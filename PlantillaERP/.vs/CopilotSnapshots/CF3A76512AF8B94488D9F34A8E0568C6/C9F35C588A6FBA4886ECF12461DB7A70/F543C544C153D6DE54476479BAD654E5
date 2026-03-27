@@ -1,0 +1,112 @@
+﻿/* Custom SB Admin Sidebar - Partial Collapse with Icons Visible */
+
+/* Override the translateX that hides the sidebar */
+.sb-sidenav-toggled #layoutSidenav #layoutSidenav_nav {
+    transform: translateX(0) !important;
+}
+
+/* Sidebar width when toggled (showing only icons) */
+.sb-sidenav-toggled #layoutSidenav #layoutSidenav_nav {
+    width: 110px !important;
+}
+
+.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav {
+    width: 110px !important;
+}
+
+.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .sb-sidenav-menu {
+    width: 110px !important;
+}
+
+/* Align nav links to center when collapsed */
+.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .nav-link {
+    padding: 0 !important;
+    text-align: center;
+    justify-content: center;
+    min-height: 50px;
+    display: flex !important;
+    align-items: center;
+    width: 110px !important;
+}
+
+/* Ensure icon container is centered and visible */
+.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .sb-nav-link-icon {
+    margin-right: 0 !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 1.5rem;
+}
+
+/* Hide text spans when collapsed */
+.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .nav-link span {
+    display: none !important;
+}
+
+/* Hide menu headings when collapsed */
+.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .sb-sidenav-menu-heading {
+    display: none !important;
+}
+
+/* Center and adjust footer */
+.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .sb-sidenav-footer {
+    text-align: center;
+    padding: 0 !important;
+    min-height: 50px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 110px !important;
+}
+
+/* Hide footer text when collapsed */
+.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .sb-sidenav-footer .small {
+    display: none !important;
+}
+
+/* Hide footer main text */
+.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .sb-sidenav-footer > div:last-child {
+    display: none !important;
+}
+
+/* Adjust main content when sidebar is collapsed - NO negative margin */
+.sb-sidenav-toggled #layoutSidenav #layoutSidenav_content {
+    margin-left: 0 !important;
+}
+
+html:not(.sb-nav-fixed) .sb-sidenav-toggled #layoutSidenav_nav {
+    margin-left: 0 !important;
+}
+
+html:not(.sb-nav-fixed) .sb-sidenav-toggled {
+    padding-left: 110px;
+}
+
+/* Responsive: Adjust for mobile devices */
+@media (max-width: 56.25em) {
+    body.sb-sidenav-toggled #layoutSidenav_nav {
+        width: auto;
+    }
+    
+    body.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav {
+        width: auto;
+    }
+    
+    html:not(.sb-nav-fixed) body #layoutSidenav_nav {
+        margin-left: -110px;
+    }
+    
+    html:not(.sb-nav-fixed) body.sb-sidenav-toggled #layoutSidenav_nav {
+        margin-left: 0;
+    }
+}
+
+/* Smooth transition for collapse/expand */
+#layoutSidenav_nav, #layoutSidenav_nav .sb-sidenav, 
+body.sb-sidenav-toggled #layoutSidenav_nav, 
+body.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav {
+    transition: width 0.3s ease, margin-left 0.3s ease;
+}

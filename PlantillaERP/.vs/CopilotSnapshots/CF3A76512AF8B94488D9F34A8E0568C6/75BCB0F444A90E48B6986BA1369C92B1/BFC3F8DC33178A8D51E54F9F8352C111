@@ -1,0 +1,98 @@
+﻿/* Custom SB Admin Sidebar - Partial Collapse with Icons Visible */
+
+/* Sidebar width when toggled (showing only icons) */
+body.sb-sidenav-toggled #layoutSidenav_nav {
+    width: 110px !important;
+}
+
+body.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav {
+    width: 110px;
+}
+
+body.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .sb-sidenav-menu {
+    width: 110px;
+}
+
+/* Align nav links to center when collapsed */
+body.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .nav-link {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    text-align: center;
+    justify-content: center;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+/* Hide text labels but keep icons visible */
+body.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .nav-link:not(.sb-nav-link-icon) {
+    width: 100%;
+}
+
+/* Ensure icon is centered and visible */
+body.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .sb-nav-link-icon {
+    margin-right: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Hide text content after icon */
+body.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .nav-link > *:not(.sb-nav-link-icon) {
+    display: none;
+}
+
+/* Hide menu headings */
+body.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .sb-sidenav-menu-heading {
+    display: none;
+}
+
+/* Center footer content */
+body.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .sb-sidenav-footer {
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Hide footer text */
+body.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .sb-sidenav-footer .small {
+    display: none;
+}
+
+/* Add tooltip effect on hover for collapsed state */
+body.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .nav-link {
+    position: relative;
+}
+
+body.sb-sidenav-toggled #layoutSidenav_nav .sb-sidenav .nav-link:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 115px;
+    background-color: #212529;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 0.875rem;
+    z-index: 1000;
+}
+
+/* Main content adjustment */
+body.sb-sidenav-toggled #layoutSidenav_content {
+    margin-left: 0;
+}
+
+html:not(.sb-nav-fixed) body.sb-sidenav-toggled #layoutSidenav_nav {
+    margin-left: 0;
+}
+
+/* Responsive: Hide sidebar on mobile */
+@media (max-width: 56.25em) {
+    html:not(.sb-nav-fixed) body #layoutSidenav_nav {
+        margin-left: -110px;
+    }
+    
+    html:not(.sb-nav-fixed) body.sb-sidenav-toggled #layoutSidenav_nav {
+        margin-left: 0;
+    }
+}
