@@ -1,0 +1,61 @@
+################################################################### / ASP.NET
+###################################
+
+# Visual Studio folder
+.vs/
+**/.vs/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.dtbcache.json
+
+###################################
+# Build output
+###################################
+
+# Build results
+bin/
+obj/
+
+# Debug / Release
+**/bin/
+**/obj/
+
+###################################
+# Logs & temp files
+###################################
+
+*.log
+Logs/
+
+###################################
+# Copilot / IntelliSense caches
+###################################
+
+**/CopilotSnapshots/
+**/CopilotIndices/
+**/FileContentIndex/
+**/copilot-chat/
+
+###################################
+# OS files
+###################################
+
+.DS_Store
+Thumbs.db
+
+###################################
+# Documentation / notes (optional)
+###################################
+
+*.md
+*.txt
+
+###################################
+# SQL temp
+###################################
+
+*.sql~

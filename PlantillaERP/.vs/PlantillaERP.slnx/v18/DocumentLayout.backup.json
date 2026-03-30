@@ -1,22 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\cepesmar\\Desktop\\test\\Plantillas\\PlantillaERP\\PlantillaERP\\",
+  "WorkspaceRootPath": "C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|c:\\users\\cepesmar\\desktop\\test\\plantillas\\plantillaerp\\plantillaerp\\plantillaerp\\default.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|solutionrelative:plantillaerp\\default.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|c:\\users\\cepesmar\\desktop\\jatechnology\\erp\\sara\\plantillaerp\\plantillaerp\\plantillaerp\\colorsettings.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|solutionrelative:plantillaerp\\colorsettings.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|C:\\Users\\cepesmar\\Desktop\\test\\Plantillas\\PlantillaERP\\PlantillaERP\\plantillaerp\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|solutionrelative:plantillaerp\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\plantillaerp\\content\\custom-sidebar.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|solutionrelative:plantillaerp\\content\\custom-sidebar.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\PlantillaERP.csproj|C:\\Users\\cepesmar\\Desktop\\test\\Plantillas\\PlantillaERP\\PlantillaERP\\plantillaerp\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\PlantillaERP.csproj|solutionrelative:plantillaerp\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\plantillaerp\\colorsettings.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|solutionrelative:plantillaerp\\colorsettings.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\PlantillaERP.csproj|C:\\Users\\cepesmar\\Desktop\\test\\Plantillas\\PlantillaERP\\PlantillaERP\\plantillaerp\\viewswitcher.ascx||{F390D63C-F7D8-4E74-AA04-57C1ECF53D4D}",
-      "RelativeMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\PlantillaERP.csproj|solutionrelative:plantillaerp\\viewswitcher.ascx||{F390D63C-F7D8-4E74-AA04-57C1ECF53D4D}"
+      "AbsoluteMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|c:\\users\\cepesmar\\desktop\\jatechnology\\erp\\sara\\plantillaerp\\plantillaerp\\plantillaerp\\content\\modulos.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|solutionrelative:plantillaerp\\content\\modulos.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\plantillaerp\\content\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{C0F58953-83C1-41C0-B78A-DBE6073DC371}|PlantillaERP\\SaraERP.csproj|solutionrelative:plantillaerp\\content\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,53 +33,72 @@
           "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Global.asax.cs",
-              "DocumentMoniker": "C:\\Users\\cepesmar\\Desktop\\test\\Plantillas\\PlantillaERP\\PlantillaERP\\PlantillaERP\\Global.asax.cs",
-              "RelativeDocumentMoniker": "PlantillaERP\\Global.asax.cs",
-              "ToolTip": "C:\\Users\\cepesmar\\Desktop\\test\\Plantillas\\PlantillaERP\\PlantillaERP\\PlantillaERP\\Global.asax.cs",
-              "RelativeToolTip": "PlantillaERP\\Global.asax.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T18:50:03.183Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Default.aspx",
-              "DocumentMoniker": "C:\\Users\\cepesmar\\Desktop\\test\\Plantillas\\PlantillaERP\\PlantillaERP\\PlantillaERP\\Default.aspx",
-              "RelativeDocumentMoniker": "PlantillaERP\\Default.aspx",
-              "ToolTip": "C:\\Users\\cepesmar\\Desktop\\test\\Plantillas\\PlantillaERP\\PlantillaERP\\PlantillaERP\\Default.aspx",
-              "RelativeToolTip": "PlantillaERP\\Default.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-03-27T15:46:30.092Z",
+              "Title": "ColorSettings.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\PlantillaERP\\ColorSettings.aspx.cs",
+              "RelativeDocumentMoniker": "PlantillaERP\\ColorSettings.aspx.cs",
+              "ToolTip": "C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\PlantillaERP\\ColorSettings.aspx.cs",
+              "RelativeToolTip": "PlantillaERP\\ColorSettings.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGMFAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-30T19:52:09.097Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ViewSwitcher.ascx",
-              "DocumentMoniker": "C:\\Users\\cepesmar\\Desktop\\test\\Plantillas\\PlantillaERP\\PlantillaERP\\PlantillaERP\\ViewSwitcher.ascx",
-              "RelativeDocumentMoniker": "PlantillaERP\\ViewSwitcher.ascx",
-              "ToolTip": "C:\\Users\\cepesmar\\Desktop\\test\\Plantillas\\PlantillaERP\\PlantillaERP\\PlantillaERP\\ViewSwitcher.ascx",
-              "RelativeToolTip": "PlantillaERP\\ViewSwitcher.ascx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003302|",
-              "WhenOpened": "2026-03-27T15:46:03.565Z"
+              "Title": "modulos.css",
+              "DocumentMoniker": "C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\PlantillaERP\\Content\\modulos.css",
+              "RelativeDocumentMoniker": "PlantillaERP\\Content\\modulos.css",
+              "ToolTip": "C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\PlantillaERP\\Content\\modulos.css",
+              "RelativeToolTip": "PlantillaERP\\Content\\modulos.css",
+              "ViewState": "AgIAAIgAAAAAAAAAAAD4vwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-03-30T18:19:25.055Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Global.asax.cs",
-              "DocumentMoniker": "C:\\Users\\cepesmar\\Desktop\\test\\Plantillas\\PlantillaERP\\PlantillaERP\\PlantillaERP\\Global.asax.cs",
-              "RelativeDocumentMoniker": "PlantillaERP\\Global.asax.cs",
-              "ToolTip": "C:\\Users\\cepesmar\\Desktop\\test\\Plantillas\\PlantillaERP\\PlantillaERP\\PlantillaERP\\Global.asax.cs",
-              "RelativeToolTip": "PlantillaERP\\Global.asax.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T15:36:20.283Z"
+              "Title": "ColorSettings.aspx",
+              "DocumentMoniker": "C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\PlantillaERP\\ColorSettings.aspx",
+              "RelativeDocumentMoniker": "PlantillaERP\\ColorSettings.aspx",
+              "ToolTip": "C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\PlantillaERP\\ColorSettings.aspx",
+              "RelativeToolTip": "PlantillaERP\\ColorSettings.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-03-30T16:00:53.455Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "custom-sidebar.css",
+              "DocumentMoniker": "C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\PlantillaERP\\Content\\custom-sidebar.css",
+              "RelativeDocumentMoniker": "PlantillaERP\\Content\\custom-sidebar.css",
+              "ToolTip": "C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\PlantillaERP\\Content\\custom-sidebar.css",
+              "RelativeToolTip": "PlantillaERP\\Content\\custom-sidebar.css",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAYAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-03-30T16:18:18.711Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Site.css",
+              "DocumentMoniker": "C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\PlantillaERP\\Content\\Site.css",
+              "RelativeDocumentMoniker": "PlantillaERP\\Content\\Site.css",
+              "ToolTip": "C:\\Users\\cepesmar\\Desktop\\JATechnology\\ERP\\Sara\\PlantillaERP\\PlantillaERP\\PlantillaERP\\Content\\Site.css",
+              "RelativeToolTip": "PlantillaERP\\Content\\Site.css",
+              "ViewState": "AgIAAGUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-03-30T15:56:24.807Z"
             }
           ]
         }

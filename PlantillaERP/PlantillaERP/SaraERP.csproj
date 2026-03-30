@@ -100,6 +100,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="ColorSettings.aspx" />
+    <Content Include="Compras\ComprasInternacionales.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -117,12 +119,21 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\custom-colors.css" />
     <Content Include="Content\custom-sidebar.css" />
+    <Content Include="Content\module-colors.css" />
+    <Content Include="Content\modulos.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\styles.css" />
     <Content Include="Default.aspx" />
+    <Content Include="EnConstruccion.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="imagenes\CapturadeCargas.png" />
+    <Content Include="imagenes\sara.png" />
+    <Content Include="imagenes\saralogo.png" />
+    <Content Include="Inventario\Productos.aspx" />
+    <Content Include="ModuleDetails.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -151,6 +162,9 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="CORRECCION_PREVIEW_HOVER_COLOR.md" />
+    <Content Include="RESUMEN_CORRECCIONES_COLOR_SETTINGS.md" />
+    <Content Include="RESOLUCION_SINCRONIZACION_COLORES.md" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -205,6 +219,20 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="ColorSettings.aspx.cs">
+      <DependentUpon>ColorSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ColorSettings.aspx.designer.cs">
+      <DependentUpon>ColorSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Compras\ComprasInternacionales.aspx.cs">
+      <DependentUpon>ComprasInternacionales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Compras\ComprasInternacionales.aspx.designer.cs">
+      <DependentUpon>ComprasInternacionales.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -219,8 +247,30 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EnConstruccion.aspx.cs">
+      <DependentUpon>EnConstruccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EnConstruccion.aspx.designer.cs">
+      <DependentUpon>EnConstruccion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario\Productos.aspx.cs">
+      <DependentUpon>Productos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventario\Productos.aspx.designer.cs">
+      <DependentUpon>Productos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleColors.aspx.designer.cs" />
+    <Compile Include="ModuleDetails.aspx.cs">
+      <DependentUpon>ModuleDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuleDetails.aspx.designer.cs">
+      <DependentUpon>ModuleDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
@@ -252,6 +302,7 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
+    <Content Include="SOLUCION_FINAL_HOVER_COLOR.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

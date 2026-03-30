@@ -1,0 +1,40 @@
+/* Auto-generated module colors - RGB Format */
+/* Generated on 2026-03-30 14:07:42 */
+
+/* ============================================
+   MODULE CARD COLORS (Solid borders)
+   ============================================ */
+
+a.module-card {
+    border-color: rgb(87, 179, 252) !important;
+    background: #ffffff !important;
+}
+
+a.module-card:hover {
+    border-color: rgb(165, 95, 253) !important;
+    background: rgb(16, 55, 161) !important;
+}
+
+.module-icon {
+    color: rgb(165, 95, 253) !important;
+}
+
+a.module-card:hover .module-icon {
+    color: rgb(87, 179, 252) !important;
+}
+
+.module-title {
+    color: rgb(16, 55, 161) !important;
+}
+
+a.module-card:hover .module-title {
+    color: rgb(87, 179, 252) !important;
+}
+
+.module-description {
+    color: rgb(16, 55, 161) !important;
+}
+
+a.module-card:hover .module-description {
+    color: rgb(165, 95, 253) !important;
+}

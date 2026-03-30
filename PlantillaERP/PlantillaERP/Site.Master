@@ -7,10 +7,13 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title><%: Page.Title %> - PlantillaERP</title>
+    <title><%: Page.Title %> ERP</title>
 
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/Content/custom-colors.css?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
+    <link href="~/Content/modulos.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/module-colors.css" rel="stylesheet" type="text/css" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
@@ -32,20 +35,30 @@
         </asp:ScriptManager>
          
         <nav class="sb-topnav navbar navbar-expand navbar-dark">
-            
-            <a class="navbar-brand ps-3" runat="server" href="~/">PlantillaERP</a>
+
+            <a class="navbar-brand ps-3" runat="server" href="~/">
+                <img src="../imagenes/sara.png" style="height: 60px; margin-right: 10px; justify-content:left; vertical-align: middle;" alt="Sara Logo" />
+
+                <span style="vertical-align: middle;">ERP</span>
+            </a>
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-           
+
 <span class="navbar-text text-white fw-bold ms-3">
     ERP
 </span>
+
+
+
              
                 <ul class="navbar-nav ms-auto me-3 me-lg-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Configuración</a></li>
-                        <li><a class="dropdown-item" href="#!">Actividad</a></li>
+                     
+<li><a class="dropdown-item" href="Contact.aspx">Contact</a></li>
+  <li><a class="dropdown-item" href="ColorSettings.aspx">Configuración de Colores</a></li>
+                      
+                        <li><a class="dropdown-item" href="About.aspx">Acerca</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="#!">Cerrar Sesión</a></li>
                     </ul>
@@ -57,19 +70,70 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <%--  <div class="sb-sidenav-menu-heading">Principal</div>  --%>
+                            <div class="sb-sidenav-menu-heading">Modulos</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCompras" aria-expanded="false" aria-controls="collapseCompras">
+                                <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                                <span>Compras</span>
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseCompras" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" runat="server" href="~/Compras/ComprasInternacionales.aspx">
+                                        <i class="fas fa-globe me-2"></i>Compras Internacionales
+                                    </a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInventario" aria-expanded="false" aria-controls="collapseInventario">
+                                <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
+                                <span>Inventario</span>
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseInventario" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" runat="server" href="~/Inventario/Productos.aspx">
+                                        <i class="fas fa-shopping-bag me-2"></i>Catalogo
+                                    </a>
+                                </nav>
+                            </div>
+                            <a class="nav-link" runat="server" href="~/Finanzas" data-bs-toggle="tooltip" data-bs-placement="right" title="Finanzas">
+                                <div class="sb-nav-link-icon"><i class="fas fa-money-bill-wave"></i></div>
+                                <span>Finanzas</span>
+                            </a>
+                            <a class="nav-link" runat="server" href="~/Mantenimiento" data-bs-toggle="tooltip" data-bs-placement="right" title="Mantenimiento">
+                                <div class="sb-nav-link-icon"><i class="fas fa-wrench"></i></div>
+                                <span>Mantenimiento</span>
+                            </a>
+                            <a class="nav-link" runat="server" href="~/Produccion" data-bs-toggle="tooltip" data-bs-placement="right" title="Produccion">
+                                <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
+                                <span>Produccion</span>
+                            </a>
+                            <a class="nav-link" runat="server" href="~/RRHH" data-bs-toggle="tooltip" data-bs-placement="right" title="RRHH">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                <span>RRHH</span>
+                            </a>
+                            <a class="nav-link" runat="server" href="~/Proyectos" data-bs-toggle="tooltip" data-bs-placement="right" title="Proyectos">
+                                <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
+                                <span>Proyectos</span>
+                            </a>
+                            <a class="nav-link" runat="server" href="~/Reporteador" data-bs-toggle="tooltip" data-bs-placement="right" title="Reporteador">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
+                                <span>Reporteador</span>
+                            </a>
+                            <a class="nav-link" runat="server" href="~/Administracion" data-bs-toggle="tooltip" data-bs-placement="right" title="Administracion">
+                                <div class="sb-nav-link-icon"><i class="fas fa-sliders-h"></i></div>
+                                <span>Administracion</span>
+                            </a>
+
+                            <div class="sb-sidenav-menu-heading">Opciones</div>
                             <a class="nav-link" runat="server" href="~/" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 <span>Dashboard</span>
                             </a>
-                            <%-- <div class="sb-sidenav-menu-heading">Opciones</div>  --%>
-                            <a class="nav-link" runat="server" href="~/About" data-bs-toggle="tooltip" data-bs-placement="right" title="About">
-                                <div class="sb-nav-link-icon"><i class="fas fa-info-circle"></i></div>
-                                <span>About</span>
-                            </a>
-                            <a class="nav-link" runat="server" href="~/Contact" data-bs-toggle="tooltip" data-bs-placement="right" title="Contact">
-                                <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
-                                <span>Contact</span>
+                           
+                    
+                            <a class="nav-link" runat="server" href="~/ColorSettings" data-bs-toggle="tooltip" data-bs-placement="right" title="Configuracion de Colores">
+                                <div class="sb-nav-link-icon"><i class="fas fa-palette"></i></div>
+                                <span>Colores</span>
                             </a>
                         </div>
                     </div>
