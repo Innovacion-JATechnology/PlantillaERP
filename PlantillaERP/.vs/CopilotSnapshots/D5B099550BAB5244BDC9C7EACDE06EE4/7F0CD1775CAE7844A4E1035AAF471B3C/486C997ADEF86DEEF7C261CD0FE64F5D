@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Facturas";
+}
+
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Home">Dashboard</a></li>
+            <li class="breadcrumb-item"><a asp-action="Finanzas" asp-controller="Modules">Finanzas</a></li>
+            <li class="breadcrumb-item active">@ViewData["Title"]</li>
+        </ol>
+    </nav>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">@ViewData["Title"]</h1>
+        <button class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Nueva Factura
+        </button>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-success text-uppercase mb-1">Total Facturas</div>
+                    <div class="h3 mb-0">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-info text-uppercase mb-1">Monto Total</div>
+                    <div class="h3 mb-0">$0</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-warning text-uppercase mb-1">Pendientes</div>
+                    <div class="h3 mb-0">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-danger text-uppercase mb-1">Vencidas</div>
+                    <div class="h3 mb-0">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-receipt me-2"></i>Facturas Registradas
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info">Sin facturas disponibles</div>
+        </div>
+    </div>
+</div>

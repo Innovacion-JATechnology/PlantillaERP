@@ -17,27 +17,44 @@
     <!-- Top Navigation Bar -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark d-flex align-items-center">
         <a class="navbar-brand ps-3 flex-shrink-0" asp-area="" asp-controller="Home" asp-action="Index">
-            <i class="fas fa-briefcase me-2"></i><span class="brand-text">ERP</span>
+            <img src="~/images/saralogo.png" alt="Sara Logo" style="height: 40px; width: auto;" />
+            <span class="brand-text ms-2"> ERP</span>
         </a>
 
         <!-- Breadcrumb Navigation -->
         @await Html.PartialAsync("_Breadcrumb")
 
-        <div class="ms-auto d-flex align-items-center gap-2 flex-shrink-0">
-            <button class="btn btn-link btn-sm text-white" id="sidebarCollapseToggle" type="button" title="Contraer/Expandir sidebar">
-                <i class="fas fa-bars"></i>
-            </button>
-            <button class="btn btn-link btn-sm" id="sidebarToggle" type="button" title="Mostrar/Ocultar sidebar">
-                <i class="fas fa-bars"></i>
-            </button>
+        <!-- User Menu Dropdown -->
+        <div class="navbar-menu-container ms-auto">
+            <div class="dropdown">
+                <button class="navbar-menu-btn dropdown-toggle" type="button" id="userMenuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuDropdown">
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Mi Perfil</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Configuración</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <!-- Layout Container with Sidebar -->
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
+    <div id="layoutSidenav"> 
+        <div id="layoutSidenav_nav"> 
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
+
+                    <button class="btn btn-link btn-sm text-white" id="sidebarCollapseToggle"
+                    type="button" title="Contraer/Expandir sidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                     
+
+
+
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Modulos</div>
 
@@ -97,10 +114,10 @@
 
                         <div class="sb-sidenav-menu-heading">Opciones</div>
 
-                        <!-- Dashboard -->
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
+                        <!-- Inicio -->
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index" data-bs-toggle="tooltip" data-bs-placement="right" title="Inicio">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            <span>Dashboard</span>
+                            <span>Inicio</span>
                         </a>
 
                         <!-- Color Settings -->

@@ -1,0 +1,102 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+
+namespace WebApp.Controllers
+{
+    public class ModulesController : Controller
+    {
+        private readonly ILogger<ModulesController> _logger;
+
+        public ModulesController(ILogger<ModulesController> logger)
+        {
+            _logger = logger;
+        }
+
+        // Compras Module
+        public IActionResult Compras()
+        {
+            ViewData["Title"] = "Compras";
+            return View();
+        }
+
+        public IActionResult ComprasInternacionales()
+        {
+            ViewData["Title"] = "Compras Internacionales";
+            return View();
+        }
+
+        // Inventario Module
+        public IActionResult Inventario()
+        {
+            ViewData["Title"] = "Inventario";
+            return View();
+        }
+
+        public IActionResult Productos()
+        {
+            ViewData["Title"] = "Productos";
+            return View();
+        }
+
+        // Finanzas Module
+        public IActionResult Finanzas()
+        {
+            ViewData["Title"] = "Finanzas";
+            return View();
+        }
+
+        // Mantenimiento Module
+        public IActionResult Mantenimiento()
+        {
+            ViewData["Title"] = "Mantenimiento";
+            return View();
+        }
+
+        // Produccion Module
+        public IActionResult Produccion()
+        {
+            ViewData["Title"] = "Produccion";
+            return View();
+        }
+
+        // RRHH Module
+        public IActionResult RRHH()
+        {
+            ViewData["Title"] = "Recursos Humanos";
+            return View();
+        }
+
+        // Proyectos Module
+        public IActionResult Proyectos()
+        {
+            ViewData["Title"] = "Proyectos";
+            return View();
+        }
+
+        // Reporteador Module
+        public IActionResult Reporteador()
+        {
+            ViewData["Title"] = "Reporteador";
+            return View();
+        }
+
+        // Administracion Module
+        public IActionResult Administracion()
+        {
+            ViewData["Title"] = "Administración";
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private class ErrorViewModel
+        {
+            public string? RequestId { get; set; }
+            public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+        }
+    }
+}

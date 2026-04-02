@@ -28,18 +28,14 @@
                         var action = option.ContainsKey("Action") ? option["Action"] : "#";
                         var icon = option.ContainsKey("Icon") ? option["Icon"] : "fas fa-folder";
                         var description = option.ContainsKey("Description") ? option["Description"] : "";
+                        var controller = option.ContainsKey("Controller") ? option["Controller"] : "Modules";
 
-                        <a asp-action="@action" asp-controller="Modules" class="module-card option-card">
+                        <a asp-action="@action" asp-controller="@controller" class="module-card">
                             <div class="module-icon">
                                 <i class="@icon"></i>
                             </div>
                             <h3 class="module-title">@moduleName</h3>
                             <p class="module-description">@description</p>
-                            <div class="option-card-footer">
-                                <small class="text-muted">
-                                    <i class="fas fa-arrow-right me-2"></i>Acceder
-                                </small>
-                            </div>
                         </a>
                     }
                 </div>

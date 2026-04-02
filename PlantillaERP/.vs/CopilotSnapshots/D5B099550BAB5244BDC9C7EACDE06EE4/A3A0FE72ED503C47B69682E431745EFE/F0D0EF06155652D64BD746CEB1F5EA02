@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Logs";
+}
+
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Home">Dashboard</a></li>
+            <li class="breadcrumb-item"><a asp-action="Administracion" asp-controller="Modules">Administración</a></li>
+            <li class="breadcrumb-item active">@ViewData["Title"]</li>
+        </ol>
+    </nav>
+
+    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-file-lines me-2"></i>Registro de Eventos del Sistema
+            </h6>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Fecha y Hora</th>
+                        <th>Nivel</th>
+                        <th>Mensaje</th>
+                        <th>Origen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">Sin eventos registrados</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

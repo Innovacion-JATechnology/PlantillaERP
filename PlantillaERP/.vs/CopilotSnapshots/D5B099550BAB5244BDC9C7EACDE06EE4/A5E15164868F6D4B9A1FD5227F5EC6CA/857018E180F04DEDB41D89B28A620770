@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Órdenes de Producción";
+}
+
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Home">Dashboard</a></li>
+            <li class="breadcrumb-item"><a asp-action="Produccion" asp-controller="Modules">Producción</a></li>
+            <li class="breadcrumb-item active">@ViewData["Title"]</li>
+        </ol>
+    </nav>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">@ViewData["Title"]</h1>
+        <button class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Nueva Orden
+        </button>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-primary text-uppercase mb-1">Pendientes</div>
+                    <div class="h3 mb-0">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-warning text-uppercase mb-1">En Proceso</div>
+                    <div class="h3 mb-0">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-success text-uppercase mb-1">Completadas</div>
+                    <div class="h3 mb-0">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-danger text-uppercase mb-1">Canceladas</div>
+                    <div class="h3 mb-0">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-industry me-2"></i>Órdenes de Producción
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info">Sin órdenes disponibles</div>
+        </div>
+    </div>
+</div>

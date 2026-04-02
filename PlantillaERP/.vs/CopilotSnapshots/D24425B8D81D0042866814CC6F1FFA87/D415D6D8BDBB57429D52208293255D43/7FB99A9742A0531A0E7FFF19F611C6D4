@@ -1,0 +1,248 @@
+﻿@{
+    ViewData["Title"] = "Compras";
+}
+
+<style>
+    .compras-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .page-header-compras {
+        margin-bottom: 30px;
+        margin-top: 20px;
+    }
+
+    .page-header-compras h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+
+    .module-card {
+        transition: all 0.3s ease;
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .module-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .module-card .card-body {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 20px;
+        text-align: center;
+    }
+
+    .module-card-icon {
+        font-size: 3.5rem;
+        margin-bottom: 15px;
+        opacity: 0.8;
+    }
+
+    .module-card-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #2c3e50;
+    }
+
+    .module-card-desc {
+        font-size: 0.85rem;
+        color: #7f8c8d;
+        margin-bottom: 20px;
+    }
+
+    .module-card-btn {
+        width: 100%;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+
+    .card-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-left: 5px solid #667eea;
+    }
+
+    .card-primary .module-card-icon {
+        color: #667eea;
+    }
+
+    .card-primary .module-card-btn {
+        background-color: #667eea;
+    }
+
+    .card-primary .module-card-btn:hover {
+        background-color: #5568d3;
+    }
+
+    .card-info {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        border-left: 5px solid #f093fb;
+    }
+
+    .card-info .module-card-icon {
+        color: #f093fb;
+    }
+
+    .card-info .module-card-btn {
+        background-color: #f093fb;
+    }
+
+    .card-info .module-card-btn:hover {
+        background-color: #ed7ba8;
+    }
+
+    .card-warning {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        border-left: 5px solid #4facfe;
+    }
+
+    .card-warning .module-card-icon {
+        color: #4facfe;
+    }
+
+    .card-warning .module-card-btn {
+        background-color: #4facfe;
+    }
+
+    .card-warning .module-card-btn:hover {
+        background-color: #3a94d9;
+    }
+
+    .card-danger {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        border-left: 5px solid #fa709a;
+    }
+
+    .card-danger .module-card-icon {
+        color: #fa709a;
+    }
+
+    .card-danger .module-card-btn {
+        background-color: #fa709a;
+    }
+
+    .card-danger .module-card-btn:hover {
+        background-color: #f67a8e;
+    }
+
+    @@media (max-width: 1024px) {
+        .compras-container {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .page-header-compras h1 {
+            font-size: 1.8rem;
+        }
+
+        .compras-container {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .module-card .card-body {
+            padding: 25px 15px;
+        }
+
+        .module-card-icon {
+            font-size: 2.8rem;
+        }
+    }
+</style>
+
+<div class="compras-container">
+    <div class="page-header-compras">
+        <h1><i class="fas fa-shopping-cart me-2"></i>@ViewData["Title"]</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Home">Dashboard</a></li>
+                <li class="breadcrumb-item active">@ViewData["Title"]</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-4 col-md-6 mb-3">
+            <div class="card module-card card-primary shadow">
+                <div class="card-body">
+                    <i class="fas fa-globe module-card-icon"></i>
+                    <div class="module-card-title">Compras Internacionales</div>
+                    <div class="module-card-desc">Gestión de compras internacionales</div>
+                    <a asp-action="ComprasInternacionales" asp-controller="Modules" class="module-card-btn">
+                        <i class="fas fa-arrow-right me-2"></i>Acceder
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-3">
+            <div class="card module-card card-info shadow">
+                <div class="card-body">
+                    <i class="fas fa-truck module-card-icon"></i>
+                    <div class="module-card-title">Proveedores</div>
+                    <div class="module-card-desc">Gestionar proveedores</div>
+                    <a href="#" class="module-card-btn">
+                        <i class="fas fa-arrow-right me-2"></i>Acceder
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-3">
+            <div class="card module-card card-warning shadow">
+                <div class="card-body">
+                    <i class="fas fa-file-invoice module-card-icon"></i>
+                    <div class="module-card-title">Órdenes de Compra</div>
+                    <div class="module-card-desc">Ver y gestionar órdenes</div>
+                    <a href="#" class="module-card-btn">
+                        <i class="fas fa-arrow-right me-2"></i>Acceder
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-3">
+            <div class="card module-card card-danger shadow">
+                <div class="card-body">
+                    <i class="fas fa-receipt module-card-icon"></i>
+                    <div class="module-card-title">Facturas</div>
+                    <div class="module-card-desc">Consultar facturas</div>
+                    <a href="#" class="module-card-btn">
+                        <i class="fas fa-arrow-right me-2"></i>Acceder
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5>Últimas Compras</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">No hay datos disponibles en este momento.</p>
+        </div>
+    </div>
+</div>

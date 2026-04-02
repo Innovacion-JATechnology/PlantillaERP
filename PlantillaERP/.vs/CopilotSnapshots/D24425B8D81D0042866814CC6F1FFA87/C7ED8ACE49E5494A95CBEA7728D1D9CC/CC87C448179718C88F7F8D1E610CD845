@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Compras";
+}
+
+<link rel="stylesheet" href="~/css/modules-layout.css" />
+
+<div class="module-container">
+    <div class="page-header-compras">
+        <h1><i class="fas fa-shopping-cart me-2"></i>@ViewData["Title"]</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Home">Dashboard</a></li>
+                <li class="breadcrumb-item active">@ViewData["Title"]</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-4 col-md-6 mb-3">
+            <div class="card module-card card-primary shadow">
+                <div class="card-body">
+                    <i class="fas fa-globe module-card-icon"></i>
+                    <div class="module-card-title">Compras Internacionales</div>
+                    <div class="module-card-desc">Gestión de compras internacionales</div>
+                    <a asp-action="ComprasInternacionales" asp-controller="Modules" class="module-card-btn">
+                        <i class="fas fa-arrow-right me-2"></i>Acceder
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-3">
+            <div class="card module-card card-info shadow">
+                <div class="card-body">
+                    <i class="fas fa-truck module-card-icon"></i>
+                    <div class="module-card-title">Proveedores</div>
+                    <div class="module-card-desc">Gestionar proveedores</div>
+                    <a href="#" class="module-card-btn">
+                        <i class="fas fa-arrow-right me-2"></i>Acceder
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-3">
+            <div class="card module-card card-warning shadow">
+                <div class="card-body">
+                    <i class="fas fa-file-invoice module-card-icon"></i>
+                    <div class="module-card-title">Órdenes de Compra</div>
+                    <div class="module-card-desc">Ver y gestionar órdenes</div>
+                    <a href="#" class="module-card-btn">
+                        <i class="fas fa-arrow-right me-2"></i>Acceder
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-3">
+            <div class="card module-card card-danger shadow">
+                <div class="card-body">
+                    <i class="fas fa-receipt module-card-icon"></i>
+                    <div class="module-card-title">Facturas</div>
+                    <div class="module-card-desc">Consultar facturas</div>
+                    <a href="#" class="module-card-btn">
+                        <i class="fas fa-arrow-right me-2"></i>Acceder
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-5">
+        <div class="card-header bg-light">
+            <h5 class="mb-0"><i class="fas fa-history me-2"></i>Últimas Compras</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted mb-0">No hay datos disponibles en este momento.</p>
+        </div>
+    </div>
+</div>
+    </div>

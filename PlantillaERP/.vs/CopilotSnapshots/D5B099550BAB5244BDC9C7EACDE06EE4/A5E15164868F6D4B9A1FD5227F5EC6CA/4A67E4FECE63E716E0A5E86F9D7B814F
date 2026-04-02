@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Materiales de Producción";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Dashboard", Url.Action("Index", "Home")),
+        ("Producción", Url.Action("Produccion", "Modules")),
+        ("Materiales", Url.Action("MaterialesProduccion", "Modules"))
+    };
+}
+
+<div class="container-fluid">
+        </ol>
+    </nav>
+
+    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-cube me-2"></i>Materiales Disponibles
+            </h6>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Material</th>
+                        <th>Stock</th>
+                        <th>Unidad</th>
+                        <th>Costo Unitario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">Sin materiales disponibles</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

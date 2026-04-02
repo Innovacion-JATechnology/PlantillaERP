@@ -10,5 +10,6 @@ wwwroot\css\modules-layout.css
 wwwroot\css\modules.css
 wwwroot\css\sidebar-collapse.css
 wwwroot\css\site.css
+wwwroot\images\saralogo.png
 wwwroot\js\sidebar-collapse.js
 wwwroot\js\site.js

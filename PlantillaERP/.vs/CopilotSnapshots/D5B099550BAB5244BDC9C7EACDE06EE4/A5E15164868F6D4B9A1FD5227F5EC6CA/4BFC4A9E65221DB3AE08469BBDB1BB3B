@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Configuración";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Dashboard", Url.Action("Index", "Home")),
+        ("Administración", Url.Action("Administracion", "Modules")),
+        ("Configuración", Url.Action("Configuracion", "Modules"))
+    };
+}
+
+<div class="container-fluid">
+        </ol>
+    </nav>
+
+    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-cog me-2"></i>Configuración del Sistema
+            </h6>
+        </div>
+        <div class="card-body">
+            <button class="btn btn-primary">
+                <i class="fas fa-save me-2"></i>Guardar Cambios
+            </button>
+        </div>
+    </div>
+</div>

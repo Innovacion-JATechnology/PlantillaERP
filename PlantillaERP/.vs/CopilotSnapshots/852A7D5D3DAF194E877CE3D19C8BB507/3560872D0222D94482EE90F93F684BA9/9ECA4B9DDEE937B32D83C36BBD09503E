@@ -1,0 +1,97 @@
+﻿// Sidebar Collapse Handler
+(function() {
+    'use strict';
+
+    console.log('[Sidebar] Script externo cargado');
+
+    function toggleSidebar(e) {
+        e.preventDefault();
+        console.log('[Sidebar] CLICK detectado');
+
+        const sidebar = document.querySelector('.sb-sidenav');
+        const content = document.getElementById('layoutSidenav_content');
+
+        if (!sidebar || !content) {
+            console.error('[Sidebar] ERROR: Elementos de sidebar/content no encontrados');
+            return;
+        }
+
+        const isCollapsed = document.body.classList.contains('sb-sidenav-collapsed');
+        console.log('[Sidebar] Collapsed?', isCollapsed);
+
+        if (isCollapsed) {
+            // Expand to 225px
+            document.body.classList.remove('sb-sidenav-collapsed');
+            sidebar.style.setProperty('width', '225px', 'important');
+            content.style.setProperty('margin-left', '225px', 'important');
+            console.log('[Sidebar] EXPANDIDO a 225px');
+        } else {
+            // Collapse to 70px
+            document.body.classList.add('sb-sidenav-collapsed');
+            sidebar.style.setProperty('width', '70px', 'important');
+            content.style.setProperty('margin-left', '70px', 'important');
+            console.log('[Sidebar] CONTRAÍDO a 70px');
+        }
+
+        updateIcon();
+    }
+
+    function updateIcon() {
+        const icon = document.querySelector('#sidebarCollapseToggle i');
+        if (icon) {
+            icon.className = document.body.classList.contains('sb-sidenav-collapsed') 
+                ? 'fas fa-bars' 
+                : 'fas fa-bars';
+        }
+    }
+
+    function init() {
+        console.log('[Sidebar] Inicializando...');
+
+        const btn = document.getElementById('sidebarCollapseToggle');
+
+        if (!btn) {
+            console.error('[Sidebar] ERROR: Botón no encontrado');
+            return;
+        }
+
+        // Use event delegation - attach to document for all current and future buttons
+        // First, remove any existing listeners to prevent duplicates
+        btn.removeEventListener('click', toggleSidebar);
+
+        // Attach the click handler
+        btn.addEventListener('click', toggleSidebar);
+
+        console.log('[Sidebar] Evento click adjuntado al botón');
+    }
+
+    // Initialize on DOMContentLoaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+    // Also watch for dynamic content changes (for Razor Pages navigation)
+    // Re-initialize whenever the sidebar button might have been replaced
+    const observer = new MutationObserver(function(mutations) {
+        for (let mutation of mutations) {
+            if (mutation.type === 'childList') {
+                const btn = document.getElementById('sidebarCollapseToggle');
+                if (btn) {
+                    btn.removeEventListener('click', toggleSidebar);
+                    btn.addEventListener('click', toggleSidebar);
+                    console.log('[Sidebar] Re-attached event listener after DOM change');
+                }
+            }
+        }
+    });
+
+    // Start observing the sidebar container for changes
+    const config = { childList: true, subtree: true };
+    const sidebarNav = document.querySelector('#layoutSidenav_nav');
+    if (sidebarNav) {
+        observer.observe(sidebarNav, config);
+        console.log('[Sidebar] MutationObserver iniciado');
+    }
+})();

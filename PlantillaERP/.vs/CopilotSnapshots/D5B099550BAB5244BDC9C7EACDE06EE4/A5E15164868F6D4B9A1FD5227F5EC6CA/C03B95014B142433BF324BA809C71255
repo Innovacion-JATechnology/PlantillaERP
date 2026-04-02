@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Movimientos de Inventario";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Dashboard", Url.Action("Index", "Home")),
+        ("Inventario", Url.Action("Inventario", "Modules")),
+        ("Movimientos", Url.Action("Movimientos", "Modules"))
+    };
+}
+
+<div class="container-fluid">
+
+    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-arrow-right-arrow-left me-2"></i>Historial de Movimientos
+            </h6>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Producto</th>
+                        <th>Tipo</th>
+                        <th>Cantidad</th>
+                        <th>Usuario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">Sin movimientos registrados</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

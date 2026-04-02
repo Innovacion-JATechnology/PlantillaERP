@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Crear Reporte";
+}
+
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Home">Dashboard</a></li>
+            <li class="breadcrumb-item"><a asp-action="Reporteador" asp-controller="Modules">Reporteador</a></li>
+            <li class="breadcrumb-item active">@ViewData["Title"]</li>
+        </ol>
+    </nav>
+
+    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-file-csv me-2"></i>Diseñador de Reportes
+            </h6>
+        </div>
+        <div class="card-body">
+            <button class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Nuevo Reporte
+            </button>
+        </div>
+    </div>
+</div>

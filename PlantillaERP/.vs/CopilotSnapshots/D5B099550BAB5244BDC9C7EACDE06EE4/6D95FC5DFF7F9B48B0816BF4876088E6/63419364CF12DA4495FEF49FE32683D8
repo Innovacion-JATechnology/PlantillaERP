@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Compras Internacionales";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Dashboard", Url.Action("Index", "Home")),
+        ("Compras", Url.Action("Compras", "Modules")),
+        ("Compras Internacionales", Url.Action("ComprasInternacionales", "Modules"))
+    };
+}
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-globe me-2"></i>Gestión de Compras Internacionales
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <label class="form-label">Buscar por País</label>
+                    <input type="text" class="form-control" placeholder="Ingrese país..." />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Proveedor</label>
+                    <select class="form-select">
+                        <option>Seleccionar proveedor...</option>
+                    </select>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button class="btn btn-primary me-2">
+                        <i class="fas fa-search me-2"></i>Buscar
+                    </button>
+                    <button class="btn btn-success">
+                        <i class="fas fa-plus me-2"></i>Nueva Compra
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Proveedor</th>
+                            <th>País</th>
+                            <th>Monto</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="7" class="text-center text-muted">No hay datos disponibles</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+using Microsoft.AspNetCore.Mvc;
+
+namespace WebApp.Controllers
+{
+    public class InventarioController : Controller
+    {
+        private readonly ILogger<InventarioController> _logger;
+
+        public InventarioController(ILogger<InventarioController> logger)
+        {
+            _logger = logger;
+        }
+
+        public IActionResult Productos()
+        {
+            ViewData["Title"] = "Productos";
+            ViewData["Breadcrumbs"] = new List<(string, string)>
+            {
+                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inventario", Url.Action("Inventario", "Modules")),
+                ("Catálogo", null)
+            };
+            return View("~/Views/Modules/Productos.cshtml");
+        }
+
+        public IActionResult Stock()
+        {
+            ViewData["Title"] = "Stock";
+            ViewData["Breadcrumbs"] = new List<(string, string)>
+            {
+                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inventario", Url.Action("Inventario", "Modules")),
+                ("Stock", null)
+            };
+            return View("~/Views/Modules/Stock.cshtml");
+        }
+
+        public IActionResult Almacenes()
+        {
+            ViewData["Title"] = "Almacenes";
+            ViewData["Breadcrumbs"] = new List<(string, string)>
+            {
+                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inventario", Url.Action("Inventario", "Modules")),
+                ("Almacenes", null)
+            };
+            return View("~/Views/Modules/Almacenes.cshtml");
+        }
+
+        public IActionResult Categorias()
+        {
+            ViewData["Title"] = "Categorías";
+            ViewData["Breadcrumbs"] = new List<(string, string)>
+            {
+                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inventario", Url.Action("Inventario", "Modules")),
+                ("Categorías", null)
+            };
+            return View("~/Views/Modules/Categorias.cshtml");
+        }
+
+        public IActionResult Movimientos()
+        {
+            ViewData["Title"] = "Movimientos de Inventario";
+            ViewData["Breadcrumbs"] = new List<(string, string)>
+            {
+                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inventario", Url.Action("Inventario", "Modules")),
+                ("Movimientos", null)
+            };
+            return View("~/Views/Modules/Movimientos.cshtml");
+        }
+
+        public IActionResult AuditoriaInventario()
+        {
+            ViewData["Title"] = "Auditoría de Inventario";
+            ViewData["Breadcrumbs"] = new List<(string, string)>
+            {
+                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inventario", Url.Action("Inventario", "Modules")),
+                ("Auditoría", null)
+            };
+            return View("~/Views/Modules/AuditoriaInventario.cshtml");
+        }
+
+        public IActionResult AjustesInventario()
+        {
+            ViewData["Title"] = "Ajustes de Inventario";
+            ViewData["Breadcrumbs"] = new List<(string, string)>
+            {
+                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inventario", Url.Action("Inventario", "Modules")),
+                ("Ajustes", null)
+            };
+            return View("~/Views/Modules/AjustesInventario.cshtml");
+        }
+
+        public IActionResult ReportesInventario()
+        {
+            ViewData["Title"] = "Reportes de Inventario";
+            ViewData["Breadcrumbs"] = new List<(string, string)>
+            {
+                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inventario", Url.Action("Inventario", "Modules")),
+                ("Reportes", null)
+            };
+            return View("~/Views/Modules/ReportesInventario.cshtml");
+        }
+    }
+}

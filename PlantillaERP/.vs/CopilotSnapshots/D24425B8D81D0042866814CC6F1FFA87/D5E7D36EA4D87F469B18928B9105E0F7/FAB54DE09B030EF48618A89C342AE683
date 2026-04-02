@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Compras";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">@ViewData["Title"]</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Home">Dashboard</a></li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ol>
+
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-primary text-uppercase mb-1">Compras Internacionales</div>
+                    <div class="h3 mb-0">
+                        <a asp-action="ComprasInternacionales" asp-controller="Modules" class="btn btn-primary btn-sm">
+                            <i class="fas fa-globe me-2"></i>Ir a Compras Internacionales
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-info text-uppercase mb-1">Proveedores</div>
+                    <div class="h3 mb-0">
+                        <a href="#" class="btn btn-info btn-sm">
+                            <i class="fas fa-building me-2"></i>Gestionar Proveedores
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-warning text-uppercase mb-1">Órdenes de Compra</div>
+                    <div class="h3 mb-0">
+                        <a href="#" class="btn btn-warning btn-sm">
+                            <i class="fas fa-file-invoice me-2"></i>Ver Órdenes
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-danger text-uppercase mb-1">Facturas</div>
+                    <div class="h3 mb-0">
+                        <a href="#" class="btn btn-danger btn-sm">
+                            <i class="fas fa-receipt me-2"></i>Ver Facturas
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5>Últimas Compras</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">No hay datos disponibles en este momento.</p>
+        </div>
+    </div>
+</div>

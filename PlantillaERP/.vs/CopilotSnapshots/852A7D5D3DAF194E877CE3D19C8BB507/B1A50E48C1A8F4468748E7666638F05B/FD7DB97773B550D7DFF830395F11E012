@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = (string)ViewData["Title"];
+    var moduleOptions = (List<Dictionary<string, string>>)ViewData["ModuleOptions"];
+
+    // Set breadcrumbs for navbar if not already set
+    if (ViewData["Breadcrumbs"] == null)
+    {
+        ViewData["Breadcrumbs"] = new List<(string, string)>
+        {
+            ("Dashboard", Url.Action("Index", "Home")),
+            ((string)ViewData["Title"], null)
+        };
+    }
+}
+
+<div class="container-fluid">
+
+    
+
+    @if (moduleOptions != null && moduleOptions.Count > 0)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="modules-grid">
+                    @foreach (var option in moduleOptions)
+                    {
+                        var moduleName = option.ContainsKey("Name") ? option["Name"] : "Opción";
+                        var action = option.ContainsKey("Action") ? option["Action"] : "#";
+                        var icon = option.ContainsKey("Icon") ? option["Icon"] : "fas fa-folder";
+                        var description = option.ContainsKey("Description") ? option["Description"] : "";
+
+                        <a asp-action="@action" asp-controller="Modules" class="module-card">
+                            <div class="module-icon">
+                                <i class="@icon"></i>
+                            </div>
+                            <h3 class="module-title">@moduleName</h3>
+                            <p class="module-description">@description</p>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Información:</strong> Este módulo aún no tiene opciones disponibles.
+                </div>
+            </div>
+        </div>
+    }
+</div>
