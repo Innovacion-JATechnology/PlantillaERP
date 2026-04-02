@@ -1,0 +1,29 @@
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.csproj.AssemblyReference.cache
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.AssemblyInfoInputs.cache
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.AssemblyInfo.cs
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.csproj.CoreCompileInputs.cache
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\bin\Debug\net10.0\UserRoles.Identity.deps.json
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\bin\Debug\net10.0\UserRoles.Identity.runtimeconfig.json
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\bin\Debug\net10.0\UserRoles.Identity.dll
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\bin\Debug\net10.0\UserRoles.Identity.pdb
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.dll
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\obj\Debug\net10.0\refint\UserRoles.Identity.dll
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.pdb
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.genruntimeconfig.cache
+C:\Users\cepesmar\Desktop\JATechnology\ERP\UserRoles.Identity\obj\Debug\net10.0\ref\UserRoles.Identity.dll
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\bin\Debug\net10.0\UserRoles.Identity.deps.json
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\bin\Debug\net10.0\UserRoles.Identity.runtimeconfig.json
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\bin\Debug\net10.0\UserRoles.Identity.dll
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\bin\Debug\net10.0\UserRoles.Identity.pdb
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.csproj.AssemblyReference.cache
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.AssemblyInfoInputs.cache
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.AssemblyInfo.cs
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.csproj.CoreCompileInputs.cache
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.sourcelink.json
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.dll
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\obj\Debug\net10.0\refint\UserRoles.Identity.dll
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.pdb
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\obj\Debug\net10.0\UserRoles.Identity.genruntimeconfig.cache
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\UserRoles.Identity\obj\Debug\net10.0\ref\UserRoles.Identity.dll

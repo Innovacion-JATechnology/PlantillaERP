@@ -1,0 +1,14 @@
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\PlantillaERP\WebApp\wwwroot\css\sidebar-collapse.css
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\PlantillaERP\WebApp\wwwroot\css\custom-sidebar.css
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\PlantillaERP\WebApp\wwwroot\css\site.css
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\PlantillaERP\WebApp\wwwroot\js\site.js
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\PlantillaERP\WebApp\wwwroot\js\sidebar-collapse.js
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\PlantillaERP\WebApp\wwwroot\css\modules-layout.css
+C:\Users\cepesmar\Desktop\test\tets viernes 27\miercoles 1\PlantillaERP\PlantillaERP\WebApp\wwwroot\css\modules.css
+wwwroot\css\custom-sidebar.css
+wwwroot\css\modules-layout.css
+wwwroot\css\modules.css
+wwwroot\css\sidebar-collapse.css
+wwwroot\css\site.css
+wwwroot\js\sidebar-collapse.js
+wwwroot\js\site.js

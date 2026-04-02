@@ -1,3 +1,5 @@
 <Solution>
+  <Project Path="../UserRoles.Identity/UserRoles.Identity.csproj" />
   <Project Path="PlantillaERP/SaraERP.csproj" Id="c0f58953-83c1-41c0-b78a-dbe6073dc371" />
+  <Project Path="WebApp/WebApp.csproj" />
 </Solution>

@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = (string)ViewData["Title"];
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">@ViewData["Title"]</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Home">Dashboard</a></li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ol>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-info-circle me-2"></i>@ViewData["Title"]
+            </h6>
+        </div>
+        <div class="card-body">
+            <p class="text-muted mb-4">
+                Esta es la página del módulo de @ViewData["Title"]. Aquí se mostrará el contenido específico de este módulo.
+            </p>
+
+            <div class="alert alert-info" role="alert">
+                <i class="fas fa-lightbulb me-2"></i>
+                <strong>Próximamente</strong> se añadirá la funcionalidad completa de este módulo.
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h5>Opciones Disponibles</h5>
+                    <div class="list-group">
+                        <button class="list-group-item list-group-item-action" disabled>
+                            <i class="fas fa-list me-2"></i>Ver Registros
+                        </button>
+                        <button class="list-group-item list-group-item-action" disabled>
+                            <i class="fas fa-plus me-2"></i>Crear Nuevo Registro
+                        </button>
+                        <button class="list-group-item list-group-item-action" disabled>
+                            <i class="fas fa-cog me-2"></i>Configuración del Módulo
+                        </button>
+                        <button class="list-group-item list-group-item-action" disabled>
+                            <i class="fas fa-file-export me-2"></i>Exportar Datos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Conciliaciones Bancarias";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Dashboard", Url.Action("Index", "Home")),
+        ("Finanzas", Url.Action("Finanzas", "Modules")),
+        ("Conciliaciones", Url.Action("Conciliaciones", "Modules"))
+    };
+}
+
+<div class="container-fluid">
+        </ol>
+    </nav>
+
+    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-check-double me-2"></i>Conciliaciones Registradas
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info">Sin conciliaciones disponibles</div>
+        </div>
+    </div>
+</div>

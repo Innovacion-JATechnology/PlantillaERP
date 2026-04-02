@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Reportes de Inventario";
+}
+
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Home">Dashboard</a></li>
+            <li class="breadcrumb-item"><a asp-action="Inventario" asp-controller="Modules">Inventario</a></li>
+            <li class="breadcrumb-item active">@ViewData["Title"]</li>
+        </ol>
+    </nav>
+
+    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Reporte de Stock Actual</h6>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Estado actual del inventario</p>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-download me-2"></i>Generar
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Productos con Bajo Stock</h6>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Productos que requieren reorden</p>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-download me-2"></i>Generar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Reportes de Proyectos";
+}
+
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Home">Dashboard</a></li>
+            <li class="breadcrumb-item"><a asp-action="Proyectos" asp-controller="Modules">Proyectos</a></li>
+            <li class="breadcrumb-item active">@ViewData["Title"]</li>
+        </ol>
+    </nav>
+
+    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Reporte de Avance</h6>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Progreso de proyectos</p>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-download me-2"></i>Generar
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Reporte de Recursos</h6>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Utilización de recursos</p>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-download me-2"></i>Generar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

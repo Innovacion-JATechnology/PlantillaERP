@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Presupuesto de Proyectos";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Dashboard", Url.Action("Index", "Home")),
+        ("Proyectos", Url.Action("Proyectos", "Modules")),
+        ("Presupuesto", Url.Action("PresupuestoProyectos", "Modules"))
+    };
+}
+
+<div class="container-fluid">
+        </ol>
+    </nav>
+
+    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-coins me-2"></i>Presupuestos de Proyectos
+            </h6>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Proyecto</th>
+                        <th>Presupuesto</th>
+                        <th>Gastado</th>
+                        <th>Disponible</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">Sin presupuestos disponibles</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

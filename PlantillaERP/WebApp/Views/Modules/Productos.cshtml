@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Productos";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Dashboard", Url.Action("Index", "Home")),
+        ("Inventario", Url.Action("Inventario", "Modules")),
+        ("Productos", Url.Action("Productos", "Modules"))
+    };
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-shopping-bag me-2"></i>Catálogo de Productos
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <label class="form-label">Buscar Producto</label>
+                    <input type="text" class="form-control" placeholder="Ingrese código o nombre..." />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Categoría</label>
+                    <select class="form-select">
+                        <option>Todas las categorías</option>
+                    </select>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button class="btn btn-primary me-2">
+                        <i class="fas fa-search me-2"></i>Buscar
+                    </button>
+                    <button class="btn btn-success">
+                        <i class="fas fa-plus me-2"></i>Nuevo Producto
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Stock</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="7" class="text-center text-muted">No hay datos disponibles</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

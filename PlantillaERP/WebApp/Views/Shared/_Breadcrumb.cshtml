@@ -1,0 +1,25 @@
+@{
+    var breadcrumbs = ViewData["Breadcrumbs"] as List<(string Title, string Url)> ?? new List<(string, string)>();
+}
+
+@if (breadcrumbs.Count > 0)
+{
+    <div class="breadcrumb-nav">
+        <nav aria-label="breadcrumb">
+            @for (int i = 0; i < breadcrumbs.Count; i++)
+            {
+                var breadcrumb = breadcrumbs[i];
+
+                @if (i < breadcrumbs.Count - 1)
+                {
+                    <a href="@breadcrumb.Url" class="breadcrumb-link">@breadcrumb.Title</a>
+                    <span class="breadcrumb-separator"> › </span>
+                }
+                else
+                {
+                    <span class="breadcrumb-active">@breadcrumb.Title</span>
+                }
+            }
+        </nav>
+    </div>
+}

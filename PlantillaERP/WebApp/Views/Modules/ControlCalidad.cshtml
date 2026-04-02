@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Control de Calidad";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Dashboard", Url.Action("Index", "Home")),
+        ("Producción", Url.Action("Produccion", "Modules")),
+        ("Control de Calidad", Url.Action("ControlCalidad", "Modules"))
+    };
+}
+
+<div class="container-fluid">
+        </ol>
+    </nav>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">@ViewData["Title"]</h1>
+        <button class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Nuevo Registro
+        </button>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-check-circle me-2"></i>Inspecciones de Calidad
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info">Sin inspecciones disponibles</div>
+        </div>
+    </div>
+</div>
