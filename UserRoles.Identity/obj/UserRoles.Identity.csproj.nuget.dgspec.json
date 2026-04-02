@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cepesmar\\Desktop\\test\\tets viernes 27\\miercoles 1\\PlantillaERP\\UserRoles.Identity\\UserRoles.Identity.csproj": {}
+    "C:\\Users\\cepesmar\\Desktop\\test\\jueves 2\\PlantillaERP\\UserRoles.Identity\\UserRoles.Identity.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cepesmar\\Desktop\\test\\tets viernes 27\\miercoles 1\\PlantillaERP\\UserRoles.Identity\\UserRoles.Identity.csproj": {
+    "C:\\Users\\cepesmar\\Desktop\\test\\jueves 2\\PlantillaERP\\UserRoles.Identity\\UserRoles.Identity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cepesmar\\Desktop\\test\\tets viernes 27\\miercoles 1\\PlantillaERP\\UserRoles.Identity\\UserRoles.Identity.csproj",
+        "projectUniqueName": "C:\\Users\\cepesmar\\Desktop\\test\\jueves 2\\PlantillaERP\\UserRoles.Identity\\UserRoles.Identity.csproj",
         "projectName": "UserRoles.Identity",
-        "projectPath": "C:\\Users\\cepesmar\\Desktop\\test\\tets viernes 27\\miercoles 1\\PlantillaERP\\UserRoles.Identity\\UserRoles.Identity.csproj",
+        "projectPath": "C:\\Users\\cepesmar\\Desktop\\test\\jueves 2\\PlantillaERP\\UserRoles.Identity\\UserRoles.Identity.csproj",
         "packagesPath": "C:\\Users\\cepesmar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cepesmar\\Desktop\\test\\tets viernes 27\\miercoles 1\\PlantillaERP\\UserRoles.Identity\\obj\\",
+        "outputPath": "C:\\Users\\cepesmar\\Desktop\\test\\jueves 2\\PlantillaERP\\UserRoles.Identity\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

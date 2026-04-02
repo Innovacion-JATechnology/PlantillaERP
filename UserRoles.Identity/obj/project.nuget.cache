@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "45AeOO/QHdg=",
+  "dgSpecHash": "aHTHyV8Iac8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\cepesmar\\Desktop\\test\\tets viernes 27\\miercoles 1\\PlantillaERP\\UserRoles.Identity\\UserRoles.Identity.csproj",
+  "projectFilePath": "C:\\Users\\cepesmar\\Desktop\\test\\jueves 2\\PlantillaERP\\UserRoles.Identity\\UserRoles.Identity.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cepesmar\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\cepesmar\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
