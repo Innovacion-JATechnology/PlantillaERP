@@ -61,8 +61,8 @@ main {
 }
 
 .page-header-module {
-    margin-bottom: 30px;
-    margin-top: 20px;
+    margin-bottom: 15px;
+    margin-top: 0;
 }
 
 .page-header-module h1 {
@@ -111,6 +111,7 @@ main {
     font-size: 3.5rem;
     margin-bottom: 15px;
     opacity: 0.8;
+    color: inherit !important;
 }
 
 .module-card-title {
@@ -231,6 +232,162 @@ main {
 .card-success .module-card-btn:hover {
     background-color: #6ee89a;
     color: #2c3e50;
+}
+
+/* ============================================
+   SUBMÓDULOS - Compras (Azul oscuro/bajito)
+   ============================================ */
+
+.card-compras-internacionales {
+    background: linear-gradient(135deg, #4a6fa5 0%, #3d5a8c 100%) !important;
+    border-left: 5px solid #4a6fa5 !important;
+    color: #4a6fa5 !important;
+}
+
+.card-compras-internacionales .module-card-icon {
+    color: #4a6fa5 !important;
+}
+
+.card-compras-internacionales .module-card-btn {
+    background-color: #4a6fa5 !important;
+}
+
+.card-compras-internacionales .module-card-btn:hover {
+    background-color: #3d5a8c !important;
+}
+
+.card-proveedores {
+    background: linear-gradient(135deg, #5a7fb5 0%, #4a6fa5 100%) !important;
+    border-left: 5px solid #5a7fb5 !important;
+    color: #5a7fb5 !important;
+}
+
+.card-proveedores .module-card-icon {
+    color: #5a7fb5 !important;
+}
+
+.card-proveedores .module-card-btn {
+    background-color: #5a7fb5 !important;
+}
+
+.card-proveedores .module-card-btn:hover {
+    background-color: #4a6fa5 !important;
+}
+
+.card-ordenes-compra {
+    background: linear-gradient(135deg, #3d5a8c 0%, #2d4a7c 100%) !important;
+    border-left: 5px solid #3d5a8c !important;
+    color: #3d5a8c !important;
+}
+
+.card-ordenes-compra .module-card-icon {
+    color: #3d5a8c !important;
+}
+
+.card-ordenes-compra .module-card-btn {
+    background-color: #3d5a8c !important;
+}
+
+.card-ordenes-compra .module-card-btn:hover {
+    background-color: #2d4a7c !important;
+}
+
+.card-facturas {
+    background: linear-gradient(135deg, #6a8fc5 0%, #5a7fb5 100%) !important;
+    border-left: 5px solid #6a8fc5 !important;
+    color: #6a8fc5 !important;
+}
+
+.card-facturas .module-card-icon {
+    color: #6a8fc5 !important;
+}
+
+.card-facturas .module-card-btn {
+    background-color: #6a8fc5 !important;
+}
+
+.card-facturas .module-card-btn:hover {
+    background-color: #5a7fb5 !important;
+}
+
+/* ============================================
+   SUBMÓDULOS - Inventario (Verde oscuro)
+   ============================================ */
+
+.card-inventario-productos {
+    background: linear-gradient(135deg, #2d5a3d 0%, #1f4a2d 100%) !important;
+    border-left: 5px solid #2d5a3d !important;
+    color: #2d5a3d !important;
+}
+
+.card-inventario-productos .module-card-icon {
+    color: #2d5a3d !important;
+}
+
+.card.module-card.card-inventario-productos i.module-card-icon {
+    color: #2d5a3d !important;
+}
+
+.card-inventario-productos .module-card-btn {
+    background-color: #2d5a3d !important;
+}
+
+.card-inventario-productos .module-card-btn:hover {
+    background-color: #1f4a2d !important;
+}
+
+.card-inventario-stock {
+    background: linear-gradient(135deg, #3d7a4d 0%, #2d5a3d 100%) !important;
+    border-left: 5px solid #3d7a4d !important;
+    color: #3d7a4d !important;
+}
+
+.card-inventario-stock .module-card-icon {
+    color: #3d7a4d !important;
+}
+
+.card-inventario-stock .module-card-btn {
+    background-color: #3d7a4d !important;
+}
+
+.card-inventario-stock .module-card-btn:hover {
+    background-color: #2d5a3d !important;
+}
+
+.card-inventario-movimientos {
+    background: linear-gradient(135deg, #1f4a2d 0%, #0f3a1d 100%) !important;
+    border-left: 5px solid #1f4a2d !important;
+    color: #1f4a2d !important;
+}
+
+.card-inventario-movimientos .module-card-icon {
+    color: #1f4a2d !important;
+}
+
+.card-inventario-movimientos .module-card-btn {
+    background-color: #1f4a2d !important;
+}
+
+.card-inventario-movimientos .module-card-btn:hover {
+    background-color: #0f3a1d !important;
+}
+
+.card-inventario-almacenes {
+    background: linear-gradient(135deg, #4d9a5d 0%, #3d7a4d 100%) !important;
+    border-left: 5px solid #4d9a5d !important;
+    color: #4d9a5d !important;
+}
+
+.card-inventario-almacenes .module-card-icon {
+    color: #4d9a5d !important;
+}
+
+.card-inventario-almacenes .module-card-btn {
+    background-color: #4d9a5d !important;
+}
+
+.card-inventario-almacenes .module-card-btn:hover {
+    background-color: #3d7a4d !important;
 }
 
 /* Responsive Design */

@@ -29,8 +29,9 @@
                         var icon = option.ContainsKey("Icon") ? option["Icon"] : "fas fa-folder";
                         var description = option.ContainsKey("Description") ? option["Description"] : "";
                         var controller = option.ContainsKey("Controller") ? option["Controller"] : "Modules";
+                        var cssClass = option.ContainsKey("CssClass") ? option["CssClass"] : "";
 
-                        <a asp-action="@action" asp-controller="@controller" class="module-card">
+                        <a asp-action="@action" asp-controller="@controller" class="module-card @cssClass">
                             <div class="module-icon">
                                 <i class="@icon"></i>
                             </div>

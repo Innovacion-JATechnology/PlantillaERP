@@ -1,62 +1,864 @@
+@model (List<WebApp.Models.CompraInternacional> Items, int TotalCount, int PageNumber, int PageSize)
+
 @{
     ViewData["Title"] = "Compras Internacionales";
     ViewData["Breadcrumbs"] = new List<(string, string)>
     {
-        ("Dashboard", Url.Action("Index", "Home")),
+        ("Inicio", Url.Action("Index", "Home")),
         ("Compras", Url.Action("Compras", "Modules")),
-        ("Compras Internacionales", Url.Action("ComprasInternacionales", "Modules"))
+        ("Compras Internacionales", Url.Action("ComprasInternacionales", "Compras"))
     };
+
+    int totalPages = (Model.TotalCount + Model.PageSize - 1) / Model.PageSize;
 }
 
-<div class="container-fluid">
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-globe me-2"></i>Gestión de Compras Internacionales
-            </h6>
-        </div>
-        <div class="card-body">
-            <div class="row mb-4">
-                <div class="col-md-4">
-                    <label class="form-label">Buscar por País</label>
-                    <input type="text" class="form-control" placeholder="Ingrese país..." />
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label">Proveedor</label>
-                    <select class="form-select">
-                        <option>Seleccionar proveedor...</option>
-                    </select>
-                </div>
-                <div class="col-md-4 d-flex align-items-end">
-                    <button class="btn btn-primary me-2">
-                        <i class="fas fa-search me-2"></i>Buscar
-                    </button>
-                    <button class="btn btn-success">
-                        <i class="fas fa-plus me-2"></i>Nueva Compra
-                    </button>
-                </div>
+<style>
+    .page-container {
+        padding: 20px 0;
+    }
+
+    .header-section {
+        margin-bottom: 30px;
+    }
+
+    .section-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0;
+    }
+
+    .search-bar {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .search-bar .form-control {
+        border-radius: 4px;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        min-width: 250px;
+    }
+
+    .search-bar .btn {
+        border-radius: 4px;
+        white-space: nowrap;
+    }
+
+    .btn-nueva-compra {
+        background: linear-gradient(135deg, #0dcaf0 0%, #0aa2c6 100%);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        color: white;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .btn-nueva-compra:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(13, 202, 240, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+
+    .alert-custom {
+        border-radius: 4px;
+        border: none;
+        margin-bottom: 20px;
+    }
+
+    .table-wrapper {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .empty-state {
+        display: none !important;
+    }
+
+    .empty-state i {
+        display: none !important;
+    }
+
+    /* Paginación */
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+
+    .pagination-btn {
+        padding: 8px 12px;
+        border: 1px solid #dee2e6;
+        background: white;
+        color: #0d6efd;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .pagination-btn:hover {
+        background: #f8f9fa;
+        border-color: #0d6efd;
+    }
+
+    .pagination-btn.active {
+        background: #0dcaf0;
+        color: white;
+        border-color: #0dcaf0;
+    }
+
+    .pagination-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .pagination-info {
+        text-align: center;
+        color: #6c757d;
+        font-size: 14px;
+        margin-top: 15px;
+    }
+</style>
+
+<div class="page-container">
+    <!-- Header Section -->
+    <div class="header-section">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+            <div>
+                <h4 class="section-title m-0">
+                    <i class="fas fa-globe me-2"></i>Compras Internacionales
+                </h4>
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-hover table-bordered">
-                    <thead class="table-light">
-                        <tr>
-                            <th>ID</th>
-                            <th>Proveedor</th>
-                            <th>País</th>
-                            <th>Monto</th>
-                            <th>Fecha</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="7" class="text-center text-muted">No hay datos disponibles</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="search-bar d-flex gap-2 align-items-center">
+                <input type="text" id="txtBuscar" class="form-control" placeholder="Buscar por contrato, contenedor o proveedor..." value="@ViewBag.SearchTerm" />
+                <button id="btnBuscar" class="btn btn-primary" type="button">
+                    <i class="fas fa-search me-1"></i>Buscar
+                </button>
+                <button id="btnLimpiar" class="btn btn-outline-secondary" type="button">
+                    <i class="fas fa-times me-1"></i>Limpiar
+                </button>
+                <button id="btnNuevaCompra" class="btn btn-nueva-compra" type="button">
+                    <i class="fas fa-plus me-1"></i>Nueva Compra
+                </button>
             </div>
         </div>
     </div>
+
+    <!-- Mensajes -->
+    <div id="mensajeAlert" class="alert alert-custom d-none" role="alert"></div>
+
+    <!-- Tabla de Compras Internacionales -->
+    <div class="table-wrapper">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="width: 12%;">Compra</th>
+                        <th style="width: 12%;">Contract</th>
+                        <th style="width: 12%;">Container</th>
+                        <th style="width: 18%;">Proveedor</th>
+                        <th style="width: 12%;">ETA</th>
+                        <th style="width: 34%; text-align: center;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Items != null && Model.Items.Any())
+                    {
+                        @foreach (var compra in Model.Items)
+                        {
+                            <tr>
+                                <td><strong>@compra.FechaCompra:yyyy-MM-dd</strong></td>
+                                <td>@compra.Contract</td>
+                                <td>@compra.Container</td>
+                                <td>@compra.Proveedor</td>
+                                <td>@(compra.ETA.HasValue ? compra.ETA.Value.ToString("yyyy-MM-dd") : "")</td>
+                                <td style="text-align: center;">
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit btn-editar" 
+                                                data-id="@compra.Id"
+                                                data-fechacompra="@compra.FechaCompra:yyyy-MM-dd"
+                                                data-contract="@compra.Contract"
+                                                data-container="@compra.Container"
+                                                data-sello="@compra.Sello"
+                                                data-proveedor="@compra.Proveedor"
+                                                data-origen="@compra.Origen"
+                                                data-puerto="@compra.Puerto"
+                                                data-naviera="@compra.Naviera"
+                                                data-etd="@(compra.ETD.HasValue ? compra.ETD.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-eta="@(compra.ETA.HasValue ? compra.ETA.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-cruce="@compra.Cruce"
+                                                data-incoterm="@compra.Incoterm"
+                                                data-invoice="@compra.Invoice"
+                                                data-pedimento="@compra.Pedimento"
+                                                data-conexionesdemoras="@compra.ConexionesDemoras"
+                                                data-fechaestim="@(compra.FechaEstimDestino.HasValue ? compra.FechaEstimDestino.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-ultimodia="@(compra.UltimoDiaLibre.HasValue ? compra.UltimoDiaLibre.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-entregavacio="@(compra.EntregaVacio.HasValue ? compra.EntregaVacio.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-diasdemoras="@(compra.DiasDemoras ?? 0)"
+                                                data-facturademoras="@compra.FacturaDemoras"
+                                                data-montousd="@(compra.MontoUSDDemoras ?? 0)"
+                                                data-tc="@(compra.TCDemoras ?? 0)"
+                                                data-montomxn="@(compra.MontoDemorasMXN ?? 0)"
+                                                data-facturacomer="@compra.FacturaComercializadora"
+                                                data-fechadespacho="@(compra.FechaDespacho.HasValue ? compra.FechaDespacho.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-fechapago="@(compra.FechaPagoPedimento.HasValue ? compra.FechaPagoPedimento.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-planta="@(compra.Planta ?? 0)"
+                                                data-lote="@compra.Lote"
+                                                data-fechaproduccion="@(compra.FechaProduccion.HasValue ? compra.FechaProduccion.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-fechacaducidad="@(compra.FechaCaducidad.HasValue ? compra.FechaCaducidad.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-empresa="@compra.Empresa"
+                                                data-codigo="@compra.Codigo"
+                                                data-descripcion="@compra.DescripcionProducto"
+                                                data-producto="@compra.Producto"
+                                                data-marca="@compra.Marca"
+                                                data-talla="@compra.Talla"
+                                                data-kgs="@(compra.Kgs ?? 0)"
+                                                data-cajas="@(compra.Cajas ?? 0)"
+                                                type="button"
+                                                title="Editar compra">
+                                            <i class="fas fa-edit me-1"></i>Editar
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Paginación -->
+    @if (Model.Items != null && Model.Items.Any())
+    {
+        <div class="pagination-container">
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                <button class="pagination-btn @(i == Model.PageNumber ? "active" : "")" 
+                        data-page="@i"
+                        @(i == Model.PageNumber ? "disabled" : "")>
+                    @i
+                </button>
+            }
+        </div>
+        <div class="pagination-info">
+            Mostrando @((Model.PageNumber - 1) * Model.PageSize + 1) a @Math.Min(Model.PageNumber * Model.PageSize, Model.TotalCount) de @Model.TotalCount registros
+        </div>
+    }
+
+    <!-- Formulario de Captura - Inicialmente oculto -->
+    <div id="formContainer" class="card mt-5" style="display: none; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div class="card-header" style="background: linear-gradient(135deg, #0dcaf0 0%, #0aa2c6 100%); color: white;">
+            <h5 class="mb-0">
+                <i class="fas fa-plus-circle me-2"></i><span id="formTitulo">Nueva Compra Internacional</span>
+            </h5>
+        </div>
+        <div class="card-body">
+            <form id="formCompra">
+                <input type="hidden" id="hfOriginalId" />
+
+                <!-- ==================== SECCIÓN: DATOS DE COMPRA ==================== -->
+                <h6 class="mb-3 mt-3">Datos de Compra</h6>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Fecha de Compra <span class="text-danger">*</span></label>
+                        <input type="date" id="txtFechaCompra" class="form-control" required />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Cruce</label>
+                        <select id="ddlCruce" class="form-select">
+                            <option value="">Seleccionar</option>
+                            <option value="A1">A1 - Cruce principal</option>
+                            <option value="A4">A4 - Alterno/segundo cruce</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Incoterm</label>
+                        <select id="ddlIncoterm" class="form-select">
+                            <option value="">Seleccionar</option>
+                            <option value="EXW">EXW - Ex Works</option>
+                            <option value="FCA">FCA - Free Carrier</option>
+                            <option value="CPT">CPT - Carriage Paid To</option>
+                            <option value="CIP">CIP - Carriage and Insurance Paid</option>
+                            <option value="DAP">DAP - Delivered At Place</option>
+                            <option value="DPU">DPU - Delivered at Place Unloaded</option>
+                            <option value="DDP">DDP - Delivered Duty Paid</option>
+                            <option value="FAS">FAS - Free Alongside Ship</option>
+                            <option value="FOB">FOB - Free On Board</option>
+                            <option value="CFR">CFR - Cost and Freight</option>
+                            <option value="CIF">CIF - Cost, Insurance & Freight</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Contract <span class="text-danger">*</span></label>
+                        <input type="text" id="txtContract" class="form-control" maxlength="40" placeholder="Contrato / Ref. interna" required />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Container <span class="text-danger">*</span></label>
+                        <input type="text" id="txtContainer" class="form-control" maxlength="40" placeholder="Contenedor" required />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Sello</label>
+                        <input type="text" id="txtSello" class="form-control" maxlength="40" placeholder="Sello" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Invoice</label>
+                        <input type="text" id="txtInvoice" class="form-control" maxlength="40" placeholder="Invoice" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Pedimento</label>
+                        <input type="text" id="txtPedimento" class="form-control" maxlength="30" placeholder="Pedimento" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Proveedor <span class="text-danger">*</span></label>
+                        <input type="text" id="txtProveedor" class="form-control" maxlength="200" placeholder="Proveedor" required />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Origen</label>
+                        <input type="text" id="txtOrigen" class="form-control" maxlength="100" placeholder="País de origen" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Puerto</label>
+                        <input type="text" id="txtPuerto" class="form-control" maxlength="100" placeholder="Puerto" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Naviera</label>
+                        <input type="text" id="txtNaviera" class="form-control" maxlength="100" placeholder="Línea naviera" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Conexiones / Demoras</label>
+                        <input type="text" id="txtConexionesDemoras" class="form-control" maxlength="40" placeholder="Conexiones" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">ETD</label>
+                        <input type="date" id="txtETD" class="form-control" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">ETA</label>
+                        <input type="date" id="txtETA" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Fecha estimada destino</label>
+                        <input type="date" id="txtFechaEstimDestino" class="form-control" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Último día libre de demoras</label>
+                        <input type="date" id="txtUltimoDiaLibre" class="form-control" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Entrega de vacío</label>
+                        <input type="date" id="txtEntregaVacio" class="form-control" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Días generados de demoras</label>
+                        <input type="number" id="txtDiasDemoras" class="form-control" placeholder="0" />
+                    </div>
+                </div>
+
+                <!-- ==================== SECCIÓN: DEMORAS ==================== -->
+                <h6 class="mb-3 mt-4">Demoras</h6>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Factura de demoras</label>
+                        <input type="text" id="txtFacturaDemoras" class="form-control" maxlength="40" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Monto USD de demoras</label>
+                        <input type="number" id="txtMontoUSDDemoras" class="form-control" placeholder="0.00" step="0.01" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">TC demoras</label>
+                        <input type="number" id="txtTCDemoras" class="form-control" placeholder="0.00" step="0.0001" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Monto demoras en MXN</label>
+                        <input type="number" id="txtMontoDemorasMXN" class="form-control" placeholder="0.00" step="0.01" readonly />
+                    </div>
+                </div>
+
+                <!-- ==================== SECCIÓN: DOCUMENTOS Y FECHAS ==================== -->
+                <h6 class="mb-3 mt-4">Documentos y Fechas</h6>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Factura comercializadora</label>
+                        <input type="text" id="txtFacturaComercializadora" class="form-control" maxlength="40" placeholder="ANEXO / Folio" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Fecha de despacho</label>
+                        <input type="date" id="txtFechaDespacho" class="form-control" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Fecha pago pedimento</label>
+                        <input type="date" id="txtFechaPagoPedimento" class="form-control" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label"># Planta</label>
+                        <input type="number" id="txtPlanta" class="form-control" placeholder="0" />
+                    </div>
+                </div>
+
+                <!-- ==================== SECCIÓN: PRODUCCIÓN Y LOTE ==================== -->
+                <h6 class="mb-3 mt-4">Producción y Lote</h6>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Lote</label>
+                        <input type="text" id="txtLote" class="form-control" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Fecha de producción</label>
+                        <input type="date" id="txtFechaProduccion" class="form-control" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Fecha de caducidad</label>
+                        <input type="date" id="txtFechaCaducidad" class="form-control" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Empresa</label>
+                        <select id="ddlEmpresa" class="form-select">
+                            <option value="">Seleccionar</option>
+                            <option value="J&J Seafood">J&amp;J Seafood</option>
+                            <option value="Central">Central</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label">Código</label>
+                        <input type="text" id="txtCodigo" class="form-control" placeholder="Código" />
+                    </div>
+                    <div class="col-md-5 mb-3">
+                        <label class="form-label">Descripción</label>
+                        <input type="text" id="txtDescripcionProducto" class="form-control" placeholder="Descripción del producto" readonly />
+                    </div>
+                    <div class="col-md-5 mb-3">
+                        <label class="form-label">Producto</label>
+                        <input type="text" id="txtProducto" class="form-control" placeholder="Producto" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Marca</label>
+                        <select id="ddlMarca" class="form-select">
+                            <option value="">Seleccionar</option>
+                            <option value="AQUA CHILE">AQUA CHILE</option>
+                            <option value="CEPESMAR">CEPESMAR</option>
+                            <option value="REY DE MAR">REY DE MAR</option>
+                            <option value="CONARTA">CONARTA</option>
+                            <option value="SIN MARCA">SIN MARCA</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Talla</label>
+                        <select id="ddlTalla" class="form-select">
+                            <option value="">Seleccionar</option>
+                            <option value="2/3">2/3</option>
+                            <option value="3/4">3/4</option>
+                            <option value="3/5">3/5</option>
+                            <option value="4-23 KG">4-23 KG</option>
+                            <option value="4/5">4/5</option>
+                            <option value="5/7">5/7</option>
+                            <option value="7/9">7/9</option>
+                            <option value="8/10">8/10</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Kgs</label>
+                        <input type="number" id="txtKgs" class="form-control" placeholder="0.00" step="0.01" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label"># Cajas</label>
+                        <input type="number" id="txtCajas" class="form-control" placeholder="0" />
+                    </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <button type="button" id="btnCancelar" class="btn btn-outline-secondary">
+                            <i class="fas fa-times me-1"></i>Cancelar
+                        </button>
+                        <button type="submit" id="btnGuardar" class="btn btn-success">
+                            <i class="fas fa-save me-1"></i><span id="btnGuardarTexto">Guardar</span>
+                        </button>
+                        <button type="button" id="btnEliminarForm" class="btn btn-danger d-none">
+                            <i class="fas fa-trash me-1"></i>Eliminar
+                        </button>
+                        <a href="#" id="btnRegresar" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-1"></i>Regresar
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Botón Nueva Compra
+            $('#btnNuevaCompra').click(function () {
+                limpiarFormulario();
+                $('#formTitulo').text('Nueva Compra Internacional');
+                $('#btnGuardarTexto').text('Guardar');
+                $('#hfOriginalId').val('');
+                $('#formContainer').slideDown();
+                $('html, body').animate({ scrollTop: $('#formContainer').offset().top - 100 }, 300);
+            });
+
+            // Cancelar formulario
+            $('#btnCancelar').click(function () {
+                $('#formContainer').slideUp();
+                limpiarFormulario();
+            });
+
+            // Buscar
+            $('#btnBuscar').click(function () {
+                var searchTerm = $('#txtBuscar').val();
+                window.location.href = '@Url.Action("ComprasInternacionales", "Compras")?searchTerm=' + encodeURIComponent(searchTerm) + '&page=1';
+            });
+
+            // Enter en buscador
+            $('#txtBuscar').keypress(function (e) {
+                if (e.which == 13) {
+                    $('#btnBuscar').click();
+                    return false;
+                }
+            });
+
+            // Limpiar búsqueda
+            $('#btnLimpiar').click(function () {
+                $('#txtBuscar').val('');
+                window.location.href = '@Url.Action("ComprasInternacionales", "Compras")';
+            });
+
+            // Paginación
+            $(document).on('click', '.pagination-btn:not(:disabled)', function () {
+                var page = $(this).data('page');
+                var searchTerm = $('#txtBuscar').val();
+                var url = '@Url.Action("ComprasInternacionales", "Compras")?page=' + page;
+                if (searchTerm) {
+                    url += '&searchTerm=' + encodeURIComponent(searchTerm);
+                }
+                window.location.href = url;
+            });
+
+            // Guardar compra
+            $('#formCompra').submit(function (e) {
+                e.preventDefault();
+
+                var id = $('#hfOriginalId').val();
+                var fechaCompra = $('#txtFechaCompra').val();
+                var contract = $('#txtContract').val().trim();
+                var container = $('#txtContainer').val().trim();
+                var sello = $('#txtSello').val().trim();
+                var proveedor = $('#txtProveedor').val().trim();
+                var origen = $('#txtOrigen').val().trim();
+                var puerto = $('#txtPuerto').val().trim();
+                var naviera = $('#txtNaviera').val().trim();
+                var etd = $('#txtETD').val();
+                var eta = $('#txtETA').val();
+                var cruce = $('#ddlCruce').val();
+                var incoterm = $('#ddlIncoterm').val();
+                var invoice = $('#txtInvoice').val().trim();
+                var pedimento = $('#txtPedimento').val().trim();
+                var conexionesDemoras = $('#txtConexionesDemoras').val().trim();
+                var fechaEstimDestino = $('#txtFechaEstimDestino').val();
+                var ultimoDiaLibre = $('#txtUltimoDiaLibre').val();
+                var entregaVacio = $('#txtEntregaVacio').val();
+                var diasDemoras = $('#txtDiasDemoras').val();
+                var facturaDemoras = $('#txtFacturaDemoras').val().trim();
+                var montoUSDDemoras = $('#txtMontoUSDDemoras').val();
+                var tcDemoras = $('#txtTCDemoras').val();
+                var montoDemorasMXN = $('#txtMontoDemorasMXN').val();
+                var facturaComercializadora = $('#txtFacturaComercializadora').val().trim();
+                var fechaDespacho = $('#txtFechaDespacho').val();
+                var fechaPagoPedimento = $('#txtFechaPagoPedimento').val();
+                var planta = $('#txtPlanta').val();
+                var lote = $('#txtLote').val().trim();
+                var fechaProduccion = $('#txtFechaProduccion').val();
+                var fechaCaducidad = $('#txtFechaCaducidad').val();
+                var empresa = $('#ddlEmpresa').val();
+                var codigo = $('#txtCodigo').val().trim();
+                var descripcionProducto = $('#txtDescripcionProducto').val().trim();
+                var producto = $('#txtProducto').val().trim();
+                var marca = $('#ddlMarca').val();
+                var talla = $('#ddlTalla').val();
+                var kgs = $('#txtKgs').val();
+                var cajas = $('#txtCajas').val();
+
+                if (!fechaCompra || !contract || !container || !proveedor) {
+                    mostrarMensaje('Los campos: Fecha, Contract, Container y Proveedor son obligatorios.', 'danger');
+                    return;
+                }
+
+                $.ajax({
+                    url: '@Url.Action("GuardarCompra", "Compras")',
+                    type: 'POST',
+                    data: {
+                        id: id || null,
+                        fechaCompra: fechaCompra,
+                        contract: contract,
+                        container: container,
+                        sello: sello,
+                        proveedor: proveedor,
+                        origen: origen,
+                        puerto: puerto,
+                        naviera: naviera,
+                        etd: etd,
+                        eta: eta,
+                        cruce: cruce,
+                        incoterm: incoterm,
+                        invoice: invoice,
+                        pedimento: pedimento,
+                        conexionesDemoras: conexionesDemoras,
+                        fechaEstimDestino: fechaEstimDestino,
+                        ultimoDiaLibre: ultimoDiaLibre,
+                        entregaVacio: entregaVacio,
+                        diasDemoras: diasDemoras,
+                        facturaDemoras: facturaDemoras,
+                        montoUSDDemoras: montoUSDDemoras,
+                        tcDemoras: tcDemoras,
+                        montoDemorasMXN: montoDemorasMXN,
+                        facturaComercializadora: facturaComercializadora,
+                        fechaDespacho: fechaDespacho,
+                        fechaPagoPedimento: fechaPagoPedimento,
+                        planta: planta,
+                        lote: lote,
+                        fechaProduccion: fechaProduccion,
+                        fechaCaducidad: fechaCaducidad,
+                        empresa: empresa,
+                        codigo: codigo,
+                        descripcionProducto: descripcionProducto,
+                        producto: producto,
+                        marca: marca,
+                        talla: talla,
+                        kgs: kgs,
+                        cajas: cajas
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            mostrarMensaje(response.message, 'success');
+                            $('#formContainer').slideUp();
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1500);
+                        } else {
+                            mostrarMensaje(response.message, 'danger');
+                        }
+                    },
+                    error: function () {
+                        mostrarMensaje('Error al guardar la compra.', 'danger');
+                    }
+                });
+            });
+
+            // Editar compra - CON EVENT DELEGATION
+            $(document).on('click', '.btn-editar', function () {
+                var id = $(this).data('id');
+                var fechacompra = $(this).data('fechacompra');
+                var contract = $(this).data('contract');
+                var container = $(this).data('container');
+                var sello = $(this).data('sello');
+                var proveedor = $(this).data('proveedor');
+                var origen = $(this).data('origen');
+                var puerto = $(this).data('puerto');
+                var naviera = $(this).data('naviera');
+                var etd = $(this).data('etd');
+                var eta = $(this).data('eta');
+                var cruce = $(this).data('cruce');
+                var incoterm = $(this).data('incoterm');
+                var invoice = $(this).data('invoice');
+                var pedimento = $(this).data('pedimento');
+                var conexionesDemoras = $(this).data('conexionesdemoras');
+                var fechaEstimDestino = $(this).data('fechaestim');
+                var ultimoDiaLibre = $(this).data('ultimodia');
+                var entregaVacio = $(this).data('entregavacio');
+                var diasDemoras = $(this).data('diasdemoras');
+                var facturaDemoras = $(this).data('facturademoras');
+                var montoUSDDemoras = $(this).data('montousd');
+                var tcDemoras = $(this).data('tc');
+                var montoDemorasMXN = $(this).data('montomxn');
+                var facturaComercializadora = $(this).data('facturacomer');
+                var fechaDespacho = $(this).data('fechadespacho');
+                var fechaPagoPedimento = $(this).data('fechapago');
+                var planta = $(this).data('planta');
+                var lote = $(this).data('lote');
+                var fechaProduccion = $(this).data('fechaproduccion');
+                var fechaCaducidad = $(this).data('fechacaducidad');
+                var empresa = $(this).data('empresa');
+                var codigo = $(this).data('codigo');
+                var descripcionProducto = $(this).data('descripcion');
+                var producto = $(this).data('producto');
+                var marca = $(this).data('marca');
+                var talla = $(this).data('talla');
+                var kgs = $(this).data('kgs');
+                var cajas = $(this).data('cajas');
+
+                $('#hfOriginalId').val(id);
+                $('#txtFechaCompra').val(fechacompra);
+                $('#txtContract').val(contract);
+                $('#txtContainer').val(container);
+                $('#txtSello').val(sello);
+                $('#txtProveedor').val(proveedor);
+                $('#txtOrigen').val(origen);
+                $('#txtPuerto').val(puerto);
+                $('#txtNaviera').val(naviera);
+                $('#txtETD').val(etd);
+                $('#txtETA').val(eta);
+                $('#ddlCruce').val(cruce);
+                $('#ddlIncoterm').val(incoterm);
+                $('#txtInvoice').val(invoice);
+                $('#txtPedimento').val(pedimento);
+                $('#txtConexionesDemoras').val(conexionesDemoras);
+                $('#txtFechaEstimDestino').val(fechaEstimDestino);
+                $('#txtUltimoDiaLibre').val(ultimoDiaLibre);
+                $('#txtEntregaVacio').val(entregaVacio);
+                $('#txtDiasDemoras').val(diasDemoras);
+                $('#txtFacturaDemoras').val(facturaDemoras);
+                $('#txtMontoUSDDemoras').val(montoUSDDemoras);
+                $('#txtTCDemoras').val(tcDemoras);
+                $('#txtMontoDemorasMXN').val(montoDemorasMXN);
+                $('#txtFacturaComercializadora').val(facturaComercializadora);
+                $('#txtFechaDespacho').val(fechaDespacho);
+                $('#txtFechaPagoPedimento').val(fechaPagoPedimento);
+                $('#txtPlanta').val(planta);
+                $('#txtLote').val(lote);
+                $('#txtFechaProduccion').val(fechaProduccion);
+                $('#txtFechaCaducidad').val(fechaCaducidad);
+                $('#ddlEmpresa').val(empresa);
+                $('#txtCodigo').val(codigo);
+                $('#txtDescripcionProducto').val(descripcionProducto);
+                $('#txtProducto').val(producto);
+                $('#ddlMarca').val(marca);
+                $('#ddlTalla').val(talla);
+                $('#txtKgs').val(kgs);
+                $('#txtCajas').val(cajas);
+
+                $('#formTitulo').text('Editar Compra Internacional');
+                $('#btnGuardarTexto').text('Actualizar');
+                $('#btnEliminarForm').removeClass('d-none');
+
+                $('#formContainer').slideDown();
+                $('html, body').animate({ scrollTop: $('#formContainer').offset().top - 100 }, 300);
+            });
+
+            // Eliminar compra desde el formulario
+            $('#btnEliminarForm').click(function () {
+                var id = $('#hfOriginalId').val();
+                if (!id) return;
+
+                if (confirm('¿Está seguro de que desea eliminar esta compra internacional?')) {
+                    $.ajax({
+                        url: '@Url.Action("EliminarCompra", "Compras")',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (response) {
+                            if (response.success) {
+                                mostrarMensaje(response.message, 'success');
+                                $('#formContainer').slideUp();
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1500);
+                            } else {
+                                mostrarMensaje(response.message, 'danger');
+                            }
+                        },
+                        error: function () {
+                            mostrarMensaje('Error al eliminar la compra.', 'danger');
+                        }
+                    });
+                }
+            });
+
+            function limpiarFormulario() {
+                $('#hfOriginalId').val('');
+                $('#txtFechaCompra').val('');
+                $('#txtContract').val('');
+                $('#txtContainer').val('');
+                $('#txtSello').val('');
+                $('#txtProveedor').val('');
+                $('#txtOrigen').val('');
+                $('#txtPuerto').val('');
+                $('#txtNaviera').val('');
+                $('#txtETD').val('');
+                $('#txtETA').val('');
+                $('#ddlCruce').val('');
+                $('#ddlIncoterm').val('');
+                $('#txtInvoice').val('');
+                $('#txtPedimento').val('');
+                $('#txtConexionesDemoras').val('');
+                $('#txtFechaEstimDestino').val('');
+                $('#txtUltimoDiaLibre').val('');
+                $('#txtEntregaVacio').val('');
+                $('#txtDiasDemoras').val('');
+                $('#txtFacturaDemoras').val('');
+                $('#txtMontoUSDDemoras').val('');
+                $('#txtTCDemoras').val('');
+                $('#txtMontoDemorasMXN').val('');
+                $('#txtFacturaComercializadora').val('');
+                $('#txtFechaDespacho').val('');
+                $('#txtFechaPagoPedimento').val('');
+                $('#txtPlanta').val('');
+                $('#txtLote').val('');
+                $('#txtFechaProduccion').val('');
+                $('#txtFechaCaducidad').val('');
+                $('#ddlEmpresa').val('');
+                $('#txtCodigo').val('');
+                $('#txtDescripcionProducto').val('');
+                $('#txtProducto').val('');
+                $('#ddlMarca').val('');
+                $('#ddlTalla').val('');
+                $('#txtKgs').val('');
+                $('#txtCajas').val('');
+                $('#btnEliminarForm').addClass('d-none');
+            }
+
+            function mostrarMensaje(mensaje, tipo) {
+                var alertDiv = $('#mensajeAlert');
+                alertDiv.removeClass('d-none alert-success alert-danger alert-warning alert-info');
+                alertDiv.addClass('alert-' + tipo);
+                alertDiv.html('<strong>' + (tipo === 'success' ? '<i class="fas fa-check-circle me-2"></i>' : '<i class="fas fa-exclamation-circle me-2"></i>') + '</strong>' + mensaje);
+
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 300);
+
+                setTimeout(function () {
+                    alertDiv.addClass('d-none');
+                }, 5000);
+            }
+        });
+    </script>
+}
+                        

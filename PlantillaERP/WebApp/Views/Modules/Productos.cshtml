@@ -1,63 +1,360 @@
+@model List<WebApp.Models.Producto>
+
 @{
     ViewData["Title"] = "Productos";
     ViewData["Breadcrumbs"] = new List<(string, string)>
     {
-        ("Dashboard", Url.Action("Index", "Home")),
+        ("Inicio", Url.Action("Index", "Home")),
         ("Inventario", Url.Action("Inventario", "Modules")),
-        ("Productos", Url.Action("Productos", "Modules"))
+        ("Productos", Url.Action("Productos", "Inventario"))
     };
 }
 
-<div class="container-fluid">
+<style>
+    .page-container {
+        padding: 20px 0;
+    }
 
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-shopping-bag me-2"></i>Catálogo de Productos
-            </h6>
-        </div>
-        <div class="card-body">
-            <div class="row mb-4">
-                <div class="col-md-4">
-                    <label class="form-label">Buscar Producto</label>
-                    <input type="text" class="form-control" placeholder="Ingrese código o nombre..." />
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label">Categoría</label>
-                    <select class="form-select">
-                        <option>Todas las categorías</option>
-                    </select>
-                </div>
-                <div class="col-md-4 d-flex align-items-end">
-                    <button class="btn btn-primary me-2">
-                        <i class="fas fa-search me-2"></i>Buscar
-                    </button>
-                    <button class="btn btn-success">
-                        <i class="fas fa-plus me-2"></i>Nuevo Producto
-                    </button>
-                </div>
+    .header-section {
+        margin-bottom: 30px;
+    }
+
+    .section-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0;
+    }
+
+    .search-bar {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .search-bar .form-control { 
+        border-radius: 4px;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        min-width: 250px;
+    }
+
+    .search-bar .btn {
+        border-radius: 4px;
+        white-space: nowrap;
+    }
+
+    .btn-nuevo-producto {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        color: white;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .btn-nuevo-producto:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .alert-custom {
+        border-radius: 4px;
+        border: none;
+        margin-bottom: 20px;
+    }
+
+    /* Tabla centrada y responsiva */
+    .table-wrapper {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 0;
+    }
+</style>
+
+<div class="page-container">
+    <!-- Header Section -->
+    <div class="header-section">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+            <div>
+                <h4 class="section-title m-0">
+                    <i class="fas fa-shopping-bag me-2"></i>Catálogo de Productos
+                </h4>
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-hover table-bordered">
-                    <thead class="table-light">
+            <div class="search-bar d-flex gap-2 align-items-center">
+                <input type="text" id="txtBuscar" class="form-control" placeholder="Buscar producto o talla..." value="@ViewBag.SearchTerm" />
+                <button id="btnBuscar" class="btn btn-primary" type="button">
+                    <i class="fas fa-search me-1"></i>Buscar
+                </button>
+                <button id="btnLimpiar" class="btn btn-outline-secondary" type="button">
+                    <i class="fas fa-times me-1"></i>Limpiar
+                </button>
+                <button id="btnNuevoProducto" class="btn btn-nuevo-producto" type="button">
+                    <i class="fas fa-plus me-1"></i>Nuevo Producto
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mensajes -->
+    <div id="mensajeAlert" class="alert alert-custom d-none" role="alert"></div>
+
+    <!-- Tabla de Productos -->
+    <div class="table-wrapper">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Id</th>
+                        <th style="width: 50%;">Producto</th>
+                        <th style="width: 35%; text-align: center;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var producto in Model)
+                        {
+                            <tr>
+                                <td><strong>@producto.Id</strong></td>
+                                <td>@producto.ProductoCompleto</td>
+                                <td style="text-align: center;">
+                                    <div class="action-buttons">
+                                        <button class="btn btn-edit btn-editar" 
+                                                data-id="@producto.Id"
+                                                data-producto="@producto.ProductoNombre"
+                                                data-talla="@producto.Talla"
+                                                type="button"
+                                                title="Editar producto">
+                                            <i class="fas fa-edit me-1"></i>Editar
+                                        </button>
+                                        <button class="btn btn-delete btn-eliminar" 
+                                                data-id="@producto.Id"
+                                                type="button"
+                                                title="Eliminar producto">
+                                            <i class="fas fa-trash me-1"></i>Eliminar
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
                         <tr>
-                            <th>Código</th>
-                            <th>Nombre</th>
-                            <th>Categoría</th>
-                            <th>Stock</th>
-                            <th>Precio</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
+                            <td colspan="3">
+                                <div class="empty-state">
+                                    <div><i class="fas fa-inbox"></i></div>
+                                    <p>No hay productos para mostrar</p>
+                                </div>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="7" class="text-center text-muted">No hay datos disponibles</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Agregar / Editar Producto -->
+<div class="modal fade" id="modalProducto" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h5 class="modal-title">
+                    <i class="fas fa-plus-circle me-2"></i><span id="modalTitulo">Agregar Producto</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formProducto">
+                    <input type="hidden" id="hfOriginalId" />
+
+                    <div class="mb-3">
+                        <label class="form-label">Id <span class="text-danger">*</span></label>
+                        <input type="text" id="txtId" class="form-control" maxlength="50" placeholder="Ej. SKU-001" required />
+                        <small class="text-muted">Campo único, no se puede modificar en edición</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Producto <span class="text-danger">*</span></label>
+                        <input type="text" id="txtProducto" class="form-control" maxlength="150" placeholder="Nombre del producto" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Talla <span class="text-muted">(Opcional)</span></label>
+                        <input type="text" id="txtTalla" class="form-control" maxlength="50" placeholder="Ej. M, L, XL" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>Cancelar
+                </button>
+                <button type="submit" form="formProducto" id="btnGuardar" class="btn btn-success">
+                    <i class="fas fa-save me-1"></i><span id="btnGuardarTexto">Guardar</span>
+                </button>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            const modalProducto = new bootstrap.Modal(document.getElementById('modalProducto'));
+
+            // Botón Nuevo Producto
+            $('#btnNuevoProducto').click(function () {
+                limpiarFormulario();
+                $('#modalTitulo').text('Agregar Producto');
+                $('#btnGuardarTexto').text('Guardar');
+                $('#txtId').prop('disabled', false);
+                modalProducto.show();
+            });
+
+            // Buscar
+            $('#btnBuscar').click(function () {
+                var searchTerm = $('#txtBuscar').val();
+                window.location.href = '@Url.Action("Productos", "Inventario")?searchTerm=' + encodeURIComponent(searchTerm);
+            });
+
+            // Enter en buscador
+            $('#txtBuscar').keypress(function (e) {
+                if (e.which == 13) {
+                    $('#btnBuscar').click();
+                    return false;
+                }
+            });
+
+            // Limpiar búsqueda
+            $('#btnLimpiar').click(function () {
+                $('#txtBuscar').val('');
+                window.location.href = '@Url.Action("Productos", "Inventario")';
+            });
+
+            // Guardar producto
+            $('#formProducto').submit(function (e) {
+                e.preventDefault();
+
+                var id = $('#txtId').val().trim();
+                var producto = $('#txtProducto').val().trim();
+                var talla = $('#txtTalla').val().trim();
+                var originalId = $('#hfOriginalId').val();
+
+                if (!id || !producto) {
+                    mostrarMensaje('El Id y Producto son obligatorios.', 'danger');
+                    return;
+                }
+
+                $.ajax({
+                    url: '@Url.Action("Guardar", "Inventario")',
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        producto: producto,
+                        talla: talla,
+                        originalId: originalId
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            mostrarMensaje(response.message, 'success');
+                            modalProducto.hide();
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1500);
+                        } else {
+                            mostrarMensaje(response.message, 'danger');
+                        }
+                    },
+                    error: function () {
+                        mostrarMensaje('Error al guardar el producto.', 'danger');
+                    }
+                });
+            });
+
+            // Editar producto - CON EVENT DELEGATION
+            $(document).on('click', '.btn-editar', function () {
+                var id = $(this).data('id');
+                var producto = $(this).data('producto');
+                var talla = $(this).data('talla');
+
+                $('#hfOriginalId').val(id);
+                $('#txtId').val(id);
+                $('#txtId').prop('disabled', true);
+                $('#txtProducto').val(producto);
+                $('#txtTalla').val(talla);
+
+                $('#modalTitulo').text('Editar Producto');
+                $('#btnGuardarTexto').text('Actualizar');
+
+                modalProducto.show();
+            });
+
+            // Eliminar producto - CON EVENT DELEGATION
+            $(document).on('click', '.btn-eliminar', function () {
+                var id = $(this).data('id');
+                var btnText = $(this).find('i').next().text().trim();
+
+                // Crear un modal de confirmación
+                if (confirm('¿Está seguro de que desea eliminar este producto?')) {
+                    $.ajax({
+                        url: '@Url.Action("Eliminar", "Inventario")',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (response) {
+                            if (response.success) {
+                                mostrarMensaje(response.message, 'success');
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1500);
+                            } else {
+                                mostrarMensaje(response.message, 'danger');
+                            }
+                        },
+                        error: function () {
+                            mostrarMensaje('Error al eliminar el producto.', 'danger');
+                        }
+                    });
+                }
+            });
+
+            // Limpiar formulario cuando se cierra el modal
+            document.getElementById('modalProducto').addEventListener('hidden.bs.modal', function () {
+                limpiarFormulario();
+            });
+
+            function limpiarFormulario() {
+                $('#hfOriginalId').val('');
+                $('#txtId').val('');
+                $('#txtId').prop('disabled', false);
+                $('#txtProducto').val('');
+                $('#txtTalla').val('');
+            }
+
+            function mostrarMensaje(mensaje, tipo) {
+                var alertDiv = $('#mensajeAlert');
+                alertDiv.removeClass('d-none alert-success alert-danger alert-warning alert-info');
+                alertDiv.addClass('alert-' + tipo);
+                alertDiv.html('<strong>' + (tipo === 'success' ? '<i class="fas fa-check-circle me-2"></i>' : '<i class="fas fa-exclamation-circle me-2"></i>') + '</strong>' + mensaje);
+
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 300);
+
+                setTimeout(function () {
+                    alertDiv.addClass('d-none');
+                }, 5000);
+            }
+        });
+    </script>
+}
