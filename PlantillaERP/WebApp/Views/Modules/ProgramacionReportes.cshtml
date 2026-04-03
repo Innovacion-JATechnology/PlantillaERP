@@ -1,31 +1,65 @@
 @{
     ViewData["Title"] = "Programación de Reportes";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Inicio", Url.Action("Index", "Home")),
+        ("Reporteador", Url.Action("Reporteador", "Modules")),
+        ("Programación", null)
+    };
 }
 
-<div class="container-fluid">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="Inicio" asp-controller="Home">Inicio</a></li>
-            <li class="breadcrumb-item"><a asp-action="Reporteador" asp-controller="Modules">Reporteador</a></li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">@ViewData["Title"]</h1>
-        <button class="btn btn-primary">
-            <i class="fas fa-plus me-2"></i>Programar Reporte
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-calendar-alt"></i>
+            Programación de Reportes
+        </h1>
+        <p>Automatiza la generación y envío de reportes según tu agenda</p>
+    </div>
+
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Programar Reporte
         </button>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-calendar-alt me-2"></i>Reportes Programados
+    <!-- Tabla de Programaciones -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-table"></i>
+                Reportes Programados
             </h6>
         </div>
         <div class="card-body">
-            <div class="alert alert-info">Sin programaciones disponibles</div>
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Frecuencia</th>
+                        <th>Próxima Ejecución</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">
+                            <div class="empty-state">
+                                <i class="fas fa-hourglass"></i>
+                                <h5>Sin programaciones disponibles</h5>
+                                <p>Crea tu primera programación de reporte</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

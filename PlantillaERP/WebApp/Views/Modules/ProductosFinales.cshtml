@@ -4,35 +4,104 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Producción", Url.Action("Produccion", "Modules")),
-        ("Productos Finales", Url.Action("ProductosFinales", "Modules"))
+        ("Productos Finales", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-box-open"></i>
+            Productos Finales
+        </h1>
+        <p>Gestiona el inventario de productos terminados listos para distribuir</p>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-box-open me-2"></i>Productos Terminados
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Registrar Producto
+        </button>
+    </div>
+
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Total Productos</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-box stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Stock Total</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-warehouse stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">Distribuidos</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-truck stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-danger">
+                    <div class="card-body">
+                        <div class="stat-label">Stock Bajo</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-exclamation-triangle stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Productos Finales -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-list"></i>
+                Productos Terminados
             </h6>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead class="table-light">
+            <table class="professional-table">
+                <thead>
                     <tr>
+                        <th>Código</th>
                         <th>Producto</th>
                         <th>Cantidad</th>
+                        <th>Unidad</th>
                         <th>Fecha de Salida</th>
                         <th>Destino</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4" class="text-center text-muted">Sin productos disponibles</td>
+                        <td colspan="8">
+                            <div class="empty-state">
+                                <i class="fas fa-box-open"></i>
+                                <h5>No hay productos disponibles</h5>
+                                <p>Los productos finales aparecerán aquí</p>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

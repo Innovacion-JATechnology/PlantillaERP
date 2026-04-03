@@ -1,42 +1,70 @@
 @{
     ViewData["Title"] = "Reportes RRHH";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Inicio", Url.Action("Index", "Home")),
+        ("Recursos Humanos", Url.Action("RRHH", "Modules")),
+        ("Reportes", null)
+    };
 }
 
-<div class="container-fluid">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="Inicio" asp-controller="Home">Inicio</a></li>
-            <li class="breadcrumb-item"><a asp-action="RRHH" asp-controller="Modules">Recursos Humanos</a></li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-chart-pie"></i>
+            Reportes de Recursos Humanos
+        </h1>
+        <p>Accede a reportes analíticos sobre tu personal y nómina</p>
+    </div>
 
-    <div class="row">
-        <div class="col-md-6 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Nómina de Personal</h6>
-                </div>
-                <div class="card-body">
-                    <p class="text-muted">Listado completo de empleados</p>
-                    <button class="btn btn-primary btn-sm">
-                        <i class="fas fa-download me-2"></i>Generar
-                    </button>
+    <!-- Reportes Cards -->
+    <div class="reports-grid">
+        <div class="row g-4">
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <h6><i class="fas fa-users me-2"></i>Nómina de Personal</h6>
+                        <p>Listado completo de empleados activos e inactivos</p>
+                        <button class="professional-btn professional-btn-info professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Generar
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Análisis de Recursos</h6>
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <h6><i class="fas fa-chart-bar me-2"></i>Análisis de Recursos</h6>
+                        <p>Estadísticas de personal y distribución por áreas</p>
+                        <button class="professional-btn professional-btn-success professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Generar
+                        </button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="text-muted">Estadísticas de personal</p>
-                    <button class="btn btn-primary btn-sm">
-                        <i class="fas fa-download me-2"></i>Generar
-                    </button>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <h6><i class="fas fa-stopwatch me-2"></i>Ausentismo y Tardanzas</h6>
+                        <p>Análisis de asistencia y puntualidad</p>
+                        <button class="professional-btn professional-btn-warning professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Generar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-danger">
+                    <div class="card-body">
+                        <h6><i class="fas fa-coins me-2"></i>Costo de Nómina</h6>
+                        <p>Análisis de gastos en recursos humanos</p>
+                        <button class="professional-btn professional-btn-danger professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Generar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

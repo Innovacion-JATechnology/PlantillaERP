@@ -4,64 +4,107 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("RRHH", Url.Action("RRHH", "Modules")),
-        ("Nómina", Url.Action("Nomina", "Modules"))
+        ("Nómina", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">@ViewData["Title"]</h1>
-        <button class="btn btn-primary">
-            <i class="fas fa-plus me-2"></i>Procesar Nómina
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-money-check-alt"></i>
+            Gestión de Nómina
+        </h1>
+        <p>Procesa y administra los pagos del personal de manera eficiente</p>
+    </div>
+
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-success">
+            <i class="fas fa-calculator"></i>
+            Procesar Nómina
         </button>
     </div>
 
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-info text-uppercase mb-1">Total Salarios</div>
-                    <div class="h3 mb-0">$0</div>
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Total Salarios</div>
+                        <div class="stat-value">$0</div>
+                        <i class="fas fa-dollar-sign stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-warning text-uppercase mb-1">Deducciones</div>
-                    <div class="h3 mb-0">$0</div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">Deducciones</div>
+                        <div class="stat-value">$0</div>
+                        <i class="fas fa-minus-circle stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-success text-uppercase mb-1">Bonificaciones</div>
-                    <div class="h3 mb-0">$0</div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Bonificaciones</div>
+                        <div class="stat-value">$0</div>
+                        <i class="fas fa-plus-circle stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-danger text-uppercase mb-1">Neto a Pagar</div>
-                    <div class="h3 mb-0">$0</div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-danger">
+                    <div class="card-body">
+                        <div class="stat-label">Neto a Pagar</div>
+                        <div class="stat-value">$0</div>
+                        <i class="fas fa-wallet stat-icon"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-money-check me-2"></i>Procesamiento de Nómina
+    <!-- Tabla de Nómina -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-file-invoice-dollar"></i>
+                Procesamiento de Nómina
             </h6>
         </div>
         <div class="card-body">
-            <div class="alert alert-info">Sin nóminas procesadas</div>
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>Empleado</th>
+                        <th>Período</th>
+                        <th>Salario Base</th>
+                        <th>Deducciones</th>
+                        <th>Bonos</th>
+                        <th>Total Neto</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="8">
+                            <div class="empty-state">
+                                <i class="fas fa-file-contract"></i>
+                                <h5>No hay nóminas procesadas</h5>
+                                <p>Procesa la primera nómina para ver los registros aquí</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -1,42 +1,97 @@
 @{
     ViewData["Title"] = "Tareas";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Inicio", Url.Action("Index", "Home")),
+        ("Proyectos", Url.Action("Proyectos", "Modules")),
+        ("Tareas", null)
+    };
 }
 
-<div class="container-fluid">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="Inicio" asp-controller="Home">Inicio</a></li>
-            <li class="breadcrumb-item"><a asp-action="Proyectos" asp-controller="Modules">Proyectos</a></li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">@ViewData["Title"]</h1>
-        <button class="btn btn-primary">
-            <i class="fas fa-plus me-2"></i>Nueva Tarea
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-tasks"></i>
+            Gestión de Tareas
+        </h1>
+        <p>Organiza y controla todas las tareas de tus proyectos</p>
+    </div>
+
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nueva Tarea
         </button>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-tasks me-2"></i>Tareas de Proyectos
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Total Tareas</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-tasks stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">En Progreso</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-spinner stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Completadas</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-check-circle stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Tareas -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-list-check"></i>
+                Tareas del Proyecto
             </h6>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead class="table-light">
+            <table class="professional-table">
+                <thead>
                     <tr>
                         <th>Tarea</th>
                         <th>Proyecto</th>
                         <th>Responsable</th>
                         <th>Estado</th>
+                        <th>Prioridad</th>
+                        <th>Fecha Vencimiento</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4" class="text-center text-muted">Sin tareas disponibles</td>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <h5>No hay tareas disponibles</h5>
+                                <p>Crea tu primera tarea del proyecto</p>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

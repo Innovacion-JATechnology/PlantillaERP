@@ -4,57 +4,96 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Inventario", Url.Action("Inventario", "Modules")),
-        ("Stock", Url.Action("Stock", "Modules"))
+        ("Stock", null)
     };
 }
 
-<div class="container-fluid">
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-boxes"></i>
+            Control de Stock
+        </h1>
+        <p>Monitorea en tiempo real el estado del inventario y niveles de stock</p>
+    </div>
 
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-primary text-uppercase mb-1">Productos en Stock</div>
-                    <div class="h3 mb-0">0</div>
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nuevo Producto
+        </button>
+    </div>
+
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Productos en Stock</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-check-circle stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-warning text-uppercase mb-1">Stock Bajo</div>
-                    <div class="h3 mb-0">0</div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">Stock Bajo</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-bell stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-danger text-uppercase mb-1">Sin Stock</div>
-                    <div class="h3 mb-0">0</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-success text-uppercase mb-1">Valor Total</div>
-                    <div class="h3 mb-0">$0</div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-danger">
+                    <div class="card-body">
+                        <div class="stat-label">Sin Stock</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-times-circle stat-icon"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-boxes me-2"></i>Control de Inventario
+    <!-- Tabla de Stock -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-table"></i>
+                Control de Inventario
             </h6>
         </div>
         <div class="card-body">
-            <div class="alert alert-info">Sin datos disponibles</div>
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>Código Producto</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Cantidad</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <h5>Sin productos disponibles</h5>
+                                <p>Comienza agregando productos a tu inventario</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

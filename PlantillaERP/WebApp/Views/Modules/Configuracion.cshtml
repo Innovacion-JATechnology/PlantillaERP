@@ -4,26 +4,127 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Administración", Url.Action("Administracion", "Modules")),
-        ("Configuración", Url.Action("Configuracion", "Modules"))
+        ("Configuración", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-cogs"></i>
+            Configuración del Sistema
+        </h1>
+        <p>Administra los parámetros y configuraciones generales del sistema ERP</p>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-cog me-2"></i>Configuración del Sistema
+    <!-- Secciones de Configuración -->
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="professional-table-card">
+                <div class="card-header">
+                    <h6>
+                        <i class="fas fa-building"></i>
+                        Información de la Empresa
+                    </h6>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Nombre de la Empresa</label>
+                        <input type="text" class="form-control" placeholder="Ingrese el nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">RUC/NIT</label>
+                        <input type="text" class="form-control" placeholder="Ingrese el RUC/NIT">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Dirección</label>
+                        <textarea class="form-control" rows="2" placeholder="Ingrese la dirección"></textarea>
+                    </div>
+                    <button class="professional-btn professional-btn-success">
+                        <i class="fas fa-save"></i>
+                        Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="professional-table-card">
+                <div class="card-header">
+                    <h6>
+                        <i class="fas fa-palette"></i>
+                        Preferencias del Sistema
+                    </h6>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Tema de Color</label>
+                        <select class="form-select">
+                            <option>Claro</option>
+                            <option>Oscuro</option>
+                            <option>Automático</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Idioma</label>
+                        <select class="form-select">
+                            <option>Español</option>
+                            <option>Inglés</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Zona Horaria</label>
+                        <select class="form-select">
+                            <option>UTC-5 (Lima)</option>
+                        </select>
+                    </div>
+                    <button class="professional-btn professional-btn-success">
+                        <i class="fas fa-save"></i>
+                        Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Configuraciones Adicionales -->
+    <div class="professional-table-card mt-4">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-sliders-h"></i>
+                Configuraciones Avanzadas
             </h6>
         </div>
-        <div class="card-body">
-            <button class="btn btn-primary">
-                <i class="fas fa-save me-2"></i>Guardar Cambios
-            </button>
+        <div class="card-body p-4">
+            <div class="row">
+                <div class="col-lg-4 mb-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="notifications">
+                        <label class="form-check-label fw-bold" for="notifications">
+                            Activar Notificaciones
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="backup">
+                        <label class="form-check-label fw-bold" for="backup">
+                            Backup Automático
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="maintenance">
+                        <label class="form-check-label fw-bold" for="maintenance">
+                            Modo Mantenimiento
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

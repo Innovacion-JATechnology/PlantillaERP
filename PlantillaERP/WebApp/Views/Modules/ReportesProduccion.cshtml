@@ -1,42 +1,70 @@
 @{
     ViewData["Title"] = "Reportes de Producción";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Inicio", Url.Action("Index", "Home")),
+        ("Producción", Url.Action("Produccion", "Modules")),
+        ("Reportes", null)
+    };
 }
 
-<div class="container-fluid">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="Inicio" asp-controller="Home">Inicio</a></li>
-            <li class="breadcrumb-item"><a asp-action="Produccion" asp-controller="Modules">Producción</a></li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-chart-bar"></i>
+            Reportes de Producción
+        </h1>
+        <p>Genera reportes detallados sobre el desempeño de tu producción</p>
+    </div>
 
-    <div class="row">
-        <div class="col-md-6 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Reporte de Producción</h6>
-                </div>
-                <div class="card-body">
-                    <p class="text-muted">Volumen de producción realizado</p>
-                    <button class="btn btn-primary btn-sm">
-                        <i class="fas fa-download me-2"></i>Generar
-                    </button>
+    <!-- Reportes Cards -->
+    <div class="reports-grid">
+        <div class="row g-4">
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <h6><i class="fas fa-chart-line me-2"></i>Reporte de Producción</h6>
+                        <p>Volumen de producción realizado por período</p>
+                        <button class="professional-btn professional-btn-info professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Generar
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Eficiencia y Desempeño</h6>
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <h6><i class="fas fa-tachometer-alt me-2"></i>Eficiencia y Desempeño</h6>
+                        <p>Métricas de rendimiento y productividad</p>
+                        <button class="professional-btn professional-btn-success professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Generar
+                        </button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="text-muted">Métricas de rendimiento</p>
-                    <button class="btn btn-primary btn-sm">
-                        <i class="fas fa-download me-2"></i>Generar
-                    </button>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <h6><i class="fas fa-exclamation-triangle me-2"></i>Desvíos y Paradas</h6>
+                        <p>Análisis de interrupciones y problemas en línea</p>
+                        <button class="professional-btn professional-btn-warning professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Generar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-danger">
+                    <div class="card-body">
+                        <h6><i class="fas fa-bug me-2"></i>Control de Calidad</h6>
+                        <p>Defectos detectados y tasa de rechazos</p>
+                        <button class="professional-btn professional-btn-danger professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Generar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

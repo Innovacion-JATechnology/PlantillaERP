@@ -4,26 +4,88 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Administración", Url.Action("Administracion", "Modules")),
-        ("Parámetros", Url.Action("ParametrosGenerales", "Modules"))
+        ("Parámetros", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-sliders-h"></i>
+            Parámetros Generales
+        </h1>
+        <p>Configura los parámetros y variables globales del sistema</p>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-sliders-h me-2"></i>Configuración General del Sistema
-            </h6>
+    <!-- Secciones de Parámetros -->
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="professional-table-card">
+                <div class="card-header">
+                    <h6>
+                        <i class="fas fa-cog"></i>
+                        Parámetros de Sistema
+                    </h6>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Formato de Fecha</label>
+                        <select class="form-select">
+                            <option>DD/MM/YYYY</option>
+                            <option>MM/DD/YYYY</option>
+                            <option>YYYY-MM-DD</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Moneda</label>
+                        <select class="form-select">
+                            <option>USD - Dólar Americano</option>
+                            <option>EUR - Euro</option>
+                            <option>PEN - Sol Peruano</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Días de Retención de Logs</label>
+                        <input type="number" class="form-control" value="30" min="1">
+                    </div>
+                    <button class="professional-btn professional-btn-success">
+                        <i class="fas fa-save"></i>
+                        Guardar Parámetros
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <button class="btn btn-primary">
-                <i class="fas fa-save me-2"></i>Guardar Cambios
-            </button>
+
+        <div class="col-lg-6">
+            <div class="professional-table-card">
+                <div class="card-header">
+                    <h6>
+                        <i class="fas fa-shield-alt"></i>
+                        Configuración de Seguridad
+                    </h6>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Intentos de Login Máximos</label>
+                        <input type="number" class="form-control" value="5" min="1">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Bloqueo de Cuenta (minutos)</label>
+                        <input type="number" class="form-control" value="30" min="1">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Duración de Sesión (minutos)</label>
+                        <input type="number" class="form-control" value="60" min="1">
+                    </div>
+                    <button class="professional-btn professional-btn-success">
+                        <i class="fas fa-save"></i>
+                        Guardar Configuración
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

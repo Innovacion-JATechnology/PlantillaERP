@@ -4,27 +4,97 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Finanzas", Url.Action("Finanzas", "Modules")),
-        ("Presupuestos", Url.Action("Presupuestos", "Modules"))
+        ("Presupuestos", null)
     };
 }
 
-<div class="container-fluid">
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">@ViewData["Title"]</h1>
-        <button class="btn btn-primary">
-            <i class="fas fa-plus me-2"></i>Nuevo Presupuesto
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-calculator"></i>
+            Gestión de Presupuestos
+        </h1>
+        <p>Planifica y controla los presupuestos de tu empresa</p>
+    </div>
+
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nuevo Presupuesto
         </button>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-calculator me-2"></i>Presupuestos Registrados
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Total Presupuestos</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-folder-open stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Aprobados</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-check-circle stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">En Revisión</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-hourglass-half stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Presupuestos -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-table"></i>
+                Presupuestos Registrados
             </h6>
         </div>
         <div class="card-body">
-            <div class="alert alert-info">Sin presupuestos disponibles</div>
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>N° Presupuesto</th>
+                        <th>Descripción</th>
+                        <th>Período</th>
+                        <th>Monto Total</th>
+                        <th>Monto Ejecutado</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-chart-pie"></i>
+                                <h5>No hay presupuestos disponibles</h5>
+                                <p>Comienza creando tu primer presupuesto</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -4,35 +4,94 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Reporteador", Url.Action("Reporteador", "Modules")),
-        ("Historial", Url.Action("HistorialReportes", "Modules"))
+        ("Historial", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-history"></i>
+            Historial de Reportes
+        </h1>
+        <p>Consulta el registro de todos los reportes generados</p>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-history me-2"></i>Reportes Generados
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Total Generados</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-file-alt stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Completados</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-check-circle stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">En Proceso</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-spinner stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-danger">
+                    <div class="card-body">
+                        <div class="stat-label">Con Errores</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-exclamation-circle stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Reportes Generados -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-list"></i>
+                Reportes Generados
             </h6>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead class="table-light">
+            <table class="professional-table">
+                <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Fecha Generación</th>
                         <th>Usuario</th>
+                        <th>Estado</th>
+                        <th>Formato</th>
+                        <th>Tamaño</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4" class="text-center text-muted">Sin reportes disponibles</td>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-history"></i>
+                                <h5>No hay reportes disponibles</h5>
+                                <p>Los reportes generados aparecerán aquí</p>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

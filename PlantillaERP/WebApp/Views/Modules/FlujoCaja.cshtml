@@ -3,57 +3,98 @@
     ViewData["Breadcrumbs"] = new List<(string, string)>
     {
         ("Inicio", Url.Action("Index", "Home")),
-        ("Finanzas", Url.Action("Contabilidad", "Modules")),
-        ("Flujo de Caja", Url.Action("FlujoCaja", "Modules"))
+        ("Finanzas", Url.Action("Finanzas", "Modules")),
+        ("Flujo de Caja", null)
     };
 }
 
-<div class="container-fluid">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="Inicio" asp-controller="Home">Inicio</a></li>
-            <li class="breadcrumb-item"><a asp-action="Finanzas" asp-controller="Modules">Finanzas</a></li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-chart-line"></i>
+            Flujo de Caja
+        </h1>
+        <p>Analiza y proyecta el flujo de efectivo de tu empresa</p>
+    </div>
 
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-success text-uppercase mb-1">Ingresos Proyectados</div>
-                    <div class="h3 mb-0">$0</div>
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-file-export"></i>
+            Exportar Reporte
+        </button>
+    </div>
+
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Ingresos Proyectados</div>
+                        <div class="stat-value">$0</div>
+                        <i class="fas fa-arrow-up stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-danger text-uppercase mb-1">Egresos Proyectados</div>
-                    <div class="h3 mb-0">$0</div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-danger">
+                    <div class="card-body">
+                        <div class="stat-label">Egresos Proyectados</div>
+                        <div class="stat-value">$0</div>
+                        <i class="fas fa-arrow-down stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-info text-uppercase mb-1">Flujo Neto</div>
-                    <div class="h3 mb-0">$0</div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Flujo Neto</div>
+                        <div class="stat-value">$0</div>
+                        <i class="fas fa-balance-scale stat-icon"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-water me-2"></i>Análisis de Flujo
+    <!-- Tabla de Flujo -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-water"></i>
+                Análisis de Flujo de Caja
             </h6>
         </div>
         <div class="card-body">
-            <div class="alert alert-info">Sin datos disponibles</div>
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>Período</th>
+                        <th>Saldo Inicial</th>
+                        <th>Ingresos</th>
+                        <th>Egresos</th>
+                        <th>Flujo Neto</th>
+                        <th>Saldo Final</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-chart-area"></i>
+                                <h5>No hay datos disponibles</h5>
+                                <p>Los registros de flujo de caja aparecerán aquí</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

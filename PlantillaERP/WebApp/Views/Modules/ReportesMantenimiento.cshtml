@@ -1,44 +1,185 @@
 @{
     ViewData["Title"] = "Reportes de Mantenimiento";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Inicio", Url.Action("Index", "Home")),
+        ("Mantenimiento", Url.Action("Mantenimiento", "Modules")),
+        ("Reportes", null)
+    };
 }
 
-<div class="container-fluid">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="Inicio" asp-controller="Home">Inicio</a></li>
-            <li class="breadcrumb-item"><a asp-action="Mantenimiento" asp-controller="Modules">Mantenimiento</a></li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-chart-bar"></i>
+            Reportes de Mantenimiento
+        </h1>
+        <p>Analiza el desempeño y costos de mantenimiento de tus equipos</p>
+    </div>
 
-    <div class="row">
-        <div class="col-md-6 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Reporte de Trabajos</h6>
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Trabajos Realizados</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-tools stat-icon"></i>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="text-muted">Resumen de mantenimientos realizados</p>
-                    <button class="btn btn-primary btn-sm">
-                        <i class="fas fa-download me-2"></i>Generar
-                    </button>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">Costo Total</div>
+                        <div class="stat-value">$0</div>
+                        <i class="fas fa-coins stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Equipos Activos</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-cogs stat-icon"></i>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Costos de Mantenimiento</h6>
+    </div>
+
+    <!-- Reportes Disponibles -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-chart-line"></i>
+                Reportes Disponibles
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="report-card">
+                        <div class="report-header stat-info">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <div class="report-body">
+                            <h6>Reporte de Trabajos</h6>
+                            <p class="text-muted">Resumen de mantenimientos realizados por período</p>
+                            <button class="professional-btn professional-btn-primary professional-btn-sm">
+                                <i class="fas fa-download"></i>
+                                Generar
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="text-muted">Análisis de gastos por equipo</p>
-                    <button class="btn btn-primary btn-sm">
-                        <i class="fas fa-download me-2"></i>Generar
-                    </button>
+                <div class="col-md-6">
+                    <div class="report-card">
+                        <div class="report-header stat-success">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="report-body">
+                            <h6>Costos de Mantenimiento</h6>
+                            <p class="text-muted">Análisis de gastos por equipo y tipo de mantenimiento</p>
+                            <button class="professional-btn professional-btn-success professional-btn-sm">
+                                <i class="fas fa-download"></i>
+                                Generar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="report-card">
+                        <div class="report-header stat-warning">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="report-body">
+                            <h6>Historial de Equipos</h6>
+                            <p class="text-muted">Cronología completa de mantenimientos por equipo</p>
+                            <button class="professional-btn professional-btn-warning professional-btn-sm">
+                                <i class="fas fa-download"></i>
+                                Generar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="report-card">
+                        <div class="report-header stat-danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="report-body">
+                            <h6>Análisis de Disponibilidad</h6>
+                            <p class="text-muted">Porcentaje de disponibilidad y tiempo de inactividad</p>
+                            <button class="professional-btn professional-btn-danger professional-btn-sm">
+                                <i class="fas fa-download"></i>
+                                Generar
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+.report-card {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.report-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.report-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.report-header.stat-info {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.report-header.stat-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.report-header.stat-warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.report-header.stat-danger {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.report-body {
+    padding: 20px;
+}
+
+.report-body h6 {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.report-body p {
+    margin-bottom: 16px;
+    font-size: 13px;
+}
+</style>

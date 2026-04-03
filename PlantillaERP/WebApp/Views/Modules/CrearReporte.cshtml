@@ -3,32 +3,97 @@
     ViewData["Breadcrumbs"] = new List<(string, string)>
     {
         ("Inicio", Url.Action("Index", "Home")),
-        ("Reporteador", Url.Action("CrearReporte", "Modules")),
-        ("Crear Reporte", Url.Action("CrearReporte", "Modules"))
+        ("Reporteador", Url.Action("Reporteador", "Modules")),
+        ("Crear Reporte", null)
     };
 }
 
-<div class="container-fluid">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="Inicio" asp-controller="Home">Inicio</a></li>
-            <li class="breadcrumb-item"><a asp-action="Reporteador" asp-controller="Modules">Reporteador</a></li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-file-csv"></i>
+            Crear Reporte
+        </h1>
+        <p>Diseña reportes personalizados según tus necesidades</p>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-file-csv me-2"></i>Diseñador de Reportes
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nuevo Reporte
+        </button>
+    </div>
+
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Reportes Creados</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-file-alt stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">En Uso</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-check-circle stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">Borradores</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-edit stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Reportes -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-list"></i>
+                Mis Reportes
             </h6>
         </div>
         <div class="card-body">
-            <button class="btn btn-primary">
-                <i class="fas fa-plus me-2"></i>Nuevo Reporte
-            </button>
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Tipo</th>
+                        <th>Fecha Creación</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <i class="fas fa-file-csv"></i>
+                                <h5>No hay reportes disponibles</h5>
+                                <p>Crea tu primer reporte personalizado</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

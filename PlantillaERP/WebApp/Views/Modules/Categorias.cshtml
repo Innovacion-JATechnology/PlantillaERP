@@ -4,38 +4,60 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Inventario", Url.Action("Inventario", "Modules")),
-        ("Categorías", Url.Action("Categorias", "Modules"))
+        ("Categorías", null)
     };
 }
 
-<div class="container-fluid">
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">@ViewData["Title"]</h1>
-        <button class="btn btn-primary">
-            <i class="fas fa-plus me-2"></i>Nueva Categoría
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-sitemap"></i>
+            Gestión de Categorías
+        </h1>
+        <p>Organiza tus productos en categorías para una mejor gestión</p>
+    </div>
+
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nueva Categoría
         </button>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-sitemap me-2"></i>Categorías de Productos
+    <!-- Tabla de Categorías -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-folder-tree"></i>
+                Categorías de Productos
             </h6>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead class="table-light">
+            <table class="professional-table">
+                <thead>
                     <tr>
+                        <th>Código</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Productos</th>
+                        <th>N° Productos</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4" class="text-center text-muted">Sin categorías disponibles</td>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <i class="fas fa-tags"></i>
+                                <h5>No hay categorías disponibles</h5>
+                                <p>Crea categorías para organizar tu catálogo de productos</p>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

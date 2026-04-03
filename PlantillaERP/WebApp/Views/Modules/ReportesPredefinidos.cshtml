@@ -4,40 +4,67 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Reporteador", Url.Action("Reporteador", "Modules")),
-        ("Reportes", Url.Action("ReportesPredefinidos", "Modules"))
+        ("Reportes", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-file-alt"></i>
+            Reportes Predefinidos
+        </h1>
+        <p>Accede a reportes listos para usar y personaliza según tus necesidades</p>
+    </div>
 
-    <div class="row">
-        <div class="col-md-6 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Reporte de Ventas</h6>
-                </div>
-                <div class="card-body">
-                    <p class="text-muted">Análisis completo de ventas por período</p>
-                    <button class="btn btn-primary btn-sm">
-                        <i class="fas fa-download me-2"></i>Generar
-                    </button>
+    <!-- Tarjetas de Reportes -->
+    <div class="reports-grid">
+        <div class="row g-4">
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <h6><i class="fas fa-chart-line me-2"></i>Reporte de Ventas</h6>
+                        <p>Análisis completo de ventas por período</p>
+                        <button class="professional-btn professional-btn-success professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Generar
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Reporte de Inventario</h6>
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <h6><i class="fas fa-boxes me-2"></i>Reporte de Inventario</h6>
+                        <p>Estado actual del inventario</p>
+                        <button class="professional-btn professional-btn-info professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Generar
+                        </button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="text-muted">Estado actual del inventario</p>
-                    <button class="btn btn-primary btn-sm">
-                        <i class="fas fa-download me-2"></i>Generar
-                    </button>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <h6><i class="fas fa-briefcase me-2"></i>Reporte de Proyectos</h6>
+                        <p>Seguimiento de proyectos en ejecución</p>
+                        <button class="professional-btn professional-btn-warning professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Generar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-danger">
+                    <div class="card-body">
+                        <h6><i class="fas fa-hand-holding-usd me-2"></i>Reporte Financiero</h6>
+                        <p>Análisis de ingresos y egresos</p>
+                        <button class="professional-btn professional-btn-danger professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Generar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

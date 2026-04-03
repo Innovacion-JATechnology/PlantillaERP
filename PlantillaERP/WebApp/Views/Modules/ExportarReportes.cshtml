@@ -4,40 +4,109 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Reporteador", Url.Action("Reporteador", "Modules")),
-        ("Exportar", Url.Action("ExportarReportes", "Modules"))
+        ("Exportar", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-download"></i>
+            Exportar Reportes
+        </h1>
+        <p>Descarga tus reportes en diferentes formatos</p>
+    </div>
 
-    <div class="row">
-        <div class="col-md-6 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Exportar a Excel</h6>
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Total Exportaciones</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-download stat-icon"></i>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="text-muted">Descargar reportes en formato Excel</p>
-                    <button class="btn btn-primary btn-sm">
-                        <i class="fas fa-download me-2"></i>Exportar
-                    </button>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Hoy</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-calendar-day stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">Pendientes</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-hourglass-half stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-danger">
+                    <div class="card-body">
+                        <div class="stat-label">Fallos</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-times-circle stat-icon"></i>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Exportar a PDF</h6>
+    </div>
+
+    <!-- Opciones de Exportación -->
+    <div class="reports-grid">
+        <div class="row g-4">
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <h6><i class="fas fa-file-excel me-2"></i>Exportar a Excel</h6>
+                        <p>Descargar reportes en formato .xlsx</p>
+                        <button class="professional-btn professional-btn-success professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Exportar
+                        </button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="text-muted">Descargar reportes en formato PDF</p>
-                    <button class="btn btn-primary btn-sm">
-                        <i class="fas fa-download me-2"></i>Exportar
-                    </button>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-danger">
+                    <div class="card-body">
+                        <h6><i class="fas fa-file-pdf me-2"></i>Exportar a PDF</h6>
+                        <p>Descargar reportes en formato .pdf</p>
+                        <button class="professional-btn professional-btn-danger professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Exportar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <h6><i class="fas fa-file-csv me-2"></i>Exportar a CSV</h6>
+                        <p>Descargar reportes en formato .csv</p>
+                        <button class="professional-btn professional-btn-info professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Exportar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <h6><i class="fas fa-file-word me-2"></i>Exportar a Word</h6>
+                        <p>Descargar reportes en formato .docx</p>
+                        <button class="professional-btn professional-btn-warning professional-btn-sm">
+                            <i class="fas fa-download me-1"></i>Exportar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

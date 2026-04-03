@@ -1,37 +1,106 @@
 @{
     ViewData["Title"] = "Recursos de Producción";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Inicio", Url.Action("Index", "Home")),
+        ("Producción", Url.Action("Produccion", "Modules")),
+        ("Recursos", null)
+    };
 }
 
-<div class="container-fluid">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="Inicio" asp-controller="Home">Inicio</a></li>
-            <li class="breadcrumb-item"><a asp-action="Produccion" asp-controller="Modules">Producción</a></li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-cog"></i>
+            Recursos de Producción
+        </h1>
+        <p>Gestiona y monitorea todos los recursos disponibles para la producción</p>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-cog me-2"></i>Recursos Disponibles
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nuevo Recurso
+        </button>
+    </div>
+
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Total Recursos</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-cog stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Disponibles</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-check-circle stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">En Uso</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-spinner stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-danger">
+                    <div class="card-body">
+                        <div class="stat-label">Mantenimiento</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-tools stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Recursos -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-list"></i>
+                Recursos Disponibles
             </h6>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead class="table-light">
+            <table class="professional-table">
+                <thead>
                     <tr>
+                        <th>Código</th>
                         <th>Recurso</th>
                         <th>Tipo</th>
                         <th>Estado</th>
                         <th>Capacidad</th>
+                        <th>Utilización</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4" class="text-center text-muted">Sin recursos disponibles</td>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-cog"></i>
+                                <h5>No hay recursos disponibles</h5>
+                                <p>Registra tus primeros recursos de producción</p>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

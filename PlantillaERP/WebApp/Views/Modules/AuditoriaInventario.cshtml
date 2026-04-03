@@ -4,35 +4,61 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Inventario", Url.Action("Inventario", "Modules")),
-        ("Auditoría", Url.Action("AuditoriaInventario", "Modules"))
+        ("Auditoría", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-search"></i>
+            Auditoría de Inventario
+        </h1>
+        <p>Revisa el historial completo de cambios y movimientos del inventario</p>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-history me-2"></i>Registro de Cambios
+    <!-- Toolbar con filtros -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-outline">
+            <i class="fas fa-filter"></i>
+            Filtrar
+        </button>
+    </div>
+
+    <!-- Tabla de Auditoría -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-history"></i>
+                Registro de Cambios
             </h6>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead class="table-light">
+            <table class="professional-table">
+                <thead>
                     <tr>
-                        <th>Fecha</th>
+                        <th>Fecha y Hora</th>
                         <th>Usuario</th>
                         <th>Acción</th>
+                        <th>Módulo</th>
                         <th>Detalles</th>
+                        <th>IP</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4" class="text-center text-muted">Sin registros disponibles</td>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-clipboard-list"></i>
+                                <h5>No hay registros disponibles</h5>
+                                <p>El historial de auditoría aparecerá aquí</p>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

@@ -4,35 +4,103 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Reporteador", Url.Action("Reporteador", "Modules")),
-        ("Plantillas", Url.Action("PlantillasReportes", "Modules"))
+        ("Plantillas", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-file-template"></i>
+            Plantillas de Reportes
+        </h1>
+        <p>Gestiona plantillas predefinidas para generar reportes rápidamente</p>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-file-template me-2"></i>Plantillas Disponibles
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nueva Plantilla
+        </button>
+    </div>
+
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Total Plantillas</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-file-template stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Activas</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-check-circle stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">Predefinidas</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-star stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-danger">
+                    <div class="card-body">
+                        <div class="stat-label">Archivadas</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-archive stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Plantillas -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-list"></i>
+                Plantillas Disponibles
             </h6>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead class="table-light">
+            <table class="professional-table">
+                <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Tipo</th>
+                        <th>Última Modificación</th>
+                        <th>Uso</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4" class="text-center text-muted">Sin plantillas disponibles</td>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-file-template"></i>
+                                <h5>No hay plantillas disponibles</h5>
+                                <p>Crea tu primera plantilla de reporte</p>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

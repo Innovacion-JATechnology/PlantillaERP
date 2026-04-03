@@ -1,0 +1,99 @@
+@{
+    ViewData["Title"] = "Órdenes de Compra";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Inicio", Url.Action("Index", "Home")),
+        ("Compras", Url.Action("Compras", "Modules")),
+        ("Órdenes de Compra", null)
+    };
+}
+
+<link rel="stylesheet" href="~/css/professional-tables.css" />
+
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-shopping-cart"></i>
+            Gestión de Órdenes de Compra
+        </h1>
+        <p>Crea, monitorea y administra todas tus órdenes de compra</p>
+    </div>
+
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nueva Orden
+        </button>
+    </div>
+
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Total Órdenes</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-list-check stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">Pendientes</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-clock stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Completadas</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-check-circle stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Órdenes -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-table"></i>
+                Órdenes de Compra Registradas
+            </h6>
+        </div>
+        <div class="card-body">
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>Número de Orden</th>
+                        <th>Proveedor</th>
+                        <th>Fecha</th>
+                        <th>Monto Total</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <h5>No hay órdenes de compra registradas</h5>
+                                <p>Comienza creando tu primera orden de compra</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

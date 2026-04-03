@@ -4,64 +4,106 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Producción", Url.Action("Produccion", "Modules")),
-        ("Órdenes", Url.Action("OrdenesProduccion", "Modules"))
+        ("Órdenes", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">@ViewData["Title"]</h1>
-        <button class="btn btn-primary">
-            <i class="fas fa-plus me-2"></i>Nueva Orden
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-industry"></i>
+            Órdenes de Producción
+        </h1>
+        <p>Gestiona y controla todas las órdenes de producción de tu empresa</p>
+    </div>
+
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nueva Orden
         </button>
     </div>
 
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-primary text-uppercase mb-1">Pendientes</div>
-                    <div class="h3 mb-0">0</div>
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Pendientes</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-hourglass-half stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-warning text-uppercase mb-1">En Proceso</div>
-                    <div class="h3 mb-0">0</div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">En Proceso</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-cogs stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-success text-uppercase mb-1">Completadas</div>
-                    <div class="h3 mb-0">0</div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Completadas</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-check-circle stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-danger text-uppercase mb-1">Canceladas</div>
-                    <div class="h3 mb-0">0</div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-danger">
+                    <div class="card-body">
+                        <div class="stat-label">Canceladas</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-times-circle stat-icon"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-industry me-2"></i>Órdenes de Producción
+    <!-- Tabla de Órdenes -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-list"></i>
+                Órdenes Registradas
             </h6>
         </div>
         <div class="card-body">
-            <div class="alert alert-info">Sin órdenes disponibles</div>
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>N° Orden</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-industry"></i>
+                                <h5>No hay órdenes disponibles</h5>
+                                <p>Crea tu primera orden de producción para comenzar</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

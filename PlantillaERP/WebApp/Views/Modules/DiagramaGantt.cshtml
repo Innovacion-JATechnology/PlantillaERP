@@ -4,24 +4,79 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Proyectos", Url.Action("Proyectos", "Modules")),
-        ("Diagrama Gantt", Url.Action("DiagramaGantt", "Modules"))
+        ("Diagrama Gantt", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-chart-gantt"></i>
+            Diagrama de Gantt
+        </h1>
+        <p>Visualiza la cronología y dependencias entre tareas de tus proyectos</p>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-chart-gantt me-2"></i>Cronograma de Proyectos
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-download"></i>
+            Exportar
+        </button>
+    </div>
+
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Proyectos Activos</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-spinner stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Hitos Próximos</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-flag stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">Riesgo Detectado</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-exclamation-triangle stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cronograma de Proyectos -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-calendar-alt"></i>
+                Cronograma de Proyectos
             </h6>
         </div>
         <div class="card-body">
-            <div class="alert alert-info">Diagrama de Gantt - Sin datos disponibles</div>
+            <div class="gantt-placeholder" style="height: 400px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <div style="text-align: center; color: #666;">
+                    <i class="fas fa-chart-gantt" style="font-size: 48px; margin-bottom: 16px; opacity: 0.3;"></i>
+                    <p>Diagrama de Gantt - Sin datos disponibles</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

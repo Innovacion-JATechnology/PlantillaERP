@@ -4,51 +4,97 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("RRHH", Url.Action("RRHH", "Modules")),
-        ("Asistencia", Url.Action("Asistencia", "Modules"))
+        ("Asistencia", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-clipboard-check"></i>
+            Control de Asistencia
+        </h1>
+        <p>Monitorea y gestiona la asistencia del personal en tiempo real</p>
+    </div>
 
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-success text-uppercase mb-1">Presentes</div>
-                    <div class="h3 mb-0">0</div>
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-calendar-check"></i>
+            Registrar Asistencia
+        </button>
+    </div>
+
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Presentes</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-user-check stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-warning text-uppercase mb-1">Ausentes</div>
-                    <div class="h3 mb-0">0</div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">Ausentes</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-user-times stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-info text-uppercase mb-1">Tardes</div>
-                    <div class="h3 mb-0">0</div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Tardanzas</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-user-clock stat-icon"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-clipboard-list me-2"></i>Registro de Asistencia
+    <!-- Tabla de Asistencia -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-clipboard-list"></i>
+                Registro de Asistencia
             </h6>
         </div>
         <div class="card-body">
-            <div class="alert alert-info">Sin registros disponibles</div>
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>Empleado</th>
+                        <th>Fecha</th>
+                        <th>Hora Entrada</th>
+                        <th>Hora Salida</th>
+                        <th>Estado</th>
+                        <th>Observaciones</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-calendar-times"></i>
+                                <h5>No hay registros disponibles</h5>
+                                <p>Los registros de asistencia aparecerán aquí</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

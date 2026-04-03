@@ -4,36 +4,94 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Mantenimiento", Url.Action("Mantenimiento", "Modules")),
-        ("Histórico", Url.Action("HistoricoMantenimiento", "Modules"))
+        ("Histórico", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-history"></i>
+            Histórico de Mantenimiento
+        </h1>
+        <p>Consulta el historial completo de trabajos y actividades de mantenimiento realizados</p>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-archive me-2"></i>Historial de Trabajos
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-download"></i>
+            Exportar Reporte
+        </button>
+    </div>
+
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Total Trabajos</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-tools stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Preventivo</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-shield-alt stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">Correctivo</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-wrench stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Histórico -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-table"></i>
+                Historial de Trabajos
             </h6>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead class="table-light">
+            <table class="professional-table">
+                <thead>
                     <tr>
                         <th>Fecha</th>
                         <th>Equipo</th>
                         <th>Tipo</th>
                         <th>Técnico</th>
                         <th>Duración</th>
+                        <th>Costo</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="5" class="text-center text-muted">Sin registros disponibles</td>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <h5>Sin registros disponibles</h5>
+                                <p>El historial de trabajos de mantenimiento aparecerá aquí</p>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

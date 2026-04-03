@@ -3,62 +3,96 @@
     ViewData["Breadcrumbs"] = new List<(string, string)>
     {
         ("Inicio", Url.Action("Index", "Home")),
-        ("RRHH", Url.Action("Empleados", "Modules")),
-        ("Empleados", Url.Action("Empleados", "Modules"))
+        ("RRHH", Url.Action("RRHH", "Modules")),
+        ("Empleados", null)
     };
 }
 
-<div class="container-fluid">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="Inicio" asp-controller="Home">Inicio</a></li>
-            <li class="breadcrumb-item"><a asp-action="RRHH" asp-controller="Modules">Recursos Humanos</a></li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">@ViewData["Title"]</h1>
-        <button class="btn btn-primary">
-            <i class="fas fa-plus me-2"></i>Nuevo Empleado
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-user-tie"></i>
+            Gestión de Empleados
+        </h1>
+        <p>Administra y consulta la información completa de tu equipo de trabajo</p>
+    </div>
+
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nuevo Empleado
         </button>
     </div>
 
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-primary text-uppercase mb-1">Total Empleados</div>
-                    <div class="h3 mb-0">0</div>
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Total Empleados</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-users stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-success text-uppercase mb-1">Activos</div>
-                    <div class="h3 mb-0">0</div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Activos</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-user-check stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-warning text-uppercase mb-1">En Licencia</div>
-                    <div class="h3 mb-0">0</div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">En Licencia</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-umbrella-beach stat-icon"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-user-tie me-2"></i>Nómina de Empleados
+    <!-- Tabla de Empleados -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-table"></i>
+                Nómina de Empleados
             </h6>
         </div>
         <div class="card-body">
-            <div class="alert alert-info">Sin empleados registrados</div>
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>Nombre Completo</th>
+                        <th>Cargo</th>
+                        <th>Departamento</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">
+                            <div class="empty-state">
+                                <i class="fas fa-user-slash"></i>
+                                <h5>No hay empleados registrados</h5>
+                                <p>Comienza agregando el primer empleado a tu equipo</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

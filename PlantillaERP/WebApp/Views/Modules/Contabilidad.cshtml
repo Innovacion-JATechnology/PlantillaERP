@@ -3,87 +3,98 @@
     ViewData["Breadcrumbs"] = new List<(string, string)>
     {
         ("Inicio", Url.Action("Index", "Home")),
-        ("Finanzas", Url.Action("Contabilidad", "Modules")),
-        ("Contabilidad", Url.Action("Contabilidad", "Modules"))
+        ("Finanzas", Url.Action("Finanzas", "Modules")),
+        ("Contabilidad", null)
     };
 }
 
-<link rel="stylesheet" href="~/css/modules-layout.css" />
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-<div class="module-container">
-    <div class="page-header-module">
-        <h1><i class="fas fa-calculator me-2"></i>@ViewData["Title"]</h1>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a asp-action="Inicio" asp-controller="Home">Inicio</a></li>
-                <li class="breadcrumb-item"><a asp-action="Finanzas" asp-controller="Modules">Finanzas</a></li>
-                <li class="breadcrumb-item active">@ViewData["Title"]</li>
-            </ol>
-        </nav>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-calculator"></i>
+            Contabilidad
+        </h1>
+        <p>Gestiona la contabilidad y el balance financiero de tu organización</p>
     </div>
 
-    <div class="row g-4 d-flex flex-wrap">
-        <div class="col-lg-4 col-md-6 mb-3">
-            <div class="card module-card card-success shadow">
-                <div class="card-body">
-                    <i class="fas fa-arrow-up module-card-icon"></i>
-                    <div class="module-card-title">Ingresos</div>
-                    <div class="module-card-desc">Registrar ingresos</div>
-                    <a href="#" class="module-card-btn">
-                        <i class="fas fa-arrow-right me-2"></i>Acceder
-                    </a>
+    <!-- Estadísticas Financieras -->
+    <div class="stats-container">
+        <div class="row g-4 mb-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="stat-icon"><i class="fas fa-arrow-up"></i></div>
+                    <div class="card-body">
+                        <div class="stat-label">Ingresos</div>
+                        <p class="stat-value">$45.2K</p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 mb-3">
-            <div class="card module-card card-danger shadow">
-                <div class="card-body">
-                    <i class="fas fa-arrow-down module-card-icon"></i>
-                    <div class="module-card-title">Egresos</div>
-                    <div class="module-card-desc">Registrar egresos</div>
-                    <a href="#" class="module-card-btn">
-                        <i class="fas fa-arrow-right me-2"></i>Acceder
-                    </a>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-danger">
+                    <div class="stat-icon"><i class="fas fa-arrow-down"></i></div>
+                    <div class="card-body">
+                        <div class="stat-label">Egresos</div>
+                        <p class="stat-value">$23.8K</p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 mb-3">
-            <div class="card module-card card-info shadow">
-                <div class="card-body">
-                    <i class="fas fa-balance-scale module-card-icon"></i>
-                    <div class="module-card-title">Saldo</div>
-                    <div class="module-card-desc">Ver balance actual</div>
-                    <a href="#" class="module-card-btn">
-                        <i class="fas fa-arrow-right me-2"></i>Acceder
-                    </a>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="stat-icon"><i class="fas fa-balance-scale"></i></div>
+                    <div class="card-body">
+                        <div class="stat-label">Balance</div>
+                        <p class="stat-value">$21.4K</p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 mb-3">
-            <div class="card module-card card-warning shadow">
-                <div class="card-body">
-                    <i class="fas fa-clock module-card-icon"></i>
-                    <div class="module-card-title">Pendiente</div>
-                    <div class="module-card-desc">Cuentas por cobrar</div>
-                    <a href="#" class="module-card-btn">
-                        <i class="fas fa-arrow-right me-2"></i>Acceder
-                    </a>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                    <div class="card-body">
+                        <div class="stat-label">Pendiente</div>
+                        <p class="stat-value">$5.2K</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    </div>
-
-    <div class="card mt-5">
-        <div class="card-header bg-light">
-            <h5 class="mb-0"><i class="fas fa-book me-2"></i>Registros Contables</h5>
+    <!-- Tabla de Registros Contables -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-book"></i>
+                Registros Contables
+            </h6>
         </div>
         <div class="card-body">
-            <p class="text-muted mb-0">Sin registros disponibles</p>
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Concepto</th>
+                        <th>Tipo</th>
+                        <th>Monto</th>
+                        <th>Balance</th>
+                        <th>Responsable</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-book"></i>
+                                <h5>No hay registros disponibles</h5>
+                                <p>Los registros contables aparecerán aquí</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

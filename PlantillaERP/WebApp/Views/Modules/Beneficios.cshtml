@@ -4,35 +4,61 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("RRHH", Url.Action("RRHH", "Modules")),
-        ("Beneficios", Url.Action("Beneficios", "Modules"))
+        ("Beneficios", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-gift"></i>
+            Gestión de Beneficios
+        </h1>
+        <p>Administra los beneficios y prestaciones para tus empleados</p>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-gift me-2"></i>Beneficios Disponibles
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nuevo Beneficio
+        </button>
+    </div>
+
+    <!-- Tabla de Beneficios -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-hands-helping"></i>
+                Beneficios Disponibles
             </h6>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead class="table-light">
+            <table class="professional-table">
+                <thead>
                     <tr>
                         <th>Beneficio</th>
                         <th>Descripción</th>
-                        <th>Costo</th>
-                        <th>Beneficiarios</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th>N° Beneficiarios</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4" class="text-center text-muted">Sin beneficios disponibles</td>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-award"></i>
+                                <h5>No hay beneficios disponibles</h5>
+                                <p>Agrega beneficios para motivar a tu equipo</p>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

@@ -4,24 +4,98 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Finanzas", Url.Action("Finanzas", "Modules")),
-        ("Conciliaciones", Url.Action("Conciliaciones", "Modules"))
+        ("Conciliaciones", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-check-double"></i>
+            Conciliaciones Bancarias
+        </h1>
+        <p>Realiza y verifica las conciliaciones de cuentas bancarias</p>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-check-double me-2"></i>Conciliaciones Registradas
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nueva Conciliación
+        </button>
+    </div>
+
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Conciliaciones Realizadas</div>
+                        <div class="stat-value">0</div>
+                        <i class="fas fa-check-circle stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Monto Conciliado</div>
+                        <div class="stat-value">$0</div>
+                        <i class="fas fa-coins stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">Diferencias</div>
+                        <div class="stat-value">$0</div>
+                        <i class="fas fa-exclamation-triangle stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Conciliaciones -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-table"></i>
+                Conciliaciones Registradas
             </h6>
         </div>
         <div class="card-body">
-            <div class="alert alert-info">Sin conciliaciones disponibles</div>
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>N° Conciliación</th>
+                        <th>Banco</th>
+                        <th>Período</th>
+                        <th>Saldo Bancario</th>
+                        <th>Saldo Contable</th>
+                        <th>Diferencia</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="8">
+                            <div class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <h5>No hay conciliaciones disponibles</h5>
+                                <p>Las conciliaciones realizadas aparecerán aquí</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

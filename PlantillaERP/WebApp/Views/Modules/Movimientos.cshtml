@@ -4,34 +4,61 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Inventario", Url.Action("Inventario", "Modules")),
-        ("Movimientos", Url.Action("Movimientos", "Modules"))
+        ("Movimientos", null)
     };
 }
 
-<div class="container-fluid">
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-exchange-alt"></i>
+            Movimientos de Inventario
+        </h1>
+        <p>Consulta y registra todos los movimientos de entrada y salida</p>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-arrow-right-arrow-left me-2"></i>Historial de Movimientos
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Registrar Movimiento
+        </button>
+    </div>
+
+    <!-- Tabla de Movimientos -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-list-alt"></i>
+                Historial de Movimientos
             </h6>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead class="table-light">
+            <table class="professional-table">
+                <thead>
                     <tr>
                         <th>Fecha</th>
+                        <th>Tipo Movimiento</th>
                         <th>Producto</th>
-                        <th>Tipo</th>
+                        <th>Almacén</th>
                         <th>Cantidad</th>
                         <th>Usuario</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="5" class="text-center text-muted">Sin movimientos registrados</td>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-boxes"></i>
+                                <h5>No hay movimientos registrados</h5>
+                                <p>Los movimientos de inventario aparecerán aquí</p>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

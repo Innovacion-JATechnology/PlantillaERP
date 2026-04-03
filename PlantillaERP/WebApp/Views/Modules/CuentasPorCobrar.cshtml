@@ -4,49 +4,98 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("Finanzas", Url.Action("Finanzas", "Modules")),
-        ("Cuentas por Cobrar", Url.Action("CuentasPorCobrar", "Modules"))
+        ("Cuentas por Cobrar", null)
     };
 }
 
-<div class="container-fluid">
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <h1 class="h3 mb-4">@ViewData["Title"]</h1>
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-hand-holding-usd"></i>
+            Cuentas por Cobrar
+        </h1>
+        <p>Gestiona y da seguimiento a las cuentas pendientes de cobro</p>
+    </div>
 
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-success text-uppercase mb-1">Total a Cobrar</div>
-                    <div class="h3 mb-0">$0</div>
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nueva Cuenta
+        </button>
+    </div>
+
+    <!-- Tarjetas de Estadísticas -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-success">
+                    <div class="card-body">
+                        <div class="stat-label">Total a Cobrar</div>
+                        <div class="stat-value">$0</div>
+                        <i class="fas fa-money-bill-wave stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-warning text-uppercase mb-1">Vencidas</div>
-                    <div class="h3 mb-0">$0</div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-warning">
+                    <div class="card-body">
+                        <div class="stat-label">Vencidas</div>
+                        <div class="stat-value">$0</div>
+                        <i class="fas fa-exclamation-circle stat-icon"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="text-info text-uppercase mb-1">Próximas a Vencer</div>
-                    <div class="h3 mb-0">$0</div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card stat-info">
+                    <div class="card-body">
+                        <div class="stat-label">Próximas a Vencer</div>
+                        <div class="stat-value">$0</div>
+                        <i class="fas fa-hourglass-half stat-icon"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-money-bills me-2"></i>Cuentas por Cobrar
+    <!-- Tabla de Cuentas -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-file-invoice-dollar"></i>
+                Cuentas por Cobrar
             </h6>
         </div>
         <div class="card-body">
-            <div class="alert alert-info">Sin cuentas disponibles</div>
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>N° Documento</th>
+                        <th>Fecha Emisión</th>
+                        <th>Fecha Vencimiento</th>
+                        <th>Monto</th>
+                        <th>Saldo Pendiente</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="8">
+                            <div class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <h5>No hay cuentas disponibles</h5>
+                                <p>Las cuentas por cobrar aparecerán aquí</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -1,10 +1,10 @@
 @{
-    ViewData["Title"] = "Ajustes de Inventario";
+    ViewData["Title"] = "Órdenes de Mantenimiento";
     ViewData["Breadcrumbs"] = new List<(string, string)>
     {
         ("Inicio", Url.Action("Index", "Home")),
-        ("Inventario", Url.Action("Inventario", "Modules")),
-        ("Ajustes", null)
+        ("Mantenimiento", Url.Action("Mantenimiento", "Modules")),
+        ("Órdenes", Url.Action("OrdenesMantenimiento", "Mantenimiento"))
     };
 }
 
@@ -14,10 +14,10 @@
     <!-- Header Profesional -->
     <div class="professional-header fade-in-up">
         <h1>
-            <i class="fas fa-sliders-h"></i>
-            Ajustes de Inventario
+            <i class="fas fa-list-check"></i>
+            Órdenes de Mantenimiento
         </h1>
-        <p>Realiza y controla los ajustes en el inventario de productos</p>
+        <p>Gestiona y da seguimiento a todas las órdenes de trabajo de mantenimiento</p>
     </div>
 
     <!-- Toolbar con botón de acción -->
@@ -25,39 +25,38 @@
         <div></div>
         <button class="professional-btn professional-btn-primary">
             <i class="fas fa-plus"></i>
-            Nuevo Ajuste
+            Nueva Orden
         </button>
     </div>
 
-    <!-- Tabla de Ajustes -->
+    <!-- Tabla de Órdenes -->
     <div class="professional-table-card">
         <div class="card-header">
             <h6>
-                <i class="fas fa-edit"></i>
-                Ajustes Realizados
+                <i class="fas fa-clipboard-list"></i>
+                Órdenes de Trabajo
             </h6>
         </div>
         <div class="card-body">
             <table class="professional-table">
                 <thead>
                     <tr>
-                        <th>Fecha</th>
-                        <th>Producto</th>
-                        <th>Almacén</th>
-                        <th>Tipo Ajuste</th>
-                        <th>Cantidad</th>
-                        <th>Motivo</th>
-                        <th>Usuario</th>
+                        <th>Número</th>
+                        <th>Equipo</th>
+                        <th>Descripción</th>
+                        <th>Fecha Creación</th>
+                        <th>Responsable</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="8">
+                        <td colspan="7">
                             <div class="empty-state">
-                                <i class="fas fa-balance-scale"></i>
-                                <h5>No hay ajustes disponibles</h5>
-                                <p>Los ajustes de inventario aparecerán aquí</p>
+                                <i class="fas fa-tasks"></i>
+                                <h5>No hay órdenes disponibles</h5>
+                                <p>Crea tu primera orden de mantenimiento</p>
                             </div>
                         </td>
                     </tr>

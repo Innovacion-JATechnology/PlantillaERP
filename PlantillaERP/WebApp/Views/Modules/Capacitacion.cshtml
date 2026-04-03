@@ -4,40 +4,61 @@
     {
         ("Inicio", Url.Action("Index", "Home")),
         ("RRHH", Url.Action("RRHH", "Modules")),
-        ("Capacitación", Url.Action("Capacitacion", "Modules"))
+        ("Capacitación", null)
     };
 }
 
-<div class="container-fluid">
-        </ol>
-    </nav>
+<link rel="stylesheet" href="~/css/professional-tables.css" />
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">@ViewData["Title"]</h1>
-        <button class="btn btn-primary">
-            <i class="fas fa-plus me-2"></i>Nuevo Programa
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-graduation-cap"></i>
+            Programas de Capacitación
+        </h1>
+        <p>Gestiona y organiza las capacitaciones para el desarrollo del personal</p>
+    </div>
+
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nuevo Programa
         </button>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <i class="fas fa-graduation-cap me-2"></i>Programas de Capacitación
+    <!-- Tabla de Capacitación -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-chalkboard-teacher"></i>
+                Programas de Capacitación
             </h6>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead class="table-light">
+            <table class="professional-table">
+                <thead>
                     <tr>
                         <th>Programa</th>
                         <th>Instructor</th>
-                        <th>Fecha</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
                         <th>Participantes</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4" class="text-center text-muted">Sin programas disponibles</td>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-book-open"></i>
+                                <h5>No hay programas disponibles</h5>
+                                <p>Crea tu primer programa de capacitación</p>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
