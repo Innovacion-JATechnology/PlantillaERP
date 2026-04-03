@@ -16,7 +16,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Órdenes de Producción";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Producción", Url.Action("Produccion", "Modules")),
                 ("Órdenes de Producción", null)
             };
@@ -28,7 +28,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Recursos";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Producción", Url.Action("Produccion", "Modules")),
                 ("Recursos", null)
             };
@@ -40,7 +40,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Control de Calidad";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Producción", Url.Action("Produccion", "Modules")),
                 ("Control de Calidad", null)
             };
@@ -52,7 +52,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Procesos";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Producción", Url.Action("Produccion", "Modules")),
                 ("Procesos", null)
             };
@@ -64,7 +64,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Materiales";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Producción", Url.Action("Produccion", "Modules")),
                 ("Materiales", null)
             };
@@ -76,7 +76,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Productos Finales";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Producción", Url.Action("Produccion", "Modules")),
                 ("Productos Finales", null)
             };
@@ -88,7 +88,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Reportes de Producción";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Producción", Url.Action("Produccion", "Modules")),
                 ("Reportes", null)
             };

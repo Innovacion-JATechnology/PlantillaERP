@@ -16,7 +16,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Equipos";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Mantenimiento", Url.Action("Mantenimiento", "Modules")),
                 ("Equipos", null)
             };
@@ -28,7 +28,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Órdenes de Trabajo";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Mantenimiento", Url.Action("Mantenimiento", "Modules")),
                 ("Órdenes de Trabajo", null)
             };
@@ -40,7 +40,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Reportes de Mantenimiento";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Mantenimiento", Url.Action("Mantenimiento", "Modules")),
                 ("Reportes", null)
             };
@@ -52,7 +52,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Mantenimiento Preventivo";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Mantenimiento", Url.Action("Mantenimiento", "Modules")),
                 ("Mantenimiento Preventivo", null)
             };
@@ -64,7 +64,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Mantenimiento Correctivo";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Mantenimiento", Url.Action("Mantenimiento", "Modules")),
                 ("Mantenimiento Correctivo", null)
             };
@@ -76,7 +76,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Checklist";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Mantenimiento", Url.Action("Mantenimiento", "Modules")),
                 ("Checklist", null)
             };
@@ -88,7 +88,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Histórico de Mantenimiento";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Mantenimiento", Url.Action("Mantenimiento", "Modules")),
                 ("Histórico", null)
             };

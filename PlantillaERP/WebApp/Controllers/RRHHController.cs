@@ -16,7 +16,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Empleados";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Recursos Humanos", Url.Action("RRHH", "Modules")),
                 ("Empleados", null)
             };
@@ -28,7 +28,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Nómina";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Recursos Humanos", Url.Action("RRHH", "Modules")),
                 ("Nómina", null)
             };
@@ -40,7 +40,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Capacitación";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Recursos Humanos", Url.Action("RRHH", "Modules")),
                 ("Capacitación", null)
             };
@@ -52,7 +52,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Evaluaciones";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Recursos Humanos", Url.Action("RRHH", "Modules")),
                 ("Evaluaciones", null)
             };
@@ -64,7 +64,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Beneficios";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Recursos Humanos", Url.Action("RRHH", "Modules")),
                 ("Beneficios", null)
             };
@@ -76,7 +76,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Asistencia";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Recursos Humanos", Url.Action("RRHH", "Modules")),
                 ("Asistencia", null)
             };
@@ -88,7 +88,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Permisos y Vacaciones";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Recursos Humanos", Url.Action("RRHH", "Modules")),
                 ("Permisos y Vacaciones", null)
             };
@@ -100,7 +100,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Reportes RRHH";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Recursos Humanos", Url.Action("RRHH", "Modules")),
                 ("Reportes RRHH", null)
             };

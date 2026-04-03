@@ -156,7 +156,7 @@ namespace PlantillaERP
                     break;
 
                 case "reporteador":
-                    options.Add(new SubModuleOption { Title = "Dashboards", Icon = "fas fa-tachometer-alt", Url = "/Analitica/Reportes", Target = "_self", Description = "Visualización interactiva de métricas" });
+                    options.Add(new SubModuleOption { Title = "Inicios", Icon = "fas fa-tachometer-alt", Url = "/Analitica/Reportes", Target = "_self", Description = "Visualización interactiva de métricas" });
                     options.Add(new SubModuleOption { Title = "KPIs", Icon = "fas fa-chart-line", Url = "/Analitica/Reportes", Target = "_self", Description = "Indicadores clave de rendimiento" });
                     options.Add(new SubModuleOption { Title = "Reportes", Icon = "fas fa-file-pdf", Url = "/Analitica/Reportes", Target = "_self", Description = "Generación y programación de reportes" });
                     options.Add(new SubModuleOption { Title = "Exportación", Icon = "fas fa-download", Url = "/EnConstruccion.aspx", Target = "_self", Description = "Exportación de datos a formatos comunes" });

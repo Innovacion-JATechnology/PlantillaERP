@@ -20,7 +20,7 @@ namespace WebApp.Controllers
         }
 
         [Authorize]
-        public IActionResult Dashboard()
+        public IActionResult Inicio()
         {
             return View();
         }

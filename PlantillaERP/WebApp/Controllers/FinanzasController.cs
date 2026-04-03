@@ -16,7 +16,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Contabilidad";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Finanzas", Url.Action("Finanzas", "Modules")),
                 ("Contabilidad", null)
             };
@@ -28,7 +28,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Facturas";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Finanzas", Url.Action("Finanzas", "Modules")),
                 ("Facturas", null)
             };
@@ -40,7 +40,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Reportes Financieros";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Finanzas", Url.Action("Finanzas", "Modules")),
                 ("Reportes Financieros", null)
             };
@@ -52,7 +52,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Presupuestos";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Finanzas", Url.Action("Finanzas", "Modules")),
                 ("Presupuestos", null)
             };
@@ -64,7 +64,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Cuentas por Pagar";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Finanzas", Url.Action("Finanzas", "Modules")),
                 ("Cuentas por Pagar", null)
             };
@@ -76,7 +76,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Cuentas por Cobrar";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Finanzas", Url.Action("Finanzas", "Modules")),
                 ("Cuentas por Cobrar", null)
             };
@@ -88,7 +88,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Conciliaciones";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Finanzas", Url.Action("Finanzas", "Modules")),
                 ("Conciliaciones", null)
             };
@@ -100,7 +100,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Flujo de Caja";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Finanzas", Url.Action("Finanzas", "Modules")),
                 ("Flujo de Caja", null)
             };

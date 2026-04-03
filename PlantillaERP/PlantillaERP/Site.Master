@@ -125,9 +125,9 @@
                             </a>
 
                             <div class="sb-sidenav-menu-heading">Opciones</div>
-                            <a class="nav-link" runat="server" href="~/" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
+                            <a class="nav-link" runat="server" href="~/" data-bs-toggle="tooltip" data-bs-placement="right" title="Inicio">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                <span>Dashboard</span>
+                                <span>Inicio</span>
                             </a>
                            
                     

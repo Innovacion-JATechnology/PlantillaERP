@@ -105,6 +105,24 @@ namespace PlantillaERP
         protected global::System.Web.UI.WebControls.TextBox txtNavbar3B;
 
         /// <summary>
+        /// btnSaveNavbar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveNavbar;
+
+        /// <summary>
+        /// btnResetNavbar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnResetNavbar;
+
+        /// <summary>
         /// txtSidebar1R control.
         /// </summary>
         /// <remarks>
@@ -159,58 +177,22 @@ namespace PlantillaERP
         protected global::System.Web.UI.WebControls.TextBox txtSidebar2B;
 
         /// <summary>
-        /// txtSidebarHoverR control.
+        /// btnSidebarSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSidebarHoverR;
+        protected global::System.Web.UI.WebControls.Button btnSidebarSave;
 
         /// <summary>
-        /// txtSidebarHoverG control.
+        /// btnSidebarReset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSidebarHoverG;
-
-        /// <summary>
-        /// txtSidebarHoverB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSidebarHoverB;
-
-        /// <summary>
-        /// txtSidebarHoverBorderR control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSidebarHoverBorderR;
-
-        /// <summary>
-        /// txtSidebarHoverBorderG control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSidebarHoverBorderG;
-
-        /// <summary>
-        /// txtSidebarHoverBorderB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSidebarHoverBorderB;
+        protected global::System.Web.UI.WebControls.Button btnSidebarReset;
 
         /// <summary>
         /// txtModule1R control.
@@ -294,21 +276,93 @@ namespace PlantillaERP
         protected global::System.Web.UI.WebControls.TextBox txtModule3B;
 
         /// <summary>
-        /// btnSave control.
+        /// btnModulesSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
+        protected global::System.Web.UI.WebControls.Button btnModulesSave;
 
         /// <summary>
-        /// btnReset control.
+        /// btnModulesReset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReset;
+        protected global::System.Web.UI.WebControls.Button btnModulesReset;
+
+        /// <summary>
+        /// txtSidebarHoverBorderR control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSidebarHoverBorderR;
+
+        /// <summary>
+        /// txtSidebarHoverBorderG control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSidebarHoverBorderG;
+
+        /// <summary>
+        /// txtSidebarHoverBorderB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSidebarHoverBorderB;
+
+        /// <summary>
+        /// txtSidebarHoverR control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSidebarHoverR;
+
+        /// <summary>
+        /// txtSidebarHoverG control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSidebarHoverG;
+
+        /// <summary>
+        /// txtSidebarHoverB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSidebarHoverB;
+
+        /// <summary>
+        /// btnSidebarHoverSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSidebarHoverSave;
+
+        /// <summary>
+        /// btnSidebarHoverReset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSidebarHoverReset;
     }
 }

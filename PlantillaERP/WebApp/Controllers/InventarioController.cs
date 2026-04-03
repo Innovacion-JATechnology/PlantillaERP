@@ -23,7 +23,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Productos";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Inventario", Url.Action("Inventario", "Modules")),
                 ("Catálogo", null)
             };
@@ -31,6 +31,7 @@ namespace WebApp.Controllers
             ViewBag.SearchTerm = searchTerm;
             ViewBag.SortExpression = sortExpression;
             ViewBag.SortDirection = sortDirection;
+            ViewBag.CurrentPage = page;
 
             var productos = ObtenerProductos(searchTerm, sortExpression, sortDirection);
             return View("~/Views/Modules/Productos.cshtml", productos);
@@ -223,7 +224,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Stock";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Inventario", Url.Action("Inventario", "Modules")),
                 ("Stock", null)
             };
@@ -235,7 +236,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Almacenes";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Inventario", Url.Action("Inventario", "Modules")),
                 ("Almacenes", null)
             };
@@ -247,7 +248,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Categorías";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Inventario", Url.Action("Inventario", "Modules")),
                 ("Categorías", null)
             };
@@ -259,7 +260,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Movimientos de Inventario";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Inventario", Url.Action("Inventario", "Modules")),
                 ("Movimientos", null)
             };
@@ -271,7 +272,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Auditoría de Inventario";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Inventario", Url.Action("Inventario", "Modules")),
                 ("Auditoría", null)
             };
@@ -283,7 +284,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Ajustes de Inventario";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Inventario", Url.Action("Inventario", "Modules")),
                 ("Ajustes", null)
             };
@@ -295,7 +296,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Reportes de Inventario";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Inventario", Url.Action("Inventario", "Modules")),
                 ("Reportes", null)
             };

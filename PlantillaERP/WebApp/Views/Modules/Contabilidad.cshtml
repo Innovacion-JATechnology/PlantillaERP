@@ -2,7 +2,7 @@
     ViewData["Title"] = "Contabilidad";
     ViewData["Breadcrumbs"] = new List<(string, string)>
     {
-        ("Dashboard", Url.Action("Index", "Home")),
+        ("Inicio", Url.Action("Index", "Home")),
         ("Finanzas", Url.Action("Contabilidad", "Modules")),
         ("Contabilidad", Url.Action("Contabilidad", "Modules"))
     };
@@ -15,7 +15,7 @@
         <h1><i class="fas fa-calculator me-2"></i>@ViewData["Title"]</h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Home">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-action="Inicio" asp-controller="Home">Inicio</a></li>
                 <li class="breadcrumb-item"><a asp-action="Finanzas" asp-controller="Modules">Finanzas</a></li>
                 <li class="breadcrumb-item active">@ViewData["Title"]</li>
             </ol>

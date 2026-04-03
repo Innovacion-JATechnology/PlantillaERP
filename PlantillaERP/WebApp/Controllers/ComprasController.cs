@@ -25,7 +25,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Compras Internacionales";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Compras", Url.Action("Compras", "Modules")),
                 ("Compras Internacionales", null)
             };
@@ -280,7 +280,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Proveedores";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Compras", Url.Action("Compras", "Modules")),
                 ("Proveedores", null)
             };
@@ -292,7 +292,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Solicitudes";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Compras", Url.Action("Compras", "Modules")),
                 ("Solicitudes", null)
             };
@@ -304,7 +304,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Órdenes de Compra";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Compras", Url.Action("Compras", "Modules")),
                 ("Órdenes de Compra", null)
             };
@@ -316,7 +316,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Reportes de Compras";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Compras", Url.Action("Compras", "Modules")),
                 ("Reportes", null)
             };
@@ -328,7 +328,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Contratos";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Compras", Url.Action("Compras", "Modules")),
                 ("Contratos", null)
             };

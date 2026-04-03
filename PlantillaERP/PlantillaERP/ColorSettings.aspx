@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <h1 class="mt-4">Configuracion de Colores</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><a href="Default.aspx">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="Default.aspx">Inicio</a></li>
             <li class="breadcrumb-item active">Configuracion de Colores</li>
         </ol>
 

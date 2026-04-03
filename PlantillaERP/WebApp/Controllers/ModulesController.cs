@@ -18,7 +18,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Compras";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Compras", Url.Action("Compras", "Modules"))
             };
             ViewData["ModuleOptions"] = new List<Dictionary<string, string>>
@@ -45,7 +45,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Inventario";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Inventario", Url.Action("Inventario", "Modules"))
             };
             ViewData["ModuleOptions"] = new List<Dictionary<string, string>>
@@ -74,7 +74,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Finanzas";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Finanzas", Url.Action("Finanzas", "Modules"))
             };
             ViewData["ModuleOptions"] = new List<Dictionary<string, string>>
@@ -97,7 +97,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Mantenimiento";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Mantenimiento", Url.Action("Mantenimiento", "Modules"))
             };
             ViewData["ModuleOptions"] = new List<Dictionary<string, string>>
@@ -119,7 +119,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Produccion";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Produccion", Url.Action("Produccion", "Modules"))
             };
             ViewData["ModuleOptions"] = new List<Dictionary<string, string>>
@@ -141,7 +141,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Recursos Humanos";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Recursos Humanos", Url.Action("RRHH", "Modules"))
             };
             ViewData["ModuleOptions"] = new List<Dictionary<string, string>>
@@ -164,7 +164,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Proyectos";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Proyectos", Url.Action("Proyectos", "Modules"))
             };
             ViewData["ModuleOptions"] = new List<Dictionary<string, string>>
@@ -186,7 +186,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Reporteador";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Reporteador", Url.Action("Reporteador", "Modules"))
             };
             ViewData["ModuleOptions"] = new List<Dictionary<string, string>>
@@ -207,7 +207,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Administración";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
-                ("Dashboard", Url.Action("Index", "Home")),
+                ("Inicio", Url.Action("Index", "Home")),
                 ("Administración", Url.Action("Administracion", "Modules"))
             };
             ViewData["ModuleOptions"] = new List<Dictionary<string, string>>
