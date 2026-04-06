@@ -1,20 +1,41 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
+using UserRoles.Identity.Constants;
+using UserRoles.Identity.Services;
 
 namespace WebApp.Controllers
 {
+    /// <summary>
+    /// Controller para gestionar el acceso a los módulos del ERP
+    /// Requiere autenticación y verifica permisos
+    /// </summary>
+    [Authorize]
     public class ModulesController : Controller
     {
         private readonly ILogger<ModulesController> _logger;
+        private readonly IPermissionService _permissionService;
 
-        public ModulesController(ILogger<ModulesController> logger)
+        public ModulesController(ILogger<ModulesController> logger, IPermissionService permissionService)
         {
             _logger = logger;
+            _permissionService = permissionService;
         }
 
-        // Compras Module
-        public IActionResult Compras()
+        /// <summary>
+        /// Módulo de Compras
+        /// </summary>
+        public async Task<IActionResult> Compras()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Verificar que el usuario tiene acceso al módulo Compras
+            if (!await _permissionService.UserHasModuleAccessAsync(userId, ModuleNames.Compras))
+            {
+                return Forbid();
+            }
+
             ViewData["Title"] = "Compras";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {

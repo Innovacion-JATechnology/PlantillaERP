@@ -1,3 +1,6 @@
+@using UserRoles.Identity.Services
+@using UserRoles.Identity.Constants
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,88 +51,45 @@
     <!-- Layout Container with Sidebar -->
     <div id="layoutSidenav"> 
         <div id="layoutSidenav_nav"> 
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion"> 
+
+                @inject IPermissionService PermissionService
+                @using System.Security.Claims
+            @using UserRoles.Identity.Constants
+
+@{
+                    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                    var userModules = userId != null
+                        ? await PermissionService.GetUserModulesAsync(userId)
+                        : new List<string>();
+                }
+
                 <div class="sb-sidenav-menu">
-
-                    <button class="btn btn-link btn-sm text-white" id="sidebarCollapseToggle"
-                    type="button" title="Contraer/Expandir sidebar">
-                        <i class="fas fa-bars"></i>
-                    </button>
-
-                     
-
-
-
                     <div class="nav">
-
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index" data-bs-toggle="tooltip" data-bs-placement="right" title="Inicio">
-                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-                            <span>Inicio</span>
-                        </a>
-
-
-                        <div class="sb-sidenav-menu-heading">Módulos</div>
-
-                        <!-- Compras Module -->
-                        <a class="nav-link module-compras" asp-action="Compras" asp-controller="Modules" data-bs-toggle="tooltip" data-bs-placement="right" title="Compras">
-                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
-                            <span>Compras</span>
-                        </a>
-
-                        <!-- Inventario Module -->
-                        <a class="nav-link module-inventario" asp-action="Inventario" asp-controller="Modules" data-bs-toggle="tooltip" data-bs-placement="right" title="Inventario">
-                            <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
-                            <span>Inventario</span>
-                        </a>
-
-                        <!-- Finanzas Module -->
-                        <a class="nav-link module-finanzas" asp-action="Finanzas" asp-controller="Modules" data-bs-toggle="tooltip" data-bs-placement="right" title="Finanzas">
-                            <div class="sb-nav-link-icon"><i class="fas fa-money-bill-wave"></i></div>
-                            <span>Finanzas</span>
-                        </a>
-
-                        <!-- Mantenimiento Module -->
-                        <a class="nav-link module-mantenimiento" asp-action="Mantenimiento" asp-controller="Modules" data-bs-toggle="tooltip" data-bs-placement="right" title="Mantenimiento">
-                            <div class="sb-nav-link-icon"><i class="fas fa-wrench"></i></div>
-                            <span>Mantenimiento</span>
-                        </a>
-
-                        <!-- Produccion Module -->
-                        <a class="nav-link module-produccion" asp-action="Produccion" asp-controller="Modules" data-bs-toggle="tooltip" data-bs-placement="right" title="Produccion">
-                            <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
-                            <span>Produccion</span>
-                        </a>
-
-                        <!-- RRHH Module -->
-                        <a class="nav-link module-rrhh" asp-action="RRHH" asp-controller="Modules" data-bs-toggle="tooltip" data-bs-placement="right" title="RRHH">
-                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                            <span>RRHH</span>
-                        </a>
-
-                        <!-- Proyectos Module -->
-                        <a class="nav-link module-proyectos" asp-action="Proyectos" asp-controller="Modules" data-bs-toggle="tooltip" data-bs-placement="right" title="Proyectos">
-                            <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
-                            <span>Proyectos</span>
-                        </a>
-
-                        <!-- Reporteador Module -->
-                        <a class="nav-link module-reporteador" asp-action="Reporteador" asp-controller="Modules" data-bs-toggle="tooltip" data-bs-placement="right" title="Reporteador">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
-                            <span>Reporteador</span>
-                        </a>
-
-                        <!-- Administracion Module -->
-                        <a class="nav-link module-administracion" asp-action="Administracion" asp-controller="Modules" data-bs-toggle="tooltip" data-bs-placement="right" title="Administracion">
-                            <div class="sb-nav-link-icon"><i class="fas fa-sliders-h"></i></div>
-                            <span>Administración</span>
-                        </a>
-
-                        
+                        <!-- Módulos disponibles para el usuario -->
+                        @foreach (var module in userModules)
+                        {
+                            <a class="nav-link" asp-action="@module" asp-controller="Modules">
+                                <span>@module</span>
+                            </a>
+                        }
                     </div>
                 </div>
+
+
                 <div class="sb-sidenav-footer">
                     <div class="small">Conectado como:</div>
-                    <div>Administrador</div>
+                    <div>
+                        @{
+                            var userEmail = User?.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value ?? "No disponible";
+                            var userRoles = User?.Claims
+                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                .Select(c => c.Value)
+                                .FirstOrDefault() ?? "Sin rol";
+                        }
+                        <strong>@userEmail</strong><br />
+                        <small style="opacity: 0.8;">@userRoles</small>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -149,14 +109,35 @@
         </div>
     </div>
 
+    <!-- Hidden form for Anti-Forgery Token -->
+    <form id="logoutTokenForm" style="display:none;">
+        @Html.AntiForgeryToken()
+    </form>
+
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
-        // Logout function
+        // Logout function - Opción A: Una sola confirmación, logout directo
         function logout() {
             if (confirm('¿Está seguro de que desea cerrar sesión?')) {
-                window.location.href = '@Url.Action("Index", "Home")';
+                // Crear form para hacer POST directo al logout
+                var form = document.createElement('form');
+                form.method = 'post';
+                form.action = '/Account/Logout';
+
+                // Obtener el token anti-forgery si existe
+                var token = document.querySelector('input[name="__RequestVerificationToken"]');
+                if (token) {
+                    var tokenInput = document.createElement('input');
+                    tokenInput.type = 'hidden';
+                    tokenInput.name = '__RequestVerificationToken';
+                    tokenInput.value = token.value;
+                    form.appendChild(tokenInput);
+                }
+
+                document.body.appendChild(form);
+                form.submit();
             }
         }
 

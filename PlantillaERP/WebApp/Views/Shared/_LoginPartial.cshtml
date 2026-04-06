@@ -7,22 +7,41 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.FindFirst(ClaimTypes.Name)?.Value!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-dark" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user-circle"></i> @User.FindFirst(ClaimTypes.Name)?.Value
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <li>
+                <a class="dropdown-item" asp-page="/Account/Profile">
+                    <i class="fas fa-user"></i> Mi Perfil
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" asp-page="/Account/ChangePassword">
+                    <i class="fas fa-key"></i> Cambiar Contraseña
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" asp-page="/Account/Logout">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+            </li>
+        </ul>
     </li>
 }
 else
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a class="nav-link text-dark" asp-page="/Account/Login">
+            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+        </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <a class="nav-link text-dark" asp-page="/Account/Register">
+            <i class="fas fa-user-plus"></i> Registrarse
+        </a>
     </li>
 }
 </ul>

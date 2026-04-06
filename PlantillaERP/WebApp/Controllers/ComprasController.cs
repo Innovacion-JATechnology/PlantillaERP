@@ -1,18 +1,38 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System.Security.Claims;
+using UserRoles.Identity.Constants;
+using UserRoles.Identity.Services;
 using WebApp.Models;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class ComprasController : Controller
     {
         private readonly ILogger<ComprasController> _logger;
         private readonly IConfiguration _configuration;
+        private readonly IPermissionService _permissionService;
 
-        public ComprasController(ILogger<ComprasController> logger, IConfiguration configuration)
+        public ComprasController(
+            ILogger<ComprasController> logger, 
+            IConfiguration configuration,
+            IPermissionService permissionService)
         {
             _logger = logger;
             _configuration = configuration;
+            _permissionService = permissionService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (!await _permissionService.UserHasModuleAccessAsync(userId, ModuleNames.Compras))
+                return Forbid();
+
+            return View();
         }
 
         private string GetConnectionString()

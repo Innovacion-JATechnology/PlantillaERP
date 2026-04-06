@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using UserRoles.Identity.Data;
 using UserRoles.Identity.Models;
 using UserRoles.Identity.Services;
+using WebApp;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -24,10 +25,41 @@ builder.Services.AddIdentity<Users, IdentityRole>(options =>
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
+// Register custom services for permissions
+builder.Services.AddScoped<IPermissionService, PermissionService>();
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+builder.Services.AddAntiforgery(options =>
+{
+    options.Cookie.SameSite = SameSiteMode.Lax;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});
+
 var app = builder.Build();
+
+// Apply database migrations and seed data
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+
+        // Apply any pending migrations
+        Console.WriteLine("🔄 Applying database migrations...");
+        await context.Database.MigrateAsync();
+        Console.WriteLine("✅ Database migrations applied successfully");
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating the database.");
+        Console.WriteLine($"❌ Error migrating database: {ex.Message}");
+        throw;
+    }
+}
 
 // Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
@@ -35,6 +67,9 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+// Seed roles, permissions, and admin user (consolidated into one seeder)
+await SeedInitialData.Initialize(app.Services);
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -49,8 +84,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
-
-// Seed the database
-await SeedService.SeedDatabase(app.Services);
 
 app.Run();

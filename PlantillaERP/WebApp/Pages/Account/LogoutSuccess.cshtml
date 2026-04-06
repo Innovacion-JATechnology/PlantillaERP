@@ -1,0 +1,30 @@
+@page
+@model WebApp.Pages.Account.LogoutSuccessModel
+@{
+    ViewData["Title"] = "Sesión Cerrada";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-body p-5 text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h2 class="mb-3">Sesión Cerrada</h2>
+                    <p class="text-muted">Has cerrado sesión exitosamente. Esperamos verte pronto.</p>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <a href="/" class="btn btn-primary">
+                            <i class="fas fa-home"></i> Volver al Inicio
+                        </a>
+                        <a asp-page="/Account/Login" class="btn btn-outline-primary">
+                            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión Nuevamente
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

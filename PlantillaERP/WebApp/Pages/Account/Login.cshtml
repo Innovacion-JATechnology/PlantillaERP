@@ -1,0 +1,381 @@
+@page
+@model WebApp.Pages.Account.LoginModel
+
+@{
+    ViewData["Title"] = "Iniciar Sesión - ERP";
+}
+
+<div class="login-container">
+    <div class="login-wrapper">
+        <!-- Left Side - Brand Section -->
+        <div class="login-brand-section">
+            <div class="brand-content">
+                <div class="brand-logo mb-4">
+                    <img src="~/images/saralogo.png" alt="ERP Logo" />
+                </div>
+                <h1 class="brand-title">ERP System</h1>
+                <p class="brand-subtitle">Gestión Empresarial Integrada</p>
+         
+            </div>
+        </div>
+
+        <!-- Right Side - Login Form -->
+        <div class="login-form-section">
+            <div class="login-form-wrapper">
+                <div class="form-header mb-5">
+                    <h2 class="form-title">
+                        <i class="fas fa-sign-in-alt"></i> Acceso a la Plataforma
+                    </h2>
+                    <p class="form-subtitle">Ingresa tus credenciales para continuar</p>
+                </div>
+
+                @if (!string.IsNullOrEmpty(ViewData["ReturnUrl"]?.ToString()))
+                {
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Acceso Requerido:</strong> Debes iniciar sesión para acceder a esa sección.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <strong>Error de Autenticación:</strong>
+                        <div asp-validation-summary="All" class="mt-2"></div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                <form method="post" asp-antiforgery="true" class="login-form">
+                    <div class="form-group mb-4">
+                        <label asp-for="Input.UserName" class="form-label">
+                            <i class="fas fa-user"></i> Nombre de Usuario
+                        </label>
+                        <input asp-for="Input.UserName" class="form-control form-control-lg" 
+                               placeholder="Ingresa tu usuario" autocomplete="username" />
+                        <span asp-validation-for="Input.UserName" class="text-danger small mt-1 d-block"></span>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label asp-for="Input.Password" class="form-label">
+                            <i class="fas fa-lock"></i> Contraseña
+                        </label>
+                        <input asp-for="Input.Password" class="form-control form-control-lg" 
+                               placeholder="Ingresa tu contraseña" autocomplete="current-password" />
+                        <span asp-validation-for="Input.Password" class="text-danger small mt-1 d-block"></span>
+                    </div>
+
+                    <div class="form-check mb-4">
+                        <input asp-for="Input.RememberMe" class="form-check-input" id="rememberMe" />
+                        <label class="form-check-label" for="rememberMe">
+                            <i class="fas fa-check-circle"></i> Mantener sesión abierta por 30 días
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </button>
+                </form>
+
+                <div class="login-footer">
+                    <div class="credentials-info">
+                        <small class="text-muted">
+                            <i class="fas fa-test"></i>
+                            <strong>Credenciales de Prueba:</strong>
+                        </small>
+                        <div class="credentials-box mt-2">
+                            <small>Usuario: <code>admin</code></small><br />
+                            <small>Contraseña: <code>Admin@123456</code></small>
+                        </div>
+                    </div>
+
+                    <div class="divider my-4"></div>
+
+                    <div class="text-center">
+                        <small class="text-muted">
+                            <i class="fas fa-arrow-left"></i>
+                            <a href="@Url.Page("/Index")" class="text-decoration-none">Volver al inicio</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f8f9fa;
+    }
+
+    .login-container {
+        display: flex;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .login-wrapper {
+        display: flex;
+        width: 100%;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Brand Section */
+    .login-brand-section {
+        flex: 1;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        color: white;
+    }
+
+    .brand-content {
+        text-align: center;
+    }
+
+    .brand-logo img {
+        max-width: 100px;
+        height: auto;
+        filter: brightness(0) invert(1);
+    }
+
+    .brand-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.5px;
+    }
+
+    .brand-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        font-weight: 300;
+    }
+
+    .brand-features {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1rem;
+    }
+
+    .feature-item i {
+        font-size: 1.5rem;
+        opacity: 0.9;
+    }
+
+    /* Form Section */
+    .login-form-section {
+        flex: 1;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 40px;
+    }
+
+    .login-form-wrapper {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .form-header {
+        text-align: left;
+    }
+
+    .form-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-subtitle {
+        color: #7f8c8d;
+        font-size: 0.95rem;
+        margin-bottom: 0;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #34495e;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    .form-control {
+        border: 2px solid #ecf0f1;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background-color: #f8f9fa;
+    }
+
+    .form-control:focus {
+        border-color: #667eea;
+        background-color: white;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-check-input {
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-top: 0.15rem;
+        cursor: pointer;
+        border: 2px solid #ecf0f1;
+        border-radius: 4px;
+    }
+
+    .form-check-input:checked {
+        background-color: #667eea;
+        border-color: #667eea;
+    }
+
+    .form-check-label {
+        margin-left: 0.5rem;
+        cursor: pointer;
+        color: #34495e;
+        user-select: none;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-primary:active {
+        transform: translateY(0);
+    }
+
+    .alert {
+        border: none;
+        border-radius: 8px;
+        border-left: 4px solid;
+    }
+
+    .alert-info {
+        background-color: #d1ecf1;
+        border-left-color: #0c5460;
+        color: #0c5460;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        border-left-color: #721c24;
+        color: #721c24;
+    }
+
+    .login-footer {
+        margin-top: 2rem;
+    }
+
+    .credentials-info {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 3px solid #667eea;
+    }
+
+    .credentials-box {
+        background: white;
+        padding: 0.75rem;
+        border-radius: 4px;
+        border: 1px solid #ecf0f1;
+    }
+
+    .credentials-box code {
+        background: #f8f9fa;
+        padding: 0.2rem 0.4rem;
+        border-radius: 3px;
+        color: #667eea;
+        font-weight: 600;
+    }
+
+    .divider {
+        border: none;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #ecf0f1, transparent);
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .login-wrapper {
+            flex-direction: column;
+        }
+
+        .login-brand-section {
+            padding: 30px 20px;
+            min-height: auto;
+        }
+
+        .brand-title {
+            font-size: 2rem;
+        }
+
+        .login-form-section {
+            padding: 40px 20px;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+    .card-header {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+
+    .btn-primary {
+        background-color: #667eea;
+        border-color: #667eea;
+    }
+
+    .btn-primary:hover {
+        background-color: #5568d3;
+        border-color: #5568d3;
+    }
+
+    code {
+        background-color: #f5f5f5;
+        padding: 0.2rem 0.4rem;
+        border-radius: 3px;
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

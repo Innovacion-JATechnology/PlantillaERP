@@ -1,0 +1,51 @@
+@page "/admin/permissions"
+@model WebApp.Pages.Admin.PermissionsModel
+@{
+    ViewData["Title"] = "Administración de Permisos";
+}
+
+<div class="container-fluid">
+    <h2>Administración de Permisos y Roles</h2>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h4>Roles Disponibles</h4>
+            <div class="list-group">
+                @foreach (var role in Model.Roles)
+                {
+                    <div class="list-group-item">
+                        <h6>@role.Name</h6>
+                        <small class="text-muted">ID: @role.Id</small>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <h4>Usuarios</h4>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#assignRoleModal@user.Id">
+                                    Asignar Rol
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
