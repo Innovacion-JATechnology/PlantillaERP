@@ -4,6 +4,7 @@ using Microsoft.Data.SqlClient;
 using System.Security.Claims;
 using UserRoles.Identity.Constants;
 using UserRoles.Identity.Services;
+using WebApp.Attributes;
 using WebApp.Models;
 
 namespace WebApp.Controllers
@@ -40,7 +41,7 @@ namespace WebApp.Controllers
             return _configuration.GetConnectionString("ServerCon");
         }
 
-        public IActionResult ComprasInternacionales(string searchTerm = null, int page = 1)
+        public async Task<IActionResult> ComprasInternacionales(string searchTerm = null, int page = 1)
         {
             ViewData["Title"] = "Compras Internacionales";
             ViewData["Breadcrumbs"] = new List<(string, string)>
@@ -50,6 +51,16 @@ namespace WebApp.Controllers
                 ("Compras Internacionales", null)
             };
             ViewBag.SearchTerm = searchTerm;
+
+            // Obtener permisos del usuario para habilitar/deshabilitar botones
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var canView = true; // Ver siempre habilitado para usuarios autenticados
+            var canEdit = await _permissionService.UserHasPermissionAsync(userId, "Compras", "Editar");
+            var canDelete = await _permissionService.UserHasPermissionAsync(userId, "Compras", "Eliminar");
+
+            ViewBag.CanView = canView;
+            ViewBag.CanEdit = canEdit;
+            ViewBag.CanDelete = canDelete;
 
             int pageSize = 3;
             if (page < 1) page = 1;
@@ -144,10 +155,11 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        [RequirePermission("Compras", "Editar")]
         public JsonResult GuardarCompra(int? id, string fechaCompra, string contract, string container, 
                                        string sello, string proveedor, string origen, string puerto, 
                                        string naviera, string etd, string eta, string cruce, string incoterm,
-                                       string invoice, string pedimento, string conexionesDemoras, 
+                                       string invoice, string pedimento, string conexionesDemoras,
                                        string fechaEstimDestino, string ultimoDiaLibre, string entregaVacio, 
                                        int? diasDemoras, string facturaDemoras, decimal? montoUSDDemoras, 
                                        decimal? tcDemoras, decimal? montoDemorasMXN, string facturaComercializadora, 
@@ -274,6 +286,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        [RequirePermission("Compras", "Eliminar")]
         public JsonResult EliminarCompra(int id)
         {
             try

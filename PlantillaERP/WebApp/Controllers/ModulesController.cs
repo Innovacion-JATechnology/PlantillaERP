@@ -234,7 +234,8 @@ namespace WebApp.Controllers
             ViewData["ModuleOptions"] = new List<Dictionary<string, string>>
             {
                 new Dictionary<string, string> { { "Name", "Usuarios" }, { "Action", "Usuarios" }, { "Controller", "Administracion" }, { "Icon", "fas fa-users" }, { "Description", "Gestión de usuarios" }, { "CssClass", "submodule-admin-usuarios" } },
-                new Dictionary<string, string> { { "Name", "Roles y Permisos" }, { "Action", "RolesPermisos" }, { "Controller", "Administracion" }, { "Icon", "fas fa-lock" }, { "Description", "Control de acceso" }, { "CssClass", "submodule-admin-roles" } },
+                new Dictionary<string, string> { { "Name", "Roles" }, { "Action", "Roles" }, { "Controller", "Administracion" }, { "Icon", "fas fa-shield-alt" }, { "Description", "Gestión de roles" }, { "CssClass", "submodule-admin-roles" } },
+                new Dictionary<string, string> { { "Name", "Roles y Permisos" }, { "Action", "RolesPermisos" }, { "Controller", "Administracion" }, { "Icon", "fas fa-lock" }, { "Description", "Control de acceso" }, { "CssClass", "submodule-admin-rolespermisos" } },
                 new Dictionary<string, string> { { "Name", "Configuración" }, { "Action", "Configuracion" }, { "Controller", "Administracion" }, { "Icon", "fas fa-cog" }, { "Description", "Parámetros del sistema" }, { "CssClass", "submodule-admin-config" } },
                 new Dictionary<string, string> { { "Name", "Auditoría" }, { "Action", "Auditoria" }, { "Controller", "Administracion" }, { "Icon", "fas fa-eye" }, { "Description", "Registro de auditoría" }, { "CssClass", "submodule-admin-auditoria" } },
                 new Dictionary<string, string> { { "Name", "Respaldos" }, { "Action", "Respaldos" }, { "Controller", "Administracion" }, { "Icon", "fas fa-database" }, { "Description", "Copias de seguridad" }, { "CssClass", "submodule-admin-respaldos" } },

@@ -1,3 +1,5 @@
+@model List<WebApp.Controllers.UsuarioViewModel>
+
 @{
     ViewData["Title"] = "Usuarios";
     ViewData["Breadcrumbs"] = new List<(string, string)>
@@ -23,7 +25,7 @@
     <!-- Toolbar con botón de acción -->
     <div class="professional-toolbar">
         <div></div>
-        <button class="professional-btn professional-btn-primary">
+        <button class="professional-btn professional-btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevoUsuario">
             <i class="fas fa-plus"></i>
             Nuevo Usuario
         </button>
@@ -38,10 +40,9 @@
             </h6>
         </div>
         <div class="card-body">
-            <table class="professional-table">
+            <table class="professional-table" id="tablaUsuarios">
                 <thead>
                     <tr>
-                        <th>Usuario</th>
                         <th>Email</th>
                         <th>Rol</th>
                         <th>Estado</th>
@@ -49,17 +50,426 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td colspan="5">
-                            <div class="empty-state">
-                                <i class="fas fa-user-slash"></i>
-                                <h5>No hay usuarios registrados</h5>
-                                <p>Comienza agregando el primer usuario al sistema</p>
-                            </div>
-                        </td>
-                    </tr>
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        @foreach (var usuario in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @usuario.Email
+                                </td>
+                                <td>
+                                    <span class="badge bg-primary">
+                                        @(usuario.Roles.Any() ? string.Join(", ", usuario.Roles) : "Sin rol")
+                                    </span>
+                                </td>
+                                <td>
+                                    @if (usuario.Estado == "Activo")
+                                    {
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check-circle"></i> Activo
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">
+                                            <i class="fas fa-lock"></i> Bloqueado
+                                        </span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-sm btn-warning btn-cambiar-rol" 
+                                                data-usuario-id="@usuario.Id" 
+                                                data-usuario-email="@usuario.Email"
+                                                title="Cambiar Rol">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger btn-eliminar-usuario" 
+                                                data-usuario-id="@usuario.Id" 
+                                                data-usuario-email="@usuario.Email"
+                                                title="Eliminar Usuario">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">
+                                <div class="empty-state">
+                                    <i class="fas fa-user-slash"></i>
+                                    <h5>No hay usuarios registrados</h5>
+                                    <p>Comienza agregando el primer usuario al sistema</p>
+                                </div>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+<!-- Modal Nuevo Usuario -->
+<div class="modal fade" id="modalNuevoUsuario" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">
+                    <i class="fas fa-user-plus"></i> Nuevo Usuario
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formularioUsuario">
+                    @Html.AntiForgeryToken()
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo Electrónico *</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                        <small class="text-muted">Será usado como nombre de usuario y debe ser único en el sistema</small>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña *</label>
+                                <input type="password" class="form-control" id="password" name="password" required minlength="6">
+                                <small class="text-muted">Mínimo 6 caracteres</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="rol" class="form-label">Rol *</label>
+                                <select class="form-select" id="rol" name="rol" required>
+                                    <option value="">Seleccionar rol...</option>
+                                    @foreach (var role in (List<Microsoft.AspNetCore.Identity.IdentityRole>)ViewBag.Roles)
+                                    {
+                                        <option value="@role.Name">@role.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info" id="mensajeError" style="display:none;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="textoError"></span>
+                    </div>
+
+                    <div class="alert alert-success" id="mensajeExito" style="display:none;">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="textoExito"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarUsuario()">
+                    <i class="fas fa-save"></i> Guardar Usuario
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cambiar Rol Usuario -->
+<div class="modal fade" id="modalCambiarRol" tabindex="-1" aria-labelledby="modalCambiarRolLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCambiarRolLabel">
+                    <i class="fas fa-exchange-alt"></i> Cambiar Rol de Usuario
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formularioCambiarRol">
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden" id="usuarioId" name="usuarioId">
+
+                    <div class="mb-3">
+                        <label for="usuarioEmailDisplay" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" id="usuarioEmailDisplay" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nuevoRol" class="form-label">Nuevo Rol *</label>
+                        <select class="form-select" id="nuevoRol" required>
+                            <option value="">Seleccionar rol...</option>
+                        </select>
+                    </div>
+
+                    <div class="alert alert-info" id="mensajeErrorRol" style="display:none;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="textoErrorRol"></span>
+                    </div>
+
+                    <div class="alert alert-success" id="mensajeExitoRol" style="display:none;">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="textoExitoRol"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarCambioRol()">
+                    <i class="fas fa-save"></i> Guardar Cambio
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .empty-state {
+        padding: 60px 20px;
+        text-align: center;
+        color: #7f8c8d;
+    }
+
+    .empty-state i {
+        font-size: 3rem;
+        color: #bdc3c7;
+        margin-bottom: 20px;
+    }
+
+    .btn-group .btn {
+        margin: 0 2px;
+    }
+
+    .badge {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.75rem;
+    }
+</style>
+
+<script>
+    // Event delegation - Escuchar clics en todo el documento
+    document.addEventListener('click', function(event) {
+        // Botón Cambiar Rol
+        if (event.target.closest('.btn-cambiar-rol')) {
+            const button = event.target.closest('.btn-cambiar-rol');
+            const usuarioId = button.getAttribute('data-usuario-id');
+            const usuarioEmail = button.getAttribute('data-usuario-email');
+            cambiarRolUsuario(usuarioId, usuarioEmail);
+            return;
+        }
+
+        // Botón Eliminar Usuario
+        if (event.target.closest('.btn-eliminar-usuario')) {
+            const button = event.target.closest('.btn-eliminar-usuario');
+            const usuarioId = button.getAttribute('data-usuario-id');
+            const usuarioEmail = button.getAttribute('data-usuario-email');
+            eliminarUsuario(usuarioId, usuarioEmail);
+            return;
+        }
+    });
+
+    // Obtener token antiforgery
+    function getAntiForgeryToken() {
+        const tokenField = document.querySelector('input[name="__RequestVerificationToken"]');
+        if (tokenField) {
+            return tokenField.value;
+        }
+        return null;
+    }
+
+    // Crear nuevo usuario
+    function guardarUsuario() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const rol = document.getElementById('rol').value;
+
+        if (!email || !password || !rol) {
+            mostrarError('Todos los campos son requeridos');
+            return;
+        }
+
+        // Generar userName desde la parte local del email
+        const userName = email.split('@@')[0];
+
+        const datos = {
+            userName: userName,
+            email: email,
+            fullname: userName,
+            password: password,
+            rol: rol
+        };
+
+        const token = getAntiForgeryToken();
+        if (!token) {
+            mostrarError('Token de seguridad no encontrado');
+            return;
+        }
+
+        fetch('@Url.Action("CrearUsuario", "Usuarios")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': token
+            },
+            body: JSON.stringify(datos)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                mostrarExito(data.message);
+                setTimeout(() => {
+                    location.reload();
+                }, 1500);
+            } else {
+                mostrarError(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            mostrarError('Error al crear el usuario');
+        });
+    }
+
+    // Eliminar usuario
+    function eliminarUsuario(id, email) {
+        if (confirm(`¿Está seguro de que desea eliminar el usuario ${email}?`)) {
+            const token = getAntiForgeryToken();
+            if (!token) {
+                alert('Token de seguridad no encontrado');
+                return;
+            }
+
+            fetch(`@Url.Action("EliminarUsuario", "Usuarios")?id=${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'RequestVerificationToken': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    location.reload();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al eliminar el usuario');
+            });
+        }
+    }
+
+    // Mostrar mensaje de error
+    function mostrarError(mensaje) {
+        const errorDiv = document.getElementById('mensajeError');
+        const textoError = document.getElementById('textoError');
+        textoError.textContent = mensaje;
+        errorDiv.style.display = 'block';
+    }
+
+    // Mostrar mensaje de éxito
+    function mostrarExito(mensaje) {
+        const exitoDiv = document.getElementById('mensajeExito');
+        const textoExito = document.getElementById('textoExito');
+        textoExito.textContent = mensaje;
+        exitoDiv.style.display = 'block';
+    }
+
+    // Cambiar rol de usuario
+    function cambiarRolUsuario(usuarioId, usuarioEmail) {
+        // Limpiar formulario
+        document.getElementById('formularioCambiarRol').reset();
+        document.getElementById('mensajeErrorRol').style.display = 'none';
+        document.getElementById('mensajeExitoRol').style.display = 'none';
+
+        // Llenar información del usuario
+        document.getElementById('usuarioEmailDisplay').value = usuarioEmail;
+        document.getElementById('usuarioId').value = usuarioId;
+
+        // Cargar roles disponibles
+        const selectRoles = document.getElementById('nuevoRol');
+        selectRoles.innerHTML = '<option value="">Seleccionar rol...</option>';
+
+        // Obtener los roles desde ViewBag
+        @{
+            var roles = (List<Microsoft.AspNetCore.Identity.IdentityRole>)ViewBag.Roles;
+        }
+        let option;
+        @foreach (var role in roles)
+        {
+            <text>
+        option = document.createElement('option');
+        option.value = '@role.Name';
+        option.textContent = '@role.Name';
+        selectRoles.appendChild(option);
+            </text>
+        }
+
+        // Mostrar modal
+        const modal = new bootstrap.Modal(document.getElementById('modalCambiarRol'));
+        modal.show();
+    }
+
+    // Guardar cambio de rol
+    function guardarCambioRol() {
+        const usuarioId = document.getElementById('usuarioId').value;
+        const nuevoRol = document.getElementById('nuevoRol').value;
+
+        if (!usuarioId || !nuevoRol) {
+            mostrarErrorRol('Debe seleccionar un rol');
+            return;
+        }
+
+        const token = getAntiForgeryToken();
+        if (!token) {
+            mostrarErrorRol('Token de seguridad no encontrado');
+            return;
+        }
+
+        // Construir URL con parámetros
+        const url = `@Url.Action("CambiarRol", "Usuarios")?userId=${encodeURIComponent(usuarioId)}&nuevoRol=${encodeURIComponent(nuevoRol)}`;
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'RequestVerificationToken': token
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                mostrarExitoRol(data.message);
+                setTimeout(() => {
+                    location.reload();
+                }, 1500);
+            } else {
+                mostrarErrorRol(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            mostrarErrorRol('Error al cambiar el rol');
+        });
+    }
+
+    // Mostrar mensaje de error en modal de cambiar rol
+    function mostrarErrorRol(mensaje) {
+        const errorDiv = document.getElementById('mensajeErrorRol');
+        const textoError = document.getElementById('textoErrorRol');
+        textoError.textContent = mensaje;
+        errorDiv.style.display = 'block';
+    }
+
+    // Mostrar mensaje de éxito en modal de cambiar rol
+    function mostrarExitoRol(mensaje) {
+        const exitoDiv = document.getElementById('mensajeExitoRol');
+        const textoExito = document.getElementById('textoExitoRol');
+        textoExito.textContent = mensaje;
+        exitoDiv.style.display = 'block';
+    }
+</script>

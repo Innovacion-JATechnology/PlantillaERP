@@ -62,11 +62,12 @@ namespace WebApp
 
                 // 3. Crear usuario administrador
                 var adminEmail = "admin@erp.com";
-                var adminUser = await userManager.FindByEmailAsync(adminEmail);
+                var adminUserByEmail = await userManager.FindByEmailAsync(adminEmail);
+                var adminUserByName = await userManager.FindByNameAsync("admin");
 
-                if (adminUser == null)
+                if (adminUserByEmail == null && adminUserByName == null)
                 {
-                    adminUser = new Users
+                    var adminUser = new Users
                     {
                         UserName = "admin",
                         Email = adminEmail,
@@ -78,16 +79,25 @@ namespace WebApp
                     if (result.Succeeded)
                     {
                         await userManager.AddToRoleAsync(adminUser, SystemRoles.Admin);
-                        Console.WriteLine("✅ Usuario admin creado (usuario: admin, contraseña: Admin@123456)");
+                        Console.WriteLine("✅ Usuario admin creado exitosamente");
+                        Console.WriteLine("   ➜ Usuario (Username): admin");
+                        Console.WriteLine("   ➜ Email: admin@erp.com");
+                        Console.WriteLine("   ➜ Contraseña: Admin@123456");
+                        Console.WriteLine("   ➜ Rol: Admin");
                     }
                     else
                     {
-                        Console.WriteLine($"❌ Error al crear admin: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                        var errors = string.Join(", ", result.Errors.Select(e => $"{e.Code}: {e.Description}"));
+                        Console.WriteLine($"❌ Error al crear admin: {errors}");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("⚠️ Usuario admin ya existe");
+                    Console.WriteLine("⚠️ Usuario admin ya existe en el sistema");
+                    if (adminUserByName != null)
+                        Console.WriteLine($"   ➜ Encontrado por nombre: {adminUserByName.UserName}");
+                    if (adminUserByEmail != null)
+                        Console.WriteLine($"   ➜ Encontrado por email: {adminUserByEmail.Email}");
                 }
 
                 // 4. Asignar todos los permisos al rol Admin

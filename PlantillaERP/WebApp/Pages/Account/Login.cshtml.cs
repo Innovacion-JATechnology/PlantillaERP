@@ -30,9 +30,10 @@ namespace WebApp.Pages.Account
 
         public class InputModel
         {
-            [Required(ErrorMessage = "El usuario es requerido")]
-            [Display(Name = "Usuario")]
-            public string UserName { get; set; }
+            [Required(ErrorMessage = "El correo electrónico es requerido")]
+            [EmailAddress(ErrorMessage = "El correo electrónico no es válido")]
+            [Display(Name = "Correo Electrónico")]
+            public string Email { get; set; }
 
             [Required(ErrorMessage = "La contraseña es requerida")]
             [DataType(DataType.Password)]
@@ -53,12 +54,12 @@ namespace WebApp.Pages.Account
             // Validar ReturnUrl - solo aceptar URLs locales y seguras
             if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
             {
-                returnUrl = "/Index";
+                returnUrl = "/Home/Index";
             }
-            // Si el ReturnUrl contiene problemas, también usar Index
+            // Si el ReturnUrl contiene problemas, también usar Home/Index
             else if (returnUrl.Contains("?") || returnUrl.Contains("&"))
             {
-                returnUrl = "/Index";
+                returnUrl = "/Home/Index";
             }
 
             // Clear the existing external cookie to ensure a clean login process
@@ -74,42 +75,52 @@ namespace WebApp.Pages.Account
             // Validar ReturnUrl - solo aceptar URLs locales y seguras
             if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
             {
-                returnUrl = "/Index";
+                returnUrl = "/Home/Index";
             }
-            // Si el ReturnUrl contiene problemas, también usar Index
+            // Si el ReturnUrl contiene problemas, también usar Home/Index
             else if (returnUrl.Contains("?") || returnUrl.Contains("&"))
             {
-                returnUrl = "/Index";
+                returnUrl = "/Home/Index";
             }
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(
-                    Input.UserName,
-                    Input.Password,
-                    Input.RememberMe,
-                    lockoutOnFailure: false);
+                // Buscar el usuario por email primero
+                var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
 
-                if (result.Succeeded)
+                if (user != null)
                 {
-                    _logger.LogInformation("Usuario {UserName} logueado exitosamente", Input.UserName);
-                    // Redirigir a Index (Inicio)
-                    return Redirect("/Index");
-                }
+                    // Autenticar usando el nombre de usuario encontrado
+                    var result = await _signInManager.PasswordSignInAsync(
+                        user.UserName,
+                        Input.Password,
+                        Input.RememberMe,
+                        lockoutOnFailure: false);
 
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("Cuenta bloqueada para usuario {UserName}", Input.UserName);
-                    return RedirectToPage("./Lockout");
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("Usuario {Email} logueado exitosamente", Input.Email);
+                        // Redirigir a Home/Index
+                        return Redirect("/Home/Index");
+                    }
+
+                    if (result.IsLockedOut)
+                    {
+                        _logger.LogWarning("Cuenta bloqueada para usuario {Email}", Input.Email);
+                        return RedirectToPage("./Lockout");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Correo electrónico o contraseña incorrectos.");
+                        _logger.LogWarning("Intento de login fallido para usuario {Email}", Input.Email);
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Intento de login inválido.");
-                    _logger.LogWarning("Intento de login fallido para usuario {UserName}", Input.UserName);
+                    ModelState.AddModelError(string.Empty, "Correo electrónico o contraseña incorrectos.");
+                    _logger.LogWarning("Usuario no encontrado para email {Email}", Input.Email);
                 }
             }
 

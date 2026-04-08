@@ -22,7 +22,7 @@ namespace WebApp.Pages.Account
         {
             // Con Opción A: el GET no se usa, todo es POST directo desde JavaScript
             // Si alguien intenta acceder por GET, redirigir al home
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Account/LogoutSuccess");
         }
 
         public async Task<IActionResult> OnPost()

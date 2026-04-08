@@ -21,9 +21,22 @@ builder.Services.AddIdentity<Users, IdentityRole>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = true;
     options.Password.RequireLowercase = true;
+    options.SignIn.RequireConfirmedEmail = false;
+    options.SignIn.RequireConfirmedPhoneNumber = false;
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
 })
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+
+// Configure Identity cookie options
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.ReturnUrlParameter = "ReturnUrl";
+});
 
 // Register custom services for permissions
 builder.Services.AddScoped<IPermissionService, PermissionService>();
@@ -84,5 +97,19 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
+
+// Redirigir raíz a Home/Index si está autenticado, sino al Login
+app.MapGet("/", async context =>
+{
+    var user = context.User;
+    if (user?.Identity?.IsAuthenticated == true)
+    {
+        context.Response.Redirect("/Home/Index");
+    }
+    else
+    {
+        context.Response.Redirect("/Account/Login");
+    }
+});
 
 app.Run();

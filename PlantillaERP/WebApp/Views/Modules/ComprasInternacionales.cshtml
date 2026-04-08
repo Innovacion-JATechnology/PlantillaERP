@@ -66,6 +66,66 @@
         text-decoration: none;
     }
 
+    .btn-nueva-compra:disabled {
+        background: linear-gradient(135deg, #b8b8b8 0%, #949494 100%);
+        cursor: not-allowed;
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    .btn-editar:disabled {
+        background: #e9ecef;
+        color: #6c757d;
+        cursor: not-allowed;
+        border-color: #dee2e6;
+    }
+
+    .btn-editar:disabled:hover {
+        background: #e9ecef;
+        color: #6c757d;
+    }
+
+    .btn-ver {
+        background: linear-gradient(135deg, #0dcaf0 0%, #0aa2c6 100%);
+        border: none;
+        color: white;
+        border-radius: 4px;
+        padding: 6px 12px;
+        font-size: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-ver:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(13, 202, 240, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+
+    .btn-delete {
+        background: linear-gradient(135deg, #dc3545 0%, #bb2d3b 100%);
+        border: none;
+        color: white;
+        border-radius: 4px;
+        padding: 6px 12px;
+        font-size: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-delete:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
     .alert-custom {
         border-radius: 4px;
         border: none;
@@ -152,7 +212,7 @@
                 <button id="btnLimpiar" class="btn btn-outline-secondary" type="button">
                     <i class="fas fa-times me-1"></i>Limpiar
                 </button>
-                <button id="btnNuevaCompra" class="btn btn-nueva-compra" type="button">
+                <button id="btnNuevaCompra" class="btn btn-nueva-compra" type="button" @(ViewBag.CanEdit ? "" : "disabled") title="@(ViewBag.CanEdit ? "Crear nueva compra" : "No tienes permiso para crear compras")">
                     <i class="fas fa-plus me-1"></i>Nueva Compra
                 </button>
             </div>
@@ -189,6 +249,50 @@
                                 <td>@(compra.ETA.HasValue ? compra.ETA.Value.ToString("yyyy-MM-dd") : "")</td>
                                 <td style="text-align: center;">
                                     <div class="action-buttons">
+                                        <button class="btn btn-sm btn-ver btn-ver-compra" 
+                                                data-id="@compra.Id"
+                                                data-fechacompra="@compra.FechaCompra:yyyy-MM-dd"
+                                                data-contract="@compra.Contract"
+                                                data-container="@compra.Container"
+                                                data-sello="@compra.Sello"
+                                                data-proveedor="@compra.Proveedor"
+                                                data-origen="@compra.Origen"
+                                                data-puerto="@compra.Puerto"
+                                                data-naviera="@compra.Naviera"
+                                                data-etd="@(compra.ETD.HasValue ? compra.ETD.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-eta="@(compra.ETA.HasValue ? compra.ETA.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-cruce="@compra.Cruce"
+                                                data-incoterm="@compra.Incoterm"
+                                                data-invoice="@compra.Invoice"
+                                                data-pedimento="@compra.Pedimento"
+                                                data-conexionesdemoras="@compra.ConexionesDemoras"
+                                                data-fechaestim="@(compra.FechaEstimDestino.HasValue ? compra.FechaEstimDestino.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-ultimodia="@(compra.UltimoDiaLibre.HasValue ? compra.UltimoDiaLibre.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-entregavacio="@(compra.EntregaVacio.HasValue ? compra.EntregaVacio.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-diasdemoras="@(compra.DiasDemoras ?? 0)"
+                                                data-facturademoras="@compra.FacturaDemoras"
+                                                data-montousd="@(compra.MontoUSDDemoras ?? 0)"
+                                                data-tc="@(compra.TCDemoras ?? 0)"
+                                                data-montomxn="@(compra.MontoDemorasMXN ?? 0)"
+                                                data-facturacomer="@compra.FacturaComercializadora"
+                                                data-fechadespacho="@(compra.FechaDespacho.HasValue ? compra.FechaDespacho.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-fechapago="@(compra.FechaPagoPedimento.HasValue ? compra.FechaPagoPedimento.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-planta="@(compra.Planta ?? 0)"
+                                                data-lote="@compra.Lote"
+                                                data-fechaproduccion="@(compra.FechaProduccion.HasValue ? compra.FechaProduccion.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-fechacaducidad="@(compra.FechaCaducidad.HasValue ? compra.FechaCaducidad.Value.ToString("yyyy-MM-dd") : "")"
+                                                data-empresa="@compra.Empresa"
+                                                data-codigo="@compra.Codigo"
+                                                data-descripcion="@compra.DescripcionProducto"
+                                                data-producto="@compra.Producto"
+                                                data-marca="@compra.Marca"
+                                                data-talla="@compra.Talla"
+                                                data-kgs="@(compra.Kgs ?? 0)"
+                                                data-cajas="@(compra.Cajas ?? 0)"
+                                                type="button"
+                                                title="Ver detalles de la compra">
+                                            <i class="fas fa-eye me-1"></i>Ver
+                                        </button>
                                         <button class="btn btn-sm btn-edit btn-editar" 
                                                 data-id="@compra.Id"
                                                 data-fechacompra="@compra.FechaCompra:yyyy-MM-dd"
@@ -230,9 +334,20 @@
                                                 data-kgs="@(compra.Kgs ?? 0)"
                                                 data-cajas="@(compra.Cajas ?? 0)"
                                                 type="button"
-                                                title="Editar compra">
+                                                @(ViewBag.CanEdit ? "" : "disabled")
+                                                title="@(ViewBag.CanEdit ? "Editar compra" : "No tienes permiso para editar")">
                                             <i class="fas fa-edit me-1"></i>Editar
                                         </button>
+                                        @if (ViewBag.CanDelete)
+                                        {
+                                            <button class="btn btn-sm btn-delete btn-eliminar ms-2" 
+                                                    data-id="@compra.Id"
+                                                    data-contract="@compra.Contract"
+                                                    type="button"
+                                                    title="Eliminar compra">
+                                                <i class="fas fa-trash me-1"></i>Eliminar
+                                            </button>
+                                        }
                                     </div>
                                 </td>
                             </tr>
@@ -683,47 +798,47 @@
                 });
             });
 
-            // Editar compra - CON EVENT DELEGATION
-            $(document).on('click', '.btn-editar', function () {
-                var id = $(this).data('id');
-                var fechacompra = $(this).data('fechacompra');
-                var contract = $(this).data('contract');
-                var container = $(this).data('container');
-                var sello = $(this).data('sello');
-                var proveedor = $(this).data('proveedor');
-                var origen = $(this).data('origen');
-                var puerto = $(this).data('puerto');
-                var naviera = $(this).data('naviera');
-                var etd = $(this).data('etd');
-                var eta = $(this).data('eta');
-                var cruce = $(this).data('cruce');
-                var incoterm = $(this).data('incoterm');
-                var invoice = $(this).data('invoice');
-                var pedimento = $(this).data('pedimento');
-                var conexionesDemoras = $(this).data('conexionesdemoras');
-                var fechaEstimDestino = $(this).data('fechaestim');
-                var ultimoDiaLibre = $(this).data('ultimodia');
-                var entregaVacio = $(this).data('entregavacio');
-                var diasDemoras = $(this).data('diasdemoras');
-                var facturaDemoras = $(this).data('facturademoras');
-                var montoUSDDemoras = $(this).data('montousd');
-                var tcDemoras = $(this).data('tc');
-                var montoDemorasMXN = $(this).data('montomxn');
-                var facturaComercializadora = $(this).data('facturacomer');
-                var fechaDespacho = $(this).data('fechadespacho');
-                var fechaPagoPedimento = $(this).data('fechapago');
-                var planta = $(this).data('planta');
-                var lote = $(this).data('lote');
-                var fechaProduccion = $(this).data('fechaproduccion');
-                var fechaCaducidad = $(this).data('fechacaducidad');
-                var empresa = $(this).data('empresa');
-                var codigo = $(this).data('codigo');
-                var descripcionProducto = $(this).data('descripcion');
-                var producto = $(this).data('producto');
-                var marca = $(this).data('marca');
-                var talla = $(this).data('talla');
-                var kgs = $(this).data('kgs');
-                var cajas = $(this).data('cajas');
+            // Función para cargar formulario en modo readonly o edit
+            function cargarFormulario(btn, mode) {
+                var id = btn.data('id');
+                var fechacompra = btn.data('fechacompra');
+                var contract = btn.data('contract');
+                var container = btn.data('container');
+                var sello = btn.data('sello');
+                var proveedor = btn.data('proveedor');
+                var origen = btn.data('origen');
+                var puerto = btn.data('puerto');
+                var naviera = btn.data('naviera');
+                var etd = btn.data('etd');
+                var eta = btn.data('eta');
+                var cruce = btn.data('cruce');
+                var incoterm = btn.data('incoterm');
+                var invoice = btn.data('invoice');
+                var pedimento = btn.data('pedimento');
+                var conexionesDemoras = btn.data('conexionesdemoras');
+                var fechaEstimDestino = btn.data('fechaestim');
+                var ultimoDiaLibre = btn.data('ultimodia');
+                var entregaVacio = btn.data('entregavacio');
+                var diasDemoras = btn.data('diasdemoras');
+                var facturaDemoras = btn.data('facturademoras');
+                var montoUSDDemoras = btn.data('montousd');
+                var tcDemoras = btn.data('tc');
+                var montoDemorasMXN = btn.data('montomxn');
+                var facturaComercializadora = btn.data('facturacomer');
+                var fechaDespacho = btn.data('fechadespacho');
+                var fechaPagoPedimento = btn.data('fechapago');
+                var planta = btn.data('planta');
+                var lote = btn.data('lote');
+                var fechaProduccion = btn.data('fechaproduccion');
+                var fechaCaducidad = btn.data('fechacaducidad');
+                var empresa = btn.data('empresa');
+                var codigo = btn.data('codigo');
+                var descripcionProducto = btn.data('descripcion');
+                var producto = btn.data('producto');
+                var marca = btn.data('marca');
+                var talla = btn.data('talla');
+                var kgs = btn.data('kgs');
+                var cajas = btn.data('cajas');
 
                 $('#hfOriginalId').val(id);
                 $('#txtFechaCompra').val(fechacompra);
@@ -765,12 +880,41 @@
                 $('#txtKgs').val(kgs);
                 $('#txtCajas').val(cajas);
 
-                $('#formTitulo').text('Editar Compra Internacional');
-                $('#btnGuardarTexto').text('Actualizar');
-                $('#btnEliminarForm').removeClass('d-none');
+                if (mode === 'readonly') {
+                    // Modo de solo lectura - Ver datos
+                    $('#formTitulo').text('Ver Compra Internacional');
+                    $('#btnGuardarTexto').text('Guardar');
+                    $('#btnGuardar').hide();
+                    $('#btnEliminarForm').addClass('d-none');
+
+                    // Deshabilitar todos los campos
+                    $('#formCompra').find('input, select, textarea').prop('disabled', true);
+                } else {
+                    // Modo editar - Permitir cambios
+                    $('#formTitulo').text('Editar Compra Internacional');
+                    $('#btnGuardarTexto').text('Actualizar');
+                    $('#btnGuardar').show();
+                    $('#btnEliminarForm').removeClass('d-none');
+
+                    // Habilitar todos los campos
+                    $('#formCompra').find('input, select, textarea').prop('disabled', false);
+                    // Algunos campos deben permanecer deshabilitados (readonly)
+                    $('#txtDescripcionProducto').prop('disabled', true);
+                    $('#txtMontoDemorasMXN').prop('disabled', true);
+                }
 
                 $('#formContainer').slideDown();
                 $('html, body').animate({ scrollTop: $('#formContainer').offset().top - 100 }, 300);
+            }
+
+            // Ver compra (solo lectura)
+            $(document).on('click', '.btn-ver-compra', function () {
+                cargarFormulario($(this), 'readonly');
+            });
+
+            // Editar compra
+            $(document).on('click', '.btn-editar:not(:disabled)', function () {
+                cargarFormulario($(this), 'edit');
             });
 
             // Eliminar compra desde el formulario
@@ -800,6 +944,164 @@
                     });
                 }
             });
+
+            // ============= MANEJO DE PERMISOS =============
+            // Mostrar alerta si intenta hacer clic en botón deshabilitado
+            $(document).on('click', '.btn-editar:disabled, .btn-nueva-compra:disabled', function(e) {
+                e.preventDefault();
+                var mensaje = 'No tienes permiso para realizar esta acción';
+                mostrarMensaje(mensaje, 'warning');
+                return false;
+            });
+
+            // Validar permisos antes de abrir formulario
+            $(document).on('click', '#btnNuevaCompra:not(:disabled)', function () {
+                $('#formContainer')[0].reset();
+                $('#hfOriginalId').val('');
+                $('#btnGuardarTexto').text('Guardar');
+                $('#btnEliminarForm').addClass('d-none');
+                $('#formTitulo').text('Nueva Compra Internacional');
+                $('#formContainer').slideDown();
+                $('html, body').animate({ scrollTop: $('#formContainer').offset().top - 100 }, 300);
+            });
+
+            // Validar permisos antes de editar
+            $(document).on('click', '.btn-editar:not(:disabled)', function () {
+                var id = $(this).data('id');
+                if (!id) return;
+
+                // Los datos ya están en data-* attributes del botón
+                cargarFormulario($(this));
+            });
+
+            // Manejar eliminación desde la tabla
+            $(document).on('click', '.btn-eliminar', function () {
+                var id = $(this).data('id');
+                var contract = $(this).data('contract');
+
+                if (!id) return;
+
+                if (confirm('¿Está seguro de que desea eliminar la compra ' + contract + '?')) {
+                    $.ajax({
+                        url: '@Url.Action("EliminarCompra", "Compras")',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (response) {
+                            if (response.success) {
+                                mostrarMensaje(response.message, 'success');
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1500);
+                            } else {
+                                mostrarMensaje(response.message, 'danger');
+                            }
+                        },
+                        error: function () {
+                            mostrarMensaje('Error al eliminar la compra.', 'danger');
+                        }
+                    });
+                }
+            });
+
+            function mostrarMensaje(mensaje, tipo) {
+                var alert = $('#mensajeAlert');
+                alert.removeClass('alert-success alert-danger alert-warning alert-info d-none');
+                alert.addClass('alert-' + tipo);
+                alert.text(mensaje);
+                alert.removeClass('d-none');
+
+                setTimeout(function () {
+                    alert.addClass('d-none');
+                }, 5000);
+            }
+
+            function cargarFormulario(btn) {
+                var fechaCompra = btn.data('fechacompra');
+                var contract = btn.data('contract');
+                var container = btn.data('container');
+                var sello = btn.data('sello');
+                var proveedor = btn.data('proveedor');
+                var origen = btn.data('origen');
+                var puerto = btn.data('puerto');
+                var naviera = btn.data('naviera');
+                var etd = btn.data('etd');
+                var eta = btn.data('eta');
+                var cruce = btn.data('cruce');
+                var incoterm = btn.data('incoterm');
+                var invoice = btn.data('invoice');
+                var pedimento = btn.data('pedimento');
+                var conexionesdemoras = btn.data('conexionesdemoras');
+                var fechaestim = btn.data('fechaestim');
+                var ultimodia = btn.data('ultimodia');
+                var entregavacio = btn.data('entregavacio');
+                var diasdemoras = btn.data('diasdemoras');
+                var facturademoras = btn.data('facturademoras');
+                var montousd = btn.data('montousd');
+                var tc = btn.data('tc');
+                var montomxn = btn.data('montomxn');
+                var facturacomer = btn.data('facturacomer');
+                var fechadespacho = btn.data('fechadespacho');
+                var fechapago = btn.data('fechapago');
+                var planta = btn.data('planta');
+                var lote = btn.data('lote');
+                var fechaproduccion = btn.data('fechaproduccion');
+                var fechacaducidad = btn.data('fechacaducidad');
+                var empresa = btn.data('empresa');
+                var codigo = btn.data('codigo');
+                var descripcion = btn.data('descripcion');
+                var producto = btn.data('producto');
+                var marca = btn.data('marca');
+                var talla = btn.data('talla');
+                var kgs = btn.data('kgs');
+                var cajas = btn.data('cajas');
+
+                $('#hfOriginalId').val(btn.data('id'));
+                $('#txtFechaCompra').val(fechaCompra);
+                $('#txtContract').val(contract);
+                $('#txtContainer').val(container);
+                $('#txtSello').val(sello);
+                $('#txtProveedor').val(proveedor);
+                $('#txtOrigen').val(origen);
+                $('#txtPuerto').val(puerto);
+                $('#txtNaviera').val(naviera);
+                $('#txtETD').val(etd);
+                $('#txtETA').val(eta);
+                $('#ddlCruce').val(cruce);
+                $('#ddlIncoterm').val(incoterm);
+                $('#txtInvoice').val(invoice);
+                $('#txtPedimento').val(pedimento);
+                $('#txtConexionesDemoras').val(conexionesdemoras);
+                $('#txtFechaEstimDestino').val(fechaestim);
+                $('#txtUltimoDiaLibre').val(ultimodia);
+                $('#txtEntregaVacio').val(entregavacio);
+                $('#txtDiasDemoras').val(diasdemoras);
+                $('#txtFacturaDemoras').val(facturademoras);
+                $('#txtMontoUSDDemoras').val(montousd);
+                $('#txtTCDemoras').val(tc);
+                $('#txtMontoDemorasMXN').val(montomxn);
+                $('#txtFacturaComercializadora').val(facturacomer);
+                $('#txtFechaDespacho').val(fechadespacho);
+                $('#txtFechaPagoPedimento').val(fechapago);
+                $('#txtPlanta').val(planta);
+                $('#txtLote').val(lote);
+                $('#txtFechaProduccion').val(fechaproduccion);
+                $('#txtFechaCaducidad').val(fechacaducidad);
+                $('#ddlEmpresa').val(empresa);
+                $('#txtCodigo').val(codigo);
+                $('#txtDescripcionProducto').val(descripcion);
+                $('#txtProducto').val(producto);
+                $('#ddlMarca').val(marca);
+                $('#ddlTalla').val(talla);
+                $('#txtKgs').val(kgs);
+                $('#txtCajas').val(cajas);
+
+                $('#formTitulo').text('Editar Compra Internacional');
+                $('#btnGuardarTexto').text('Actualizar');
+                $('#btnEliminarForm').removeClass('d-none');
+
+                $('#formContainer').slideDown();
+                $('html, body').animate({ scrollTop: $('#formContainer').offset().top - 100 }, 300);
+            }
 
             function limpiarFormulario() {
                 $('#hfOriginalId').val('');
