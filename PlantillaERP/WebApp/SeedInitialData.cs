@@ -26,9 +26,39 @@ namespace WebApp
                     }
                 }
 
-                // 2. Crear permisos por módulo
+                // 2. Crear permisos por submódulo
                 var modulesCreated = 0;
-                foreach (var module in ModuleNames.AllModules)
+                var submodules = new[]
+                {
+                    // Compras
+                    "Compras.ComprasInternacionales", "Compras.Proveedores", "Compras.Solicitudes",
+                    "Compras.OrdenesCompra", "Compras.ReportesCompras", "Compras.Contratos",
+                    // Inventario
+                    "Inventario.Catalogo", "Inventario.Stock", "Inventario.Almacenes",
+                    "Inventario.Categorias", "Inventario.Movimientos", "Inventario.AuditoriaInventario",
+                    "Inventario.AjustesInventario", "Inventario.ReportesInventario",
+                    // Finanzas
+                    "Finanzas.Contabilidad", "Finanzas.Facturas", "Finanzas.ReportesFinancieros",
+                    "Finanzas.Presupuestos", "Finanzas.CuentasPorPagar", "Finanzas.CuentasPorCobrar",
+                    "Finanzas.Conciliaciones", "Finanzas.FlujoCaja",
+                    // Mantenimiento
+                    "Mantenimiento.Equipos", "Mantenimiento.OrdenesMantenimiento", "Mantenimiento.ReportesMantenimiento",
+                    "Mantenimiento.MantenimientoPreventivo", "Mantenimiento.MantenimientoCorrectivo",
+                    "Mantenimiento.ChecklistMantenimiento", "Mantenimiento.HistoricoMantenimiento",
+                    // Producción
+                    "Produccion.OrdenesProduccion", "Produccion.Recursos", "Produccion.ControlCalidad",
+                    "Produccion.Procesos", "Produccion.MaterialesProduccion", "Produccion.ProductosFinales",
+                    "Produccion.ReportesProduccion",
+                    // RRHH
+                    "RRHH.Empleados", "RRHH.Nomina", "RRHH.Capacitacion", "RRHH.Evaluaciones",
+                    "RRHH.Beneficios", "RRHH.Asistencia", "RRHH.PermisosVacaciones", "RRHH.ReportesRRHH",
+                    // Proyectos
+                    "Proyectos.ListaProyectos", "Proyectos.Tareas", "Proyectos.RecursosProyecto",
+                    "Proyectos.DiagramaGantt", "Proyectos.PresupuestoProyectos", "Proyectos.DocumentosProyectos",
+                    "Proyectos.ReportesProyectos"
+                };
+
+                foreach (var submodule in submodules)
                 {
                     foreach (var permission in new[] { 
                         PermissionNames.View, 
@@ -38,15 +68,15 @@ namespace WebApp
                     })
                     {
                         var exists = context.Set<ModulePermission>()
-                            .Any(mp => mp.ModuleName == module && mp.PermissionName == permission);
-                        
+                            .Any(mp => mp.ModuleName == submodule && mp.PermissionName == permission);
+
                         if (!exists)
                         {
                             context.Set<ModulePermission>().Add(new ModulePermission
                             {
-                                ModuleName = module,
+                                ModuleName = submodule,
                                 PermissionName = permission,
-                                Description = $"{permission} en {module}",
+                                Description = $"{permission} en {submodule}",
                                 IsActive = true
                             });
                             modulesCreated++;
@@ -57,7 +87,7 @@ namespace WebApp
                 if (modulesCreated > 0)
                 {
                     await context.SaveChangesAsync();
-                    Console.WriteLine($"✅ {modulesCreated} permisos creados");
+                    Console.WriteLine($"✅ {modulesCreated} permisos de submódulos creados");
                 }
 
                 // 3. Crear usuario administrador

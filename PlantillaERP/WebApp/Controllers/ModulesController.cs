@@ -61,8 +61,16 @@ namespace WebApp.Controllers
         }
 
         // Inventario Module
-        public IActionResult Inventario()
+        public async Task<IActionResult> Inventario()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Verificar que el usuario tiene acceso al módulo Inventario
+            if (!await _permissionService.UserHasModuleAccessAsync(userId, ModuleNames.Inventario))
+            {
+                return Forbid();
+            }
+
             ViewData["Title"] = "Inventario";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
@@ -90,8 +98,16 @@ namespace WebApp.Controllers
         }
 
         // Finanzas Module
-        public IActionResult Finanzas()
+        public async Task<IActionResult> Finanzas()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Verificar que el usuario tiene acceso al módulo Finanzas
+            if (!await _permissionService.UserHasModuleAccessAsync(userId, ModuleNames.Finanzas))
+            {
+                return Forbid();
+            }
+
             ViewData["Title"] = "Finanzas";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
@@ -113,8 +129,16 @@ namespace WebApp.Controllers
         }
 
         // Mantenimiento Module
-        public IActionResult Mantenimiento()
+        public async Task<IActionResult> Mantenimiento()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Verificar que el usuario tiene acceso al módulo Mantenimiento
+            if (!await _permissionService.UserHasModuleAccessAsync(userId, ModuleNames.Mantenimiento))
+            {
+                return Forbid();
+            }
+
             ViewData["Title"] = "Mantenimiento";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
@@ -135,8 +159,16 @@ namespace WebApp.Controllers
         }
 
         // Produccion Module
-        public IActionResult Produccion()
+        public async Task<IActionResult> Produccion()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Verificar que el usuario tiene acceso al módulo Produccion
+            if (!await _permissionService.UserHasModuleAccessAsync(userId, ModuleNames.Produccion))
+            {
+                return Forbid();
+            }
+
             ViewData["Title"] = "Produccion";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
@@ -157,8 +189,16 @@ namespace WebApp.Controllers
         }
 
         // RRHH Module
-        public IActionResult RRHH()
+        public async Task<IActionResult> RRHH()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Verificar que el usuario tiene acceso al módulo RRHH
+            if (!await _permissionService.UserHasModuleAccessAsync(userId, ModuleNames.RRHH))
+            {
+                return Forbid();
+            }
+
             ViewData["Title"] = "Recursos Humanos";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
@@ -180,8 +220,16 @@ namespace WebApp.Controllers
         }
 
         // Proyectos Module
-        public IActionResult Proyectos()
+        public async Task<IActionResult> Proyectos()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Verificar que el usuario tiene acceso al módulo Proyectos
+            if (!await _permissionService.UserHasModuleAccessAsync(userId, ModuleNames.Proyectos))
+            {
+                return Forbid();
+            }
+
             ViewData["Title"] = "Proyectos";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
@@ -202,8 +250,16 @@ namespace WebApp.Controllers
         }
 
         // Reporteador Module
-        public IActionResult Reporteador()
+        public async Task<IActionResult> Reporteador()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Verificar que el usuario tiene acceso al módulo Reporteador
+            if (!await _permissionService.UserHasModuleAccessAsync(userId, ModuleNames.Reporteador))
+            {
+                return Forbid();
+            }
+
             ViewData["Title"] = "Reporteador";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
@@ -223,8 +279,16 @@ namespace WebApp.Controllers
         }
 
         // Administracion Module
-        public IActionResult Administracion()
+        public async Task<IActionResult> Administracion()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Verificar que el usuario tiene acceso al módulo Administracion
+            if (!await _permissionService.UserHasModuleAccessAsync(userId, ModuleNames.Administracion))
+            {
+                return Forbid();
+            }
+
             ViewData["Title"] = "Administración";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {
@@ -235,7 +299,6 @@ namespace WebApp.Controllers
             {
                 new Dictionary<string, string> { { "Name", "Usuarios" }, { "Action", "Usuarios" }, { "Controller", "Administracion" }, { "Icon", "fas fa-users" }, { "Description", "Gestión de usuarios" }, { "CssClass", "submodule-admin-usuarios" } },
                 new Dictionary<string, string> { { "Name", "Roles" }, { "Action", "Roles" }, { "Controller", "Administracion" }, { "Icon", "fas fa-shield-alt" }, { "Description", "Gestión de roles" }, { "CssClass", "submodule-admin-roles" } },
-                new Dictionary<string, string> { { "Name", "Roles y Permisos" }, { "Action", "RolesPermisos" }, { "Controller", "Administracion" }, { "Icon", "fas fa-lock" }, { "Description", "Control de acceso" }, { "CssClass", "submodule-admin-rolespermisos" } },
                 new Dictionary<string, string> { { "Name", "Configuración" }, { "Action", "Configuracion" }, { "Controller", "Administracion" }, { "Icon", "fas fa-cog" }, { "Description", "Parámetros del sistema" }, { "CssClass", "submodule-admin-config" } },
                 new Dictionary<string, string> { { "Name", "Auditoría" }, { "Action", "Auditoria" }, { "Controller", "Administracion" }, { "Icon", "fas fa-eye" }, { "Description", "Registro de auditoría" }, { "CssClass", "submodule-admin-auditoria" } },
                 new Dictionary<string, string> { { "Name", "Respaldos" }, { "Action", "Respaldos" }, { "Controller", "Administracion" }, { "Icon", "fas fa-database" }, { "Description", "Copias de seguridad" }, { "CssClass", "submodule-admin-respaldos" } },

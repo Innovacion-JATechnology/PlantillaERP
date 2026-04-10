@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="~/css/sidebar-collapse.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/tables-common.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/productos-custom.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/fullscreen.css" asp-append-version="true" />
     <!-- Dynamic Colors from Database -->
     <link rel="stylesheet" href="@Url.Action("GetDynamicColors", "Settings")" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -31,8 +32,18 @@
             <span class="brand-text ms-2"> ERP</span>
         </a>
 
+        <!-- Hamburger Menu (Collapse/Expand Sidebar) -->
+        <button class="btn btn-link btn-sm order-lg-0 ms-2" id="sidebarCollapseToggle" title="Mostrar/Ocultar menú">
+            <i class="fas fa-bars" style="color: white; font-size: 1.5rem;"></i>
+        </button>
+
         <!-- Breadcrumb Navigation -->
         @await Html.PartialAsync("_Breadcrumb")
+
+        <!-- Fullscreen Button -->
+        <button class="btn btn-link btn-sm ms-2" id="fullscreenToggle" data-bs-toggle="tooltip" title="Pantalla completa" data-fullscreen-state="exited" style="color: white;">
+            <i class="fas fa-maximize" style="font-size: 1.2rem; display: inline-block;"></i>
+        </button>
 
         <!-- User Menu Dropdown -->
         <div class="navbar-menu-container ms-auto">
@@ -78,11 +89,51 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <!-- Módulos disponibles para el usuario -->
-                        @foreach (var module in userModules)
+                        @{
+                            var moduleIcons = new Dictionary<string, string>
+                            {
+                                { "Administracion", "fas fa-sliders-h" },
+                                { "Compras", "fas fa-shopping-cart" },
+                                { "Finanzas", "fas fa-money-bill" },
+                                { "Inventario", "fas fa-boxes" },
+                                { "Mantenimiento", "fas fa-wrench" },
+                                { "Produccion", "fas fa-industry" },
+                                { "Proyectos", "fas fa-briefcase" },
+                                { "Reporteador", "fas fa-chart-line" },
+                                { "RRHH", "fas fa-users" }
+                            };
+
+                            var allModules = new List<string>
+                            {
+                                "Administracion", "Compras", "Finanzas", "Inventario",
+                                "Mantenimiento", "Produccion", "Proyectos", "Reporteador", "RRHH"
+                            };
+                        }
+
+                        @foreach (var module in allModules)
                         {
-                            <a class="nav-link" asp-action="@module" asp-controller="Modules">
-                                <span>@module</span>
-                            </a>
+                            var iconClass = moduleIcons.ContainsKey(module) ? moduleIcons[module] : "fas fa-folder";
+                            var hasAccess = userModules.Contains(module);
+
+                            @if (hasAccess)
+                            {
+                                <a class="nav-link" asp-action="@module" asp-controller="Modules" 
+                                   title="@module" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-trigger="hover">
+                                    <div class="sb-nav-link-icon">
+                                        <i class="@iconClass"></i>
+                                    </div>
+                                    <span>@module</span>
+                                </a>
+                            }
+                            else
+                            {
+                                <div class="nav-link nav-link-disabled" title="Sin permiso para acceder" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-trigger="hover">
+                                    <div class="sb-nav-link-icon">
+                                        <i class="@iconClass"></i>
+                                    </div>
+                                    <span>@module</span>
+                                </div>
+                            }
                         }
                     </div>
                 </div>
@@ -152,12 +203,185 @@
             }
         }
 
-        // Initialize tooltips only
-        document.addEventListener('DOMContentLoaded', function() {
+        // Initialize tooltips and fullscreen button
+        function initializePageElements() {
+            console.log('🚀 initializePageElements() called');
+
+            // Initialize all tooltips
             const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            console.log('📌 Found', tooltipTriggerList.length, 'tooltip elements');
             tooltipTriggerList.map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
-        });
-    </script>
+
+            // Initialize fullscreen button
+            const fullscreenToggle = document.getElementById('fullscreenToggle');
+            console.log('🔘 fullscreenToggle element:', fullscreenToggle);
+
+            if (fullscreenToggle) {
+                console.log('✅ fullscreenToggle found, attaching click listener');
+                fullscreenToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('🖱️ Fullscreen button clicked!');
+                    toggleFullscreen();
+                });
+
+                // Listen for fullscreen changes (all variants)
+                document.addEventListener('fullscreenchange', () => {
+                    console.log('📡 fullscreenchange event fired');
+                    updateFullscreenIcon();
+                });
+                document.addEventListener('webkitfullscreenchange', () => {
+                    console.log('📡 webkitfullscreenchange event fired');
+                    updateFullscreenIcon();
+                });
+                document.addEventListener('mozfullscreenchange', () => {
+                    console.log('📡 mozfullscreenchange event fired');
+                    updateFullscreenIcon();
+                });
+                document.addEventListener('msfullscreenchange', () => {
+                    console.log('📡 msfullscreenchange event fired');
+                    updateFullscreenIcon();
+                });
+
+                // Initialize icon on page load
+                console.log('🎨 Initializing icon on page load');
+                updateFullscreenIcon();
+            } else {
+                console.error('❌ fullscreenToggle button NOT found');
+            }
+        }
+
+        // Run initialization when DOM is ready, or immediately if already loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePageElements);
+        } else {
+            initializePageElements();
+        }
+
+        // Fullscreen functionality
+        function updateFullscreenIcon(isFullscreen) {
+            const fullscreenToggle = document.getElementById('fullscreenToggle');
+            if (!fullscreenToggle) {
+                console.warn('❌ fullscreenToggle button not found');
+                return;
+            }
+
+            // Use the passed state parameter or detect it
+            if (isFullscreen === undefined) {
+                isFullscreen = !!(
+                    document.fullscreenElement ||
+                    document.webkitFullscreenElement ||
+                    document.mozFullScreenElement ||
+                    document.msFullscreenElement
+                );
+            }
+
+            console.log('🔄 updateFullscreenIcon called with isFullscreen:', isFullscreen);
+
+            if (isFullscreen) {
+                console.log('✅ Setting to MINIMIZE state');
+                // Replace entire icon HTML - Font Awesome v6 converts <i> to <svg>, so we need to set the HTML directly
+                fullscreenToggle.innerHTML = '<i class="fas fa-minimize" style="font-size: 1.2rem;"></i>';
+                fullscreenToggle.title = 'Salir de pantalla completa';
+                fullscreenToggle.setAttribute('data-bs-original-title', 'Salir de pantalla completa');
+                fullscreenToggle.setAttribute('data-fullscreen-state', 'entered');
+                fullscreenToggle.setAttribute('aria-label', 'Salir de pantalla completa');
+
+                // Update tooltip by getting the instance and updating it
+                const tooltipInstance = bootstrap.Tooltip.getInstance(fullscreenToggle);
+                if (tooltipInstance) {
+                    console.log('✅ Updating tooltip text');
+                    tooltipInstance.dispose();
+                    new bootstrap.Tooltip(fullscreenToggle, { title: 'Salir de pantalla completa' });
+                }
+            } else {
+                console.log('✅ Setting to MAXIMIZE state');
+                // Replace entire icon HTML - Font Awesome v6 converts <i> to <svg>, so we need to set the HTML directly
+                fullscreenToggle.innerHTML = '<i class="fas fa-maximize" style="font-size: 1.2rem;"></i>';
+                fullscreenToggle.title = 'Pantalla completa';
+                fullscreenToggle.setAttribute('data-bs-original-title', 'Pantalla completa');
+                fullscreenToggle.setAttribute('data-fullscreen-state', 'exited');
+                fullscreenToggle.setAttribute('aria-label', 'Pantalla completa');
+
+                // Update tooltip by getting the instance and updating it
+                const tooltipInstance = bootstrap.Tooltip.getInstance(fullscreenToggle);
+                if (tooltipInstance) {
+                    console.log('✅ Updating tooltip text');
+                    tooltipInstance.dispose();
+                    new bootstrap.Tooltip(fullscreenToggle, { title: 'Pantalla completa' });
+                }
+            }
+        }
+
+        function toggleFullscreen() {
+            const elem = document.documentElement;
+
+            // Verificar estado actual
+            const isCurrentlyFullscreen = !!(
+                document.fullscreenElement ||
+                document.webkitFullscreenElement ||
+                document.mozFullScreenElement ||
+                document.msFullscreenElement
+            );
+
+            console.log('🖱️ Toggle button clicked. Currently fullscreen?', isCurrentlyFullscreen);
+
+            if (!isCurrentlyFullscreen) {
+                // Entrar a fullscreen
+                console.log('📺 Attempting to enter fullscreen...');
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen()
+                        .then(() => {
+                            console.log('✅ Fullscreen promise resolved, scheduling icon update...');
+                            // Small delay to ensure browser updates fullscreenElement
+                            setTimeout(() => {
+                                console.log('⏰ Timeout fired, calling updateFullscreenIcon(true)');
+                                updateFullscreenIcon(true);
+                            }, 10);
+                        })
+                        .catch(err => console.error('❌ Fullscreen error:', err));
+                } else if (elem.webkitRequestFullscreen) {
+                    console.log('🔧 Using webkit fullscreen');
+                    elem.webkitRequestFullscreen();
+                    setTimeout(() => updateFullscreenIcon(true), 50);
+                } else if (elem.mozRequestFullScreen) {
+                    console.log('🔧 Using moz fullscreen');
+                    elem.mozRequestFullScreen();
+                    setTimeout(() => updateFullscreenIcon(true), 50);
+                } else if (elem.msRequestFullscreen) {
+                    console.log('🔧 Using ms fullscreen');
+                    elem.msRequestFullscreen();
+                    setTimeout(() => updateFullscreenIcon(true), 50);
+                }
+            } else {
+                // Salir de fullscreen
+                console.log('📺 Attempting to exit fullscreen...');
+                if (document.exitFullscreen) {
+                    document.exitFullscreen()
+                        .then(() => {
+                            console.log('✅ Exit fullscreen promise resolved, scheduling icon update...');
+                            // Small delay to ensure browser updates fullscreenElement
+                            setTimeout(() => {
+                                console.log('⏰ Timeout fired, calling updateFullscreenIcon(false)');
+                                updateFullscreenIcon(false);
+                            }, 10);
+                        })
+                        .catch(err => console.error('❌ Exit fullscreen error:', err));
+                } else if (document.webkitExitFullscreen) {
+                    console.log('🔧 Using webkit exit fullscreen');
+                    document.webkitExitFullscreen();
+                    setTimeout(() => updateFullscreenIcon(false), 50);
+                } else if (document.mozCancelFullScreen) {
+                    console.log('🔧 Using moz cancel fullscreen');
+                    document.mozCancelFullScreen();
+                    setTimeout(() => updateFullscreenIcon(false), 50);
+                } else if (document.msExitFullscreen) {
+                    console.log('🔧 Using ms exit fullscreen');
+                    document.msExitFullscreen();
+                    setTimeout(() => updateFullscreenIcon(false), 50);
+                }
+            }
+        }
+        </script>
     <script src="~/js/sidebar-collapse.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -55,8 +55,8 @@ namespace WebApp.Controllers
             // Obtener permisos del usuario para habilitar/deshabilitar botones
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var canView = true; // Ver siempre habilitado para usuarios autenticados
-            var canEdit = await _permissionService.UserHasPermissionAsync(userId, "Compras", "Editar");
-            var canDelete = await _permissionService.UserHasPermissionAsync(userId, "Compras", "Eliminar");
+            var canEdit = await _permissionService.UserHasPermissionAsync(userId, "Compras.ComprasInternacionales", "Editar");
+            var canDelete = await _permissionService.UserHasPermissionAsync(userId, "Compras.ComprasInternacionales", "Eliminar");
 
             ViewBag.CanView = canView;
             ViewBag.CanEdit = canEdit;
@@ -155,8 +155,8 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        [RequirePermission("Compras", "Editar")]
-        public JsonResult GuardarCompra(int? id, string fechaCompra, string contract, string container, 
+        [RequirePermission("Compras.ComprasInternacionales", "Editar")]
+        public JsonResult GuardarCompra(int? id, string fechaCompra, string contract, string container,
                                        string sello, string proveedor, string origen, string puerto, 
                                        string naviera, string etd, string eta, string cruce, string incoterm,
                                        string invoice, string pedimento, string conexionesDemoras,
@@ -286,7 +286,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        [RequirePermission("Compras", "Eliminar")]
+        [RequirePermission("Compras.ComprasInternacionales", "Eliminar")]
         public JsonResult EliminarCompra(int id)
         {
             try

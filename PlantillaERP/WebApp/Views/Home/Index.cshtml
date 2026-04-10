@@ -1,90 +1,299 @@
+@using System.Security.Claims
+@using UserRoles.Identity.Constants
+@using UserRoles.Identity.Services
+@inject IPermissionService PermissionService
+
 @{
     ViewData["Title"] = "Inicio";
+    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+    // Define which sub-modules belong to each parent module
+    var moduleSubmodules = new Dictionary<string, List<string>>
+    {
+        { ModuleNames.Compras, new List<string> { ModuleNames.Compras } },
+        { ModuleNames.Inventario, new List<string> { ModuleNames.Inventario } },
+        { ModuleNames.Finanzas, new List<string> { ModuleNames.Finanzas } },
+        { ModuleNames.Mantenimiento, new List<string> { ModuleNames.Mantenimiento } },
+        { ModuleNames.Produccion, new List<string> { ModuleNames.Produccion } },
+        { ModuleNames.RRHH, new List<string> { ModuleNames.RRHH } },
+        { ModuleNames.Proyectos, new List<string> { ModuleNames.Proyectos } },
+        { ModuleNames.Reporteador, new List<string> { ModuleNames.Reporteador } },
+        { ModuleNames.Administracion, new List<string> { ModuleNames.Administracion } }
+    };
+
+    // Helper function to check if user has access to module or any of its sub-modules
+    async Task<bool> UserCanAccessModule(string moduleName)
+    {
+        if (string.IsNullOrEmpty(userId))
+            return false;
+
+        // Admin users have access to all modules
+        if (User.IsInRole("Admin"))
+            return true;
+
+        // Check if user has access to the module itself
+        if (await PermissionService.UserHasModuleAccessAsync(userId, moduleName))
+            return true;
+
+        // For now, just check the module itself (can be extended if needed)
+        return false;
+    }
 }
 
 <div class="modules-container">
-    
+
 
     <div class="modules-grid">
         <!-- Compras Module -->
-        <a asp-action="Compras" asp-controller="Modules" class="module-card compras">
-            <div class="module-icon">
-                <i class="fas fa-shopping-cart"></i>
+        @{
+            var comprasAccess = await UserCanAccessModule(ModuleNames.Compras);
+        }
+        @if (comprasAccess)
+        {
+            <a asp-action="Compras" asp-controller="Modules" class="module-card compras">
+                <div class="module-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3 class="module-title">Compras</h3>
+                <p class="module-description">Gestión de compras e importaciones</p>
+            </a>
+        }
+        else
+        {
+            <div class="module-card module-card-disabled compras">
+                <div class="module-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3 class="module-title">Compras</h3>
+                <p class="module-description">Gestión de compras e importaciones</p>
+                <span class="module-locked-indicator">
+                    <i class="fas fa-lock"></i> Sin acceso
+                </span>
             </div>
-            <h3 class="module-title">Compras</h3>
-            <p class="module-description">Gestión de compras e importaciones</p>
-        </a>
+        }
 
         <!-- Inventario Module -->
-        <a asp-action="Inventario" asp-controller="Modules" class="module-card inventario">
-            <div class="module-icon">
-                <i class="fas fa-box"></i>
+        @{
+            var inventarioAccess = await UserCanAccessModule(ModuleNames.Inventario);
+        }
+        @if (inventarioAccess)
+        {
+            <a asp-action="Inventario" asp-controller="Modules" class="module-card inventario">
+                <div class="module-icon">
+                    <i class="fas fa-box"></i>
+                </div>
+                <h3 class="module-title">Inventario</h3>
+                <p class="module-description">Control de productos y stock</p>
+            </a>
+        }
+        else
+        {
+            <div class="module-card module-card-disabled inventario">
+                <div class="module-icon">
+                    <i class="fas fa-box"></i>
+                </div>
+                <h3 class="module-title">Inventario</h3>
+                <p class="module-description">Control de productos y stock</p>
+                <span class="module-locked-indicator">
+                    <i class="fas fa-lock"></i> Sin acceso
+                </span>
             </div>
-            <h3 class="module-title">Inventario</h3>
-            <p class="module-description">Control de productos y stock</p>
-        </a>
+        }
 
         <!-- Finanzas Module -->
-        <a asp-action="Finanzas" asp-controller="Modules" class="module-card finanzas">
-            <div class="module-icon">
-                <i class="fas fa-money-bill-wave"></i>
+        @{
+            var finanzasAccess = await UserCanAccessModule(ModuleNames.Finanzas);
+        }
+        @if (finanzasAccess)
+        {
+            <a asp-action="Finanzas" asp-controller="Modules" class="module-card finanzas">
+                <div class="module-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <h3 class="module-title">Finanzas</h3>
+                <p class="module-description">Gestión financiera y contable</p>
+            </a>
+        }
+        else
+        {
+            <div class="module-card module-card-disabled finanzas">
+                <div class="module-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <h3 class="module-title">Finanzas</h3>
+                <p class="module-description">Gestión financiera y contable</p>
+                <span class="module-locked-indicator">
+                    <i class="fas fa-lock"></i> Sin acceso
+                </span>
             </div>
-            <h3 class="module-title">Finanzas</h3>
-            <p class="module-description">Gestión financiera y contable</p>
-        </a>
+        }
 
         <!-- Mantenimiento Module -->
-        <a asp-action="Mantenimiento" asp-controller="Modules" class="module-card mantenimiento">
-            <div class="module-icon">
-                <i class="fas fa-wrench"></i>
+        @{
+            var mantenimientoAccess = await UserCanAccessModule(ModuleNames.Mantenimiento);
+        }
+        @if (mantenimientoAccess)
+        {
+            <a asp-action="Mantenimiento" asp-controller="Modules" class="module-card mantenimiento">
+                <div class="module-icon">
+                    <i class="fas fa-wrench"></i>
+                </div>
+                <h3 class="module-title">Mantenimiento</h3>
+                <p class="module-description">Mantenimiento de equipos</p>
+            </a>
+        }
+        else
+        {
+            <div class="module-card module-card-disabled mantenimiento">
+                <div class="module-icon">
+                    <i class="fas fa-wrench"></i>
+                </div>
+                <h3 class="module-title">Mantenimiento</h3>
+                <p class="module-description">Mantenimiento de equipos</p>
+                <span class="module-locked-indicator">
+                    <i class="fas fa-lock"></i> Sin acceso
+                </span>
             </div>
-            <h3 class="module-title">Mantenimiento</h3>
-            <p class="module-description">Mantenimiento de equipos</p>
-        </a>
+        }
 
         <!-- Produccion Module -->
-        <a asp-action="Produccion" asp-controller="Modules" class="module-card produccion">
-            <div class="module-icon">
-                <i class="fas fa-cog"></i>
+        @{
+            var produccionAccess = await UserCanAccessModule(ModuleNames.Produccion);
+        }
+        @if (produccionAccess)
+        {
+            <a asp-action="Produccion" asp-controller="Modules" class="module-card produccion">
+                <div class="module-icon">
+                    <i class="fas fa-industry"></i>
+                </div>
+                <h3 class="module-title">Producción</h3>
+                <p class="module-description">Control de producción</p>
+            </a>
+        }
+        else
+        {
+            <div class="module-card module-card-disabled produccion">
+                <div class="module-icon">
+                    <i class="fas fa-industry"></i>
+                </div>
+                <h3 class="module-title">Producción</h3>
+                <p class="module-description">Control de producción</p>
+                <span class="module-locked-indicator">
+                    <i class="fas fa-lock"></i> Sin acceso
+                </span>
             </div>
-            <h3 class="module-title">Producción</h3>
-            <p class="module-description">Control de producción</p>
-        </a>
+        }
 
         <!-- RRHH Module -->
-        <a asp-action="RRHH" asp-controller="Modules" class="module-card rrhh">
-            <div class="module-icon">
-                <i class="fas fa-users"></i>
+        @{
+            var rrhhAccess = await UserCanAccessModule(ModuleNames.RRHH);
+        }
+        @if (rrhhAccess)
+        {
+            <a asp-action="RRHH" asp-controller="Modules" class="module-card rrhh">
+                <div class="module-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="module-title">RRHH</h3>
+                <p class="module-description">Recursos humanos</p>
+            </a>
+        }
+        else
+        {
+            <div class="module-card module-card-disabled rrhh">
+                <div class="module-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="module-title">RRHH</h3>
+                <p class="module-description">Recursos humanos</p>
+                <span class="module-locked-indicator">
+                    <i class="fas fa-lock"></i> Sin acceso
+                </span>
             </div>
-            <h3 class="module-title">RRHH</h3>
-            <p class="module-description">Recursos humanos</p>
-        </a>
+        }
 
         <!-- Proyectos Module -->
-        <a asp-action="Proyectos" asp-controller="Modules" class="module-card proyectos">
-            <div class="module-icon">
-                <i class="fas fa-building"></i>
+        @{
+            var proyectosAccess = await UserCanAccessModule(ModuleNames.Proyectos);
+        }
+        @if (proyectosAccess)
+        {
+            <a asp-action="Proyectos" asp-controller="Modules" class="module-card proyectos">
+                <div class="module-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3 class="module-title">Proyectos</h3>
+                <p class="module-description">Gestión de proyectos</p>
+            </a>
+        }
+        else
+        {
+            <div class="module-card module-card-disabled proyectos">
+                <div class="module-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3 class="module-title">Proyectos</h3>
+                <p class="module-description">Gestión de proyectos</p>
+                <span class="module-locked-indicator">
+                    <i class="fas fa-lock"></i> Sin acceso
+                </span>
             </div>
-            <h3 class="module-title">Proyectos</h3>
-            <p class="module-description">Gestión de proyectos</p>
-        </a>
+        }
 
         <!-- Reporteador Module -->
-        <a asp-action="Reporteador" asp-controller="Modules" class="module-card reporteador">
-            <div class="module-icon">
-                <i class="fas fa-chart-line"></i>
+        @{
+            var reporteadorAccess = await UserCanAccessModule(ModuleNames.Reporteador);
+        }
+        @if (reporteadorAccess)
+        {
+            <a asp-action="Reporteador" asp-controller="Modules" class="module-card reporteador">
+                <div class="module-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="module-title">Reporteador</h3>
+                <p class="module-description">Generación de reportes</p>
+            </a>
+        }
+        else
+        {
+            <div class="module-card module-card-disabled reporteador">
+                <div class="module-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="module-title">Reporteador</h3>
+                <p class="module-description">Generación de reportes</p>
+                <span class="module-locked-indicator">
+                    <i class="fas fa-lock"></i> Sin acceso
+                </span>
             </div>
-            <h3 class="module-title">Reporteador</h3>
-            <p class="module-description">Generación de reportes</p>
-        </a>
+        }
 
         <!-- Administracion Module -->
-        <a asp-action="Administracion" asp-controller="Modules" class="module-card administracion">
-            <div class="module-icon">
-                <i class="fas fa-sliders-h"></i>
+        @{
+            var administracionAccess = await UserCanAccessModule(ModuleNames.Administracion);
+        }
+        @if (administracionAccess)
+        {
+            <a asp-action="Administracion" asp-controller="Modules" class="module-card administracion">
+                <div class="module-icon">
+                    <i class="fas fa-sliders-h"></i>
+                </div>
+                <h3 class="module-title">Administración</h3>
+                <p class="module-description">Configuración del sistema</p>
+            </a>
+        }
+        else
+        {
+            <div class="module-card module-card-disabled administracion">
+                <div class="module-icon">
+                    <i class="fas fa-sliders-h"></i>
+                </div>
+                <h3 class="module-title">Administración</h3>
+                <p class="module-description">Configuración del sistema</p>
+                <span class="module-locked-indicator">
+                    <i class="fas fa-lock"></i> Sin acceso
+                </span>
             </div>
-            <h3 class="module-title">Administración</h3>
-            <p class="module-description">Configuración del sistema</p>
-        </a>
+        }
     </div>
 </div>

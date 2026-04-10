@@ -133,113 +133,6 @@ namespace WebApp.Controllers
             }
         }
 
-        // GET: Obtener permisos disponibles
-        [HttpGet]
-        [RequirePermission("Administracion", "Ver")]
-        public async Task<IActionResult> ObtenerPermisos()
-        {
-            try
-            {
-                var permisos = await _dbContext.ModulePermissions
-                    .Where(p => p.IsActive)
-                    .GroupBy(p => p.ModuleName)
-                    .Select(g => new
-                    {
-                        module = g.Key,
-                        permissions = g.Select(p => new
-                        {
-                            id = p.Id,
-                            name = p.PermissionName,
-                            description = p.Description
-                        }).ToList()
-                    })
-                    .ToListAsync();
-
-                return Json(new { success = true, data = permisos });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error al obtener permisos: {ex.Message}");
-                return Json(new { success = false, message = "Error al obtener permisos" });
-            }
-        }
-
-        // GET: Obtener permisos asignados a un rol
-        [HttpGet]
-        [RequirePermission("Administracion", "Ver")]
-        public async Task<IActionResult> ObtenerPermisosRol(string roleId)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(roleId))
-                {
-                    return Json(new { success = false, message = "ID de rol requerido" });
-                }
-
-                var permisosAsignados = await _dbContext.RolePermissions
-                    .Where(rp => rp.RoleId == roleId)
-                    .Select(rp => rp.ModulePermissionId)
-                    .ToListAsync();
-
-                return Json(new { success = true, data = permisosAsignados });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error al obtener permisos del rol: {ex.Message}");
-                return Json(new { success = false, message = "Error al obtener permisos del rol" });
-            }
-        }
-
-        // POST: Asignar permisos a un rol
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [RequirePermission("Administracion", "Editar")]
-        public async Task<IActionResult> AsignarPermisos([FromBody] AsignarPermisosRequest request)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(request.RoleId))
-                {
-                    return Json(new { success = false, message = "ID de rol requerido" });
-                }
-
-                var rol = await _roleManager.FindByIdAsync(request.RoleId);
-                if (rol == null)
-                {
-                    return Json(new { success = false, message = "El rol no existe" });
-                }
-
-                // Remover todos los permisos actuales del rol
-                var permisosActuales = await _dbContext.RolePermissions
-                    .Where(rp => rp.RoleId == request.RoleId)
-                    .ToListAsync();
-
-                _dbContext.RolePermissions.RemoveRange(permisosActuales);
-
-                // Agregar nuevos permisos
-                if (request.PermissionIds != null && request.PermissionIds.Any())
-                {
-                    var nuevosPermisos = request.PermissionIds.Select(permissionId => new RolePermission
-                    {
-                        RoleId = request.RoleId,
-                        ModulePermissionId = permissionId
-                    }).ToList();
-
-                    await _dbContext.RolePermissions.AddRangeAsync(nuevosPermisos);
-                }
-
-                await _dbContext.SaveChangesAsync();
-                _logger.LogInformation($"Permisos asignados al rol '{rol.Name}'");
-
-                return Json(new { success = true, message = "Permisos asignados exitosamente" });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error al asignar permisos: {ex.Message}");
-                return Json(new { success = false, message = "Error al asignar permisos" });
-            }
-        }
-
         // GET: Obtener lista de roles para select
         [HttpGet]
         [RequirePermission("Administracion", "Ver")]
@@ -416,15 +309,6 @@ namespace WebApp.Controllers
             [Required]
             [StringLength(256)]
             public string NombreRol { get; set; }
-        }
-
-        // DTO para asignar permisos
-        public class AsignarPermisosRequest
-        {
-            [Required]
-            public string RoleId { get; set; }
-
-            public List<int> PermissionIds { get; set; } = new List<int>();
         }
 
         // DTO para reasignar roles

@@ -244,7 +244,7 @@ body {
     background-color: transparent !important;
     padding: 0 0.5rem !important;
     border-radius: 4px;
-    margin-left: 45px !important;
+    margin-left: 1px !important;
 }
 
 .breadcrumb-nav nav::-webkit-scrollbar {
@@ -576,6 +576,70 @@ body.sb-sidenav-toggled.sb-sidenav-collapsed #layoutSidenav_nav {
 .footer {
     margin-top: auto;
     padding: 1rem 0;
+}
+
+/* ============================================
+   DISABLED MODULE STYLES
+   ============================================ */
+
+.nav-link-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    color: #9ca3af !important;
+    background-color: transparent !important;
+}
+
+.nav-link-disabled .sb-nav-link-icon i {
+    color: #9ca3af;
+    opacity: 0.6;
+}
+
+.nav-link-disabled:hover {
+    color: #9ca3af !important;
+    background-color: transparent !important;
+}
+
+/* ============================================
+   DISABLED MODULE CARD STYLES
+   ============================================ */
+
+.module-card-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: #f3f4f6 !important;
+    border-color: #d1d5db !important;
+}
+
+.module-card-disabled .module-icon i {
+    color: #9ca3af !important;
+    opacity: 0.7;
+}
+
+.module-card-disabled .module-title,
+.module-card-disabled .module-description {
+    color: #9ca3af !important;
+}
+
+.module-card-disabled:hover {
+    transform: none;
+    box-shadow: none;
+    background-color: #f3f4f6 !important;
+}
+
+.module-locked-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.module-locked-indicator i {
+    font-size: 11px;
 }
 
 /* ============================================

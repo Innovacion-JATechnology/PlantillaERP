@@ -1,0 +1,267 @@
+@using Microsoft.AspNetCore.Identity
+@using UserRoles.Identity.Constants
+@using UserRoles.Identity.Services
+@inject IPermissionService PermissionService
+
+@{
+    ViewData["Title"] = "Permisos de Submódulos";
+    var roles = (List<IdentityRole>)ViewBag.Roles ?? new List<IdentityRole>();
+    var selectedRoleId = (string)ViewBag.SelectedRoleId;
+    var roleSubmodulePermissions = (Dictionary<string, List<string>>)ViewBag.RoleSubmodulePermissions ?? new Dictionary<string, List<string>>();
+}
+
+<link rel="stylesheet" href="~/css/professional-tables.css" />
+
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-shield-alt"></i>
+            Permisos de Submódulos
+        </h1>
+        <p>Asigna permisos (Crear, Leer, Editar, Eliminar) a submódulos</p>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Selector de Rol -->
+        <div class="col-md-3" style="padding: 0 12px;">
+            <div class="professional-table-card">
+                <div class="card-header">
+                    <h6>
+                        <i class="fas fa-users"></i>
+                        Seleccionar Rol
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <form method="get" class="mb-3">
+                        <div class="mb-3">
+                            <label for="roleSelect" class="form-label">Rol</label>
+                            <select id="roleSelect" name="roleId" class="form-select" onchange="window.location.href = '@Url.Action("PermisosSubmodulos", "Administracion")?roleId=' + this.value">
+                                <option value="">-- Seleccionar Rol --</option>
+                                @foreach (var role in roles)
+                                {
+                                    if (selectedRoleId == role.Id)
+                                    {
+                                        <option value="@role.Id" selected>@role.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@role.Id">@role.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </form>
+
+                    @if (!string.IsNullOrEmpty(selectedRoleId))
+                    {
+                        var roleName = roles.FirstOrDefault(r => r.Id == selectedRoleId)?.Name;
+                        <div class="alert alert-info">
+                            <small>
+                                <strong>Rol seleccionado:</strong><br />
+                                @roleName
+                            </small>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Submódulos y Permisos -->
+        <div class="col-md-9">
+            @if (string.IsNullOrEmpty(selectedRoleId))
+            {
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Selecciona un rol</strong> para ver y administrar sus permisos de submódulos
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            else
+            {
+                <div class="accordion" id="modulesAccordion">
+                    @{
+                        // Agrupar submódulos por módulo (dinámico desde BD)
+                        var moduleSubmodules = new Dictionary<string, List<(string key, string name)>>();
+
+                        foreach (var submoduleKey in roleSubmodulePermissions.Keys)
+                        {
+                            var moduleName = submoduleKey.Contains(".") 
+                                ? submoduleKey.Substring(0, submoduleKey.IndexOf('.'))
+                                : submoduleKey;
+
+                            var submoduleName = submoduleKey.Contains(".") 
+                                ? submoduleKey.Substring(submoduleKey.IndexOf('.') + 1)
+                                : submoduleKey;
+
+                            if (!moduleSubmodules.ContainsKey(moduleName))
+                            {
+                                moduleSubmodules[moduleName] = new List<(string, string)>();
+                            }
+
+                            moduleSubmodules[moduleName].Add((submoduleKey, submoduleName));
+                        }
+
+                        var actions = new List<string> { "Ver", "Crear", "Editar", "Eliminar" };
+
+                        // Iconos de módulos (igual que en el sidebar)
+                        var moduleIcons = new Dictionary<string, string>
+                        {
+                            { "Administracion", "fas fa-sliders-h" },
+                            { "Administración", "fas fa-sliders-h" },
+                            { "Compras", "fas fa-shopping-cart" },
+                            { "Finanzas", "fas fa-money-bill" },
+                            { "Inventario", "fas fa-boxes" },
+                            { "Mantenimiento", "fas fa-wrench" },
+                            { "Produccion", "fas fa-industry" },
+                            { "Producción", "fas fa-industry" },
+                            { "Proyectos", "fas fa-briefcase" },
+                            { "Reporteador", "fas fa-chart-line" },
+                            { "RRHH", "fas fa-users" }
+                        };
+                    }
+
+                    @if (moduleSubmodules.Any())
+                    {
+                        @foreach (var module in moduleSubmodules.OrderBy(m => m.Key))
+                        {
+                            var moduleKey = module.Key.Replace(" ", "").Replace("ó", "o").Replace("í", "i");
+                            var submodules = module.Value.OrderBy(s => s.name).ToList();
+
+                            // Contar cuántos submodulos tienen al menos un permiso
+                            var submodulesWithPermissions = submodules.Count(s => 
+                                roleSubmodulePermissions.ContainsKey(s.key) && 
+                                roleSubmodulePermissions[s.key].Count > 0);
+
+                            // Obtener el icono del módulo
+                            var moduleIcon = moduleIcons.ContainsKey(module.Key) ? moduleIcons[module.Key] : "fas fa-folder";
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed module-header" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@moduleKey" aria-expanded="false">
+                                        <div class="module-header-content">
+                                            <div class="module-info">
+                                                <i class="@moduleIcon"></i>
+                                                <strong class="module-name">@module.Key</strong>
+                                            </div>
+                                            <div class="module-badges">
+                                                <span class="badge-number text-primary">@submodules.Count Disponibles</span>
+                                                @if (submodulesWithPermissions > 0)
+                                                {
+                                                    <span class="badge-text text-success">@submodulesWithPermissions Habilitados</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge-text text-secondary">0 Habilitados</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </button>
+                                </h2>
+                                <div id="collapse_@moduleKey" class="accordion-collapse collapse" data-bs-parent="#modulesAccordion">
+                                    <div class="accordion-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover mb-0">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th style="width: 25%;"><i class="fas fa-cog me-2"></i>Submódulo</th>
+                                                        @foreach (var action in actions)
+                                                        {
+                                                            <th style="width: 18.75%;" class="text-center">@action</th>
+                                                        }
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var submodule in submodules)
+                                                    {
+                                                        var submodulePermissions = roleSubmodulePermissions.ContainsKey(submodule.key) 
+                                                            ? roleSubmodulePermissions[submodule.key] 
+                                                            : new List<string>();
+
+                                                        <tr>
+                                                            <td>
+                                                                <strong>@submodule.name</strong>
+                                                                <br />
+                                                                <small class="text-muted">@submodule.key</small>
+                                                            </td>
+                                                            @foreach (var action in actions)
+                                                            {
+                                                                var hasPermission = submodulePermissions.Contains(action);
+
+                                                                <td class="text-center">
+                                                                    <form method="post" asp-action="ActualizarPermisoSubmodulo" class="d-inline">
+                                                                        <input type="hidden" name="roleId" value="@selectedRoleId">
+                                                                        <input type="hidden" name="submoduleName" value="@submodule.key">
+                                                                        <input type="hidden" name="actionName" value="@action">
+                                                                        <input type="hidden" name="returnUrl" value="@Url.Action("PermisosSubmodulos", "Administracion", new { roleId = selectedRoleId })">
+
+                                                                        <button type="submit" class="btn btn-sm @(hasPermission ? "btn-success" : "btn-outline-secondary")" 
+                                                                                title="@(hasPermission ? "Habilitado" : "Deshabilitado")">
+                                                                            <i class="fas @(hasPermission ? "fa-check" : "fa-times")"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                </td>
+                                                            }
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            No hay submódulos disponibles
+                        </div>
+                    }
+                </div>
+
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-lightbulb me-2"></i>
+                    <strong>Nota:</strong> Click en cada módulo para asigar permisos.
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .accordion-button {
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border: 1px solid #dee2e6;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: #e7f1ff;
+        color: #0c63e4;
+    }
+
+    .accordion-button::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230c63e4'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    }
+
+    .table th {
+        font-weight: 600;
+        background-color: #f8f9fa;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .btn-sm {
+        min-width: 38px;
+    }
+
+    .badge {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.65rem;
+    }
+</style>
+

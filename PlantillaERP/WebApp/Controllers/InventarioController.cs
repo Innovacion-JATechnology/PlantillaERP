@@ -1,25 +1,43 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using System.Security.Claims;
 using Microsoft.Data.SqlClient;
 using WebApp.Models;
+using UserRoles.Identity.Constants;
+using UserRoles.Identity.Services;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class InventarioController : Controller
     {
         private readonly ILogger<InventarioController> _logger;
         private readonly IConfiguration _configuration;
+        private readonly IPermissionService _permissionService;
         private readonly string _strcon;
 
-        public InventarioController(ILogger<InventarioController> logger, IConfiguration configuration)
+        public InventarioController(
+            ILogger<InventarioController> logger, 
+            IConfiguration configuration,
+            IPermissionService permissionService)
         {
             _logger = logger;
             _configuration = configuration;
+            _permissionService = permissionService;
             _strcon = _configuration.GetConnectionString("ServerCon") ?? throw new InvalidOperationException("Connection string 'ServerCon' not found.");
         }
 
-        public IActionResult Productos(string searchTerm = "", string sortExpression = "ProductoCompleto", string sortDirection = "ASC", int page = 1)
+        public async Task<IActionResult> Productos(string searchTerm = "", string sortExpression = "ProductoCompleto", string sortDirection = "ASC", int page = 1)
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Verificar que el usuario tiene acceso al módulo Inventario
+            if (!await _permissionService.UserHasModuleAccessAsync(userId, ModuleNames.Inventario))
+            {
+                return Forbid();
+            }
+
             ViewData["Title"] = "Productos";
             ViewData["Breadcrumbs"] = new List<(string, string)>
             {

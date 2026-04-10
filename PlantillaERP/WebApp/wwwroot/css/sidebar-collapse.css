@@ -1,20 +1,77 @@
 /* Sidebar collapse - simplified */
 
+/* Base styling for nav links */
+.sb-sidenav .nav-link {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.sb-sidenav .nav-link:hover {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.sb-sidenav .nav-link.active {
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Icon styling - TAMAÑO CONSISTENTE */
+.sb-sidenav .nav-link .sb-nav-link-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 1.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 1.4rem;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+}
+
+.sb-sidenav .nav-link .sb-nav-link-icon i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Text styling */
+.sb-sidenav .nav-link span {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* === COLLAPSED STATE === */
+
 /* Hide text when collapsed */
 body.sb-sidenav-collapsed .sb-sidenav .nav-link span {
     display: none !important;
 }
 
-/* Center icons when collapsed */
+/* Center icons when collapsed - MANTENER TAMAÑO */
 body.sb-sidenav-collapsed .sb-sidenav .nav-link {
     justify-content: center !important;
-    padding: 0.75rem 0 !important;
+    padding: 1rem !important;
 }
 
-/* Icon sizing when collapsed */
+/* Icon sizing when collapsed - MANTENER TAMAÑO CONSISTENTE */
 body.sb-sidenav-collapsed .sb-sidenav .nav-link .sb-nav-link-icon {
     margin-right: 0 !important;
-    font-size: 1.5rem !important;
+    margin-left: 0 !important;
+    min-width: 1.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 1.4rem;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0;
 }
 
 /* Hide headings when collapsed */
@@ -27,4 +84,21 @@ body.sb-sidenav-collapsed .sb-sidenav-menu-nested,
 body.sb-sidenav-collapsed .collapse {
     display: none !important;
 }
+
+/* Tooltip styling para Bootstrap */
+.tooltip {
+    z-index: 9999 !important;
+}
+
+.tooltip-inner {
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 0.4rem;
+    font-weight: 500;
+}
+
+/* Tooltips siempre deben permitir clicks */
+.nav-link[data-bs-toggle="tooltip"] {
+    pointer-events: auto;
+}
+
 

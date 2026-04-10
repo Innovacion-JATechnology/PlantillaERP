@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using UserRoles.Identity.Data;
 using UserRoles.Identity.Models;
+using UserRoles.Identity.Services;
 using WebApp.Attributes;
 
 namespace WebApp.Controllers
@@ -13,15 +15,21 @@ namespace WebApp.Controllers
         private readonly ILogger<AdministracionController> _logger;
         private readonly UserManager<Users> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IPermissionService _permissionService;
+        private readonly AppDbContext _context;
 
         public AdministracionController(
             ILogger<AdministracionController> logger,
             UserManager<Users> userManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            IPermissionService permissionService,
+            AppDbContext context)
         {
             _logger = logger;
             _userManager = userManager;
             _roleManager = roleManager;
+            _permissionService = permissionService;
+            _context = context;
         }
 
         [RequirePermission("Usuarios", "Ver")]
@@ -74,6 +82,127 @@ namespace WebApp.Controllers
 
             var roles = await _roleManager.Roles.ToListAsync();
             return View("~/Views/Modules/Roles.cshtml", roles);
+        }
+
+        [RequirePermission("Administracion", "Ver")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> PermisosSubmodulos(string roleId)
+        {
+            ViewData["Title"] = "Permisos de Submódulos";
+            ViewData["Breadcrumbs"] = new List<(string, string)>
+            {
+                ("Inicio", Url.Action("Index", "Home")),
+                ("Administración", Url.Action("Administracion", "Modules")),
+                ("Roles", Url.Action("Roles", "Administracion")),
+                ("Permisos de Submódulos", null)
+            };
+
+            var roles = await _roleManager.Roles.ToListAsync();
+            ViewBag.Roles = roles;
+
+            if (string.IsNullOrEmpty(roleId) && roles.Any())
+            {
+                roleId = roles.First().Id;
+            }
+
+            ViewBag.SelectedRoleId = roleId;
+
+            // Load role permissions for submodules - OBTENER DINÁMICAMENTE
+            var roleSubmodulePermissions = new Dictionary<string, List<string>>();
+            if (!string.IsNullOrEmpty(roleId))
+            {
+                // Obtener todos los módulos dinámicamente desde la BD
+                var allModules = await _permissionService.GetAllModulesAsync();
+
+                // Para cada módulo, obtener sus submódulos
+                foreach (var module in allModules)
+                {
+                    var modulePermissions = await _permissionService.GetModulePermissionsAsync(module);
+
+                    // Para cada submódulo único en este módulo
+                    var submodules = modulePermissions
+                        .Select(mp => mp.ModuleName)
+                        .Distinct()
+                        .ToList();
+
+                    foreach (var submodule in submodules)
+                    {
+                        roleSubmodulePermissions[submodule] = new List<string>();
+
+                        // Obtener todos los permisos para este submódulo
+                        var submodulePermissions = modulePermissions
+                            .Where(mp => mp.ModuleName == submodule && mp.IsActive)
+                            .ToList();
+
+                        foreach (var permission in submodulePermissions)
+                        {
+                            // Verificar si el rol tiene este permiso
+                            var hasPermission = await _context.RolePermissions
+                                .AnyAsync(rp => rp.RoleId == roleId && rp.ModulePermissionId == permission.Id);
+
+                            if (hasPermission)
+                            {
+                                roleSubmodulePermissions[submodule].Add(permission.PermissionName);
+                            }
+                        }
+                    }
+                }
+            }
+
+            ViewBag.RoleSubmodulePermissions = roleSubmodulePermissions;
+            return View("~/Views/Modules/PermisosSubmodulos.cshtml");
+        }
+
+        [HttpPost]
+        [RequirePermission("Administracion", "Editar")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ActualizarPermisoSubmodulo(string roleId, string submoduleName, string actionName, string returnUrl = null)
+        {
+            try
+            {
+                var role = await _roleManager.FindByIdAsync(roleId);
+                if (role == null)
+                {
+                    return BadRequest("Rol no encontrado");
+                }
+
+                // Get the module permissions for this submodule + action
+                var modulePermissions = await _permissionService.GetModulePermissionsAsync(submoduleName);
+                var permission = modulePermissions?.FirstOrDefault(mp => 
+                    mp.ModuleName == submoduleName && 
+                    mp.PermissionName == actionName && 
+                    mp.IsActive);
+
+                if (permission == null)
+                {
+                    return BadRequest($"Permiso no encontrado para {submoduleName} - {actionName}");
+                }
+
+                // Check if role already has this permission
+                var hasPermission = await _context.RolePermissions
+                    .AnyAsync(rp => rp.RoleId == roleId && rp.ModulePermissionId == permission.Id);
+
+                if (hasPermission)
+                {
+                    await _permissionService.RemovePermissionFromRoleAsync(roleId, permission.Id);
+                }
+                else
+                {
+                    await _permissionService.AssignPermissionToRoleAsync(roleId, permission.Id);
+                }
+
+                if (!string.IsNullOrEmpty(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+
+                return RedirectToAction("PermisosSubmodulos", new { roleId });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al actualizar permiso");
+                return BadRequest($"Error al actualizar el permiso: {ex.Message}");
+            }
         }
 
         public IActionResult RolesPermisos()
