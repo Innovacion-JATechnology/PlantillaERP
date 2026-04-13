@@ -1,0 +1,29 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+/* Font Awesome Icon Visibility */
+i[class*="fas"],
+i[class*="fab"],
+i[class*="far"] {
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

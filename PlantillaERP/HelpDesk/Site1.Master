@@ -1,0 +1,175 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="HelpDesk.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    
+
+ <style>
+        /* Edge/IE specific pseudo-elements */
+        input[type="password"]::-ms-reveal,
+        input[type="password"]::-ms-clear {
+            display: none;
+        }
+    </style>
+
+     
+
+    <%-- boostrap cs --%>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <%-- data tables css --%>
+    <link href="datatables/css/dataTables.dataTables.min.css" rel="stylesheet" />
+    <%-- font awesome  css --%>
+    <link href="fontawesome/css/all.css" rel="stylesheet" />
+    <link href="css/customstylesheet.css" rel="stylesheet" />
+
+    <script src="bootstrap/js/jquery-3.3.1.slim.min.js"></script>
+    <%-- popper --%>
+    <script src="bootstrap/js/popper.min.js"></script>
+    <%-- boostrap js --%>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <%-- datatables js --%>
+    <script src="datatables/js/dataTables.min.js"></script>
+
+
+    <script>
+        window.addEventListener("pageshow", function (event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+            });
+        </script>
+
+
+        <script>
+            // Si la página vuelve desde el bfcache, recargar y disparar la verificación de rol en servidor
+            window.addEventListener('pageshow', function (event) {
+                if (event.persisted) {
+                    window.location.reload();
+                }
+            });
+        </script>
+
+
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" />
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#"> 
+                    <img src="imgs/getsitelogo.png"    height="50" href="homepage.aspx" />
+                    HelpDesk
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
+
+                    <ul class="navbar-nav">
+
+
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="linkIngreso" runat="server" OnClick="LinkButton1_Click">Ingresar</asp:LinkButton>
+                        </li>
+
+
+                      
+<li class="nav-item active">
+    <a id="lnkInicio" runat="server" class="nav-link">Inicio</a>
+</li>
+
+
+                        <li class="nav-item active">
+                            <a class="nav-link" href="acercaDe.aspx">Acerca</a>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="linkSalir" runat="server" Visible="False" OnClick="linkSalir_Click">Salir</asp:LinkButton>
+                        </li>
+
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="linkHola" runat="server" Visible="False" OnClick="linkHola_Click">Hola Usuario</asp:LinkButton>
+                        </li>
+                    </ul>
+
+                </div>
+
+
+            </nav>
+        </div>
+
+        <!-- Main content placeholder -->
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <!-- Main content placeholder -->
+
+
+        <!-- Footer -->
+        <footer>
+            <div id="footer1" class="container-fluid">
+
+                <br />
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <p>
+                            <asp:LinkButton class="footerlinks" ID="linkAdministrador"
+                                runat="server" OnClick="LinkButton6_Click">Ingreso Agente</asp:LinkButton>
+                            &nbsp;
+                    <asp:LinkButton class="footerlinks" ID="linkCatalogo"
+                        runat="server" OnClick="LinkButton12_Click">Ver usuarios</asp:LinkButton>
+                            &nbsp;
+                    <asp:LinkButton class="footerlinks" ID="linkHistorial"
+                        runat="server" OnClick="LinkButton8_Click" Visible="False">Ver tickets</asp:LinkButton>
+                            &nbsp;
+                    <asp:LinkButton class="footerlinks" ID="linkRegistro"
+                        runat="server" OnClick="LinkButton10_Click">Agregar usuario</asp:LinkButton>
+                            &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="AgregarAgente"
+                                runat="server" OnClick="LinkButton18_Click">Agregar agente</asp:LinkButton>
+                            &nbsp;
+                    <asp:LinkButton class="footerlinks" ID="linkMantenimiento"
+                        runat="server" OnClick="LinkButton11_Click" Visible="False">Mantenimiento</asp:LinkButton>
+                              
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="footer2" class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <p style="color: lightcyan">
+                            &copy; Derechos Reservados - 2026 
+                <a class="footerlinks" href="#" target="_blank" style="color: lightcyan">JA Technology</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+
+
+    </form>
+</body>
+</html>
