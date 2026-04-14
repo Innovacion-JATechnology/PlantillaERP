@@ -1,0 +1,188 @@
+﻿@page
+@model Portal.Pages.SistemasModel
+@{
+    Layout = null;
+    ViewData["Title"] = "TI - En construcción";
+}
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+    }
+
+    .systems-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #538AFC, #6960E6, #784ECE);
+        padding: 20px;
+    }
+
+    .systems-card {
+        background: #ffffff;
+        max-width: 560px;
+        width: 100%;
+        border-radius: 16px;
+        padding: 50px 40px;
+        box-shadow: 0 30px 70px rgba(0,0,0,.25);
+        text-align: center;
+        animation: fadeUp .5s ease-out;
+    }
+
+    @@keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Animated Icon */
+    .systems-icon {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 25px;
+        position: relative;
+    }
+
+    .gear {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+        font-size: 42px;
+        color: #538AFC;
+    }
+
+    .gear.big {
+        transform: translate(-50%, -50%);
+        animation: spin 6s linear infinite;
+    }
+
+    .gear.small {
+        font-size: 26px;
+        top: 28%;
+        left: 68%;
+        animation: spinReverse 4s linear infinite;
+    }
+
+    @@keyframes spin {
+        from { transform: translate(-50%, -50%) rotate(0deg); }
+        to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @@keyframes spinReverse {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(-360deg); }
+    }
+
+    .systems-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #538AFC;
+        margin-bottom: 8px;
+    }
+
+    .systems-subtitle {
+        font-size: 1.1rem;
+        color: #538AFC;
+        margin-bottom: 20px;
+    }
+
+    .systems-message {
+        font-size: .95rem;
+        color: #538AFC;
+        line-height: 1.6;
+        margin-bottom: 25px;
+    }
+
+    .systems-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 30px;
+        text-align: left;
+    }
+
+    .systems-features li {
+        padding-left: 26px;
+        margin-bottom: 10px;
+        position: relative;
+        font-size: .95rem;
+        color: #343a40;
+    }
+
+    .systems-features li::before {
+        content: "⚙";
+        position: absolute;
+        left: 0;
+        color: #2c5364;
+        font-weight: bold;
+    }
+
+    .systems-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .systems-actions a {
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all .2s ease;
+    }
+
+    .btn-primary-sys {
+        background: linear-gradient(135deg, #538AFC, darkblue);
+        color: white;
+    }
+
+    .btn-primary-sys:hover {
+        opacity: .9;
+    }
+
+    .btn-secondary-sys {
+        background: #f1f3f5;
+        color: #343a40;
+    }
+
+    .btn-secondary-sys:hover {
+        background: #e9ecef;
+    }
+</style>
+
+<div class="systems-container">
+    <div class="systems-card">
+
+        <!-- Animated Icon -->
+        <div class="systems-icon">
+            <i class="fas fa-cog gear big"></i>
+            <i class="fas fa-cog gear small"></i>
+        </div>
+
+        <h1 class="systems-title">Sistemas</h1>
+        <p class="systems-subtitle">Módulo en construcción</p>
+
+        <p class="systems-message">
+            Este módulo concentrará la configuración técnica, integraciones,
+            parámetros del sistema y herramientas administrativas avanzadas.
+        </p>
+
+        <ul class="systems-features">
+            <li>Configuración general del sistema</li>
+            <li>Gestión de integraciones y APIs</li>
+            <li>Parámetros globales y catálogos</li>
+            <li>Seguridad, auditoría y monitoreo</li>
+        </ul>
+
+        <div class="systems-actions">
+            <a href="/" class="btn-primary-sys">
+                <i class="fas fa-arrow-left me-2"></i> Volver al Portal
+            </a> 
+        </div>
+
+    </div>
+</div>

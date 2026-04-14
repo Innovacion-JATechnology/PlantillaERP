@@ -1,0 +1,525 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Sara - Portal de Soluciones";
+}
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html, body {
+        height: 100%;
+        width: 100%;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    /* Decorative circles */
+    body::before {
+        content: '';
+        position: fixed;
+        width: 500px;
+        height: 500px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        top: -150px;
+        right: -150px;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    body::after {
+        content: '';
+        position: fixed;
+        width: 350px;
+        height: 350px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 50%;
+        bottom: -100px;
+        left: -100px;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    /* Main Content */
+    .portal-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 40px;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Logo Section */
+    .portal-logo-section {
+        margin-bottom: 50px;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        animation: slideInDown 0.8s ease;
+    }
+
+    .portal-logo {
+        width: 100px;
+        height: 100px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #764ba2 0%, #5a3a7f 100%);
+        border-radius: 50%;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(118, 75, 162, 0.6);
+        font-size: 60px;
+    }
+
+    .portal-logo img {
+        max-width: 85%;
+        height: auto;
+        filter: brightness(1.3) saturate(1.2) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+    }
+
+    .portal-logo i {
+        font-size: 60px;
+        color: white;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .portal-header {
+        text-align: left;
+    }
+
+    .portal-header h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .portal-header p {
+        font-size: 1.15rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin: 0;
+    }
+
+    /* Solutions Grid */
+    .solutions-container {
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .solutions-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+        width: 100%;
+    }
+
+    .solution-card {
+        background: white;
+        border-radius: 16px;
+        padding: 45px 40px;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        border: 2px solid transparent;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        animation: fadeInUp 0.6s ease backwards;
+    }
+
+    .solution-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: currentColor;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .solution-card:nth-child(1) {
+        animation-delay: 0.2s;
+    }
+
+    .solution-card:nth-child(2) {
+        animation-delay: 0.3s;
+    }
+
+    .solution-card:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    .solution-card:nth-child(4) {
+        animation-delay: 0.5s;
+    }
+
+    .solution-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+        border-color: currentColor;
+    }
+
+    .solution-icon {
+        font-size: 48px;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        line-height: 1;
+        color: white;
+        font-weight: 800;
+        letter-spacing: -1px;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+        box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .solution-card:hover .solution-icon {
+        transform: scale(1.15) rotate(-5deg);
+    }
+
+    .solution-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #212529;
+        margin-bottom: 12px;
+    }
+
+    .solution-desc {
+        font-size: 1rem;
+        color: #666;
+        line-height: 1.7;
+    }
+
+    /* Color Variants */
+    .card-saraerp {
+        color: #784ECE;
+    }
+
+    .card-saraerp .solution-icon {
+        background: #784ECE;
+    }
+
+    .card-crm {
+        color: #6960E6;
+    }
+
+    .card-crm .solution-icon {
+        background: #6960E6;
+    }
+
+    .card-helpdesk {
+        color: #538AFC;
+    }
+
+    .card-helpdesk .solution-icon {
+        background: #538AFC;
+    }
+
+    .card-sistemas {
+        color: #43B6FF;
+    }
+
+    .card-sistemas .solution-icon {
+        background: #43B6FF;
+    }
+
+    /* Animations */
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Footer */
+    .portal-footer {
+        text-align: center;
+        padding: 30px 20px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.85rem;
+        background: rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        flex-shrink: 0;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Responsive Design */
+    @@media (max-width: 1200px) {
+        .portal-content {
+            padding: 50px 30px;
+        }
+
+        .portal-header h1 {
+            font-size: 2.5rem;
+        }
+
+        .solutions-grid {
+            gap: 25px;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .solution-card {
+            padding: 40px 35px;
+        }
+    }
+
+    @@media (max-width: 1024px) {
+        .portal-content {
+            padding: 45px 25px;
+        }
+
+        .portal-header h1 {
+            font-size: 2.2rem;
+        }
+
+        .solutions-grid {
+            gap: 28px;
+        }
+
+        .solution-card {
+            padding: 35px 30px;
+        }
+
+        .solution-icon {
+            width: 130px;
+            height: 130px;
+            font-size: 65px;
+            margin-bottom: 20px;
+        }
+
+        .solution-title {
+            font-size: 1.4rem;
+        }
+
+        .solution-desc {
+            font-size: 0.95rem;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .portal-content {
+            padding: 40px 20px;
+        }
+
+        .portal-logo-section {
+            margin-bottom: 35px;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .portal-logo {
+            width: 80px;
+            height: 80px;
+        }
+
+        .portal-logo img {
+            max-width: 70%;
+        }
+
+        .portal-header {
+            text-align: center;
+        }
+
+        .portal-header h1 {
+            font-size: 1.8rem;
+        }
+
+        .portal-header p {
+            font-size: 1rem;
+        }
+
+        .solutions-grid {
+            grid-template-columns: 1fr;
+            gap: 22px;
+        }
+
+        .solution-card {
+            padding: 30px 25px;
+        }
+
+        .solution-icon {
+            width: 120px;
+            height: 120px;
+            font-size: 55px;
+            margin-bottom: 18px;
+        }
+
+        .solution-title {
+            font-size: 1.3rem;
+        }
+
+        .solution-desc {
+            font-size: 0.9rem;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .portal-content {
+            padding: 30px 15px;
+        }
+
+        .portal-logo-section {
+            margin-bottom: 25px;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .portal-logo {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 0;
+        }
+
+        .portal-header {
+            text-align: center;
+        }
+
+        .portal-header h1 {
+            font-size: 1.5rem;
+        }
+
+        .portal-header p {
+            font-size: 0.95rem;
+        }
+
+        .solutions-grid {
+            gap: 18px;
+        }
+
+        .solution-card {
+            padding: 25px 20px;
+        }
+
+        .solution-icon {
+            width: 105px;
+            height: 105px;
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .solution-title {
+            font-size: 1.15rem;
+        }
+
+        .solution-desc {
+            font-size: 0.85rem;
+        }
+
+        .portal-footer {
+            font-size: 0.75rem;
+        }
+    }
+</style>
+
+<!-- Main Content -->
+<div class="portal-content">
+    <!-- Logo & Header -->
+    <div class="portal-logo-section">
+        <div >
+            <img src="~/images/saralogo.png" alt="Sara Logo" height="120px"/>
+        </div>
+        <div class="portal-header">
+            <h1>Portal de Soluciones Empresariales</h1>
+        </div>
+    </div>
+
+    <!-- Solutions Grid -->
+    <div class="solutions-container">
+        <div class="solutions-grid">
+            <!-- SaraERP Card -->
+            <a href="@Model.SaraERPUrl" class="solution-card card-saraerp text-decoration-none">
+                <div class="solution-icon">
+                    ERP
+                </div>
+                <h3 class="solution-title">SaraERP</h3>
+                <p class="solution-desc">
+                    Gestión empresarial integral con control total de recursos, inventario y operaciones.
+                </p>
+            </a>
+
+            
+<a asp-page="/trabajando"
+   class="solution-card card-crm text-decoration-none">
+    <div class="solution-icon">
+        CRM
+    </div>
+    <h3 class="solution-title">SaraCRM</h3>
+    <p class="solution-desc">
+        Administra clientes, ventas y relaciones comerciales de forma eficiente y escalable.
+    </p>
+</a>
+
+
+
+            <!-- HelpDesk Card -->
+            <a href="@Model.HelpDeskUrl" class="solution-card card-helpdesk text-decoration-none">
+                <div class="solution-icon">
+                    HD
+                </div>
+                <h3 class="solution-title">HelpDesk</h3>
+                <p class="solution-desc">
+                    Sistema de soporte técnico con gestión eficiente de incidencias y monitoreo de respuesta.
+                </p>
+            </a>
+
+            <!-- Sistemas Card -->
+            <a asp-page="/Sistemas" class="solution-card card-sistemas text-decoration-none">
+                <div class="solution-icon">
+                    TI
+                </div>
+                <h3 class="solution-title">Tecnologías de la Información</h3>
+                <p class="solution-desc">
+                    Panel administrativo para configuración y monitoreo de la plataforma Sara.
+                </p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="portal-footer">
+    <p>© 2024 JATechnology - Sistema Sara. Todos los derechos reservados.</p>
+</div>

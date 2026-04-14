@@ -1,0 +1,1264 @@
+@{
+    ViewData["Title"] = "Configuración de Colores";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Inicio", Url.Action("Index", "Home")),
+        ("Configuración de Colores", null)
+    };
+}
+
+<style>
+    .color-settings-container {
+        background: #f8f9fa;
+        min-height: calc(100vh - 120px);
+        padding: 30px 0;
+        margin: 0;
+    }
+
+    .color-settings-container .container-fluid {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .color-settings-container .row {
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+
+    .color-settings-container .col-12 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .page-header {
+        margin-bottom: 30px;
+        padding: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .page-header h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 8px;
+    }
+
+    .breadcrumb {
+        background-color: transparent;
+        padding-left: 0;
+        margin: 0;
+    }
+
+    .breadcrumb-item {
+        color: #7f8c8d;
+        font-size: 0.95rem;
+    }
+
+    .breadcrumb-item a {
+        color: #3498db;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item a:hover {
+        color: #2980b9;
+        text-decoration: underline;
+    }
+
+    /* Tab Navigation Styling */
+    .color-tabs-nav {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 0;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1400px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-bottom: 2px solid #e8ecf1;
+        background: #f8fafb;
+        border-radius: 12px 12px 0 0;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+        padding-top: 8px;
+        padding-bottom: 0;
+    }
+
+    .color-tab-btn {
+        padding: 12px 20px;
+        border: none;
+        background: transparent;
+        color: #666;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 10px 10px 0 0;
+        position: relative;
+        white-space: nowrap;
+        border: 2px solid transparent;
+        border-bottom: none;
+    }
+
+    .color-tab-btn i {
+        font-size: 1.05rem;
+        transition: transform 0.25s ease;
+    }
+
+    .color-tab-btn:hover {
+        color: #2980b9;
+        background-color: rgba(52, 152, 219, 0.08);
+        border-color: rgba(52, 152, 219, 0.3);
+        border-bottom: none;
+    }
+
+    .color-tab-btn:hover i {
+        transform: scale(1.1);
+    }
+
+    .color-tab-btn.active {
+        color: #2980b9;
+        background: linear-gradient(180deg, rgba(52, 152, 219, 0.15) 0%, rgba(52, 152, 219, 0.05) 100%);
+        border-color: #3498db;
+        border-bottom-color: transparent;
+        box-shadow: 0 -2px 8px rgba(52, 152, 219, 0.1);
+    }
+
+    .color-tab-btn.active::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #3498db, transparent);
+    }
+
+    /* Tab Content Styling */
+    .tab-content {
+        background: white;
+        border-radius: 0 12px 12px 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        border: 1px solid #e8ecf1;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1400px;
+        padding-left: 30px;
+        padding-right: 30px;
+        margin-bottom: 30px;
+    }
+
+    .tab-pane {
+        padding: 30px 0;
+    }
+
+    /* Tab Header */
+    .tab-header {
+        background: linear-gradient(180deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 18px 24px;
+        margin: -30px -30px 25px -30px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-radius: 0 8px 0 0;
+    }
+
+    .tab-header i {
+        font-size: 1.3rem;
+    }
+
+    .tab-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .tab-description {
+        color: #7f8c8d;
+        margin-bottom: 25px;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .tab-description i {
+        flex-shrink: 0;
+        margin-top: 2px;
+        color: #3498db;
+    }
+
+    /* Color Input Groups */
+    .color-input-group {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 4px solid #3498db;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .color-input-group:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .color-input-group.sidebar {
+        border-left-color: #9b59b6;
+    }
+
+    .color-input-group.module {
+        border-left-color: #f39c12;
+    }
+
+    .color-input-group label {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .color-input-group .form-label.small {
+        font-weight: 500;
+        color: #7f8c8d;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* RGB Inputs Layout */
+    .rgb-inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr auto;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .rgb-input-item {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .rgb-input-label {
+        display: block;
+        background: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #2c3e50;
+        text-align: center;
+    }
+
+    .form-control {
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        height: 38px;
+        font-size: 0.9rem;
+    }
+
+    .form-control:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.15);
+    }
+
+    .form-control-color {
+        width: 100%;
+        height: 38px;
+        cursor: pointer;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        padding: 2px;
+        transition: all 0.3s ease;
+    }
+
+    .form-control-color:hover {
+        border-color: #3498db;
+    }
+
+    /* Color Preview Bar */
+    .color-preview-bar {
+        height: 50px;
+        border-radius: 6px;
+        border: 2px solid #e0e0e0;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Main Content Row */
+    .color-settings-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        align-items: start;
+    }
+
+    /* Preview Card */
+    .preview-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+    }
+
+    .preview-card .card-header {
+        background: linear-gradient(180deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 16px 20px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .preview-card .card-body {
+        padding: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 280px;
+    }
+
+    .preview-gradient-large {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 16px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .preview-state-label {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #7f8c8d;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .preview-module-box {
+        border-radius: 10px;
+        border: 4px solid;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        height: 100px;
+        gap: 8px;
+    }
+
+    .preview-module-box:hover {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .preview-module-box i {
+        font-size: 2rem;
+    }
+
+    .preview-module-box strong {
+        font-size: 0.9rem;
+    }
+
+    /* Button Styling */
+    .action-buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .btn-save {
+        background: linear-gradient(180deg, #27ae60 0%, #229954 100%);
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 10px 24px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        font-size: 0.95rem;
+    }
+
+    .btn-save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+
+    .btn-reset {
+        background: #f39c12;
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 10px 24px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        font-size: 0.95rem;
+    }
+
+    .btn-reset:hover {
+        background: #e67e22;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+
+    /* Messages */
+    .alert {
+        border: none;
+        border-radius: 0;
+        border-left: 4px solid;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1400px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .alert-success {
+        border-left-color: #27ae60;
+        background: #d5f4e6;
+        color: #1e5631;
+    }
+
+    .alert-danger {
+        border-left-color: #e74c3c;
+        background: #fadbd8;
+        color: #78281f;
+    }
+
+    .alert-info {
+        border-left-color: #3498db;
+        background: #d6eaf8;
+        color: #0c3d66;
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .page-header h1 {
+            font-size: 1.8rem;
+        }
+
+        .color-settings-row {
+            grid-template-columns: 1fr;
+        }
+
+        .color-tabs-nav {
+            flex-wrap: wrap;
+            gap: 2px;
+            padding: 6px 6px 0 6px;
+        }
+
+        .color-tab-btn {
+            padding: 10px 14px;
+            font-size: 0.8rem;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .tab-pane {
+            padding: 20px;
+        }
+
+        .tab-header {
+            margin: -20px -20px 20px -20px;
+        }
+
+        .rgb-inputs {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>
+
+<div class="color-settings-container">
+    <div class="container-fluid">
+        <!-- Page Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="page-header">
+                    <h1><i class="fas fa-paint-brush me-2"></i>Configuración de Colores</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-action="Inicio" asp-controller="Home">Inicio</a></li>
+                            <li class="breadcrumb-item active">Configuración de Colores</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert Messages -->
+        <div id="messageAlert" class="alert alert-info" role="alert" style="display:none;">
+            <span id="messageText"></span>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="color-tabs-nav">
+            <button class="color-tab-btn active" data-tab="navbar">
+                <i class="fas fa-window-maximize"></i>
+                Barra de Navegación (Navbar)
+            </button>
+            <button class="color-tab-btn" data-tab="sidebar">
+                <i class="fas fa-bars"></i>
+                Barra Lateral (Sidebar)
+            </button>
+            <button class="color-tab-btn" data-tab="hover">
+                <i class="fas fa-hand-pointer"></i>
+                Hover del Sidebar
+            </button>
+            <button class="color-tab-btn" data-tab="icons">
+                <i class="fas fa-icons"></i>
+                Colores de Iconos
+            </button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Navbar Tab -->
+            <div class="tab-pane fade show active" id="navbar-tab" data-tab="navbar">
+                <div class="tab-header">
+                    <i class="fas fa-window-maximize"></i>
+                    <h3>Colores de la Barra de Navegación</h3>
+                </div>
+
+                <div class="tab-description">
+                    <i class="fas fa-info-circle"></i>
+                    <span>La barra de navegación utiliza un degradado con 3 colores).</span>
+                </div>
+
+                <div class="color-settings-row">
+                    <!-- Left Column: Color Inputs -->
+                    <div>
+                        <!-- Color 1 -->
+                        <div class="color-input-group">
+                            <label>
+                                <i class="fas fa-circle" style="color: rgb(87, 179, 252);"></i>
+                                Color 1 - Inicio del Degradado
+                            </label>
+                            <div class="rgb-inputs">
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Rojo</span>
+                                    <input type="number" id="navbarColor1R" class="form-control" min="0" max="255" value="@Model.NavbarColor1R" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Verde</span>
+                                    <input type="number" id="navbarColor1G" class="form-control" min="0" max="255" value="@Model.NavbarColor1G" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Azul</span>
+                                    <input type="number" id="navbarColor1B" class="form-control" min="0" max="255" value="@Model.NavbarColor1B" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Selector</span>
+                                    <input type="color" id="colorPickerNavbar1" class="form-control-color" title="Seleccionar color" />
+                                </div>
+                            </div>
+                            <div id="previewNavbar1" class="color-preview-bar" style="background-color: rgb(87, 179, 252);"></div>
+                        </div>
+
+                        <!-- Color 2 -->
+                        <div class="color-input-group">
+                            <label>
+                                <i class="fas fa-circle" style="color: rgb(165, 95, 253);"></i>
+                                Color 2 - Medio del Degradado
+                            </label>
+                            <div class="rgb-inputs">
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Rojo</span>
+                                    <input type="number" id="navbarColor2R" class="form-control" min="0" max="255" value="@Model.NavbarColor2R" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Verde</span>
+                                    <input type="number" id="navbarColor2G" class="form-control" min="0" max="255" value="@Model.NavbarColor2G" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Azul</span>
+                                    <input type="number" id="navbarColor2B" class="form-control" min="0" max="255" value="@Model.NavbarColor2B" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Selector</span>
+                                    <input type="color" id="colorPickerNavbar2" class="form-control-color" title="Seleccionar color" />
+                                </div>
+                            </div>
+                            <div id="previewNavbar2" class="color-preview-bar" style="background-color: rgb(165, 95, 253);"></div>
+                        </div>
+
+                        <!-- Color 3 -->
+                        <div class="color-input-group">
+                            <label>
+                                <i class="fas fa-circle" style="color: rgb(16, 55, 161);"></i>
+                                Color 3 - Final del Degradado
+                            </label>
+                            <div class="rgb-inputs">
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Rojo</span>
+                                    <input type="number" id="navbarColor3R" class="form-control" min="0" max="255" value="@Model.NavbarColor3R" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Verde</span>
+                                    <input type="number" id="navbarColor3G" class="form-control" min="0" max="255" value="@Model.NavbarColor3G" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Azul</span>
+                                    <input type="number" id="navbarColor3B" class="form-control" min="0" max="255" value="@Model.NavbarColor3B" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Selector</span>
+                                    <input type="color" id="colorPickerNavbar3" class="form-control-color" title="Seleccionar color" />
+                                </div>
+                            </div>
+                            <div id="previewNavbar3" class="color-preview-bar" style="background-color: rgb(16, 55, 161);"></div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Preview -->
+                    <div>
+                        <div class="preview-card">
+                            <div class="card-header">
+                                <i class="fas fa-eye"></i>
+                                Vista Previa
+                            </div>
+                            <div class="card-body">
+                                <div id="previewNavbarFull" class="preview-gradient-large" style="background: linear-gradient(90deg, rgb(87, 179, 252), rgb(165, 95, 253), rgb(16, 55, 161));">
+                                    Vista previa del degradado
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-save" onclick="saveColors()"><i class="fas fa-save"></i>Guardar Cambios</button>
+                    <button class="btn-reset" onclick="resetColors()"><i class="fas fa-redo"></i>Restablecer</button>
+                </div>
+            </div>
+
+            <!-- Sidebar Tab -->
+            <div class="tab-pane fade" id="sidebar-tab" data-tab="sidebar">
+                <div class="tab-header">
+                    <i class="fas fa-bars"></i>
+                    <h3>Colores de la Barra Lateral</h3>
+                </div>
+
+                <div class="tab-description">
+                    <i class="fas fa-info-circle"></i>
+                    <span>La barra lateral utiliza un degradado con 2 colores.</span>
+                </div>
+
+                <div class="color-settings-row">
+                    <!-- Left Column: Color Inputs -->
+                    <div>
+                        <!-- Color 1 -->
+                        <div class="color-input-group sidebar">
+                            <label>
+                                <i class="fas fa-circle" style="color: rgb(87, 179, 252);"></i>
+                                Color 1 - Inicio del Degradado
+                            </label>
+                            <div class="rgb-inputs">
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Rojo</span>
+                                    <input type="number" id="sidebarColor1R" class="form-control" min="0" max="255" value="@Model.SidebarColor1R" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Verde</span>
+                                    <input type="number" id="sidebarColor1G" class="form-control" min="0" max="255" value="@Model.SidebarColor1G" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Azul</span>
+                                    <input type="number" id="sidebarColor1B" class="form-control" min="0" max="255" value="@Model.SidebarColor1B" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Selector</span>
+                                    <input type="color" id="colorPickerSidebar1" class="form-control-color" title="Seleccionar color" />
+                                </div>
+                            </div>
+                            <div id="previewSidebar1" class="color-preview-bar" style="background-color: rgb(87, 179, 252);"></div>
+                        </div>
+
+                        <!-- Color 2 -->
+                        <div class="color-input-group sidebar">
+                            <label>
+                                <i class="fas fa-circle" style="color: rgb(130, 157, 245);"></i>
+                                Color 2 - Final del Degradado
+                            </label>
+                            <div class="rgb-inputs">
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Rojo</span>
+                                    <input type="number" id="sidebarColor2R" class="form-control" min="0" max="255" value="@Model.SidebarColor2R" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Verde</span>
+                                    <input type="number" id="sidebarColor2G" class="form-control" min="0" max="255" value="@Model.SidebarColor2G" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Azul</span>
+                                    <input type="number" id="sidebarColor2B" class="form-control" min="0" max="255" value="@Model.SidebarColor2B" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Selector</span>
+                                    <input type="color" id="colorPickerSidebar2" class="form-control-color" title="Seleccionar color" />
+                                </div>
+                            </div>
+                            <div id="previewSidebar2" class="color-preview-bar" style="background-color: rgb(130, 157, 245);"></div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Preview -->
+                    <div>
+                        <div class="preview-card">
+                            <div class="card-header">
+                                <i class="fas fa-eye"></i>
+                                Vista Previa
+                            </div>
+                            <div class="card-body">
+                                <div id="previewSidebarFull" class="preview-gradient-large" style="background: linear-gradient(90deg, rgb(87, 179, 252), rgb(130, 157, 245));">
+                                    Vista previa del degradado
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-save" onclick="saveColors()"><i class="fas fa-save"></i>Guardar Cambios</button>
+                    <button class="btn-reset" onclick="resetColors()"><i class="fas fa-redo"></i>Restablecer</button>
+                </div>
+            </div>
+
+            <!-- Hover Tab -->
+            <div class="tab-pane fade" id="hover-tab" data-tab="hover">
+                <div class="tab-header">
+                    <i class="fas fa-hand-pointer"></i>
+                    <h3>Color de Hover del Menu lateral</h3>
+                </div>
+
+                <div class="tab-description">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Personaliza el color que aparece al pasar el ratón sobre los elementos del menú lateral</span>
+                </div>
+
+                <div class="color-settings-row">
+                    <!-- Left Column: Color Inputs -->
+                    <div>
+                        <!-- Hover Color -->
+                        <div class="color-input-group hover">
+                            <label>
+                                <i class="fas fa-circle" style="color: rgb(165, 95, 253);"></i>
+                                Color de Hover del Sidebar
+                            </label>
+                            <div class="rgb-inputs">
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Rojo</span>
+                                    <input type="number" id="sidebarHoverR" class="form-control" min="0" max="255" value="@Model.SidebarHoverR" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Verde</span>
+                                    <input type="number" id="sidebarHoverG" class="form-control" min="0" max="255" value="@Model.SidebarHoverG" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Azul</span>
+                                    <input type="number" id="sidebarHoverB" class="form-control" min="0" max="255" value="@Model.SidebarHoverB" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Selector</span>
+                                    <input type="color" id="colorPickerSidebarHover" class="form-control-color" title="Seleccionar color" />
+                                </div>
+                            </div>
+                            <div id="previewSidebarHover" class="color-preview-bar" style="background-color: rgb(165, 95, 253);"></div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Preview -->
+                    <div>
+                        <div class="preview-card">
+                            <div class="card-header">
+                                <i class="fas fa-eye"></i>
+                                Vista Previa del Sidebar
+                            </div>
+                            <div id="hoverPreviewBackground" class="card-body" style="background: linear-gradient(180deg, rgb(87, 179, 252), rgb(130, 157, 245)); padding: 15px;">
+                                <div style="flex: 1;">
+                                    <div class="preview-sidebar-item" style="border-left-color: rgb(87, 179, 252); background-color: transparent; color: white;">
+                                        <i class="fas fa-home"></i>
+                                        <span>Elemento Normal</span>
+                                    </div>
+                                    <div class="preview-sidebar-item" style="border-left-color: rgb(165, 95, 253); background-color: rgba(165, 95, 253, 0.15); color: white;">
+                                        <i class="fas fa-box"></i>
+                                        <span>Elemento en Hover</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-save" onclick="saveColors()"><i class="fas fa-save"></i>Guardar Cambios</button>
+                    <button class="btn-reset" onclick="resetColors()"><i class="fas fa-redo"></i>Restablecer</button>
+                </div>
+            </div>
+
+            <!-- Icons Tab -->
+            <div class="tab-pane fade" id="icons-tab" data-tab="icons">
+                <div class="tab-header">
+                    <i class="fas fa-icons"></i>
+                    <h3>Colores de Iconos</h3>
+                </div>
+
+                <div class="tab-description">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Configura los colores de los iconos de módulos y opciones. Aplica tanto a la página de inicio como a los módulos internos.</span>
+                </div>
+
+                <div class="color-settings-row">
+                    <!-- Left Column: Color Inputs -->
+                    <div>
+                        <!-- Color Normal -->
+                        <div class="color-input-group module">
+                            <label>
+                                <i class="fas fa-circle" style="color: rgb(13, 110, 253);"></i>
+                                Color de Iconos (Normal)
+                            </label>
+                            <div class="rgb-inputs">
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Rojo</span>
+                                    <input type="number" id="iconColorR" class="form-control" min="0" max="255" value="@Model.IconColorR" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Verde</span>
+                                    <input type="number" id="iconColorG" class="form-control" min="0" max="255" value="@Model.IconColorG" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Azul</span>
+                                    <input type="number" id="iconColorB" class="form-control" min="0" max="255" value="@Model.IconColorB" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Selector</span>
+                                    <input type="color" id="colorPickerIcon" class="form-control-color" title="Seleccionar color" />
+                                </div>
+                            </div>
+                            <div id="previewIcon" class="color-preview-bar" style="background-color: rgb(13, 110, 253);"></div>
+                        </div>
+
+                        <!-- Color Hover -->
+                        <div class="color-input-group module">
+                            <label>
+                                <i class="fas fa-circle" style="color: rgb(10, 88, 202);"></i>
+                                Color de Iconos (Hover)
+                            </label>
+                            <div class="rgb-inputs">
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Rojo</span>
+                                    <input type="number" id="iconColorHoverR" class="form-control" min="0" max="255" value="@Model.IconColorHoverR" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Verde</span>
+                                    <input type="number" id="iconColorHoverG" class="form-control" min="0" max="255" value="@Model.IconColorHoverG" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Azul</span>
+                                    <input type="number" id="iconColorHoverB" class="form-control" min="0" max="255" value="@Model.IconColorHoverB" />
+                                </div>
+                                <div class="rgb-input-item">
+                                    <span class="rgb-input-label">Selector</span>
+                                    <input type="color" id="colorPickerIconHover" class="form-control-color" title="Seleccionar color" />
+                                </div>
+                            </div>
+                            <div id="previewIconHover" class="color-preview-bar" style="background-color: rgb(10, 88, 202);"></div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Preview -->
+                    <div>
+                        <div class="preview-card">
+                            <div class="card-header">
+                                <i class="fas fa-eye"></i>
+                                Vista Previa de Iconos
+                            </div>
+                            <div class="card-body">
+                                <div style="display: grid; gap: 20px; width: 100%;">
+                                    <div class="preview-state-label">
+                                        <i class="fas fa-mouse"></i> Estado Normal
+                                    </div>
+                                    <div id="previewIconNormal" class="preview-module-box" style="border-color: rgb(13, 110, 253); color: rgb(13, 110, 253);">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <strong>Compras</strong>
+                                    </div>
+
+                                    <div class="preview-state-label">
+                                        <i class="fas fa-hand-pointer"></i> Estado Hover
+                                    </div>
+                                    <div id="previewIconHoverState" class="preview-module-box" style="border-color: rgb(10, 88, 202); color: rgb(10, 88, 202); transform: scale(1.05);">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <strong>Compras</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-save" onclick="saveColors()"><i class="fas fa-save"></i>Guardar Cambios</button>
+                    <button class="btn-reset" onclick="resetColors()"><i class="fas fa-redo"></i>Restablecer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Tab switching
+    document.querySelectorAll('.color-tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tabName = this.dataset.tab;
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.color-tab-btn').forEach(b => b.classList.remove('active'));
+            
+            // Hide all tab panes
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.remove('show', 'active');
+            });
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Show corresponding tab
+            const tabElement = document.getElementById(`${tabName}-tab`);
+            if (tabElement) {
+                tabElement.classList.add('show', 'active');
+            }
+        });
+    });
+
+    // Initialize color pickers on DOM ready
+    document.addEventListener('DOMContentLoaded', function () {
+        initializeColorPickers();
+        updatePreviews();
+    });
+
+    function initializeColorPickers() {
+        ['Navbar1', 'Navbar2', 'Navbar3', 'Sidebar1', 'Sidebar2', 'SidebarHover', 'Icon', 'IconHover'].forEach(prefix => {
+            const picker = document.getElementById(`colorPicker${prefix}`);
+
+            if (picker) {
+                updateColorPickerFromInputs(prefix);
+
+                picker.addEventListener('change', function () {
+                    const hex = this.value;
+                    const rgb = hexToRgb(hex);
+                    const rId = getInputId(prefix, 'R');
+                    const gId = getInputId(prefix, 'G');
+                    const bId = getInputId(prefix, 'B');
+
+                    document.getElementById(rId).value = rgb.r;
+                    document.getElementById(gId).value = rgb.g;
+                    document.getElementById(bId).value = rgb.b;
+                    updatePreviews();
+                });
+            }
+
+            ['R', 'G', 'B'].forEach(component => {
+                const inputId = getInputId(prefix, component);
+                const input = document.getElementById(inputId);
+                if (input) {
+                    input.addEventListener('input', function () {
+                        updateColorPickerFromInputs(prefix);
+                        updatePreviews();
+                    });
+                }
+            });
+        });
+    }
+
+    function getInputId(prefix, component) {
+        // prefix comes in as "Navbar1", "Sidebar1", "SidebarHover", "Icon", "IconHover" etc
+        let nameMap = {
+            'Navbar1': 'navbarColor1',
+            'Navbar2': 'navbarColor2',
+            'Navbar3': 'navbarColor3',
+            'Sidebar1': 'sidebarColor1',
+            'Sidebar2': 'sidebarColor2',
+            'SidebarHover': 'sidebarHover',
+            'Icon': 'iconColor',
+            'IconHover': 'iconColorHover'
+        };
+
+        const basePart = nameMap[prefix] || prefix.toLowerCase();
+        return `${basePart}${component}`;
+    }
+
+    function updateColorPickerFromInputs(prefix) {
+        const rId = getInputId(prefix, 'R');
+        const gId = getInputId(prefix, 'G');
+        const bId = getInputId(prefix, 'B');
+
+        const r = parseInt(document.getElementById(rId).value) || 0;
+        const g = parseInt(document.getElementById(gId).value) || 0;
+        const b = parseInt(document.getElementById(bId).value) || 0;
+        const picker = document.getElementById(`colorPicker${prefix}`);
+
+        if (picker) {
+            picker.value = rgbToHex(r, g, b);
+        }
+    }
+
+    function updatePreviews() {
+        updateSinglePreview('Navbar1', 'previewNavbar1');
+        updateSinglePreview('Navbar2', 'previewNavbar2');
+        updateSinglePreview('Navbar3', 'previewNavbar3');
+        updateSinglePreview('Sidebar1', 'previewSidebar1');
+        updateSinglePreview('Sidebar2', 'previewSidebar2');
+        updateSinglePreview('SidebarHover', 'previewSidebarHover');
+        updateSinglePreview('Icon', 'previewIcon');
+        updateSinglePreview('IconHover', 'previewIconHover');
+
+        updateNavbarPreview();
+        updateSidebarPreview();
+        updateHoverPreview();
+        updateIconPreview();
+    }
+
+    function updateSinglePreview(prefix, elementId) {
+        const rId = getInputId(prefix, 'R');
+        const gId = getInputId(prefix, 'G');
+        const bId = getInputId(prefix, 'B');
+
+        const r = document.getElementById(rId).value;
+        const g = document.getElementById(gId).value;
+        const b = document.getElementById(bId).value;
+        document.getElementById(elementId).style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    }
+
+    function updateNavbarPreview() {
+        const r1 = document.getElementById('navbarColor1R').value;
+        const g1 = document.getElementById('navbarColor1G').value;
+        const b1 = document.getElementById('navbarColor1B').value;
+        const r2 = document.getElementById('navbarColor2R').value;
+        const g2 = document.getElementById('navbarColor2G').value;
+        const b2 = document.getElementById('navbarColor2B').value;
+        const r3 = document.getElementById('navbarColor3R').value;
+        const g3 = document.getElementById('navbarColor3G').value;
+        const b3 = document.getElementById('navbarColor3B').value;
+
+        const preview = document.getElementById('previewNavbarFull');
+        preview.style.background = `linear-gradient(90deg, rgb(${r1}, ${g1}, ${b1}), rgb(${r2}, ${g2}, ${b2}), rgb(${r3}, ${g3}, ${b3}))`;
+    }
+
+    function updateSidebarPreview() {
+        const r1 = document.getElementById('sidebarColor1R').value;
+        const g1 = document.getElementById('sidebarColor1G').value;
+        const b1 = document.getElementById('sidebarColor1B').value;
+        const r2 = document.getElementById('sidebarColor2R').value;
+        const g2 = document.getElementById('sidebarColor2G').value;
+        const b2 = document.getElementById('sidebarColor2B').value;
+
+        const preview = document.getElementById('previewSidebarFull');
+        preview.style.background = `linear-gradient(90deg, rgb(${r1}, ${g1}, ${b1}), rgb(${r2}, ${g2}, ${b2}))`;
+    }
+
+    function updateHoverPreview() {
+        const rHover = document.getElementById('sidebarHoverR').value;
+        const gHover = document.getElementById('sidebarHoverG').value;
+        const bHover = document.getElementById('sidebarHoverB').value;
+
+        const hoverItem = document.querySelector('.preview-sidebar-item:last-child');
+        if (hoverItem) {
+            hoverItem.style.borderLeftColor = `rgb(${rHover}, ${gHover}, ${bHover})`;
+            hoverItem.style.backgroundColor = `rgba(${rHover}, ${gHover}, ${bHover}, 0.15)`;
+        }
+
+        // Update hover preview background with current sidebar colors
+        const r1 = document.getElementById('sidebarColor1R').value;
+        const g1 = document.getElementById('sidebarColor1G').value;
+        const b1 = document.getElementById('sidebarColor1B').value;
+        const r2 = document.getElementById('sidebarColor2R').value;
+        const g2 = document.getElementById('sidebarColor2G').value;
+        const b2 = document.getElementById('sidebarColor2B').value;
+
+        const bgElement = document.getElementById('hoverPreviewBackground');
+        if (bgElement) {
+            bgElement.style.background = `linear-gradient(90deg, rgb(${r1}, ${g1}, ${b1}), rgb(${r2}, ${g2}, ${b2}))`;
+        }
+    }
+
+    function updateIconPreview() {
+        const r = document.getElementById('iconColorR').value;
+        const g = document.getElementById('iconColorG').value;
+        const b = document.getElementById('iconColorB').value;
+        const rHover = document.getElementById('iconColorHoverR').value;
+        const gHover = document.getElementById('iconColorHoverG').value;
+        const bHover = document.getElementById('iconColorHoverB').value;
+
+        const normalPreview = document.getElementById('previewIconNormal');
+        const hoverPreview = document.getElementById('previewIconHoverState');
+
+        if (normalPreview) {
+            normalPreview.style.borderColor = `rgb(${r}, ${g}, ${b})`;
+            normalPreview.style.color = `rgb(${r}, ${g}, ${b})`;
+        }
+
+        if (hoverPreview) {
+            hoverPreview.style.borderColor = `rgb(${rHover}, ${gHover}, ${bHover})`;
+            hoverPreview.style.color = `rgb(${rHover}, ${gHover}, ${bHover})`;
+        }
+    }
+
+    function rgbToHex(r, g, b) {
+        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+
+    function hexToRgb(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : { r: 0, g: 0, b: 0 };
+    }
+
+    function saveColors() {
+        const colors = {
+            navbarColor1R: document.getElementById('navbarColor1R').value,
+            navbarColor1G: document.getElementById('navbarColor1G').value,
+            navbarColor1B: document.getElementById('navbarColor1B').value,
+            navbarColor2R: document.getElementById('navbarColor2R').value,
+            navbarColor2G: document.getElementById('navbarColor2G').value,
+            navbarColor2B: document.getElementById('navbarColor2B').value,
+            navbarColor3R: document.getElementById('navbarColor3R').value,
+            navbarColor3G: document.getElementById('navbarColor3G').value,
+            navbarColor3B: document.getElementById('navbarColor3B').value,
+            sidebarColor1R: document.getElementById('sidebarColor1R').value,
+            sidebarColor1G: document.getElementById('sidebarColor1G').value,
+            sidebarColor1B: document.getElementById('sidebarColor1B').value,
+            sidebarColor2R: document.getElementById('sidebarColor2R').value,
+            sidebarColor2G: document.getElementById('sidebarColor2G').value,
+            sidebarColor2B: document.getElementById('sidebarColor2B').value,
+            sidebarHoverR: document.getElementById('sidebarHoverR').value,
+            sidebarHoverG: document.getElementById('sidebarHoverG').value,
+            sidebarHoverB: document.getElementById('sidebarHoverB').value,
+            iconColorR: document.getElementById('iconColorR').value,
+            iconColorG: document.getElementById('iconColorG').value,
+            iconColorB: document.getElementById('iconColorB').value,
+            iconColorHoverR: document.getElementById('iconColorHoverR').value,
+            iconColorHoverG: document.getElementById('iconColorHoverG').value,
+            iconColorHoverB: document.getElementById('iconColorHoverB').value
+        };
+
+        fetch('/Settings/SaveColors', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(colors)
+        })
+        .then(response => response.json())
+        .then(data => {
+            showMessage(data.message, data.success ? 'success' : 'danger');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showMessage('Error al guardar los colores', 'danger');
+        });
+    }
+
+    function resetColors() {
+        if (confirm('¿Está seguro de que desea restablecer los valores predeterminados?')) {
+            // Get the active tab
+            const activePane = document.querySelector('.tab-pane.show.active');
+            const activeTab = activePane ? activePane.id : null;
+
+            // Define default values for each tab
+            const defaultValues = {
+                'navbar-tab': {
+                    prefixes: ['Navbar1', 'Navbar2', 'Navbar3'],
+                    values: {
+                        'navbarColor1': { R: '87', G: '179', B: '252' },
+                        'navbarColor2': { R: '165', G: '95', B: '253' },
+                        'navbarColor3': { R: '16', G: '55', B: '161' }
+                    }
+                },
+                'sidebar-tab': {
+                    prefixes: ['Sidebar1', 'Sidebar2'],
+                    values: {
+                        'sidebarColor1': { R: '87', G: '179', B: '252' },
+                        'sidebarColor2': { R: '130', G: '157', B: '245' }
+                    }
+                },
+                'hover-tab': {
+                    prefixes: ['SidebarHover'],
+                    values: {
+                        'sidebarHover': { R: '165', G: '95', B: '253' }
+                    }
+                }
+            };
+
+            // Reset only the active tab's colors
+            if (activeTab && defaultValues[activeTab]) {
+                const tabDefaults = defaultValues[activeTab];
+
+                // Set the values
+                for (const [colorName, components] of Object.entries(tabDefaults.values)) {
+                    document.getElementById(`${colorName}R`).value = components.R;
+                    document.getElementById(`${colorName}G`).value = components.G;
+                    document.getElementById(`${colorName}B`).value = components.B;
+                }
+
+                // Update color pickers for this tab
+                tabDefaults.prefixes.forEach(prefix => {
+                    updateColorPickerFromInputs(prefix);
+                });
+            }
+
+            updatePreviews();
+            showMessage('Valores restablecidos a valores predeterminados', 'success');
+        }
+    }
+
+    function showMessage(message, type) {
+        const alert = document.getElementById('messageAlert');
+        const messageText = document.getElementById('messageText');
+        alert.className = `alert alert-${type}`;
+        messageText.textContent = message;
+        alert.style.display = 'block';
+        setTimeout(() => {
+            alert.style.display = 'none';
+        }, 5000);
+    }
+</script>
