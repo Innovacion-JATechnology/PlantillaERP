@@ -39,6 +39,7 @@ namespace UserRoles.Identity.Services
         /// Verifica si un usuario tiene un permiso específico en un submódulo
         /// El parámetro moduleName debe ser el submódulo completo, ej: "Inventario.Catálogo"
         /// </summary>
+        
         public async Task<bool> UserHasPermissionAsync(string userId, string moduleName, string permissionName)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -57,7 +58,6 @@ namespace UserRoles.Identity.Services
 
             return hasPermission;
         }
-
         /// <summary>
         /// Verifica si un usuario tiene acceso a un módulo (al menos un submódulo con permiso)
         /// </summary>

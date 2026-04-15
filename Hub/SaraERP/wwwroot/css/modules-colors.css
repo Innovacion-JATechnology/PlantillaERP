@@ -3,270 +3,270 @@
    ============================================ */
 
 /* COMPRAS - All use Cyan (#0dcaf0) */
-.submodule-compras-internacionales .module-icon { color: #0dcaf0 !important; border-color: #0dcaf0 !important; }
-.submodule-compras-internacionales:hover .module-icon { color: #0aa2c6 !important; border-color: #0aa2c6 !important; }
+.submodule-compras-internacionales .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-compras-internacionales:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-compras-internacionales { border-bottom-color: #0dcaf0 !important; }
 
-.submodule-compras-proveedores .module-icon { color: #0dcaf0 !important; border-color: #0dcaf0 !important; }
-.submodule-compras-proveedores:hover .module-icon { color: #0aa2c6 !important; border-color: #0aa2c6 !important; }
+.submodule-compras-proveedores .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-compras-proveedores:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-compras-proveedores { border-bottom-color: #0dcaf0 !important; }
 
-.submodule-compras-solicitudes .module-icon { color: #0dcaf0 !important; border-color: #0dcaf0 !important; }
-.submodule-compras-solicitudes:hover .module-icon { color: #0aa2c6 !important; border-color: #0aa2c6 !important; }
+.submodule-compras-solicitudes .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-compras-solicitudes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-compras-solicitudes { border-bottom-color: #0dcaf0 !important; }
 
-.submodule-compras-ordenes .module-icon { color: #0dcaf0 !important; border-color: #0dcaf0 !important; }
-.submodule-compras-ordenes:hover .module-icon { color: #0aa2c6 !important; border-color: #0aa2c6 !important; }
+.submodule-compras-ordenes .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-compras-ordenes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-compras-ordenes { border-bottom-color: #0dcaf0 !important; }
 
-.submodule-compras-reportes .module-icon { color: #0dcaf0 !important; border-color: #0dcaf0 !important; }
-.submodule-compras-reportes:hover .module-icon { color: #0aa2c6 !important; border-color: #0aa2c6 !important; }
+.submodule-compras-reportes .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-compras-reportes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-compras-reportes { border-bottom-color: #0dcaf0 !important; }
 
-.submodule-compras-contratos .module-icon { color: #0dcaf0 !important; border-color: #0dcaf0 !important; }
-.submodule-compras-contratos:hover .module-icon { color: #0aa2c6 !important; border-color: #0aa2c6 !important; }
+.submodule-compras-contratos .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-compras-contratos:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-compras-contratos { border-bottom-color: #0dcaf0 !important; }
 
 /* INVENTARIO - All use Orange (#fd7e14) */
-.submodule-inventario-catalogo .module-icon { color: #fd7e14 !important; border-color: #fd7e14 !important; }
-.submodule-inventario-catalogo:hover .module-icon { color: #d86100 !important; border-color: #d86100 !important; }
+.submodule-inventario-catalogo .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-inventario-catalogo:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-inventario-catalogo { border-bottom-color: #fd7e14 !important; }
 
-.submodule-inventario-stock .module-icon { color: #fd7e14 !important; border-color: #fd7e14 !important; }
-.submodule-inventario-stock:hover .module-icon { color: #d86100 !important; border-color: #d86100 !important; }
+.submodule-inventario-stock .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-inventario-stock:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-inventario-stock { border-bottom-color: #fd7e14 !important; }
 
-.submodule-inventario-almacenes .module-icon { color: #fd7e14 !important; border-color: #fd7e14 !important; }
-.submodule-inventario-almacenes:hover .module-icon { color: #d86100 !important; border-color: #d86100 !important; }
+.submodule-inventario-almacenes .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-inventario-almacenes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-inventario-almacenes { border-bottom-color: #fd7e14 !important; }
 
-.submodule-inventario-categorias .module-icon { color: #fd7e14 !important; border-color: #fd7e14 !important; }
-.submodule-inventario-categorias:hover .module-icon { color: #d86100 !important; border-color: #d86100 !important; }
+.submodule-inventario-categorias .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-inventario-categorias:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-inventario-categorias { border-bottom-color: #fd7e14 !important; }
 
-.submodule-inventario-movimientos .module-icon { color: #fd7e14 !important; border-color: #fd7e14 !important; }
-.submodule-inventario-movimientos:hover .module-icon { color: #d86100 !important; border-color: #d86100 !important; }
+.submodule-inventario-movimientos .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-inventario-movimientos:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-inventario-movimientos { border-bottom-color: #fd7e14 !important; }
 
-.submodule-inventario-auditoria .module-icon { color: #fd7e14 !important; border-color: #fd7e14 !important; }
-.submodule-inventario-auditoria:hover .module-icon { color: #d86100 !important; border-color: #d86100 !important; }
+.submodule-inventario-auditoria .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-inventario-auditoria:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-inventario-auditoria { border-bottom-color: #fd7e14 !important; }
 
-.submodule-inventario-ajustes .module-icon { color: #fd7e14 !important; border-color: #fd7e14 !important; }
-.submodule-inventario-ajustes:hover .module-icon { color: #d86100 !important; border-color: #d86100 !important; }
+.submodule-inventario-ajustes .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-inventario-ajustes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-inventario-ajustes { border-bottom-color: #fd7e14 !important; }
 
-.submodule-inventario-reportes .module-icon { color: #fd7e14 !important; border-color: #fd7e14 !important; }
-.submodule-inventario-reportes:hover .module-icon { color: #d86100 !important; border-color: #d86100 !important; }
+.submodule-inventario-reportes .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-inventario-reportes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-inventario-reportes { border-bottom-color: #fd7e14 !important; }
 
 /* FINANZAS - All use Green (#198754) */
-.submodule-finanzas-contabilidad .module-icon { color: #198754 !important; border-color: #198754 !important; }
-.submodule-finanzas-contabilidad:hover .module-icon { color: #146c43 !important; border-color: #146c43 !important; }
+.submodule-finanzas-contabilidad .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-finanzas-contabilidad:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-finanzas-contabilidad { border-bottom-color: #198754 !important; }
 
-.submodule-finanzas-facturas .module-icon { color: #198754 !important; border-color: #198754 !important; }
-.submodule-finanzas-facturas:hover .module-icon { color: #146c43 !important; border-color: #146c43 !important; }
+.submodule-finanzas-facturas .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-finanzas-facturas:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-finanzas-facturas { border-bottom-color: #198754 !important; }
 
-.submodule-finanzas-reportes .module-icon { color: #198754 !important; border-color: #198754 !important; }
-.submodule-finanzas-reportes:hover .module-icon { color: #146c43 !important; border-color: #146c43 !important; }
+.submodule-finanzas-reportes .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-finanzas-reportes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-finanzas-reportes { border-bottom-color: #198754 !important; }
 
-.submodule-finanzas-presupuestos .module-icon { color: #198754 !important; border-color: #198754 !important; }
-.submodule-finanzas-presupuestos:hover .module-icon { color: #146c43 !important; border-color: #146c43 !important; }
+.submodule-finanzas-presupuestos .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-finanzas-presupuestos:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-finanzas-presupuestos { border-bottom-color: #198754 !important; }
 
-.submodule-finanzas-cuentas-pagar .module-icon { color: #198754 !important; border-color: #198754 !important; }
-.submodule-finanzas-cuentas-pagar:hover .module-icon { color: #146c43 !important; border-color: #146c43 !important; }
+.submodule-finanzas-cuentas-pagar .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-finanzas-cuentas-pagar:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-finanzas-cuentas-pagar { border-bottom-color: #198754 !important; }
 
-.submodule-finanzas-cuentas-cobrar .module-icon { color: #198754 !important; border-color: #198754 !important; }
-.submodule-finanzas-cuentas-cobrar:hover .module-icon { color: #146c43 !important; border-color: #146c43 !important; }
+.submodule-finanzas-cuentas-cobrar .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-finanzas-cuentas-cobrar:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-finanzas-cuentas-cobrar { border-bottom-color: #198754 !important; }
 
-.submodule-finanzas-conciliaciones .module-icon { color: #198754 !important; border-color: #198754 !important; }
-.submodule-finanzas-conciliaciones:hover .module-icon { color: #146c43 !important; border-color: #146c43 !important; }
+.submodule-finanzas-conciliaciones .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-finanzas-conciliaciones:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-finanzas-conciliaciones { border-bottom-color: #198754 !important; }
 
-.submodule-finanzas-flujo .module-icon { color: #198754 !important; border-color: #198754 !important; }
-.submodule-finanzas-flujo:hover .module-icon { color: #146c43 !important; border-color: #146c43 !important; }
+.submodule-finanzas-flujo .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-finanzas-flujo:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-finanzas-flujo { border-bottom-color: #198754 !important; }
 
-/* MANTENIMIENTO - All use Purple (#6f42c1) */
-.submodule-mantenimiento-equipos .module-icon { color: #6f42c1 !important; border-color: #6f42c1 !important; }
-.submodule-mantenimiento-equipos:hover .module-icon { color: #563199 !important; border-color: #563199 !important; }
-.submodule-mantenimiento-equipos { border-bottom-color: #6f42c1 !important; }
+/* MANTENIMIENTO - All use Purple (#4A48B9) */
+.submodule-mantenimiento-equipos .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-mantenimiento-equipos:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-mantenimiento-equipos { border-bottom-color: #4A48B9 !important; }
 
-.submodule-mantenimiento-ordenes .module-icon { color: #6f42c1 !important; border-color: #6f42c1 !important; }
-.submodule-mantenimiento-ordenes:hover .module-icon { color: #563199 !important; border-color: #563199 !important; }
-.submodule-mantenimiento-ordenes { border-bottom-color: #6f42c1 !important; }
+.submodule-mantenimiento-ordenes .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-mantenimiento-ordenes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-mantenimiento-ordenes { border-bottom-color: #4A48B9 !important; }
 
-.submodule-mantenimiento-reportes .module-icon { color: #6f42c1 !important; border-color: #6f42c1 !important; }
-.submodule-mantenimiento-reportes:hover .module-icon { color: #563199 !important; border-color: #563199 !important; }
-.submodule-mantenimiento-reportes { border-bottom-color: #6f42c1 !important; }
+.submodule-mantenimiento-reportes .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-mantenimiento-reportes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-mantenimiento-reportes { border-bottom-color: #4A48B9 !important; }
 
-.submodule-mantenimiento-preventivo .module-icon { color: #6f42c1 !important; border-color: #6f42c1 !important; }
-.submodule-mantenimiento-preventivo:hover .module-icon { color: #563199 !important; border-color: #563199 !important; }
-.submodule-mantenimiento-preventivo { border-bottom-color: #6f42c1 !important; }
+.submodule-mantenimiento-preventivo .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-mantenimiento-preventivo:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-mantenimiento-preventivo { border-bottom-color: #4A48B9 !important; }
 
-.submodule-mantenimiento-correctivo .module-icon { color: #6f42c1 !important; border-color: #6f42c1 !important; }
-.submodule-mantenimiento-correctivo:hover .module-icon { color: #563199 !important; border-color: #563199 !important; }
-.submodule-mantenimiento-correctivo { border-bottom-color: #6f42c1 !important; }
+.submodule-mantenimiento-correctivo .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-mantenimiento-correctivo:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-mantenimiento-correctivo { border-bottom-color: #4A48B9 !important; }
 
-.submodule-mantenimiento-checklist .module-icon { color: #6f42c1 !important; border-color: #6f42c1 !important; }
-.submodule-mantenimiento-checklist:hover .module-icon { color: #563199 !important; border-color: #563199 !important; }
-.submodule-mantenimiento-checklist { border-bottom-color: #6f42c1 !important; }
+.submodule-mantenimiento-checklist .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-mantenimiento-checklist:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-mantenimiento-checklist { border-bottom-color: #4A48B9 !important; }
 
-.submodule-mantenimiento-historico .module-icon { color: #6f42c1 !important; border-color: #6f42c1 !important; }
-.submodule-mantenimiento-historico:hover .module-icon { color: #563199 !important; border-color: #563199 !important; }
-.submodule-mantenimiento-historico { border-bottom-color: #6f42c1 !important; }
+.submodule-mantenimiento-historico .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-mantenimiento-historico:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-mantenimiento-historico { border-bottom-color: #4A48B9 !important; }
 
-/* PRODUCCION - All use Red (#dc3545) */
-.submodule-produccion-ordenes .module-icon { color: #dc3545 !important; border-color: #dc3545 !important; }
-.submodule-produccion-ordenes:hover .module-icon { color: #b02a37 !important; border-color: #b02a37 !important; }
-.submodule-produccion-ordenes { border-bottom-color: #dc3545 !important; }
+/* PRODUCCION - All use Red (#4A48B9) */
+.submodule-produccion-ordenes .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-produccion-ordenes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-produccion-ordenes { border-bottom-color: #4A48B9 !important; }
 
-.submodule-produccion-recursos .module-icon { color: #dc3545 !important; border-color: #dc3545 !important; }
-.submodule-produccion-recursos:hover .module-icon { color: #b02a37 !important; border-color: #b02a37 !important; }
-.submodule-produccion-recursos { border-bottom-color: #dc3545 !important; }
+.submodule-produccion-recursos .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-produccion-recursos:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-produccion-recursos { border-bottom-color: #4A48B9 !important; }
 
-.submodule-produccion-calidad .module-icon { color: #dc3545 !important; border-color: #dc3545 !important; }
-.submodule-produccion-calidad:hover .module-icon { color: #b02a37 !important; border-color: #b02a37 !important; }
-.submodule-produccion-calidad { border-bottom-color: #dc3545 !important; }
+.submodule-produccion-calidad .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-produccion-calidad:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-produccion-calidad { border-bottom-color: #4A48B9 !important; }
 
-.submodule-produccion-procesos .module-icon { color: #dc3545 !important; border-color: #dc3545 !important; }
-.submodule-produccion-procesos:hover .module-icon { color: #b02a37 !important; border-color: #b02a37 !important; }
-.submodule-produccion-procesos { border-bottom-color: #dc3545 !important; }
+.submodule-produccion-procesos .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-produccion-procesos:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-produccion-procesos { border-bottom-color: #4A48B9 !important; }
 
-.submodule-produccion-materiales .module-icon { color: #dc3545 !important; border-color: #dc3545 !important; }
-.submodule-produccion-materiales:hover .module-icon { color: #b02a37 !important; border-color: #b02a37 !important; }
-.submodule-produccion-materiales { border-bottom-color: #dc3545 !important; }
+.submodule-produccion-materiales .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-produccion-materiales:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-produccion-materiales { border-bottom-color: #4A48B9 !important; }
 
-.submodule-produccion-productos .module-icon { color: #dc3545 !important; border-color: #dc3545 !important; }
-.submodule-produccion-productos:hover .module-icon { color: #b02a37 !important; border-color: #b02a37 !important; }
-.submodule-produccion-productos { border-bottom-color: #dc3545 !important; }
+.submodule-produccion-productos .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-produccion-productos:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-produccion-productos { border-bottom-color: #4A48B9 !important; }
 
-.submodule-produccion-reportes .module-icon { color: #dc3545 !important; border-color: #dc3545 !important; }
-.submodule-produccion-reportes:hover .module-icon { color: #b02a37 !important; border-color: #b02a37 !important; }
-.submodule-produccion-reportes { border-bottom-color: #dc3545 !important; }
+.submodule-produccion-reportes .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-produccion-reportes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-produccion-reportes { border-bottom-color: #4A48B9 !important; }
 
-/* RRHH - All use Blue (#0d6efd) */
-.submodule-rrhh-empleados .module-icon { color: #0d6efd !important; border-color: #0d6efd !important; }
-.submodule-rrhh-empleados:hover .module-icon { color: #0a58ca !important; border-color: #0a58ca !important; }
-.submodule-rrhh-empleados { border-bottom-color: #0d6efd !important; }
+/* RRHH - All use Blue (##4A48B9) */
+.submodule-rrhh-empleados .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-rrhh-empleados:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-rrhh-empleados { border-bottom-color: #4A48B9 !important; }
 
-.submodule-rrhh-nomina .module-icon { color: #0d6efd !important; border-color: #0d6efd !important; }
-.submodule-rrhh-nomina:hover .module-icon { color: #0a58ca !important; border-color: #0a58ca !important; }
-.submodule-rrhh-nomina { border-bottom-color: #0d6efd !important; }
+.submodule-rrhh-nomina .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-rrhh-nomina:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-rrhh-nomina { border-bottom-color: #4A48B9 !important; }
 
-.submodule-rrhh-capacitacion .module-icon { color: #0d6efd !important; border-color: #0d6efd !important; }
-.submodule-rrhh-capacitacion:hover .module-icon { color: #0a58ca !important; border-color: #0a58ca !important; }
-.submodule-rrhh-capacitacion { border-bottom-color: #0d6efd !important; }
+.submodule-rrhh-capacitacion .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-rrhh-capacitacion:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-rrhh-capacitacion { border-bottom-color: #4A48B9 !important; }
 
-.submodule-rrhh-evaluaciones .module-icon { color: #0d6efd !important; border-color: #0d6efd !important; }
-.submodule-rrhh-evaluaciones:hover .module-icon { color: #0a58ca !important; border-color: #0a58ca !important; }
-.submodule-rrhh-evaluaciones { border-bottom-color: #0d6efd !important; }
+.submodule-rrhh-evaluaciones .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-rrhh-evaluaciones:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-rrhh-evaluaciones { border-bottom-color: #4A48B9 !important; }
 
-.submodule-rrhh-beneficios .module-icon { color: #0d6efd !important; border-color: #0d6efd !important; }
-.submodule-rrhh-beneficios:hover .module-icon { color: #0a58ca !important; border-color: #0a58ca !important; }
-.submodule-rrhh-beneficios { border-bottom-color: #0d6efd !important; }
+.submodule-rrhh-beneficios .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-rrhh-beneficios:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-rrhh-beneficios { border-bottom-color: #4A48B9 !important; }
 
-.submodule-rrhh-asistencia .module-icon { color: #0d6efd !important; border-color: #0d6efd !important; }
-.submodule-rrhh-asistencia:hover .module-icon { color: #0a58ca !important; border-color: #0a58ca !important; }
-.submodule-rrhh-asistencia { border-bottom-color: #0d6efd !important; }
+.submodule-rrhh-asistencia .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-rrhh-asistencia:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-rrhh-asistencia { border-bottom-color: #4A48B9 !important; }
 
-.submodule-rrhh-permisos .module-icon { color: #0d6efd !important; border-color: #0d6efd !important; }
-.submodule-rrhh-permisos:hover .module-icon { color: #0a58ca !important; border-color: #0a58ca !important; }
-.submodule-rrhh-permisos { border-bottom-color: #0d6efd !important; }
+.submodule-rrhh-permisos .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-rrhh-permisos:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-rrhh-permisos { border-bottom-color: #4A48B9 !important; }
 
-.submodule-rrhh-reportes .module-icon { color: #0d6efd !important; border-color: #0d6efd !important; }
-.submodule-rrhh-reportes:hover .module-icon { color: #0a58ca !important; border-color: #0a58ca !important; }
-.submodule-rrhh-reportes { border-bottom-color: #0d6efd !important; }
+.submodule-rrhh-reportes .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-rrhh-reportes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-rrhh-reportes { border-bottom-color: #4A48B9 !important; }
 
-/* PROYECTOS - All use Purple (#6610f2) */
-.submodule-proyectos-lista .module-icon { color: #6610f2 !important; border-color: #6610f2 !important; }
-.submodule-proyectos-lista:hover .module-icon { color: #520dc2 !important; border-color: #520dc2 !important; }
-.submodule-proyectos-lista { border-bottom-color: #6610f2 !important; }
+/* PROYECTOS - All use Purple (#4A48B9) */
+.submodule-proyectos-lista .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-proyectos-lista:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-proyectos-lista { border-bottom-color: #4A48B9 !important; }
 
-.submodule-proyectos-tareas .module-icon { color: #6610f2 !important; border-color: #6610f2 !important; }
-.submodule-proyectos-tareas:hover .module-icon { color: #520dc2 !important; border-color: #520dc2 !important; }
-.submodule-proyectos-tareas { border-bottom-color: #6610f2 !important; }
+.submodule-proyectos-tareas .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-proyectos-tareas:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-proyectos-tareas { border-bottom-color: #4A48B9 !important; }
 
-.submodule-proyectos-recursos .module-icon { color: #6610f2 !important; border-color: #6610f2 !important; }
-.submodule-proyectos-recursos:hover .module-icon { color: #520dc2 !important; border-color: #520dc2 !important; }
-.submodulo-proyectos-recursos { border-bottom-color: #6610f2 !important; }
+.submodule-proyectos-recursos .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-proyectos-recursos:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodulo-proyectos-recursos { border-bottom-color: #4A48B9 !important; }
 
-.submodule-proyectos-gantt .module-icon { color: #6610f2 !important; border-color: #6610f2 !important; }
-.submodule-proyectos-gantt:hover .module-icon { color: #520dc2 !important; border-color: #520dc2 !important; }
-.submodule-proyectos-gantt { border-bottom-color: #6610f2 !important; }
+.submodule-proyectos-gantt .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-proyectos-gantt:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-proyectos-gantt { border-bottom-color: #4A48B9 !important; }
 
-.submodule-proyectos-presupuesto .module-icon { color: #6610f2 !important; border-color: #6610f2 !important; }
-.submodule-proyectos-presupuesto:hover .module-icon { color: #520dc2 !important; border-color: #520dc2 !important; }
-.submodule-proyectos-presupuesto { border-bottom-color: #6610f2 !important; }
+.submodule-proyectos-presupuesto .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-proyectos-presupuesto:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-proyectos-presupuesto { border-bottom-color: #4A48B9 !important; }
 
-.submodule-proyectos-documentos .module-icon { color: #6610f2 !important; border-color: #6610f2 !important; }
-.submodule-proyectos-documentos:hover .module-icon { color: #520dc2 !important; border-color: #520dc2 !important; }
-.submodule-proyectos-documentos { border-bottom-color: #6610f2 !important; }
+.submodule-proyectos-documentos .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-proyectos-documentos:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-proyectos-documentos { border-bottom-color: #4A48B9 !important; }
 
-.submodule-proyectos-reportes .module-icon { color: #6610f2 !important; border-color: #6610f2 !important; }
-.submodule-proyectos-reportes:hover .module-icon { color: #520dc2 !important; border-color: #520dc2 !important; }
-.submodule-proyectos-reportes { border-bottom-color: #6610f2 !important; }
+.submodule-proyectos-reportes .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-proyectos-reportes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-proyectos-reportes { border-bottom-color: #4A48B9 !important; }
 
-/* REPORTEADOR - All use Pink (#d63384) */
-.submodule-reporteador-predefinidos .module-icon { color: #d63384 !important; border-color: #d63384 !important; }
-.submodule-reporteador-predefinidos:hover .module-icon { color: #a82860 !important; border-color: #a82860 !important; }
-.submodule-reporteador-predefinidos { border-bottom-color: #d63384 !important; }
+/* REPORTEADOR - All use Pink (#4A48B9) */
+.submodule-reporteador-predefinidos .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-reporteador-predefinidos:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-reporteador-predefinidos { border-bottom-color: #4A48B9 !important; }
 
-.submodule-reporteador-crear .module-icon { color: #d63384 !important; border-color: #d63384 !important; }
-.submodule-reporteador-crear:hover .module-icon { color: #a82860 !important; border-color: #a82860 !important; }
-.submodule-reporteador-crear { border-bottom-color: #d63384 !important; }
+.submodule-reporteador-crear .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-reporteador-crear:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-reporteador-crear { border-bottom-color: #4A48B9 !important; }
 
-.submodule-reporteador-programacion .module-icon { color: #d63384 !important; border-color: #d63384 !important; }
-.submodule-reporteador-programacion:hover .module-icon { color: #a82860 !important; border-color: #a82860 !important; }
-.submodule-reporteador-programacion { border-bottom-color: #d63384 !important; }
+.submodule-reporteador-programacion .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-reporteador-programacion:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-reporteador-programacion { border-bottom-color: #4A48B9 !important; }
 
-.submodule-reporteador-plantillas .module-icon { color: #d63384 !important; border-color: #d63384 !important; }
-.submodule-reporteador-plantillas:hover .module-icon { color: #a82860 !important; border-color: #a82860 !important; }
-.submodule-reporteador-plantillas { border-bottom-color: #d63384 !important; }
+.submodule-reporteador-plantillas .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-reporteador-plantillas:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-reporteador-plantillas { border-bottom-color: #4A48B9 !important; }
 
-.submodule-reporteador-historial .module-icon { color: #d63384 !important; border-color: #d63384 !important; }
-.submodule-reporteador-historial:hover .module-icon { color: #a82860 !important; border-color: #a82860 !important; }
-.submodule-reporteador-historial { border-bottom-color: #d63384 !important; }
+.submodule-reporteador-historial .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-reporteador-historial:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-reporteador-historial { border-bottom-color: #4A48B9 !important; }
 
-.submodule-reporteador-exportar .module-icon { color: #d63384 !important; border-color: #d63384 !important; }
-.submodule-reporteador-exportar:hover .module-icon { color: #a82860 !important; border-color: #a82860 !important; }
-.submodule-reporteador-exportar { border-bottom-color: #d63384 !important; }
+.submodule-reporteador-exportar .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-reporteador-exportar:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-reporteador-exportar { border-bottom-color: #4A48B9 !important; }
 
-/* ADMINISTRACION - All use Gray (#495057) */
-.submodule-admin-usuarios .module-icon { color: #495057 !important; border-color: #495057 !important; }
-.submodule-admin-usuarios:hover .module-icon { color: #343a40 !important; border-color: #343a40 !important; }
-.submodule-admin-usuarios { border-bottom-color: #495057 !important; }
+/* ADMINISTRACION - All use Gray (#4A48B9) */
+.submodule-admin-usuarios .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-admin-usuarios:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-admin-usuarios { border-bottom-color: #4A48B9 !important; }
 
-.submodule-admin-roles .module-icon { color: #495057 !important; border-color: #495057 !important; }
-.submodule-admin-roles:hover .module-icon { color: #343a40 !important; border-color: #343a40 !important; }
-.submodule-admin-roles { border-bottom-color: #495057 !important; }
+.submodule-admin-roles .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-admin-roles:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-admin-roles { border-bottom-color: #4A48B9 !important; }
 
-.submodule-admin-config .module-icon { color: #495057 !important; border-color: #495057 !important; }
-.submodule-admin-config:hover .module-icon { color: #343a40 !important; border-color: #343a40 !important; }
-.submodule-admin-config { border-bottom-color: #495057 !important; }
+.submodule-admin-config .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-admin-config:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-admin-config { border-bottom-color: #4A48B9 !important; }
 
-.submodule-admin-auditoria .module-icon { color: #495057 !important; border-color: #495057 !important; }
-.submodule-admin-auditoria:hover .module-icon { color: #343a40 !important; border-color: #343a40 !important; }
-.submodule-admin-auditoria { border-bottom-color: #495057 !important; }
+.submodule-admin-auditoria .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-admin-auditoria:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-admin-auditoria { border-bottom-color: #4A48B9 !important; }
 
-.submodule-admin-respaldos .module-icon { color: #495057 !important; border-color: #495057 !important; }
-.submodule-admin-respaldos:hover .module-icon { color: #343a40 !important; border-color: #343a40 !important; }
-.submodule-admin-respaldos { border-bottom-color: #495057 !important; }
+.submodule-admin-respaldos .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-admin-respaldos:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-admin-respaldos { border-bottom-color: #4A48B9 !important; }
 
-.submodule-admin-parametros .module-icon { color: #495057 !important; border-color: #495057 !important; }
-.submodule-admin-parametros:hover .module-icon { color: #343a40 !important; border-color: #343a40 !important; }
-.submodule-admin-parametros { border-bottom-color: #495057 !important; }
+.submodule-admin-parametros .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-admin-parametros:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-admin-parametros { border-bottom-color: #4A48B9 !important; }
 
-.submodule-admin-logs .module-icon { color: #495057 !important; border-color: #495057 !important; }
-.submodule-admin-logs:hover .module-icon { color: #343a40 !important; border-color: #343a40 !important; }
-.submodule-admin-logs { border-bottom-color: #495057 !important; }
+.submodule-admin-logs .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-admin-logs:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-admin-logs { border-bottom-color: #4A48B9 !important; }
 
-.submodule-admin-integraciones .module-icon { color: #495057 !important; border-color: #495057 !important; }
-.submodule-admin-integraciones:hover .module-icon { color: #343a40 !important; border-color: #343a40 !important; }
-.submodule-admin-integraciones { border-bottom-color: #495057 !important; }
+.submodule-admin-integraciones .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
+.submodule-admin-integraciones:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
+.submodule-admin-integraciones { border-bottom-color: #4A48B9 !important; }

@@ -147,7 +147,7 @@
                             var userRoles = User?.Claims
                                 .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
                                 .Select(c => c.Value)
-                                .FirstOrDefault() ?? "Sin rol";
+                                .FirstOrDefault() ?? "Rol: N/A";
                         }
                         <strong>@userEmail</strong><br />
                         <small style="opacity: 0.8;">@userRoles</small>

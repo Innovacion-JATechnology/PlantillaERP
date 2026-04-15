@@ -1,5 +1,6 @@
 @using System.Security.Claims
-@using UserRoles.Identity.Constants
+@using SaraERP.Models
+@using UserRoles.Identity.Constants;
 @using UserRoles.Identity.Services
 @inject IPermissionService PermissionService
 
@@ -8,138 +9,92 @@
     var moduleOptions = (List<Dictionary<string, string>>)ViewData["ModuleOptions"];
     var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-    // Set breadcrumbs for navbar if not already set
-    if (ViewData["Breadcrumbs"] == null)
-    {
-        ViewData["Breadcrumbs"] = new List<(string, string)>
-        {
-            ("Inicio", Url.Action("Index", "Home")),
-            ((string)ViewData["Title"], null)
-        };
-    }
+    var processedOptions = new List<ModuleOptionView>();
 
-    // Filter submodules based on user permissions
-    var filteredOptions = new List<Dictionary<string, string>>();
     if (moduleOptions != null && moduleOptions.Count > 0)
     {
         foreach (var option in moduleOptions)
         {
-            var moduleName = option.ContainsKey("Name") ? option["Name"] : "Opción";
+            var submoduleName = option.GetValueOrDefault("Action", "Opción");
+            
+            var moduleName = option.GetValueOrDefault("Controller", "Opción");
 
-            // Map module name to submodule name for permission checking
-            var submoduleNameKey = moduleName switch
+            var submoduleNameKey = moduleName + "." + submoduleName; 
+
+            var hasAccess = !string.IsNullOrEmpty(userId) &&
+                (User.IsInRole("Admin") 
+                ||
+                 await PermissionService.UserHasPermissionAsync(userId, submoduleNameKey, PermissionNames.View)
+                ||
+                 await PermissionService.UserHasPermissionAsync(userId, submoduleNameKey, PermissionNames.Create)
+                ||
+                 await PermissionService.UserHasPermissionAsync(userId, submoduleNameKey, PermissionNames.Edit)
+                ||
+                 await PermissionService.UserHasPermissionAsync(userId, submoduleNameKey, PermissionNames.Delete));
+
+            processedOptions.Add(new ModuleOptionView
             {
-                // Compras
-                "Compras Internacionales" => "Compras.ComprasInternacionales",
-                "Proveedores" => "Compras.Proveedores",
-                "Solicitudes" => "Compras.Solicitudes",
-                "Órdenes de Compra" => "Compras.OrdenesCompra",
-                "Reportes" when ViewData["Title"]?.ToString() == "Compras" => "Compras.ReportesCompras",
-                "Contratos" => "Compras.Contratos",
-                // Inventario
-                "Catálogo" => "Inventario.Catalogo",
-                "Stock" => "Inventario.Stock",
-                "Almacenes" => "Inventario.Almacenes",
-                "Categorías" => "Inventario.Categorias",
-                "Movimientos" => "Inventario.Movimientos",
-                "Auditoría" => "Inventario.AuditoriaInventario",
-                "Ajustes" => "Inventario.AjustesInventario",
-                "Reportes" when ViewData["Title"]?.ToString() == "Inventario" => "Inventario.ReportesInventario",
-                // Finanzas
-                "Contabilidad" => "Finanzas.Contabilidad",
-                "Facturas" => "Finanzas.Facturas",
-                "Reportes Financieros" => "Finanzas.ReportesFinancieros",
-                "Presupuestos" => "Finanzas.Presupuestos",
-                "Cuentas por Pagar" => "Finanzas.CuentasPorPagar",
-                "Cuentas por Cobrar" => "Finanzas.CuentasPorCobrar",
-                "Conciliaciones" => "Finanzas.Conciliaciones",
-                "Flujo de Caja" => "Finanzas.FlujoCaja",
-                // Mantenimiento
-                "Equipos" => "Mantenimiento.Equipos",
-                "Órdenes de Trabajo" => "Mantenimiento.OrdenesMantenimiento",
-                "Reportes" when ViewData["Title"]?.ToString() == "Mantenimiento" => "Mantenimiento.ReportesMantenimiento",
-                "Mantenimiento Preventivo" => "Mantenimiento.MantenimientoPreventivo",
-                "Mantenimiento Correctivo" => "Mantenimiento.MantenimientoCorrectivo",
-                "Checklist" => "Mantenimiento.ChecklistMantenimiento",
-                "Histórico" => "Mantenimiento.HistoricoMantenimiento",
-                // Produccion
-                "Órdenes de Producción" => "Produccion.OrdenesProduccion",
-                "Recursos" when ViewData["Title"]?.ToString() == "Produccion" => "Produccion.Recursos",
-                "Control de Calidad" => "Produccion.ControlCalidad",
-                "Procesos" => "Produccion.Procesos",
-                "Materiales" => "Produccion.MaterialesProduccion",
-                "Productos Finales" => "Produccion.ProductosFinales",
-                "Reportes" when ViewData["Title"]?.ToString() == "Produccion" => "Produccion.ReportesProduccion",
-                // RRHH
-                "Empleados" => "RRHH.Empleados",
-                "Nómina" => "RRHH.Nomina",
-                "Capacitación" => "RRHH.Capacitacion",
-                "Evaluaciones" => "RRHH.Evaluaciones",
-                "Beneficios" => "RRHH.Beneficios",
-                "Asistencia" => "RRHH.Asistencia",
-                "Permisos y Vacaciones" => "RRHH.PermisosVacaciones",
-                "Reportes RRHH" => "RRHH.ReportesRRHH",
-                // Proyectos
-                "Proyectos" when ViewData["Title"]?.ToString() == "Proyectos" => "Proyectos.ListaProyectos",
-                "Tareas" => "Proyectos.Tareas",
-                "Recursos" when ViewData["Title"]?.ToString() == "Proyectos" => "Proyectos.RecursosProyecto",
-                "Diagrama Gantt" => "Proyectos.DiagramaGantt",
-                "Presupuesto" => "Proyectos.PresupuestoProyectos",
-                "Documentos" => "Proyectos.DocumentosProyectos",
-                "Reportes" when ViewData["Title"]?.ToString() == "Proyectos" => "Proyectos.ReportesProyectos",
-                _ => moduleName
-            };
-
-            var hasAccess = !string.IsNullOrEmpty(userId) && 
-                (User.IsInRole("Admin") || await PermissionService.UserHasSubmoduleAccessAsync(userId, submoduleNameKey));
-
-            if (hasAccess)
-            {
-                filteredOptions.Add(option);
-            }
+                Data = option,
+                HasAccess = hasAccess
+            });
         }
     }
 }
 
 <div class="container-fluid">
+@if (processedOptions.Count > 0)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="modules-grid">
+                @foreach (var item in processedOptions)
+                {
+                    var option = item.Data;
+                    var hasAccess = item.HasAccess;
+
+                    var moduleName = option.GetValueOrDefault("Name", "Opción");
+                    var action = option.GetValueOrDefault("Action", "#");
+                    var controller = option.GetValueOrDefault("Controller", "Modules");
+                    var icon = option.GetValueOrDefault("Icon", "fas fa-folder");
+                    var description = option.GetValueOrDefault("Description", "");
+                    var cssClass = option.GetValueOrDefault("CssClass", ""); 
+                    
+                        @if (hasAccess)                           
+                        {
+                                <a asp-action="@action" asp-controller="@controller" class="module-card @cssClass">
+                                    <div class="module-icon">
+                                        <i class="@icon"></i>
+                                    </div>
+                                    <h3 class="module-title">@moduleName</h3>
+                                    <p class="module-description">@description</p>
+                                </a>
+                            }
+else
+{
+    <div class="module-card @cssClass module-card-disabled"
+         title="No tienes acceso a este módulo">
+        <div class="module-icon">
+            <i class="@icon"></i>
+        </div>
+        <h3 class="module-title">@moduleName</h3>
+                                <p class="module-description">@description</p>
+                                <span class="module-locked-indicator">
+                                    <i class="fas fa-lock"></i> Bloqu k k k k eado
+                                </span>
+    </div>
+}
 
 
-
-    @if (filteredOptions != null && filteredOptions.Count > 0)
-    {
-        <div class="row">
-            <div class="col-md-12">
-                <div class="modules-grid">
-                    @foreach (var option in filteredOptions)
-                    {
-                        var moduleName = option.ContainsKey("Name") ? option["Name"] : "Opción";
-                        var action = option.ContainsKey("Action") ? option["Action"] : "#";
-                        var icon = option.ContainsKey("Icon") ? option["Icon"] : "fas fa-folder";
-                        var description = option.ContainsKey("Description") ? option["Description"] : "";
-                        var controller = option.ContainsKey("Controller") ? option["Controller"] : "Modules";
-                        var cssClass = option.ContainsKey("CssClass") ? option["CssClass"] : "";
-
-                        <a asp-action="@action" asp-controller="@controller" class="module-card @cssClass">
-                            <div class="module-icon">
-                                <i class="@icon"></i>
-                            </div>
-                            <h3 class="module-title">@moduleName</h3>
-                            <p class="module-description">@description</p>
-                        </a>
-                    }
-                </div>
+                }
             </div>
         </div>
-    }
-    else
-    {
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-info" role="alert">
-                    <i class="fas fa-info-circle me-2"></i>
-                    <strong>Información:</strong> Este módulo aún no tiene opciones disponibles.
-                </div>
-            </div>
-        </div>
-    }
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle me-2"></i>
+        Este módulo aún no tiene opciones disponibles.
+    </div>
+}
 </div>
