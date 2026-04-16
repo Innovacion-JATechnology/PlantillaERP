@@ -14,6 +14,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\deleteComprasPage.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\deleteComprasPage.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="00_LEEME_PRIMERO.txt" />
     <None Remove="ACTUALIZACION_FINAL_ICONOS.md" />
     <None Remove="ACTUALIZACION_FINAL_RAPIDO.md" />

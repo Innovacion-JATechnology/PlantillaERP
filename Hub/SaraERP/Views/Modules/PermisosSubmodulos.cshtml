@@ -24,7 +24,7 @@
 
     <div class="row mt-4">
         <!-- Selector de Rol -->
-        <div class="col-md-3" style="padding: 0 12px;">
+        <div class="col-md-4" style="padding: 0 12px;">
             <div class="professional-table-card">
                 <div class="card-header">
                     <h6>
@@ -34,9 +34,10 @@
                 </div>
                 <div class="card-body">
                     <form method="get" class="mb-3">
-                        <div class="mb-3">
+                        <div class="px-2">
+
                             <label for="roleSelect" class="form-label">Rol</label>
-                            <select id="roleSelect" name="roleId" class="form-select" onchange="window.location.href = '@Url.Action("PermisosSubmodulos", "Administracion")?roleId=' + this.value">
+                            <select id="roleSelect" name="roleId" class="form-select mt-2" onchange="window.location.href = '@Url.Action("PermisosSubmodulos", "Administracion")?roleId=' + this.value">
                                 <option value="">-- Seleccionar Rol --</option>
                                 @foreach (var role in roles)
                                 {
@@ -56,19 +57,23 @@
                     @if (!string.IsNullOrEmpty(selectedRoleId))
                     {
                         var roleName = roles.FirstOrDefault(r => r.Id == selectedRoleId)?.Name;
+                        
+                        <div class="px-2">
                         <div class="alert alert-info">
                             <small>
                                 <strong>Rol seleccionado:</strong><br />
                                 @roleName
                             </small>
                         </div>
+                               </div>
+
                     }
                 </div>
             </div>
         </div>
 
         <!-- Submódulos y Permisos -->
-        <div class="col-md-9">
+        <div class="col-md-8">
             @if (string.IsNullOrEmpty(selectedRoleId))
             {
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">

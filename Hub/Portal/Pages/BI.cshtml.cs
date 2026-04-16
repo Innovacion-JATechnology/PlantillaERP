@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Portal.Pages
 {
-    public class SistemasModel : PageModel
+    public class BIModel : PageModel
     {
         public void OnGet()
         {

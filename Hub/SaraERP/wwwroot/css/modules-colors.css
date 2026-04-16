@@ -60,6 +60,21 @@
 .submodule-inventario-reportes:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }
 .submodule-inventario-reportes { border-bottom-color: #fd7e14 !important; }
 
+
+    .submodule-inventario-productos .module-icon {
+        color: #4A48B9 !important;
+        border-color: #4A48B9 !important;
+    }
+
+    .submodule-inventario-productos:hover .module-icon {
+        color: #80B2F6 !important;
+        border-color: #80B2F6 !important;
+    }
+
+.submodule-inventario-productos {
+    border-bottom-color: #fd7e14 !important;
+}
+
 /* FINANZAS - All use Green (#198754) */
 .submodule-finanzas-contabilidad .module-icon { color: #4A48B9 !important; border-color: #4A48B9 !important; }
 .submodule-finanzas-contabilidad:hover .module-icon { color: #80B2F6 !important; border-color: #80B2F6 !important; }

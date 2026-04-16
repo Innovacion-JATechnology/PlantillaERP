@@ -1,0 +1,66 @@
+@{
+    ViewData["Title"] = "Catalogo";
+    ViewData["Breadcrumbs"] = new List<(string, string)>
+    {
+        ("Inicio", Url.Action("Index", "Home")),
+        ("Inventario", Url.Action("Inventario", "Modules")),
+        ("Catalogo", null)
+    };
+}
+
+<link rel="stylesheet" href="~/css/professional-tables.css" />
+
+<div class="professional-page-container">
+    <!-- Header Profesional -->
+    <div class="professional-header fade-in-up">
+        <h1>
+            <i class="fas fa-sitemap"></i>
+            Gestión de Catálogo
+        </h1>
+        <p>Organiza tus productos en Catálogo para una mejor gestión</p>
+    </div>
+
+    <!-- Toolbar con botón de acción -->
+    <div class="professional-toolbar">
+        <div></div>
+        <button class="professional-btn professional-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nueva Categoría
+        </button>
+    </div>
+
+    <!-- Tabla de Catalogo -->
+    <div class="professional-table-card">
+        <div class="card-header">
+            <h6>
+                <i class="fas fa-folder-tree"></i>
+                Cátalogo de Productos
+            </h6>
+        </div>
+        <div class="card-body">
+            <table class="professional-table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>N° Productos</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <i class="fas fa-tags"></i>
+                                <h5>No hay Catálogos disponibles</h5>
+                                <p>Crea Catálogo para organizar productos</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

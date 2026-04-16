@@ -335,7 +335,8 @@
                                                 data-cajas="@(compra.Cajas ?? 0)"
                                                 type="button"
                                                 @(ViewBag.CanEdit ? "" : "disabled")
-                                                title="@(ViewBag.CanEdit ? "Editar compra" : "No tienes permiso para editar")">
+                                                title="@(ViewBag.CanEdit ? "Editar compra" : "No tienes permiso para editar")"
+                                                >
                                             <i class="fas fa-edit me-1"></i>Editar
                                         </button>
                                         @if (ViewBag.CanDelete)
@@ -884,6 +885,7 @@
                     // Modo de solo lectura - Ver datos
                     $('#formTitulo').text('Ver Compra Internacional');
                     $('#btnGuardarTexto').text('Guardar');
+
                     $('#btnGuardar').hide();
                     $('#btnEliminarForm').addClass('d-none');
 

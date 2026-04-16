@@ -81,6 +81,7 @@ namespace UserRoles.Identity.Constants
         public const string AuditoriaInventario = "Inventario.AuditoriaInventario";
         public const string AjustesInventario = "Inventario.AjustesInventario";
         public const string ReportesInventario = "Inventario.ReportesInventario";
+        public const string Productos = "Inventario.Productos";
 
         // Finanzas submodules
         public const string Contabilidad = "Finanzas.Contabilidad";

@@ -1,11 +1,12 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Security.Claims;
-using Microsoft.Data.SqlClient;
-using WebApp.Models;
 using UserRoles.Identity.Constants;
 using UserRoles.Identity.Services;
+using WebApp.Attributes;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {
@@ -28,15 +29,25 @@ namespace WebApp.Controllers
             _strcon = _configuration.GetConnectionString("ServerCon") ?? throw new InvalidOperationException("Connection string 'ServerCon' not found.");
         }
 
-        public async Task<IActionResult> Productos(string searchTerm = "", string sortExpression = "ProductoCompleto", string sortDirection = "ASC", int page = 1)
+        [HttpGet]
+        [RequirePermission(SubmoduleNames.Productos, "Ver")]
+        public async Task<IActionResult> Productos(
+      string searchTerm = "",
+      string sortExpression = "ProductoCompleto",
+      string sortDirection = "ASC",
+      int page = 1)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            // Verificar que el usuario tiene acceso al módulo Inventario
-            if (!await _permissionService.UserHasModuleAccessAsync(userId, ModuleNames.Inventario))
-            {
-                return Forbid();
-            }
+            // UI permissions   public const string Producto = "Inventario.Productos";
+            ViewBag.CanCreate = await _permissionService
+                .UserHasPermissionAsync(userId, SubmoduleNames.Productos, "Crear");
+
+            ViewBag.CanEdit = await _permissionService
+                .UserHasPermissionAsync(userId, SubmoduleNames.Productos   , "Editar");
+
+            ViewBag.CanDelete = await _permissionService
+                .UserHasPermissionAsync(userId, SubmoduleNames.Productos, "Eliminar");
 
             ViewData["Title"] = "Productos";
             ViewData["Breadcrumbs"] = new List<(string, string)>
@@ -123,7 +134,9 @@ namespace WebApp.Controllers
             return productos;
         }
 
+
         [HttpPost]
+        [RequirePermission("Inventario.Productos", "Editar")] 
         public IActionResult Guardar(string id, string producto, string talla, string originalId = "")
         {
             try
@@ -155,7 +168,9 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        [RequirePermission("Inventario.Productos", "Eliminar")]
         public IActionResult Eliminar(string id)
+
         {
             try
             {
@@ -176,7 +191,9 @@ namespace WebApp.Controllers
         }
 
         [HttpGet]
+        [RequirePermission("Inventario.Productos", "Ver")]
         public IActionResult ObtenerProducto(string id)
+
         {
             try
             {
@@ -319,6 +336,19 @@ namespace WebApp.Controllers
                 ("Reportes", null)
             };
             return View("~/Views/Modules/ReportesInventario.cshtml");
+        }
+
+
+        public IActionResult Catalogo()
+        {
+            ViewData["Title"] = "Catálogo";
+            ViewData["Breadcrumbs"] = new List<(string, string)>
+            {
+                ("Inicio", Url.Action("Index", "Home")),
+                ("Inventario", Url.Action("Inventario", "Modules")),
+                ("Catalogo", null)
+            };
+            return View("~/Views/Modules/Catalogo.cshtml");
         }
     }
 }

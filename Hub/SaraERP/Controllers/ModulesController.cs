@@ -79,7 +79,8 @@ namespace WebApp.Controllers
             };
             ViewData["ModuleOptions"] = new List<Dictionary<string, string>>
             {
-                new Dictionary<string, string> { { "Name", "Catálogo" }, { "Action", "Productos" }, { "Controller", "Inventario" }, { "Icon", "fas fa-shopping-bag" }, { "Description", "Gestión de productos" }, { "CssClass", "submodule-inventario-catalogo" } },
+                new Dictionary<string, string> { { "Name", "Productos" }, { "Action", "Productos" }, { "Controller", "Inventario" }, { "Icon", "fas fa-chart-pie" }, { "Description", "Gestón de  productos" }, { "CssClass", "submodule-inventario-productos" } },
+                new Dictionary<string, string> { { "Name", "Catálogo" }, { "Action", "Catalogo" }, { "Controller", "Inventario" }, { "Icon", "fas fa-shopping-bag" }, { "Description", "Gestión de Catálogo" }, { "CssClass", "submodule-inventario-catalogo" } },
                 new Dictionary<string, string> { { "Name", "Stock" }, { "Action", "Stock" }, { "Controller", "Inventario" }, { "Icon", "fas fa-boxes" }, { "Description", "Control de inventario" }, { "CssClass", "submodule-inventario-stock" } },
                 new Dictionary<string, string> { { "Name", "Almacenes" }, { "Action", "Almacenes" }, { "Controller", "Inventario" }, { "Icon", "fas fa-warehouse" }, { "Description", "Gestión de almacenes" }, { "CssClass", "submodule-inventario-almacenes" } },
                 new Dictionary<string, string> { { "Name", "Categorías" }, { "Action", "Categorias" }, { "Controller", "Inventario" }, { "Icon", "fas fa-sitemap" }, { "Description", "Categorización de productos" }, { "CssClass", "submodule-inventario-categorias" } },
@@ -87,6 +88,7 @@ namespace WebApp.Controllers
                 new Dictionary<string, string> { { "Name", "Auditoría" }, { "Action", "AuditoriaInventario" }, { "Controller", "Inventario" }, { "Icon", "fas fa-history" }, { "Description", "Registro de cambios" }, { "CssClass", "submodule-inventario-auditoria" } },
                 new Dictionary<string, string> { { "Name", "Ajustes" }, { "Action", "AjustesInventario" }, { "Controller", "Inventario" }, { "Icon", "fas fa-sliders-h" }, { "Description", "Ajustes de inventario" }, { "CssClass", "submodule-inventario-ajustes" } },
                 new Dictionary<string, string> { { "Name", "Reportes" }, { "Action", "ReportesInventario" }, { "Controller", "Inventario" }, { "Icon", "fas fa-chart-pie" }, { "Description", "Reportes de inventario" }, { "CssClass", "submodule-inventario-reportes" } }
+                
             };
             return View("ModuleView");
         }

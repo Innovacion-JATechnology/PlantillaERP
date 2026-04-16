@@ -212,7 +212,7 @@
     }
 
     .solution-desc {
-        font-size: 1rem;
+        font-size: 1.2rem;
         color: #666;
         line-height: 1.7;
     }
@@ -473,8 +473,7 @@
             <a href="@Model.SaraERPUrl" class="solution-card card-saraerp text-decoration-none">
                 <div class="solution-icon">
                     ERP
-                </div>
-                <h3 class="solution-title">SaraERP</h3>
+                </div> 
                 <p class="solution-desc">
                     Gestión empresarial integral con control total de recursos, inventario y operaciones.
                 </p>
@@ -485,8 +484,7 @@
    class="solution-card card-crm text-decoration-none">
     <div class="solution-icon">
         CRM
-    </div>
-    <h3 class="solution-title">SaraCRM</h3>
+    </div> 
     <p class="solution-desc">
         Administra clientes, ventas y relaciones comerciales de forma eficiente y escalable.
     </p>
@@ -495,25 +493,22 @@
 
 
             <!-- HelpDesk Card -->
-            <a href="@Model.HelpDeskUrl" class="solution-card card-helpdesk text-decoration-none">
+            <a asp-page="/BI" class="solution-card card-sistemas text-decoration-none">
                 <div class="solution-icon">
-                    HD
-                </div>
-                <h3 class="solution-title">HelpDesk</h3>
+                    BI
+                </div> 
                 <p class="solution-desc">
-                    Sistema de soporte técnico con gestión eficiente de incidencias y monitoreo de respuesta.
+                    Información del negocio mediante indicadores, reportes y dashboards interactivos.
                 </p>
             </a>
 
             <!-- Sistemas Card -->
-            <a asp-page="/Sistemas" class="solution-card card-sistemas text-decoration-none">
+            <a href="@Model.HelpDeskUrl" class="solution-card card-helpdesk text-decoration-none">
                 <div class="solution-icon">
                     TI
                 </div>
-                <h3 class="solution-title">Tecnologías de la Información</h3>
-                <p class="solution-desc">
-                    Panel administrativo para configuración y monitoreo de la plataforma Sara.
-                </p>
+                <p class="solution-desc">Mesa de ayuda y Panel administrativo para configuración y monitoreo de la plataforma.</p>
+                 
             </a>
         </div>
     </div>

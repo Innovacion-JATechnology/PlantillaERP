@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
+using UserRoles.Identity.Constants;
 using UserRoles.Identity.Data;
 using UserRoles.Identity.Models;
 using WebApp.Attributes;
@@ -28,6 +30,8 @@ namespace WebApp.Controllers
             _logger = logger;
             _dbContext = dbContext;
         }
+
+    
 
         // POST: Crear nuevo rol
         [HttpPost]
