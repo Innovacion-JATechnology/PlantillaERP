@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace HelpDesk
 {
-    public partial class WebForm2 : System.Web.UI.Page
+    public partial class WebForm2 : PaginasHD
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -9,7 +9,7 @@ using System.Web.UI;
 
 namespace HelpDesk
 {
-    public partial class agregarAgente : AgentOnlyPage
+    public partial class agregarAgente : AdminOnlyPage
     {
         private readonly string strcon = ConfigurationManager.ConnectionStrings["ServerCon"].ConnectionString;
 

@@ -11,7 +11,7 @@ using HelpDesk.Utilities;
 
 namespace HelpDesk
 {
-    public partial class adminAllTickets : Page
+    public partial class adminAllTickets : AgentPage
     {
         private readonly string strcon =
             ConfigurationManager.ConnectionStrings["ServerCon"].ConnectionString;

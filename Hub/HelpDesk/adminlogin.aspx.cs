@@ -9,7 +9,7 @@ using HelpDesk.Utilities; // Igual que en userlogin: PasswordCrypto
 
 namespace HelpDesk
 {
-    public partial class adminlogin : System.Web.UI.Page
+    public partial class adminlogin : PaginasHD
     {
         protected void Page_Load(object sender, EventArgs e)
         {

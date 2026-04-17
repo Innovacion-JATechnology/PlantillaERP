@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace HelpDesk
 {
-    public partial class usersignup : AgentOnlyPage
+    public partial class usersignup : AgentPage
     {
         private readonly string strcon = ConfigurationManager.ConnectionStrings["ServerCon"].ConnectionString;
 

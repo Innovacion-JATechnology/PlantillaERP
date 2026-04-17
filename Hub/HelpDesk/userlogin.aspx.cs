@@ -11,7 +11,7 @@ using HelpDesk.Utilities;
 
 namespace HelpDesk
 {
-    public partial class userlogin : System.Web.UI.Page
+    public partial class userlogin : PaginasHD
     {
         private readonly string strcon = ConfigurationManager.ConnectionStrings["ServerCon"].ConnectionString;
 

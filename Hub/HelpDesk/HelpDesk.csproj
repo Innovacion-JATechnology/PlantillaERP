@@ -78,7 +78,6 @@
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\jquery-3.3.1.slim.min.js" />
     <Content Include="bootstrap\js\popper.min.js" />
-    <Content Include="CapturaTablas.aspx" />
     <Content Include="css\customstylesheet.css" />
     <Content Include="Database\helpDeskScripts.sql" />
     <Content Include="datatables\css\dataTables.dataTables.min.css" />
@@ -112,7 +111,6 @@
     <Content Include="jquery-3.3.1.js" />
     <Content Include="jquery-3.3.1.min.js" />
     <Content Include="miPerfil.aspx" />
-    <Content Include="misAgentes.aspx" />
     <Content Include="misTickets.aspx" />
     <Content Include="Properties\admin.png" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -122,7 +120,6 @@
     <Content Include="Web.config" />
     <Content Include="crearTicket.aspx" />
     <Content Include="enConstruccion.aspx" />
-    <Content Include="Preferencias.aspx" />
     <Content Include="acercaDe.aspx" />
     <Content Include="AccesoRestringido.aspx" />
   </ItemGroup>
@@ -169,13 +166,6 @@
     <Compile Include="allUsers.aspx.designer.cs">
       <DependentUpon>allUsers.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CapturaTablas.aspx.cs">
-      <DependentUpon>CapturaTablas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CapturaTablas.aspx.designer.cs">
-      <DependentUpon>CapturaTablas.aspx</DependentUpon>
-    </Compile>
     <Compile Include="emailClass.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -208,13 +198,6 @@
     <Compile Include="miPerfil.aspx.designer.cs">
       <DependentUpon>miPerfil.aspx</DependentUpon>
     </Compile>
-    <Compile Include="misAgentes.aspx.cs">
-      <DependentUpon>misAgentes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="misAgentes.aspx.designer.cs">
-      <DependentUpon>misAgentes.aspx</DependentUpon>
-    </Compile>
     <Compile Include="misTickets.aspx.cs">
       <DependentUpon>misTickets.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -222,7 +205,7 @@
     <Compile Include="misTickets.aspx.designer.cs">
       <DependentUpon>misTickets.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AgentOnlyPage.cs">
+    <Compile Include="DefinicionPaginas.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -234,10 +217,7 @@
     <Compile Include="Site1.Master.designer.cs">
       <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
-    <Compile Include="TicketStatus.cs" />
-    <Compile Include="TicketStatusExamples.cs" />
     <Compile Include="TicketStatusTransitions.cs" />
-    <Compile Include="TrancisionarTickets.cs" />
     <Compile Include="userlogin.aspx.cs">
       <DependentUpon>userlogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -266,13 +246,6 @@
     <Compile Include="enConstruccion.aspx.designer.cs">
       <DependentUpon>enConstruccion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Preferencias.aspx.cs">
-      <DependentUpon>Preferencias.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Preferencias.aspx.designer.cs">
-      <DependentUpon>Preferencias.aspx</DependentUpon>
-    </Compile>
     <Compile Include="acercaDe.aspx.cs">
       <DependentUpon>acercaDe.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -300,7 +273,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="data\" />
     <Folder Include="Uploads\Cargas\" />
   </ItemGroup>
   <PropertyGroup>

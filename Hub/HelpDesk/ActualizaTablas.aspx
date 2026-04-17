@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Catálogos: Empresas, Puestos y SLA" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="ActulizaTablas.aspx.cs" Inherits="HelpDesk.ActulizaTablas" %>
+﻿<%@ Page Title="Catálogos: Empresas, Puestos y SLA" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="ActualizaTablas.aspx.cs" Inherits="HelpDesk.ActualizaTablas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>

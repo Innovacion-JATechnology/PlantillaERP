@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace HelpDesk
 {
-    public partial class miPerfil : UsuarioOnlyPage //Page
+    public partial class miPerfil : UsuarioOnlyPage 
     {
         private readonly string strcon =
             ConfigurationManager.ConnectionStrings["ServerCon"].ConnectionString;

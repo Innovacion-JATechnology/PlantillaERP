@@ -11,7 +11,7 @@ namespace HelpDesk
 {
 
 
-    public partial class ActulizaTablas
+    public partial class ActualizaTablas
     {
 
         /// <summary>

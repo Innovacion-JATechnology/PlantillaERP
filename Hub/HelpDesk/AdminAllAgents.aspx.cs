@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace HelpDesk
 {
-    public partial class AdminAllAgents : System.Web.UI.Page
+    public partial class AdminAllAgents : AdminOnlyPage
     {
         string cs = ConfigurationManager.ConnectionStrings["ServerCon"].ConnectionString;
 

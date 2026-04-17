@@ -452,9 +452,91 @@
             font-size: 0.75rem;
         }
     }
+
+    .top-bar {
+        position: fixed;
+        top: 20px;
+        right: 30px;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user-info {
+        color: white;
+        font-weight: 600;
+        margin-right: 10px;
+    }
+
+    .login-inline input {
+        padding: 6px 10px;
+        border-radius: 6px;
+        border: none;
+        margin-right: 5px;
+        font-size: 0.85rem;
+    }
+
+    .btn-login, .btn-logout {
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .btn-login {
+        background: #2121aa;
+        color: white;
+    }
+
+    .btn-logout {
+        background: #ffffff;
+        color: white;
+    }
+
+    .btn-login:hover {
+        background: #0090f0;
+    }
+
+    .btn-logout:hover {
+        background: #ffffff;
+    }
 </style>
 
 <!-- Main Content -->
+
+<div class="top-bar">
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        <span class="user-info">
+            <i class="fa-solid fa-user"></i>
+            @User.Identity.Name
+        </span>
+
+        <form method="post" asp-page-handler="Logout" class="d-inline">
+            <button type="submit" class="btn-logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Salir
+            </button>
+        </form>
+    }
+    else
+    {
+        <form method="post" asp-page-handler="Login" class="login-inline">
+            <input type="text" name="Username" placeholder="Usuario" required />
+            <input type="password" name="Password" placeholder="Contraseña" required />
+            <button type="submit" class="btn-login">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Entrar
+            </button>
+        </form>
+    }
+</div>
+
 <div class="portal-content">
     <!-- Logo & Header -->
     <div class="portal-logo-section">

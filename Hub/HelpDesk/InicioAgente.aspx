@@ -21,7 +21,7 @@
             <div class="row">
 
 
-                <div class="col-md-4">
+                <div class="col-md-4" >
                     <a href="allUsers.aspx" style="text-decoration: none; color: inherit;">
                         <center>
                             <img height="150px" src="imgs/catalogodeUsuarios.png" />
@@ -59,7 +59,7 @@
                     </a>
                 </div>
                 
-                <div class="col-md-4">
+                <div class="col-md-4"  runat="server" id="divVerAgentes">
                     <a href="AdminAllAgents.aspx" style="text-decoration: none; color: inherit;">
                         <center>
                             <img height="150px" src="imgs/veragentes.png" />
@@ -71,7 +71,7 @@
                     </a>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4"  runat="server" id="divAgregarAgente">
                     <a href="agregarAgente.aspx" style="text-decoration: none; color: inherit;">
                         <center>
                             <img height="150px" src="imgs/agregarAgente.png" />

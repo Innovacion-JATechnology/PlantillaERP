@@ -4,7 +4,7 @@ using System.Web.UI;
 
 namespace HelpDesk
 {
-    public partial class ActulizaTablas : Page
+    public partial class ActualizaTablas : AgentPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
