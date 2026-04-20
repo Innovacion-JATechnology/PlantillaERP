@@ -5,6 +5,7 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -14,12 +15,16 @@ namespace WebApp.Controllers
             _logger = logger;
         }
 
+
+
+        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public IActionResult Index()
         {
             return View();
         }
+         
 
-        [Authorize]
+        [Authorize] 
         public IActionResult Inicio()
         {
             return View();
