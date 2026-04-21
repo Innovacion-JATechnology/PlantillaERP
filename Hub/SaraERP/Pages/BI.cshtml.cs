@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Portal.Pages
+namespace SaraERP.Pages
 {
-    public class trabajandoModel : PageModel
+    public class BIModel : PageModel
     {
         public void OnGet()
         {

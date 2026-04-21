@@ -1,5 +1,5 @@
-@page
-@model IndexModel
+﻿@page
+@model SaraERP.Pages.Hub.HubIndexModel
 @{
     ViewData["Title"] = "Sara - Portal de Soluciones";
 }
@@ -487,23 +487,16 @@
         align-items: center;
         gap: 5px;
     }
-
-    .btn-login {
-        background: #2121aa;
-        color: white;
-    }
+     
 
     .btn-logout {
-        background: #ffffff;
+        background: #5040f0;
         color: white;
     }
-
-    .btn-login:hover {
-        background: #0090f0;
-    }
+     
 
     .btn-logout:hover {
-        background: #ffffff;
+        background: #7080ff;
     }
 </style>
 
@@ -517,24 +510,14 @@
             @User.Identity.Name
         </span>
 
-        <form method="post" asp-page-handler="Logout" class="d-inline">
+        <form method="post" asp-page="/Account/Logout"  class="d-inline">
             <button type="submit" class="btn-logout">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 Salir
             </button>
         </form>
     }
-    else
-    {
-        <form method="post" asp-page-handler="Login" class="login-inline">
-            <input type="text" name="Username" placeholder="Usuario" required />
-            <input type="password" name="Password" placeholder="Contraseña" required />
-            <button type="submit" class="btn-login">
-                <i class="fa-solid fa-right-to-bracket"></i>
-                Entrar
-            </button>
-        </form>
-    }
+    
 </div>
 
 <div class="portal-content">

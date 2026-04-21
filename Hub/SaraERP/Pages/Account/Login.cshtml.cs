@@ -56,12 +56,12 @@ namespace WebApp.Pages.Account
             // Validar ReturnUrl - solo aceptar URLs locales y seguras
             if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
             {
-                returnUrl = "/Home/Index";
+                returnUrl = "/Hub/Hubindex";
             }
-            // Si el ReturnUrl contiene problemas, también usar Home/Index
+            // Si el ReturnUrl contiene problemas, también usar Hub/Hubindex
             else if (returnUrl.Contains("?") || returnUrl.Contains("&"))
             {
-                returnUrl = "/Home/Index";
+                returnUrl = "/Hub/Hubindex";
             }
 
             // Clear the existing external cookie to ensure a clean login process
@@ -77,12 +77,12 @@ namespace WebApp.Pages.Account
             // Validar ReturnUrl - solo aceptar URLs locales y seguras
             if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
             {
-                returnUrl = "/Home/Index";
+                returnUrl = "/Hub/Hubindex";
             }
-            // Si el ReturnUrl contiene problemas, también usar Home/Index
+            // Si el ReturnUrl contiene problemas, también usar Hub/Hubindex
             else if (returnUrl.Contains("?") || returnUrl.Contains("&"))
             {
-                returnUrl = "/Home/Index";
+                returnUrl = "/Hub/Hubindex";
             }
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -104,8 +104,8 @@ namespace WebApp.Pages.Account
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("Usuario {Email} logueado exitosamente", Input.Email);
-                        // Redirigir a Home/Index
-                        return Redirect("/Home/Index");
+                        // Redirigir a /Hub/Hubindex
+                        return Redirect("/Hub/Hubindex");
                     }
 
                     if (result.IsLockedOut)

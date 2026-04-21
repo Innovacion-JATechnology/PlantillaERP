@@ -122,17 +122,17 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Hub}/{action=HubIndex}/{id?}");
 
 app.MapRazorPages();
 
-// Redirigir raíz a Home/Index si está autenticado, sino al Login
+// Redirigir raíz a Hub/HubIndex si está autenticado, sino al Login
 app.MapGet("/", async context =>
 {
     var user = context.User;
     if (user?.Identity?.IsAuthenticated == true)
     {
-        context.Response.Redirect("/Home/Index");
+        context.Response.Redirect("/Hub/HubIndex");
     }
     else
     {
