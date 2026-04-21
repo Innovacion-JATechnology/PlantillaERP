@@ -205,17 +205,42 @@
             color: #6c757d !important;
         }
 
+        
+#unsavedBadge {
+    animation: pulse 1.5s infinite;
+     background-color: #e9ecef !important;
+             color: #884444 !important;
+}
+
+@@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+
 </style>
 
 <div class="page-container">
     <!-- Header Section -->
     <div class="header-section">
+         
+
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
             <div>
                 <h4 class="section-title m-0">
                     <i class="fas fa-globe me-2"></i>Compras Internacionales
                 </h4>
+                <span id="unsavedBadge"
+                      class="badge bg-warning text-dark d-none"
+                      title="Cambios sin guardar">
+                    <i class="fas fa-exclamation-triangle me-1"></i>
+                    Cambios sin guardar
+                </span>
             </div>
+
+
+
 
             <div class="search-bar d-flex gap-2 align-items-center">
                 <input type="text" id="txtBuscar" class="form-control" placeholder="Buscar por contrato, contenedor o proveedor..." value="@ViewBag.SearchTerm" />
@@ -677,11 +702,20 @@
 
         let initialFormState = '';
          
+        function updateUnsavedBadge(isDirty) {
+            if (isDirty) {
+                $('#unsavedBadge').removeClass('d-none');
+            } else {
+                $('#unsavedBadge').addClass('d-none');
+            }
+        }
 
         
         function captureFormState() {
             initialFormState = getUserFormState();
             $('#isDirty').val('false');
+            updateUnsavedBadge(false);
+
         }
 
 
@@ -696,7 +730,9 @@ window.addEventListener('beforeunload', function (e) {
 
 
         
-       
+        
+
+        
         $('#formCompra').on('input change', 'input, select, textarea', function () {
             if ($('#formCompra').hasClass('form-readonly')) return;
 
@@ -704,7 +740,9 @@ window.addEventListener('beforeunload', function (e) {
             const dirty = currentState !== initialFormState;
 
             $('#isDirty').val(dirty ? 'true' : 'false');
+            updateUnsavedBadge(dirty);
         });
+
 
 
 
@@ -886,6 +924,7 @@ window.addEventListener('beforeunload', function (e) {
                         
         $('#isDirty').val('false');
         initialFormState = '';
+                updateUnsavedBadge(false);
 
                         if (response.success) {
                             mostrarMensaje(response.message, 'success');
@@ -988,12 +1027,13 @@ window.addEventListener('beforeunload', function (e) {
                 $('#txtCajas').val(cajas);
 
                 
-        const $form = $('#formCompra');
+                 const $form = $('#formCompra');
 
-        // RESET
-        $form.removeClass('form-readonly');
-        $form.find('input, textarea').prop('readonly', false);
-        $form.find('select').prop('disabled', false);
+                 // RESET
+                $form.removeClass('form-readonly');
+                $form.find('input, textarea').prop('readonly', false);
+                $form.find('select').prop('disabled', false);
+                updateUnsavedBadge(false);
 
 
                 if (mode === 'readonly') {
@@ -1179,6 +1219,7 @@ $(document).on('click', '.btn-ver-compra', function () {
                 
         $('#isDirty').val('false');
         initialFormState = '';
+                updateUnsavedBadge(false);
 
             }
 
