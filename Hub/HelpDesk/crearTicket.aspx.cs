@@ -3,6 +3,8 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Web;
 using System.Web.UI;
 
@@ -21,8 +23,9 @@ namespace HelpDesk
             if (string.IsNullOrWhiteSpace(sev)) return 4; // Normal
             sev = sev.Trim().ToLowerInvariant();
             switch (sev)
-            { 
-                case "critíco":
+            {
+                case "critico":
+                case "crítico":
                     return 1;
                 case "muy urgente":
                     return 2;
@@ -44,14 +47,7 @@ namespace HelpDesk
             string descripcionValue = (descripcion?.Text ?? string.Empty).Trim();
 
 
-            string filepath = "";
-            string filename = Path.GetFileName(FileUpload1.PostedFile.FileName);
-
-            if (!string.IsNullOrEmpty(filename))
-            {
-            FileUpload1.SaveAs(Server.MapPath("inventory/" + filename));
-            filepath = "~/inventory/" + filename;
-            }
+             
 
 
             if (string.IsNullOrWhiteSpace(asuntoValue))
@@ -148,11 +144,90 @@ VALUES
                     cmd.Parameters.Add("@CreadoUtc", SqlDbType.DateTime2).Value = nowUtc;
                     cmd.Parameters.Add("@ActualizadoUtc", SqlDbType.DateTime2).Value = nowUtc;
                     cmd.Parameters.Add("@CerradoUtc", SqlDbType.DateTime2).Value = DBNull.Value;
-                    cmd.Parameters.Add("@Adjuntos", SqlDbType.NVarChar, -1).Value = (object)filepath ?? DBNull.Value; // -1 = NVARCHAR(MAX)
+
+                    cmd.Parameters.Add("@Adjuntos", SqlDbType.NVarChar, -1)
+                       .Value = DBNull.Value;
 
                     con.Open();
                     object result = cmd.ExecuteScalar();
                     newTicketId = Convert.ToInt32(result);
+
+
+                    // 5) Save attachment under inventory/UserId/TicketId
+                    if (FileUpload1.HasFile)
+                    {
+
+
+                        string ext = Path.GetExtension(FileUpload1.FileName).ToLowerInvariant();
+                        string[] allowed = { ".jpg", ".png", ".pdf", ".docx", ".xlsx" };
+
+                        if (!allowed.Contains(ext))
+                        {
+                            ShowClientMessage("Tipo de archivo no permitido.");
+                            return;
+                        }
+
+                        if (FileUpload1.PostedFile.ContentLength > 30 * 1024 * 1024)
+                        {
+                            ShowClientMessage("Archivo demasiado grande (máx 30MB).");
+                            return;
+                        }
+
+                        // Get userId safely
+                        long userId = 0;
+                        if (Session["userid"] is string ss && long.TryParse(ss, out var uid))
+                            userId = uid;
+
+                        string fileName = Path.GetFileName(FileUpload1.FileName);
+
+
+                        string uniqueName =
+                            Path.GetFileNameWithoutExtension(fileName)
+                            + "_" + Guid.NewGuid()
+                            + Path.GetExtension(fileName);
+
+
+                        // ~/inventory/{UserId}/{TicketId}/
+                        string relativeDir = $"~/inventory/{userId}/{newTicketId}/";
+                        string physicalDir = Server.MapPath(relativeDir);
+
+                        // Create directory if not exists
+                        if (!Directory.Exists(physicalDir))
+                        {
+                            Directory.CreateDirectory(physicalDir);
+                        }
+
+                        string relativePath = relativeDir + uniqueName;
+                        string physicalPath = Path.Combine(physicalDir, uniqueName);
+
+                        // Save file
+                        FileUpload1.SaveAs(physicalPath);
+
+                        // 6) Update ticket with attachment path
+                        const string updateSql = @"
+        UPDATE hd.Ticket
+        SET Adjuntos = @Adjuntos,
+            ActualizadoUtc = @NowUtc
+        WHERE TicketId = @TicketId";
+
+                        using (var con2 = new SqlConnection(_connString))
+                        using (var cmd2 = new SqlCommand(updateSql, con2))
+                        {
+                            cmd2.Parameters.Add("@Adjuntos", SqlDbType.NVarChar, -1)
+                                .Value = relativePath;
+
+                            cmd2.Parameters.Add("@NowUtc", SqlDbType.DateTime2)
+                                .Value = DateTime.UtcNow;
+
+                            cmd2.Parameters.Add("@TicketId", SqlDbType.Int)
+                                .Value = newTicketId;
+
+                            con2.Open();
+                            cmd2.ExecuteNonQuery();
+                        }
+                    }
+
+
                 }
 
                 // 4) Client feedback                 

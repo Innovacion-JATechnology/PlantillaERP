@@ -3,7 +3,7 @@ namespace WebApp.Models
     public class CompraInternacional
     {
         public int Id { get; set; }
-        public DateTime FechaCompra { get; set; }
+        public DateOnly? FechaCompra { get; set; }
         public string Contract { get; set; }
         public string Container { get; set; }
         public string Sello { get; set; }

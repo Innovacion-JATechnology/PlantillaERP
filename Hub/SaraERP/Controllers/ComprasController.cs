@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System.Data;
+using System.Globalization;
 using System.Security.Claims;
 using UserRoles.Identity.Constants;
 using UserRoles.Identity.Services;
 using WebApp.Attributes;
-using WebApp.Models;
+using WebApp.Models; 
 
 namespace WebApp.Controllers
 {
@@ -109,7 +111,9 @@ namespace WebApp.Controllers
                         compras.Add(new CompraInternacional
                         {
                             Id = reader.IsDBNull(0) ? 0 : Convert.ToInt32(reader[0]),
-                            FechaCompra = reader.IsDBNull(1) ? DateTime.Now : Convert.ToDateTime(reader[1]),
+
+                            FechaCompra = reader.IsDBNull("FechaCompra") ? null: DateOnly.FromDateTime(reader.GetDateTime("FechaCompra")),
+
                             Contract = reader.IsDBNull(2) ? string.Empty : reader[2].ToString(),
                             Container = reader.IsDBNull(3) ? string.Empty : reader[3].ToString(),
                             Sello = reader.IsDBNull(4) ? string.Empty : reader[4].ToString(),
@@ -177,7 +181,12 @@ namespace WebApp.Controllers
                     return Json(new { success = false, message = "Los campos requeridos no pueden estar vacíos." });
                 }
 
-                DateTime dtFechaCompra = DateTime.Parse(fechaCompra);
+                var dtFechaCompra = DateTime.ParseExact(
+                    fechaCompra,
+                    "yyyy-MM-dd",
+                    CultureInfo.InvariantCulture
+                );
+
                 DateTime? dtETD = string.IsNullOrWhiteSpace(etd) ? (DateTime?)null : DateTime.Parse(etd);
                 DateTime? dtETA = string.IsNullOrWhiteSpace(eta) ? (DateTime?)null : DateTime.Parse(eta);
                 DateTime? dtFechaEstimDestino = string.IsNullOrWhiteSpace(fechaEstimDestino) ? (DateTime?)null : DateTime.Parse(fechaEstimDestino);
@@ -233,7 +242,7 @@ namespace WebApp.Controllers
                                    @DescripcionProducto, @Producto, @Marca, @Talla, @Kgs, @Cajas)", con);
                     }
 
-                    cmd.Parameters.Add("@FechaCompra", System.Data.SqlDbType.DateTime).Value = dtFechaCompra;
+                    cmd.Parameters.Add("@FechaCompra", System.Data.SqlDbType.DateTime).Value = dtFechaCompra.Date;
                     cmd.Parameters.Add("@Contract", System.Data.SqlDbType.NVarChar, 40).Value = contract;
                     cmd.Parameters.Add("@Container", System.Data.SqlDbType.NVarChar, 40).Value = container;
                     cmd.Parameters.Add("@Sello", System.Data.SqlDbType.NVarChar, 40).Value = sello ?? string.Empty;
@@ -284,6 +293,102 @@ namespace WebApp.Controllers
                 return Json(new { success = false, message = "Error al guardar la compra: " + ex.Message });
             }
         }
+        //////////////////////////////////////////////////////////////////////////////
+        ///  para subir archivos relacionados a cada compra internacional, 
+        ///  se guardarán en wwwroot/uploaded/{contract}/filename.ext
+        ///  /////////////////////////////////////////////////////////////////////////
+
+        [HttpPost]
+        public async Task<IActionResult> UploadFile(IFormFile file, string contract)
+        {
+            if (file == null || file.Length == 0)
+                return Json(new { success = false, message = "Archivo inválido" });
+
+            if (string.IsNullOrWhiteSpace(contract))
+                return Json(new { success = false, message = "Contrato inválido" });
+             
+            var safeContract = Path.GetFileName(contract?.Trim());
+            var basePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploaded");
+            var contractPath = Path.Combine(basePath, safeContract);
+
+            if (!Directory.Exists(contractPath))
+                Directory.CreateDirectory(contractPath);
+
+            var filePath = Path.Combine(contractPath, Path.GetFileName(file.FileName));
+
+            // ✅ IMPORTANT: async + await guarantees flush before response
+            await using (var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                await file.CopyToAsync(stream);
+                await stream.FlushAsync();
+            }
+
+            // ✅ Force materialization NOW
+            var files = GetFilesForContract(contract).ToList();
+
+            return Json(new
+            {
+                success = true,
+                files = files
+            });
+        }
+
+
+        [HttpGet]
+        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
+        public IActionResult GetFiles(string contract)
+        {
+            return Json(GetFilesForContract(contract)); 
+        }
+
+
+        private IEnumerable<object> GetFilesForContract(string contract)
+        {
+            if (string.IsNullOrWhiteSpace(contract))
+                return Enumerable.Empty<object>();
+             
+            var safeContract = Path.GetFileName(contract?.Trim());
+            var folder = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot", "uploaded", safeContract);
+
+            _logger.LogInformation($"FILES FOLDER: [{safeContract}]");
+
+            if (!Directory.Exists(folder))
+                return Enumerable.Empty<object>();
+
+            return Directory.GetFiles(folder)
+                .Select(f => new
+                {
+                    name = Path.GetFileName(f),
+
+                    size = new FileInfo(f).Length,
+                    url = Url.Content($"~/uploaded/{safeContract}/{Path.GetFileName(f)}")
+                })
+                .ToList();
+        }
+
+
+
+        [HttpPost]
+        public IActionResult DeleteFile(string contract, string fileName)
+        {
+            var safeContract = Path.GetFileName(contract);
+            var safeFile = Path.GetFileName(fileName);
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(),
+                "wwwroot", "uploaded", safeContract, safeFile);
+
+            if (System.IO.File.Exists(path))
+                System.IO.File.Delete(path);
+
+            return Json(new { success = true });
+        }
+
+
+        /// /////////////////////////////////////////////////////////  
+        /// fin de funcionalidad subir archivos relacionados a cada compra internacional  
+        /////////////////////////////////////////////////////////////
 
         [HttpPost]
         [RequirePermission("Compras.ComprasInternacionales", "Eliminar")]

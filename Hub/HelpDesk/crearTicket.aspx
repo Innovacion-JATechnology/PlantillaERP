@@ -2,17 +2,40 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('#imgview').attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
+                reader.onload = function (e) {
+                    $('#imgview').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         }
-    }
-</script>
+
+        function validateFile(input) {
+            if (!input.files || !input.files[0]) return;
+
+            const file = input.files[0];
+            const maxSize = 30 * 1024 * 1024; // 30MB
+            const allowed = ['jpg', 'png', 'pdf', 'docx', 'xlsx'];
+
+            const ext = file.name.split('.').pop().toLowerCase();
+
+            if (!allowed.includes(ext)) {
+                alert('Tipo de archivo no permitido.');
+                input.value = '';
+                return;
+            }
+
+            if (file.size > maxSize) {
+                alert('El archivo excede el tamaño máximo permitido (30MB).');
+                input.value = '';
+                return;
+            }
+        }
+
+    </script>
 </asp:Content>
 
 
@@ -76,11 +99,14 @@
 
                                     <div class="col-md-8 d-flex align-items-end">
                                         <div class="form-group w-100">
-                                            
-                                <asp:FileUpload onchange="readURL(this);"
-                                    class="form-control"
-                                    ID="FileUpload1"
-                                    runat="server" />
+                                             
+                                            <asp:FileUpload
+    ID="FileUpload1"
+    runat="server"
+    CssClass="form-control"
+    onchange="validateFile(this); readURL(this);"
+    accept=".jpg,.png,.pdf,.docx,.xlsx" />
+
                                         </div>
                                     </div>
                                 </div>

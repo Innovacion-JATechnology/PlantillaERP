@@ -198,6 +198,12 @@
         pointer-events: none;
     }
 
+    .form-readonly a {
+    pointer-events: auto !important;
+    cursor: pointer;
+}
+
+
         .form-readonly input,
         .form-readonly select,
         .form-readonly textarea {
@@ -280,7 +286,8 @@
                         @foreach (var compra in Model.Items)
                         {
                             <tr>
-                                <td><strong>@compra.FechaCompra</strong></td>
+                                <td><strong>@(compra.FechaCompra.HasValue ? compra.FechaCompra.Value.ToString("yyyy-MM-dd") : "")</strong></td>
+
                                 <td>@compra.Contract</td>
                                 <td>@compra.Container</td>
                                 <td>@compra.Proveedor</td>
@@ -289,7 +296,7 @@
                                     <div class="action-buttons">
                                         <button class="btn btn-sm btn-ver btn-ver-compra" 
                                                 data-id="@compra.Id"
-                                                data-fechacompra="@compra.FechaCompra:yyyy-MM-dd"
+                                                data-fechacompra="@(compra.FechaCompra.HasValue ? compra.FechaCompra.Value.ToString("yyyy-MM-dd") : "")"
                                                 data-contract="@compra.Contract"
                                                 data-container="@compra.Container"
                                                 data-sello="@compra.Sello"
@@ -333,7 +340,11 @@
                                         </button>
                                         <button class="btn btn-sm btn-edit btn-editar" 
                                                 data-id="@compra.Id"
-                                                data-fechacompra="@compra.FechaCompra:yyyy-MM-dd"
+                                                
+                                                data-fechacompra="@(compra.FechaCompra.HasValue 
+                                                    ? compra.FechaCompra.Value.ToString("yyyy-MM-dd") 
+                                                    : "")"
+
                                                 data-contract="@compra.Contract"
                                                 data-container="@compra.Container"
                                                 data-sello="@compra.Sello"
@@ -578,8 +589,13 @@
                     </div>
                 </div>
 
+
+
+
                 <!-- ==================== SECCIÓN: PRODUCCIÓN Y LOTE ==================== -->
                 <h6 class="mb-3 mt-4">Producción y Lote</h6>
+
+
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label class="form-label">Lote</label>
@@ -691,6 +707,39 @@
                              
                     </div>
                 </div>
+
+                <!-- ==================== SECCIÓN: ARCHIVOS ==================== -->
+<h6 class="mb-3 mt-4">Archivos</h6>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <input type="file" id="fileUpload" class="form-control" />
+    </div>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-primary" id="btnUploadFile" disabled>
+            <i class="fas fa-upload me-1"></i> Subir
+        </button>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-sm table-bordered" id="filesTable">
+        <thead>
+            <tr>
+                <th>Archivo</th>
+                <th>Tamaño (KB)</th>
+                <th style="width: 120px;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3" class="text-center text-muted">
+                    No hay archivos
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
             </form>
         </div>
     </div>
@@ -698,9 +747,160 @@
 
 @section Scripts {
     <script>
+
+    function loadFiles(contract) {
+    if (!contract) return;
+    const isReadonly = $('#formMode').val() === 'readonly';
+    $.ajax({
+    url: '@Url.Action("GetFiles", "Compras")',
+    type: 'GET',
+    cache: false,              // ✅ IMPORTANT
+    data: { contract },
+    success: function (files) {
+        const tbody = $('#filesTable tbody');
+        tbody.empty();
+
+        if (!files.length) {
+            tbody.append(`
+                <tr>
+                    <td colspan="3" class="text-center text-muted">No hay archivos</td>
+                </tr>
+            `);
+            return;
+        }
+
+        const isReadonly = $('#formMode').val() === 'readonly';
+
+        files.forEach(f => {
+            tbody.append(`
+                <tr>
+                    <td>
+                        <a href="${f.url}" target="_blank">${f.name}</a>
+                    </td>
+                    <td>${(f.size / 1024).toFixed(1)}</td>
+                    <td class="text-center">
+                        ${isReadonly
+                            ? '<span class="text-muted">—</span>'
+                            : `
+                                <button class="btn btn-sm btn-danger btn-delete-file"
+                                        data-file="${f.name}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                              `}
+                    </td>
+                </tr>
+            `);
+        });
+    }
+});
+   
+     }
+
+     $(document).on('click', '.btn-delete-file', function () {
+    const fileName = $(this).data('file'); 
+    const contract = $('#txtContract').val().trim();
+
+
+    if (!confirm('¿Eliminar archivo?')) return;
+
+    $.post('@Url.Action("DeleteFile", "Compras")', {
+        contract,
+        fileName
+    }).done(function () {
+        loadFiles(contract);
+    });
+});
+
+   $('#btnUploadFile').click(function () {
+    console.log("UPLOAD CLICK");
+
+    const fileInput = $('#fileUpload')[0];
+    const contract = $('#txtContract').val().trim();
+    const id = $('#hfOriginalId').val();
+
+    if (!id) {
+        mostrarMensaje('Guarde la compra antes de subir archivos', 'warning');
+        return;
+    }
+
+    if (!fileInput.files.length) return;
+
+    const data = new FormData();
+    data.append('file', fileInput.files[0]);
+    data.append('contract', contract);
+
+    $.ajax({
+        url: '@Url.Action("UploadFile", "Compras")',
+        type: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+            if (!res.success) {
+                mostrarMensaje(res.message, 'danger');
+                return;
+            }
+
+            mostrarMensaje('Archivo subido correctamente', 'success');
+
+            $('#fileUpload').val('');
+            $('#btnUploadFile').prop('disabled', true);
+
+            // ✅ This WILL now run
+            renderFiles(res.files);
+        },
+        error: function () {
+            mostrarMensaje('Error al subir el archivo', 'danger');
+        }
+    });
+});
+
+    function renderFiles(files) {
+    const tbody = $('#filesTable tbody');
+    tbody.empty();
+
+    if (!files || !files.length) {
+        tbody.append(`
+            <tr>
+                <td colspan="3" class="text-center text-muted">No hay archivos</td>
+            </tr>
+        `);
+        return;
+    }
+
+    const isReadonly = $('#formMode').val() === 'readonly';
+
+    files.forEach(f => {
+        tbody.append(`
+            <tr>
+                <td><a href="${f.url}" target="_blank">${f.name}</a></td>
+                <td>${(f.size / 1024).toFixed(1)}</td>
+                <td class="text-center">
+                    ${isReadonly ? '<span class="text-muted">—</span>' : `
+                        <button class="btn btn-sm btn-danger btn-delete-file"
+                                data-file="${f.name}">
+                            <i class="fas fa-trash"></i>
+                        </button>`}
+                </td>
+            </tr>
+        `);
+    });
+}
+    
+
         $(document).ready(function () {
 
-        let initialFormState = '';
+            
+          // ✅ Initialize clean form state immediately
+            $('#formMode').val('idle');
+            initialFormState = '';
+
+            $('#fileUpload').on('change', function () {
+                const hasFile = this.files && this.files.length > 0;
+                $('#btnUploadFile').prop('disabled', !hasFile);
+         });
+
+
          
         function updateUnsavedBadge(isDirty) {
             if (isDirty) {
@@ -748,25 +948,27 @@ window.addEventListener('beforeunload', function (e) {
 
             // Botón Nueva Compra
             $('#btnNuevaCompra').click(function () {
-                            if (!confirmDiscardChanges()) return;
-        const $form = $('#formCompra');
-
+            if (!confirmDiscardChanges()) return;
         
-        $form.removeClass('form-readonly');
-        $form[0].reset();
+            const $form = $('#formCompra');
+            $form.removeClass('form-readonly');
+            $form[0].reset();          
+            $form.find('input, textarea').prop('readonly', false);          
+            $form.find('select').prop('disabled', false);
 
-          $form.find('input, textarea').prop('readonly', false);
-          $form.find('select').prop('disabled', false);
-
-          $('#hfOriginalId').val('');
-          $('#formMode').val('create');
-          $('#btnGuardarTexto').text('Guardar');
-          $('#btnEliminarForm').addClass('d-none');
-          $('#formTitulo').text('Nueva Compra Internacional');
-
-          captureFormState(); // para manejar cambios y advertir al usuario si intenta salir sin guardar
-
-          $('#formContainer').slideDown();
+            $('#hfOriginalId').val('');
+            $('#formMode').val('create');
+            $('#btnGuardarTexto').text('Guardar');
+            $('#btnEliminarForm').addClass('d-none');
+            $('#formTitulo').text('Nueva Compra Internacional');
+            captureFormState(); // para manejar cambios y advertir al usuario si intenta salir sin guardar
+            $('#formContainer').slideDown();
+            
+            $('#filesTable tbody').html(`
+            <tr>
+            <td colspan="3" class="text-center text-muted">Guarde la compra para subir archivos</td>
+            </tr>
+            `);
 
             });
 
@@ -1027,7 +1229,7 @@ window.addEventListener('beforeunload', function (e) {
                 $('#txtCajas').val(cajas);
 
                 
-                 const $form = $('#formCompra');
+                const $form = $('#formCompra');
 
                  // RESET
                 $form.removeClass('form-readonly');
@@ -1035,50 +1237,73 @@ window.addEventListener('beforeunload', function (e) {
                 $form.find('select').prop('disabled', false);
                 updateUnsavedBadge(false);
 
-
                 if (mode === 'readonly') {
                 
-        $('#formTitulo').text('Ver Compra Internacional');
-        $('#btnGuardar').hide();
-        $('#btnCancelar').hide();
-        $('#btnEliminarForm').addClass('d-none');
+                    
+                $('#formMode').val('readonly');
 
-        $form.addClass('form-readonly');
-        $form.find('input, textarea').prop('readonly', true);
-        $form.find('select').prop('disabled', true);
-        
-        $('#formMode').val('readonly');
-            $('#isDirty').val('false');
-             
-                    initialFormState = getUserFormState();
+                //  FORCE state capture BEFORE readonly lock
+                initialFormState = getUserFormState();
+                $('#isDirty').val('false');
 
-    
-                } else {
+                $('#formTitulo').text('Ver Compra Internacional');
+                $('#btnGuardar').hide();
+                $('#btnCancelar').hide();
+                $('#btnEliminarForm').addClass('d-none');
+
+                $form.addClass('form-readonly');
+                $form.find('input, textarea').prop('readonly', true);
+                $form.find('select').prop('disabled', true);
+
+                $('#fileUpload').prop('disabled', true);
+                $('#btnUploadFile').hide();
+
+
+                } else {             
+                                                            
+                $('#formTitulo').text('Editar Compra Internacional');
+                $('#btnGuardar').show();
+                $('#btnCancelar').show();
+                $('#btnEliminarForm').removeClass('d-none');
+
+                $('#txtDescripcionProducto').prop('readonly', true);
+                $('#txtMontoDemorasMXN').prop('readonly', true);
+
+                // EDIT MODE STATE
+                $('#formMode').val('edit');
+
+                //  ENABLE FILE INPUT
+                $('#fileUpload').prop('disabled', false);
+
+                //  SHOW upload button BUT DISABLED until file is chosen
+                $('#btnUploadFile')
+                    .show()
+                    .prop('disabled', true);
+
+                captureFormState();
                  
-        $('#formTitulo').text('Editar Compra Internacional');
-        $('#btnGuardar').show();
-        $('#btnCancelar').show();
-        $('#btnEliminarForm').removeClass('d-none');
-
-        $('#txtDescripcionProducto').prop('readonly', true);
-        $('#txtMontoDemorasMXN').prop('readonly', true);
-
-        $('#formMode').val('edit');
-
-        captureFormState();
-
                 }
-
+                 
+                
+                loadFiles(contract);
                 $('#formContainer').slideDown();
-                $('html, body').animate({ scrollTop: $('#formContainer').offset().top - 100 }, 300);
+                $('html, body').animate(
+                    { scrollTop: $('#formContainer').offset().top - 100 },
+                    300
+                );
+
+              
             }
 
             // Ver compra (solo lectura)
 
-            
+             
+        
         function confirmDiscardChanges() {
             const isDirty = $('#isDirty').val() === 'true';
             const mode = $('#formMode').val();
+
+            if (!mode || mode === 'idle') return true;
 
             if ((mode === 'edit' || mode === 'create') && isDirty) {
                 return confirm('Hay cambios sin guardar. ¿Desea continuar sin guardar?');
@@ -1086,6 +1311,7 @@ window.addEventListener('beforeunload', function (e) {
 
             return true;
         }
+
 
             
 $(document).on('click', '.btn-ver-compra', function () {
@@ -1214,11 +1440,12 @@ $(document).on('click', '.btn-ver-compra', function () {
                 $('#txtKgs').val('');
                 $('#txtCajas').val('');
                 $('#btnEliminarForm').addClass('d-none');
-
-                        $('#formMode').val('create');
+                $('#formMode').val('idle');
+                $('#isDirty').val('false');
                 
-        $('#isDirty').val('false');
-        initialFormState = '';
+                initialFormState = getUserFormState();
+                $('#isDirty').val('false');
+
                 updateUnsavedBadge(false);
 
             }
