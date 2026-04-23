@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Globalization;
@@ -17,6 +18,19 @@ namespace WebApp.Controllers
         private readonly ILogger<ComprasController> _logger;
         private readonly IConfiguration _configuration;
         private readonly IPermissionService _permissionService;
+
+
+        private const long MaxFileSize = 1 * 1024 * 1024; // 30 MB
+
+        private static readonly string[] AllowedExtensions =
+        {
+            ".jpg", ".jpeg", ".png", ".gif",".bmp",
+            ".xls", ".xlsx",
+            ".doc", ".docx",
+            ".pdf",
+            ".txt"
+        };
+
 
         public ComprasController(
             ILogger<ComprasController> logger, 
@@ -113,7 +127,6 @@ namespace WebApp.Controllers
                             Id = reader.IsDBNull(0) ? 0 : Convert.ToInt32(reader[0]),
 
                             FechaCompra = reader.IsDBNull("FechaCompra") ? null: DateOnly.FromDateTime(reader.GetDateTime("FechaCompra")),
-
                             Contract = reader.IsDBNull(2) ? string.Empty : reader[2].ToString(),
                             Container = reader.IsDBNull(3) ? string.Empty : reader[3].ToString(),
                             Sello = reader.IsDBNull(4) ? string.Empty : reader[4].ToString(),
@@ -302,45 +315,52 @@ namespace WebApp.Controllers
         public async Task<IActionResult> UploadFile(IFormFile file, string contract)
         {
             if (file == null || file.Length == 0)
-                return Json(new { success = false, message = "Archivo inválido" });
+                return Json(new { success = false, message = "Archivo inválido." });
+
+            if (file.Length > MaxFileSize)
+                return Json(new { success = false, message = "El archivo excede el tamaño máximo de 30 MB." });
+
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            if (!AllowedExtensions.Contains(extension))
+                return Json(new
+                {
+                    success = false,
+                    message = "Tipo de archivo no permitido. Solo imágenes, Excel, Word , PDF y TXT."
+                });
 
             if (string.IsNullOrWhiteSpace(contract))
-                return Json(new { success = false, message = "Contrato inválido" });
-             
-            var safeContract = Path.GetFileName(contract?.Trim());
+                return Json(new { success = false, message = "Contrato inválido." });
+
+            var safeContract = Path.GetFileName(contract.Trim());
             var basePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploaded");
             var contractPath = Path.Combine(basePath, safeContract);
 
             if (!Directory.Exists(contractPath))
                 Directory.CreateDirectory(contractPath);
 
-            var filePath = Path.Combine(contractPath, Path.GetFileName(file.FileName));
+            var safeFileName = Path.GetFileName(file.FileName);
+            var filePath = Path.Combine(contractPath, safeFileName);
 
-            // ✅ IMPORTANT: async + await guarantees flush before response
-            await using (var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+            await using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
-                await stream.FlushAsync();
             }
 
-            // ✅ Force materialization NOW
             var files = GetFilesForContract(contract).ToList();
 
-            return Json(new
-            {
-                success = true,
-                files = files
-            });
+            return Json(new { success = true, files });
         }
-
 
         [HttpGet]
         [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public IActionResult GetFiles(string contract)
         {
-            return Json(GetFilesForContract(contract)); 
-        }
+            Response.Headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0";
+            Response.Headers["Pragma"] = "no-cache";
+            Response.Headers["Expires"] = "0";
 
+            return Json(GetFilesForContract(contract));
+        }
 
         private IEnumerable<object> GetFilesForContract(string contract)
         {

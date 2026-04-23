@@ -678,9 +678,6 @@
                         <input type="hidden" id="formMode" value="create" />
 
 
-                         
-  
-
                         <button type="button" id="btnCancelar" class="btn btn-outline-secondary">
                             <i class="fas fa-times me-1"></i>Cancelar
                         </button>
@@ -713,7 +710,18 @@
 
 <div class="row mb-3">
     <div class="col-md-6">
-        <input type="file" id="fileUpload" class="form-control" />
+        <input type="file"
+       id="fileUpload"
+       class="form-control"
+       accept=".jpg,.jpeg,.png,.gif,.xls,.xlsx,.doc,.docx,.txt" />
+
+       
+<div id="fileError"
+     class="text-danger mt-2 d-none"
+     style="font-size: 0.9rem;">
+</div>
+
+
     </div>
     <div class="col-md-2">
         <button type="button" class="btn btn-primary" id="btnUploadFile" disabled>
@@ -748,55 +756,76 @@
 @section Scripts {
     <script>
 
-    function loadFiles(contract) {
-    if (!contract) return;
-    const isReadonly = $('#formMode').val() === 'readonly';
-    $.ajax({
-    url: '@Url.Action("GetFiles", "Compras")',
-    type: 'GET',
-    cache: false,              // ✅ IMPORTANT
-    data: { contract },
-    success: function (files) {
-        const tbody = $('#filesTable tbody');
-        tbody.empty();
+    
 
-        if (!files.length) {
-            tbody.append(`
-                <tr>
-                    <td colspan="3" class="text-center text-muted">No hay archivos</td>
-                </tr>
-            `);
-            return;
-        }
+ function loadFiles(contract) { 
 
-        const isReadonly = $('#formMode').val() === 'readonly';
-
-        files.forEach(f => {
-            tbody.append(`
-                <tr>
-                    <td>
-                        <a href="${f.url}" target="_blank">${f.name}</a>
-                    </td>
-                    <td>${(f.size / 1024).toFixed(1)}</td>
-                    <td class="text-center">
-                        ${isReadonly
-                            ? '<span class="text-muted">—</span>'
-                            : `
-                                <button class="btn btn-sm btn-danger btn-delete-file"
-                                        data-file="${f.name}">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                              `}
-                    </td>
-                </tr>
-            `);
-        });
+    if (!contract) {
+        
+        return;
     }
-});
-   
-     }
 
-     $(document).on('click', '.btn-delete-file', function () {
+    $.ajax({
+        url: '@Url.Action("GetFiles", "Compras")',
+        type: 'GET',
+        data: {
+            contract: contract,
+            _: Date.now()
+        },
+        success: function (files) { 
+            renderFiles(files);
+        },
+        error: function (xhr) {
+             
+        }
+    });
+}
+
+
+function renderFiles(files) { 
+
+    const tbody = $('#filesTable tbody');
+    tbody.empty();
+
+    if (!files || !files.length) {
+        tbody.append(`
+            <tr>
+                <td colspan="3" class="text-center text-muted">No hay archivos</td>
+            </tr>
+        `);
+        return;
+    }
+
+    const isReadonly = $('#formMode').val() === 'readonly';
+
+    files.forEach(f => {
+        tbody.append(`
+            <tr>
+                <td>
+                    <a href="${f.url}" target="_blank">${f.name}</a>
+                </td>
+                <td>${(f.size / 1024).toFixed(1)}</td>
+                <td class="text-center">
+                    ${isReadonly ? '—' : `
+                        
+                    <button type="button"
+                            class="btn btn-sm btn-danger btn-delete-file"
+                            data-file="${f.name}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                        `}
+                </td>
+            </tr>
+        `);
+    });
+}
+
+     $(document).on('click', '.btn-delete-file', function (e) {
+         
+    e.preventDefault();   //  stop form submission
+    e.stopPropagation();  //  stop bubbling
+
     const fileName = $(this).data('file'); 
     const contract = $('#txtContract').val().trim();
 
@@ -811,8 +840,8 @@
     });
 });
 
-   $('#btnUploadFile').click(function () {
-    console.log("UPLOAD CLICK");
+
+$('#btnUploadFile').on('click', function () {
 
     const fileInput = $('#fileUpload')[0];
     const contract = $('#txtContract').val().trim();
@@ -842,12 +871,9 @@
             }
 
             mostrarMensaje('Archivo subido correctamente', 'success');
-
             $('#fileUpload').val('');
             $('#btnUploadFile').prop('disabled', true);
-
-            // ✅ This WILL now run
-            renderFiles(res.files);
+            loadFiles(contract);
         },
         error: function () {
             mostrarMensaje('Error al subir el archivo', 'danger');
@@ -855,37 +881,21 @@
     });
 });
 
-    function renderFiles(files) {
-    const tbody = $('#filesTable tbody');
-    tbody.empty();
+   function mostrarMensaje(mensaje, tipo) {
+                var alertDiv = $('#mensajeAlert');
+                alertDiv.removeClass('d-none alert-success alert-danger alert-warning alert-info');
+                alertDiv.addClass('alert-' + tipo);
+                alertDiv.html('<strong>' + (tipo === 'success' ? '<i class="fas fa-check-circle me-2"></i>' : '<i class="fas fa-exclamation-circle me-2"></i>') + '</strong>' + mensaje);
 
-    if (!files || !files.length) {
-        tbody.append(`
-            <tr>
-                <td colspan="3" class="text-center text-muted">No hay archivos</td>
-            </tr>
-        `);
-        return;
-    }
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 300);
 
-    const isReadonly = $('#formMode').val() === 'readonly';
+                setTimeout(function () {
+                    alertDiv.addClass('d-none');
+                }, 5000);
+            }
 
-    files.forEach(f => {
-        tbody.append(`
-            <tr>
-                <td><a href="${f.url}" target="_blank">${f.name}</a></td>
-                <td>${(f.size / 1024).toFixed(1)}</td>
-                <td class="text-center">
-                    ${isReadonly ? '<span class="text-muted">—</span>' : `
-                        <button class="btn btn-sm btn-danger btn-delete-file"
-                                data-file="${f.name}">
-                            <i class="fas fa-trash"></i>
-                        </button>`}
-                </td>
-            </tr>
-        `);
-    });
-}
     
 
         $(document).ready(function () {
@@ -895,12 +905,56 @@
             $('#formMode').val('idle');
             initialFormState = '';
 
-            $('#fileUpload').on('change', function () {
-                const hasFile = this.files && this.files.length > 0;
-                $('#btnUploadFile').prop('disabled', !hasFile);
-         });
+
+ 
+const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1 MB (testing)
+
+const ALLOWED_EXTENSIONS = [
+    'jpg', 'jpeg', 'png', 'gif','bmp',
+    'xls', 'xlsx',
+    'doc', 'docx',
+    'pdf',
+    'txt'
+];
+
+ 
 
 
+function showFileError(message) {
+    $('#fileError').text(message).removeClass('d-none');
+}
+
+function clearFileError() {
+    $('#fileError').addClass('d-none').text('');
+}
+
+$('#fileUpload').on('change', function () {
+    const file = this.files[0];
+    clearFileError();
+
+    if (!file) {
+        $('#btnUploadFile').prop('disabled', true);
+        return;
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+        showFileError('El archivo excede el tamaño máximo permitido de 1 MB.');
+        this.value = '';
+        $('#btnUploadFile').prop('disabled', true);
+        return;
+    }
+
+    const extension = file.name.split('.').pop().toLowerCase();
+    if (!ALLOWED_EXTENSIONS.includes(extension)) {
+        showFileError('Formato no soportado. Solo imágenes, Excel, Word y TXT.');
+        this.value = '';
+        $('#btnUploadFile').prop('disabled', true);
+        return;
+    }
+
+    clearFileError();
+    $('#btnUploadFile').prop('disabled', false);
+});
          
         function updateUnsavedBadge(isDirty) {
             if (isDirty) {
@@ -921,20 +975,19 @@
 
 
         
-window.addEventListener('beforeunload', function (e) {
-    if ($('#formContainer').is(':visible') && $('#isDirty').val() === 'true') {
-        e.preventDefault();
-        e.returnValue = '';
-    }
-});
+        window.addEventListener('beforeunload', function (e) {
+            if ($('#formContainer').is(':visible') && $('#isDirty').val() === 'true') {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
 
 
-        
-        
-
-        
-        $('#formCompra').on('input change', 'input, select, textarea', function () {
+       $('#formCompra').on('input change', 'input, select, textarea', function () {
             if ($('#formCompra').hasClass('form-readonly')) return;
+
+            // Ignore file input changes
+            if (this.type === 'file' || this.id === 'fileUpload') return;
 
             const currentState = getUserFormState();
             const dirty = currentState !== initialFormState;
@@ -942,8 +995,6 @@ window.addEventListener('beforeunload', function (e) {
             $('#isDirty').val(dirty ? 'true' : 'false');
             updateUnsavedBadge(dirty);
         });
-
-
 
 
             // Botón Nueva Compra
@@ -1469,21 +1520,10 @@ $(document).on('click', '.btn-ver-compra', function () {
             return JSON.stringify(data);
         }
 
-            function mostrarMensaje(mensaje, tipo) {
-                var alertDiv = $('#mensajeAlert');
-                alertDiv.removeClass('d-none alert-success alert-danger alert-warning alert-info');
-                alertDiv.addClass('alert-' + tipo);
-                alertDiv.html('<strong>' + (tipo === 'success' ? '<i class="fas fa-check-circle me-2"></i>' : '<i class="fas fa-exclamation-circle me-2"></i>') + '</strong>' + mensaje);
-
-                $('html, body').animate({
-                    scrollTop: 0
-                }, 300);
-
-                setTimeout(function () {
-                    alertDiv.addClass('d-none');
-                }, 5000);
-            }
+         
         });
+
+
     </script>
 }
                         
