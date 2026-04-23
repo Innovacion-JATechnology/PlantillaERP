@@ -148,7 +148,7 @@ namespace HelpDesk
             ClearMessages();
 
             var nombre = (txtNuevoSla.Text ?? string.Empty).Trim();
-            var urgStr = (txtNuevoSlaUrgencia.Text ?? string.Empty).Trim();
+            var urgStr = (txtNuevoSlaTiempoDeRespuesta.Text ?? string.Empty).Trim();
 
             if (string.IsNullOrWhiteSpace(nombre))
             {
@@ -156,25 +156,25 @@ namespace HelpDesk
                 return;
             }
 
-            if (!int.TryParse(urgStr, out int urgencia))
+            if (!int.TryParse(urgStr, out int TiempoDeRespuesta))
             {
-                ShowError(lblMsgSla, "La urgencia debe ser un número entre 1 y 10.");
+                ShowError(lblMsgSla, "TiempoDeRespuesta debe ser un número entre 1 y 10000.");
                 return;
             }
-            if (urgencia < 1 || urgencia > 10)
+            if (TiempoDeRespuesta < 1 || TiempoDeRespuesta > 10000)
             {
-                ShowError(lblMsgSla, "La urgencia debe estar entre 1 y 10.");
+                ShowError(lblMsgSla, "TiempoDeRespuesta debe estar entre 1 y 10000.");
                 return;
             }
 
             try
             {
                 SqlDataSourceSla.InsertParameters["Nombre"].DefaultValue = nombre;
-                SqlDataSourceSla.InsertParameters["Urgencia"].DefaultValue = urgencia.ToString();
+                SqlDataSourceSla.InsertParameters["TiempoDeRespuesta"].DefaultValue = TiempoDeRespuesta.ToString();
                 SqlDataSourceSla.Insert();
 
                 txtNuevoSla.Text = string.Empty;
-                txtNuevoSlaUrgencia.Text = string.Empty;
+                txtNuevoSlaTiempoDeRespuesta.Text = string.Empty;
                 ShowSuccess(lblMsgSla, "SLA agregado correctamente.");
             }
             catch (Exception ex)

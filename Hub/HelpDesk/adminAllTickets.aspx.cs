@@ -643,11 +643,11 @@ WHERE agenteId = @id";
             {
                 switch (priority)
                 {
-                    case 1: return "Crítico";
-                    case 2: return "Muy urgente";
-                    case 3: return "Urgente";
-                    case 4: return "Normal";
-                    case 5: return "Bajo";
+                    case 8: return "Crítico";
+                    case 4: return "Muy urgente";
+                    case 2: return "Urgente";
+                    case 1: return "Normal";
+                    case 0: return "Bajo";
                     default: return "Normal";
                 }
             }

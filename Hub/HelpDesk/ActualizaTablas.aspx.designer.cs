@@ -141,13 +141,13 @@ namespace HelpDesk
         protected global::System.Web.UI.WebControls.TextBox txtNuevoSla;
 
         /// <summary>
-        /// txtNuevoSlaUrgencia control.
+        /// txtNuevoSlaTiempoDeRespuesta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNuevoSlaUrgencia;
+        protected global::System.Web.UI.WebControls.TextBox txtNuevoSlaTiempoDeRespuesta;
 
         /// <summary>
         /// btnAgregarSla control.
@@ -168,22 +168,22 @@ namespace HelpDesk
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNuevoSlaNombre;
 
         /// <summary>
-        /// rfvNuevoSlaUrgencia control.
+        /// rfvNuevoSlaTiempoDeRespuesta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNuevoSlaUrgencia;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNuevoSlaTiempoDeRespuesta;
 
         /// <summary>
-        /// rngNuevoSlaUrgencia control.
+        /// rngNuevoSlaTiempoDeRespuesta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator rngNuevoSlaUrgencia;
+        protected global::System.Web.UI.WebControls.RangeValidator rngNuevoSlaTiempoDeRespuesta;
 
         /// <summary>
         /// lblMsgSla control.

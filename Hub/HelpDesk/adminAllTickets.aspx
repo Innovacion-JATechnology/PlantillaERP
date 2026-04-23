@@ -101,11 +101,11 @@
                                     if (prLbl) {
                                         var txt = '';
                                         switch (pr) {
-                                            case '1': txt = 'Crítico'; break;
-                                            case '2': txt = 'Muy urgente'; break;
-                                            case '3': txt = 'Urgente'; break;
-                                            case '4': txt = 'Normal'; break;
-                                            case '5': txt = 'Bajo'; break;
+                                            case '8': txt = 'Crítico'; break;
+                                            case '4': txt = 'Muy urgente'; break;
+                                            case '2': txt = 'Urgente'; break;
+                                            case '1': txt = 'Normal'; break;
+                                            case '0': txt = 'Bajo'; break;
                                             default: txt = pr || 'NA'; break;
                                         }
                                         prLbl.innerText = txt;

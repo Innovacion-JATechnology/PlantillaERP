@@ -242,7 +242,7 @@
                 <div class="row mb-3">
                     <div class="col">
                         <h3 class="mb-0">SLA</h3>
-                        <div class="form-note">Agregar/Modificar SLA (Urgencia 1 mas urgente – 10 menos urgente)</div>
+                        <div class="form-note">Agregar/Modificar SLA (TiempoDeRespuesta en minutos)</div>
                     </div>
                 </div>
 
@@ -252,8 +252,8 @@
                         <div class="input-group">
                             <asp:TextBox ID="txtNuevoSla" runat="server" CssClass="form-control" MaxLength="100"
                                 placeholder="Nombre del SLA" />
-                            <asp:TextBox ID="txtNuevoSlaUrgencia" runat="server" CssClass="form-control"
-                                placeholder="Urgencia (1-10)" />
+                            <asp:TextBox ID="txtNuevoSlaTiempoDeRespuesta" runat="server" CssClass="form-control"
+                                placeholder="TiempoDeRespuesta (1-10)" />
                             <div class="input-group-append">
                                 <asp:Button ID="btnAgregarSla" runat="server" CssClass="btn btn-primary"
                                     Text="Agregar" OnClick="btnAgregarSla_Click"
@@ -267,14 +267,14 @@
                             ErrorMessage="El nombre del SLA es obligatorio."
                             Display="Dynamic" ValidationGroup="vgSla" />
                         <br />
-                        <asp:RequiredFieldValidator ID="rfvNuevoSlaUrgencia" runat="server"
-                            ControlToValidate="txtNuevoSlaUrgencia" CssClass="text-danger"
-                            ErrorMessage="La urgencia es obligatoria."
+                        <asp:RequiredFieldValidator ID="rfvNuevoSlaTiempoDeRespuesta" runat="server"
+                            ControlToValidate="txtNuevoSlaTiempoDeRespuesta" CssClass="text-danger"
+                            ErrorMessage="TiempoDeRespuesta es obligatorio."
                             Display="Dynamic" ValidationGroup="vgSla" />
-                        <asp:RangeValidator ID="rngNuevoSlaUrgencia" runat="server"
-                            ControlToValidate="txtNuevoSlaUrgencia" CssClass="text-danger"
-                            ErrorMessage="La urgencia debe estar entre 1 y 10."
-                            Type="Integer" MinimumValue="1" MaximumValue="10"
+                        <asp:RangeValidator ID="rngNuevoSlaTiempoDeRespuesta" runat="server"
+                            ControlToValidate="txtNuevoSlaTiempoDeRespuesta" CssClass="text-danger"
+                            ErrorMessage="El TiempoDeRespuesta debe ser > 1."
+                            Type="Integer" MinimumValue="1" MaximumValue="10000"
                             Display="Dynamic" ValidationGroup="vgSla" />
                     </div>
                 </div>
@@ -290,20 +290,20 @@
                 <asp:SqlDataSource ID="SqlDataSourceSla" runat="server"
                     ConnectionString="<%$ ConnectionStrings:ServerCon %>"
                     CancelSelectOnNullParameter="false"
-                    SelectCommand="SELECT SLAId, Nombre, Urgencia FROM [hd].[SLA] ORDER BY Nombre"
-                    InsertCommand="INSERT INTO [hd].[SLA] (Nombre, Urgencia) VALUES (@Nombre, @Urgencia)"
-                    UpdateCommand="UPDATE [hd].[SLA] SET Nombre = @Nombre, Urgencia = @Urgencia WHERE SLAId = @SLAId"
+                    SelectCommand="SELECT SLAId, Nombre, TiempoDeRespuesta FROM [hd].[SLA] ORDER BY Nombre"
+                    InsertCommand="INSERT INTO [hd].[SLA] (Nombre, TiempoDeRespuesta) VALUES (@Nombre, @TiempoDeRespuesta)"
+                    UpdateCommand="UPDATE [hd].[SLA] SET Nombre = @Nombre, TiempoDeRespuesta = @TiempoDeRespuesta WHERE SLAId = @SLAId"
                     DeleteCommand="DELETE FROM [hd].[SLA] WHERE SLAId = @SLAId"
                     OnInserted="SqlDataSourceSla_Inserted"
                     OnUpdated="SqlDataSourceSla_Updated"
                     OnDeleted="SqlDataSourceSla_Deleted">
                     <InsertParameters>
                         <asp:Parameter Name="Nombre" Type="String" />
-                        <asp:Parameter Name="Urgencia" Type="Int32" />
+                        <asp:Parameter Name="TiempoDeRespuesta" Type="Int32" />
                     </InsertParameters>
                     <UpdateParameters>
                         <asp:Parameter Name="Nombre" Type="String" />
-                        <asp:Parameter Name="Urgencia" Type="Int32" />
+                        <asp:Parameter Name="TiempoDeRespuesta" Type="Int32" />
                         <asp:Parameter Name="SLAId" Type="Int32" />
                     </UpdateParameters>
                     <DeleteParameters>
@@ -337,21 +337,21 @@
                                 </EditItemTemplate>
                             </asp:TemplateField>
 
-                            <asp:TemplateField HeaderText="Urgencia" SortExpression="Urgencia">
+                            <asp:TemplateField HeaderText="TiempoDeRespuesta" SortExpression="TiempoDeRespuesta">
                                 <ItemTemplate>
-                                    <%# Eval("Urgencia") %>
+                                    <%# Eval("TiempoDeRespuesta") %>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtUrgenciaSlaEdit" runat="server" CssClass="form-control"
-                                        Text='<%# Bind("Urgencia") %>' />
-                                    <asp:RequiredFieldValidator ID="rfvUrgenciaSlaEdit" runat="server"
-                                        ControlToValidate="txtUrgenciaSlaEdit" CssClass="text-danger"
-                                        ErrorMessage="La urgencia es obligatoria." Display="Dynamic"
+                                    <asp:TextBox ID="txtTiempoDeRespuestaSlaEdit" runat="server" CssClass="form-control"
+                                        Text='<%# Bind("TiempoDeRespuesta") %>' />
+                                    <asp:RequiredFieldValidator ID="rfvTiempoDeRespuestaSlaEdit" runat="server"
+                                        ControlToValidate="txtTiempoDeRespuestaSlaEdit" CssClass="text-danger"
+                                        ErrorMessage=" TiempoDeRespuesta es obligatorio." Display="Dynamic"
                                         ValidationGroup="vgSla" />
-                                    <asp:RangeValidator ID="rngUrgenciaSlaEdit" runat="server"
-                                        ControlToValidate="txtUrgenciaSlaEdit" CssClass="text-danger"
-                                        ErrorMessage="La urgencia debe estar entre 1 y 10."
-                                        Type="Integer" MinimumValue="1" MaximumValue="10"
+                                    <asp:RangeValidator ID="rngTiempoDeRespuestaSlaEdit" runat="server"
+                                        ControlToValidate="txtTiempoDeRespuestaSlaEdit" CssClass="text-danger"
+                                        ErrorMessage="La TiempoDeRespuesta debe estar entre 1 y 10000."
+                                        Type="Integer" MinimumValue="1" MaximumValue="10000"
                                         Display="Dynamic" ValidationGroup="vgSla" />
                                 </EditItemTemplate>
                             </asp:TemplateField>

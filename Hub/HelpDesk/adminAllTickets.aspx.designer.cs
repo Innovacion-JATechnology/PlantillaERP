@@ -33,15 +33,6 @@ namespace HelpDesk
         protected global::System.Web.UI.WebControls.Button modalBtnAssign;
 
         /// <summary>
-        /// modalHiddenTicketId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField modalHiddenTicketId;
-
-        /// <summary>
         /// modalDdlTicketStatus control.
         /// </summary>
         /// <remarks>
@@ -58,6 +49,15 @@ namespace HelpDesk
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button modalBtnUpdateTicketStatus;
+
+        /// <summary>
+        /// modalHiddenTicketId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField modalHiddenTicketId;
 
         /// <summary>
         /// txtSearch control.

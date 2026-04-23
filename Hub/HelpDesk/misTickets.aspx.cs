@@ -95,7 +95,17 @@ namespace HelpDesk
                     // Texto principal
                     txtAsunto.Text = NullToEmpty(r["Asunto"]);
                     txtEstatus.Text = NullToEmpty(r["Estatus"]);
-                    txtPrioridad.Text = NullToEmpty(r["Prioridad"]);
+                    string tmp = NullToEmpty(r["Prioridad"]);
+                    switch (tmp)
+                    {
+                        case "8": txtPrioridad.Text = "Crítico"; break;
+                        case "4": txtPrioridad.Text = "Muy urgente"; break;
+                        case "2": txtPrioridad.Text = "Urgente"; break;
+                        case "1": txtPrioridad.Text = "Normal"; break;
+                        case "0": txtPrioridad.Text = "Bajo"; break;
+                        default: txtPrioridad.Text = "N/A"; break;
+                    }
+
                     txtAgenteId.Text = NullToEmpty(r["AgenteId"]);
                     txtUsuarioId.Text = NullToEmpty(r["UsuarioId"]);
 
@@ -122,7 +132,7 @@ namespace HelpDesk
                     }
 
                     // Badges: Estatus y Prioridad
-                    PintarBadges(txtEstatus.Text, txtPrioridad.Text);
+                    PintarBadges(txtEstatus.Text, tmp);
 
                     // Botón Cerrar: visible solo si NO está cerrado
                     btnCerrar.Visible = string.IsNullOrWhiteSpace(txtCerradoUtc.Text);
