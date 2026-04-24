@@ -291,5 +291,17 @@ namespace WebApp.Controllers
         public int SidebarHoverR { get; set; } = 165;
         public int SidebarHoverG { get; set; } = 95;
         public int SidebarHoverB { get; set; } = 253;
+
+
+        // Icon colors
+        public int IconColorR { get; set; } = 255;
+        public int IconColorG { get; set; } = 255;
+        public int IconColorB { get; set; } = 255;
+
+        // Icon hover colors
+        public int IconColorHoverR { get; set; } = 255;
+        public int IconColorHoverG { get; set; } = 255;
+        public int IconColorHoverB { get; set; } = 255;
+
     }
 }
