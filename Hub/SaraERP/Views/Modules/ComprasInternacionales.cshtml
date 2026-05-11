@@ -12,6 +12,13 @@
     int totalPages = (Model.TotalCount + Model.PageSize - 1) / Model.PageSize;
 }
 
+
+
+@{
+    var codigoActual = ViewBag.CodigoSeleccionado as string ?? "";
+}
+
+
 <style>
     .page-container {
         padding: 20px 0;
@@ -629,8 +636,25 @@
                         <input type="text" id="txtDescripcionProducto" class="form-control" placeholder="Descripción del producto" readonly />
                     </div>
                     <div class="col-md-5 mb-3">
-                        <label class="form-label">Producto</label>
-                        <input type="text" id="txtProducto" class="form-control" placeholder="Producto" />
+                        <label class="form-label">Producto</label> 
+                         
+ 
+
+
+
+<select id="ddlProducto" name="codigo" class="form-select">
+    <option value="">-- Seleccione un producto --</option>
+
+    @foreach (var item in (List<CompraInternacional.CatalogoItem>)ViewBag.Catalogo)
+    {
+        <option value="@item.Codigo">
+            @item.Producto
+            @(string.IsNullOrWhiteSpace(item.Talla) ? "" : $" ({item.Talla})")
+        </option>
+    }
+</select>
+
+
                     </div>
                 </div>
 
@@ -981,6 +1005,16 @@ $('#fileUpload').on('change', function () {
                 e.returnValue = '';
             }
         });
+        ////////////////////////////////////////////
+        
+// ✅ Al cambiar producto, sincronizar Código y Descripción
+$('#ddlProducto').on('change', function () {
+    const codigo = $(this).val();
+    const descripcion = $(this).find('option:selected').text().trim();
+
+    $('#txtCodigo').val(codigo || '');
+    $('#txtDescripcionProducto').val(codigo ? descripcion : '');
+});
 
 
        $('#formCompra').on('input change', 'input, select, textarea', function () {
@@ -1117,8 +1151,8 @@ $('#fileUpload').on('change', function () {
                 var fechaCaducidad = $('#txtFechaCaducidad').val();
                 var empresa = $('#ddlEmpresa').val();
                 var codigo = $('#txtCodigo').val().trim();
-                var descripcionProducto = $('#txtDescripcionProducto').val().trim();
-                var producto = $('#txtProducto').val().trim();
+                var descripcionProducto = $('#txtDescripcionProducto').val().trim(); 
+                var producto = $('#ddlProducto option:selected').text().trim();
                 var marca = $('#ddlMarca').val();
                 var talla = $('#ddlTalla').val();
                 var kgs = $('#txtKgs').val();
@@ -1232,6 +1266,7 @@ $('#fileUpload').on('change', function () {
                 var fechaCaducidad = btn.data('fechacaducidad');
                 var empresa = btn.data('empresa');
                 var codigo = btn.data('codigo');
+                $('#ddlProducto').val(codigo).trigger('change');
                 var descripcionProducto = btn.data('descripcion');
                 var producto = btn.data('producto');
                 var marca = btn.data('marca');
@@ -1272,6 +1307,14 @@ $('#fileUpload').on('change', function () {
                 $('#txtFechaCaducidad').val(fechaCaducidad);
                 $('#ddlEmpresa').val(empresa);
                 $('#txtCodigo').val(codigo);
+
+                
+//  THIS IS THE FIX
+$('#ddlProducto').val(codigo).trigger('change');
+
+// Optional: keep compatibility
+$('#txtProducto').val(producto);
+
                 $('#txtDescripcionProducto').val(descripcionProducto);
                 $('#txtProducto').val(producto);
                 $('#ddlMarca').val(marca);

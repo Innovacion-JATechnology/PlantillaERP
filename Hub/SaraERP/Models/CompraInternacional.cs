@@ -49,5 +49,13 @@ namespace WebApp.Models
         public string Talla { get; set; }
         public decimal? Kgs { get; set; }
         public int? Cajas { get; set; }
+
+        public class CatalogoItem
+        {
+            public string Codigo { get; set; } = string.Empty;
+            public string Producto { get; set; } = string.Empty;
+            public string? Talla { get; set; }
+        }
+
     }
 }

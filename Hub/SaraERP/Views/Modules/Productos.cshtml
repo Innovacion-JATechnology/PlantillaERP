@@ -151,6 +151,13 @@
             min-width: 100%;
         }
     }
+
+    
+    .btn-disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
 </style>
 
 <div class="page-container">
@@ -171,9 +178,17 @@
                 <button id="btnLimpiar" class="btn btn-outline-secondary" type="button">
                     <i class="fas fa-times me-1"></i>Limpiar
                 </button>
-                <button id="btnNuevoProducto" class="btn btn-nuevo-producto" type="button">
+                
+                <button id="btnNuevoProducto"
+                        class="btn btn-nuevo-producto @(ViewBag.CanCreate ? "" : "btn-disabled")"
+                        type="button"
+                    @(ViewBag.CanCreate ? "" : "disabled")
+                        title="@(ViewBag.CanCreate ? "Crear nuevo producto" : "No tienes permiso para crear productos")">
                     <i class="fas fa-plus me-1"></i>Nuevo Producto
                 </button>
+
+
+
             </div>
         </div>
     </div>
@@ -202,20 +217,39 @@
                                 <td>@producto.ProductoCompleto</td>
                                 <td style="text-align: center;">
                                     <div class="action-buttons">
-                                        <button class="btn btn-edit btn-editar" 
-                                                data-id="@producto.Id"
-                                                data-producto="@producto.ProductoNombre"
-                                                data-talla="@producto.Talla"
-                                                type="button"
-                                                title="Editar producto">
-                                            <i class="fas fa-edit me-1"></i>Editar
-                                        </button>
-                                        <button class="btn btn-delete btn-eliminar" 
-                                                data-id="@producto.Id"
-                                                type="button"
-                                                title="Eliminar producto">
-                                            <i class="fas fa-trash me-1"></i>Eliminar
-                                        </button>
+
+                                        
+                                        <div class="action-buttons">
+                                             
+                                            
+                                                
+                                                <button class="btn btn-edit btn-editar @(ViewBag.CanEdit ? "" : "btn-disabled")"
+                                                        data-id="@producto.Id"
+                                                        data-producto="@producto.ProductoNombre"
+                                                        data-talla="@producto.Talla"
+                                                        type="button"
+                                                    @(ViewBag.CanEdit ? "" : "disabled")
+                                                        title="@(ViewBag.CanEdit ? "Editar producto" : "No tienes permiso para editar")">
+                                                    <i class="fas fa-edit me-1"></i>Editar
+                                                </button>
+
+                                            
+                                             
+                                            
+                                              
+                                                <button class="btn btn-delete btn-eliminar @(ViewBag.CanDelete ? "" : "btn-disabled")"
+                                                        data-id="@producto.Id"
+                                                        type="button"
+                                                    @(ViewBag.CanDelete ? "" : "disabled")
+                                                        title="@(ViewBag.CanDelete ? "Eliminar producto" : "No tienes permiso para eliminar")">
+                                                    <i class="fas fa-trash me-1"></i>Eliminar
+                                                </button>
+
+                                            
+
+                                        </div>
+
+
                                     </div>
                                 </td>
                             </tr>

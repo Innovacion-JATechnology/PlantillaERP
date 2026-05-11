@@ -20,6 +20,8 @@ namespace WebApp.Controllers
         private readonly IPermissionService _permissionService;
 
 
+       
+
         private const long MaxFileSize = 1 * 1024 * 1024; // 30 MB
 
         private static readonly string[] AllowedExtensions =
@@ -30,6 +32,9 @@ namespace WebApp.Controllers
             ".pdf",
             ".txt"
         };
+
+      
+
 
 
         public ComprasController(
@@ -66,6 +71,11 @@ namespace WebApp.Controllers
                 ("Compras", Url.Action("Compras", "Modules")),
                 ("Compras Internacionales", null)
             };
+
+
+            var catalogo = ObtenerCatalogo();
+            ViewBag.Catalogo = catalogo;
+
             ViewBag.SearchTerm = searchTerm;
 
             // Obtener permisos del usuario para habilitar/deshabilitar botones
@@ -479,6 +489,32 @@ namespace WebApp.Controllers
                 ("Reportes", null)
             };
             return View("~/Views/Modules/ReportesCompras.cshtml");
+        }
+
+        private List<CompraInternacional.CatalogoItem> ObtenerCatalogo()
+        {
+            var lista = new List<CompraInternacional.CatalogoItem>();
+
+            using (var con = new SqlConnection(GetConnectionString()))
+            using (var cmd = new SqlCommand(@"
+        SELECT Id, Producto, Talla
+        FROM hd.Catalogo
+        ORDER BY Producto, Talla", con))
+            {
+                con.Open();
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    lista.Add(new CompraInternacional.CatalogoItem
+                    {
+                        Codigo = reader["Id"].ToString()!,
+                        Producto = reader["Producto"].ToString()!,
+                        Talla = reader["Talla"]?.ToString()
+                    });
+                }
+            }
+
+            return lista;
         }
 
         public IActionResult Contratos()
