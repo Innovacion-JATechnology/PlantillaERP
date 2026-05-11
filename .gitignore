@@ -27,7 +27,6 @@ project.nuget.cache
 ####################################
 # ASP.NET Core
 ####################################
-wwwroot/lib/
 appsettings.Development.json
 
 ####################################
